@@ -53,13 +53,19 @@ TinyVision V851se支持多种不同的系统，有主线，有原厂BSP，有RTO
 ### 插卡启动
 
 在开发板启动前需要先将SD卡接入开发板，如下图所示：
-
+ 
 ![image-20240110120118215](https://photos.100ask.net/dongshanpi/TinyVision/image-20240110120118215.png)
 
 
+![image-20240110141348166](https://photos.100ask.net/dongshanpi/TinyVision/TinyVision_Pin_001.jpg)
+
 ​使用40Gbps数据线连接TinyVision开发板和TypeC-SUB调试器，如下图所示：
 
-![image-20240110141348166](https://photos.100ask.net/dongshanpi/TinyVision/image-20240110141348166.png)
+![image-20240110141348166](https://photos.100ask.net/dongshanpi/TinyVision/TinyVision_Pin_002.jpg)
+
+![image-20240110141348166](https://photos.100ask.net/dongshanpi/TinyVision/TinyVision_Pin_003.jpg)
+
+
 
 ​	使用两条Type-C连接TypeC UART调试器和电脑端，连接完成后即可启动系统.
 
