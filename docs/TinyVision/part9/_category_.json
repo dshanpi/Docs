@@ -1,0 +1,8 @@
+{
+  "label": "WIFI驱动开发",
+  "position": 11,
+  "link": {
+    "type": "generated-index",
+    "description": "TinyVision 使用GPIO引出WIFI模块，配套的WIFI模块主控芯片为 AIC8800D80文章中的资源下下载地址：https://github.com/YuzukiHD/YuzukiHD.github.io/releases/tag/20240112"
+  }
+}
