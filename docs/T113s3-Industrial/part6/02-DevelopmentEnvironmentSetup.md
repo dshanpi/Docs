@@ -7,7 +7,9 @@ sidebar_position: 2
 
 查看上面源码工具文档手册，下载TinaSDK源码：
 
-![image-20240709104317300](images/image-20240709104317300.png)
+Tina-SDKV2.0源码网盘链接：https://pan.baidu.com/s/13uKlqDXImmMl9cgKc41tZg?pwd=qcw7
+T113-Pro开发板扩展补丁： https://github.com/DongshanPI/100ASK_T113-Pro_TinaSDK
+
 
 上传到ubuntu，创建文件夹用来保存源码：
 
@@ -81,6 +83,12 @@ ubuntu@ubuntu1804:~/100ASK_T113s3-Industrial-Devkit_TinaSDK$ ls
 device  lichee  package  prebuilt  README.md  target
 ubuntu@ubuntu1804:~/100ASK_T113s3-Industrial-Devkit_TinaSDK$ git submodule update --init
 ubuntu@ubuntu1804:~/100ASK_T113s3-Industrial-Devkit_TinaSDK$ cp ./* -rfvd ~/tina-d1-h
+~~~
+
+编译固件之前，先安装一些依赖，否则编译会报错：
+
+~~~bash
+sudo apt-get install build-essential subversion git libncurses5-dev zlib1g-dev gawk flex quilt libssl-dev xsltproc libxml-parser-perl mercurial bzr ecj cvs unzip lib32z1 lib32z1-dev lib32stdc++6 libstdc++6 libc6:i386 libstdc++6:i386 lib32ncurses5 lib32z1 -y
 ~~~
 
 ### 编译出固件

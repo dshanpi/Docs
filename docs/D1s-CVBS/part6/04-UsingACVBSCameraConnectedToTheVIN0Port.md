@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 ---
 # 使用CVBS摄像头接入VIN0端口
 
