@@ -108,12 +108,11 @@ install.bat
 * 硬件：8GB以上的 Micro TF卡 x1
 * 软件：Tina系统TF卡烧录工具: [PhoenixCard-V2.8](https://gitlab.com/dongshanpi/tools/-/raw/main/PhoenixCard-V2.8.zip)
 * 软件：SDcard格式化工具：[SDCardFormatter5](https://gitlab.com/dongshanpi/tools/-/raw/main/SDCardFormatter5.0.1Setup.exe)
-* 软件：TinaTF卡系统镜像
 
 
 ### 运行烧写软件烧写
 
-首先需要下载  **win32diskimage  SDcard专用格式化** 这两个烧写TF卡的工具，然后获取到TF卡系统镜像文件**.zip**，获取到以后，先安装 **SDcard专用格式化 SDCardFormatter5**  这个工具，同时可以解压 一下TF卡系统的镜像文件 **tina_t113-100ask_uart3.zip**，可以得到一个  **tina_t113-100ask_uart3.img**文件，这个文件就是我们要烧写的镜像。  同时解压缩 **Tina系统TF卡烧录工具 PhoenixCard-V2.8**，解压完成后，进入到烧写工具目录内，双击运行 `PhoenixCard.exe`烧录工具。
+首先需要下载  **win32diskimage  SDcard专用格式化** 这两个烧写TF卡的工具，然后可以根据开发环境搭建章节，打包出相应的镜像文件，这个文件就是我们要烧写的镜像。 同时解压缩 **Tina系统TF卡烧录工具 PhoenixCard-V2.8**，解压完成后，进入到烧写工具目录内，双击运行 `PhoenixCard.exe`烧录工具。
 
 ![image-20240709112823756](images/image-20240709112823756-17205082843101.png)
 
