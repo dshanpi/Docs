@@ -1,112 +1,521 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
-# 启动开发板
+# 开发环境搭建
 
-开发板启动连接接口如下：
+## 1.获取TinaSDK5源码
 
-![image-20240719145451499](images/image-20240719145451499.png)
+获取扩展补丁包：https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK/
 
-接入**③12v电源接口**、**①OTG**和**②串口**。拨动电源开关（往电源接口方向拨动的是12vDC电源供电，另外的方向是OTG线供电），即可启动开发板。
+在虚拟机上，打开下载好的ubuntu镜像。
 
-## windows下使用 ADB登录系统
-### 连接OTG线
+拉取扩展补丁：
 
-将开发板配套的两根typec线，一根 直接连接至 开发板 `OTG烧录接口` 另一头连接至电脑的USB接口，开发板默认有系统，接通otg电源线就会通电并直接启动。
+~~~bash
+ubuntu@dshanpi:~/meihao$ git clone https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK.git
+~~~
 
-### 安装windows板ADB
-点击链接下载Windows版ADB工具 [adb-tools](https://gitlab.com/dongshanpi/tools/-/raw/main/ADB.7z)
-下载完成后解压，可以看到如下目录，
+进入源码根目录`t113i_tinasdk5.0-v1/`，拷贝扩展补丁：
 
-![adb-tools-dir](images/adb-tools-dir.png)
+~~~bash
+ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$ cp ~/meihao/T113i_DevKitF_Tina5SDK/* -rfvd .
+~~~
 
-然后 我们单独 拷贝 上一层的 **platform-tools** 文件夹到任意 目录，拷贝完成后，记住这个 目录位置，我们接下来要把这个 路径添加至 Windows系统环境变量里。
+## 2.编译固件
 
-![adb-tools-dir](images/adb-tools-dir-001.png)
+在Ubuntu上，进入源码根目录`t113i_tinasdk5.0-v1/`。
 
-我这里是把它单独拷贝到了 D盘，我的目录是 `D:\platform-tools` 接下来 我需要把它单独添加到Windows系统环境变量里面才可以在任意位置使用adb命令。
+①先执行 `source build/envsetup.sh` 初始化环境变量；
 
-![adb-tools-windows_config_001](images/adb-tools-windows_config_001.png)
+②接着执行 `./build.sh` 选择开发板选项。
 
-添加到 Windows系统环境变量里面
-![adb-tools-windows_config_001](images/adb-tools-windows_config_002.png)
+- platform : **linux**
+- linux_dev : **buildroot**
+- ic : **t113_i**
+- board : **evb1_auto**
+- flash : **default**
 
-### 打开cmd连接开发板
-打开CMD Windows 命令提示符方式有两种
-方式1：直接在Windows10/11搜索对话框中输入  cmd 在弹出的软件中点击  `命令提示符`
-方式2：同时按下 wind + r 键，输入 cmd 命令，按下确认 就可以自动打开 `命令提示符`
+~~~bash
+ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$ source build/envsetup.sh
+NOTE: The SDK(/home/ubuntu/meihao/t113i_tinasdk5.0-v1) was successfully loaded
+load openwrt... ok
+Please run lunch next for openwrt.
+load buildroot,bsp...ok
+Invoke . build/quick.sh from your shell to add the following functions to your environment:
+    croot                          - Changes directory to the top of the tree
+    cbsp                           - Changes directory to the bsp
+    cbsptest                       - Changes directory to the bsptest
+    ckernel                        - Changes directory to the kernel
+    cbrandy                        - Changes directory to the brandy
+    cboot                          - Changes directory to the uboot
+    cbr                            - Changes directory to the buildroot
+    cchips                         - Changes directory to the board
+    cconfigs                       - Changes directory to the board's config
+    cbin                           - Changes directory to the board's bin
+    cdts                           - Changes directory to the kernel's dts
+    ckernelout                     - Changes directory to the kernel output
+    cout                           - Changes directory to the product's output
+    copenssl                       - Changes directory to the product's openssl-1.0.0
+Usage: build.sh [args]
+    build.sh                       - default build all
+    build.sh bootloader            - only build bootloader
+    build.sh kernel                - only build kernel
+    build.sh buildroot_rootfs      - only build buildroot
+    build.sh menuconfig            - edit kernel menuconfig
+    build.sh saveconfig            - save kernel menuconfig
+    build.sh recovery_menuconfig   - edit recovery menuconfig
+    build.sh recovery_saveconfig   - save recovery menuconfig
+    build.sh buildroot_menuconfig  - edit buildroot menuconfig
+    build.sh buildroot_saveconfig  - save buildroot menuconfig
+    build.sh clean                 - clean all
+    build.sh distclean             - distclean all
+    build.sh pack                  - pack firmware
+    build.sh pack_debug            - pack firmware with debug info output to card0
+    build.sh pack_secure           - pack firmware with secureboot
+Usage: pack [args]
+    pack                           - pack firmware
+    pack -d                        - pack firmware with debug info output to card0
+    pack -s                        - pack firmware with secureboot
+    pack -sd                       - pack firmware with secureboot and debug info output to card0
+ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$
+ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$ ./build.sh
+All available platform:
+   0. android
+   1. linux
+Choice [android]: 1
+All available linux_dev:
+   0. bsp
+   1. buildroot
+   2. openwrt
+Choice [bsp]: 1
+All available ic:
+   0. t113_i
+   1. t113_s4
+Choice [t113_i]: 0
+All available board:
+   0. evb1
+   1. evb1_auto
+   2. evb1_auto_nand
+   3. evb1_auto_nor
+Choice [evb1]: 1
+All available flash:
+   0. default
+   1. nor
+Choice [default]: 0
+~~~
 
-![adb-tools-windows_config_003](images/adb-tools-windows_config_003.png)
+选择完，按下`Enter`键之后，会出现报错。
 
-打开命令提示符，输出 adb命令可以直接看到我们的adb已经配置成功
+~~~bash
+Choice [default]: 0
+INFO: kernel relative recovery defconfig: ../../../../../device/config/chips/t113_i/configs/evb1_auto/linux-5.4/config-5.4-recovery
+INFO: kernel absolute recovery defconfig: /home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto/linux-5.4/config-5.4-recovery
+INFO: Prepare toolchain ...
+INFO: kernel defconfig: generate /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/kernel/build/.config by /home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto/linux-5.4/config-5.4
+INFO: Prepare toolchain ...
+make: Entering directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/kernel/linux-5.4'
+make[1]: Entering directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/kernel/build'
+  GEN     Makefile
+*** Default configuration is based on '../../../../../device/config/chips/t113_i/configs/evb1_auto/linux-5.4/config-5.4'
+#
+# No change to .config
+#
+make[1]: Leaving directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/kernel/build'
+make: Leaving directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/kernel/linux-5.4'
+make: Entering directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/buildroot/buildroot-201902'
+  GEN     /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/buildroot/Makefile
+Config.in.legacy:1769:warning: choice value used outside its choice group
+#
+# configuration written to /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/buildroot/.config
+#
+make: Leaving directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/buildroot/buildroot-201902'
+INFO: buildroot defconfig is sun8iw20p1_t113_defconfig
+INFO: clean buildserver
+INFO: prepare_buildserver
+========ACTION List: build_linuxdev;========
+options :
+INFO: ----------------------------------------
+INFO: build linuxdev ...
+INFO: chip: sun8iw20p1
+INFO: platform: linux
+INFO: kernel: linux-5.4
+INFO: board: evb1_auto
+INFO: output: /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot
+INFO: ----------------------------------------
+INFO: don't build dtbo ...
+INFO: build arisc
+find: '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/brandy-2.0/spl': No such file or directory
+find: '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/dramlib': No such file or directory
+INFO: build_bootloader: brandy_path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/brandy-2.0
+INFO: skip build brandy.
+INFO: build kernel ...
+INFO: prepare_buildserver
+INFO: Prepare toolchain ...
+Makefile:681: arch//Makefile: No such file or directory
+make: *** No rule to make target 'arch//Makefile'.  Stop.
+ERROR: build  Failed
+INFO: build kernel failed
+ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$
+~~~
 
-![adb-tools-windows_config_004](images/adb-tools-windows_config_004.png)
+加上 `-d` 参数，强行编译，就不会出现报错了。
 
-连接好开发板的 OTG 并将其连接至电脑上，然后 输入 adb shell就可以自动登录系统
+~~~bash
+ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$ ./build.sh -d
+========ACTION List: build_linuxdev;========
+options :
+INFO: ----------------------------------------
+INFO: build linuxdev ...
+INFO: chip: sun8iw20p1
+INFO: platform: linux
+INFO: kernel: linux-5.4
+INFO: board: evb1_auto
+INFO: output: /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot
+INFO: ----------------------------------------
+INFO: don't build dtbo ...
+INFO: build arisc
+find: '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/brandy-2.0/spl': No such file or directory
+find: '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/dramlib': No such file or directory
+INFO: build_bootloader: brandy_path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/brandy-2.0
+INFO: skip build brandy.
+INFO: build kernel ...
+INFO: prepare_buildserver
+INFO: Prepare toolchain ...
+Building kernel
+make[1]: Entering directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/kernel/build'
+  GEN     Makefile
+  DTC     arch/arm/boot/dts/board.dtb
+  CALL    /home/ubuntu/meihao/t113i_tinasdk5.0-v1/kernel/linux-5.4/scripts/atomic/check-atomics.sh
+  CALL    /home/ubuntu/meihao/t113i_tinasdk5.0-v1/kernel/linux-5.4/scripts/checksyscalls.sh
+  CHK     include/generated/compile.h
+  Kernel: arch/arm/boot/Image is ready
+  Building modules, stage 2.
+  MODPOST 6 modules
+  Kernel: arch/arm/boot/zImage is ready
+  Kernel: arch/arm/boot/uImage is ready
+...
 
-``` shell
+Exportable Squashfs 4.0 filesystem, xz compressed, data block size 131072
+        compressed data, compressed metadata, compressed fragments, no xattrs
+        duplicates are removed
+Filesystem size 56902.63 Kbytes (55.57 Mbytes)
+        38.88% of uncompressed filesystem size (146336.84 Kbytes)
+Inode table size 54158 bytes (52.89 Kbytes)
+        23.54% of uncompressed inode table size (230025 bytes)
+Directory table size 70804 bytes (69.14 Kbytes)
+        48.95% of uncompressed directory table size (144657 bytes)
+Number of duplicate files found 37
+Number of inodes 6686
+Number of files 5571
+Number of fragments 397
+Number of symbolic links  813
+Number of device nodes 0
+Number of fifo nodes 0
+Number of socket nodes 0
+Number of directories 302
+Number of ids (unique uids + gids) 1
+Number of uids 1
+        root (0)
+Number of gids 1
+        root (0)
+INFO: pack rootfs ok ...
+INFO: ----------------------------------------
+INFO: build Tina OK.
+INFO: ----------------------------------------
+ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$
+~~~
 
-C:\System> adb shell
-* daemon not running. starting it now on port 5037 *
-* daemon started successfully *
+等待一段时间，编译成功后，执行 `./build.sh pack` 进行打包。
 
- _____  _              __     _
-|_   _||_| ___  _ _   |  |   |_| ___  _ _  _ _
-  | |   _ |   ||   |  |  |__ | ||   || | ||_'_|
-  | |  | || | || _ |  |_____||_||_|_||___||_,_|
-  |_|  |_||_|_||_|_|  Tina is Based on OpenWrt!
- ----------------------------------------------
- Tina Linux
- ----------------------------------------------
-root@TinaLinux:/#
+~~~bash
+ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$ ./build.sh pack
+========ACTION List: mk_pack ;========
+options :
+INFO: packing firmware ...
+INFO: /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/common/keys
+copying tools file
+copying configs file
+copying product configs file
+linux copying boardt&linux_kernel_version configs file
+ls: cannot access '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto/linux-5.4/env*': No such file or directory
+Use u-boot env file:
+Warning: u-boot env file '' not exist! use file in default directory other than 'evb1_auto' directory
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/aultls32.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/aultools.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot_package.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot_package.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot_package_nor.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/cardscript.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/cardscript_secure.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/cardtool.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/diskfs.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/dragon_toc.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env-recovery.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env_ab.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env_burn.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env_dragon.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env_nor.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/esm.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/image.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/image_crashdump.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/image_linux.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/image_nor.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/parameter.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/split_xxxx.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sunxi.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sw-subimgs-ab-rdiff.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sw-subimgs-ab.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sw-subimgs-recovery.cfg
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_config.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition-recovery.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition_ab.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition_dump.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition_nor.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition_private.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sysrecovery.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc0.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc0_ft.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc0_nand.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc0_sdcard.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc0_ufs.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc1.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/usbtool.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/usbtool_crash.fex
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/usbtool_test.fex
+copying boot resource
+copying boot file
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/boot0_nand_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_nand.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/boot0_sdcard_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_sdcard.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/boot0_spinor_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_spinor.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/fes1_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/fes1.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/u-boot-sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/u-boot.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/optee_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/optee.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/boot0_nand_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_nand.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/boot0_sdcard_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_sdcard.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/boot0_spinor_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_spinor.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/fes1_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/fes1.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/u-boot-sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/u-boot.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/optee_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/optee.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto/bin/amp_rv0.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/amp_rv0.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto//bin/amp_rv0.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/amp_rv0.fex'
+copying boot file 2.0
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/arisc' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/arisc.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/sunxi.dtb' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sunxi.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/boot0_nand_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_nand.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/boot0_sdcard_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_sdcard.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/boot0_spinor_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_spinor.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/fes1_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/fes1.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/sboot_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sboot.bin'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/u-boot-sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/u-boot.fex'
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/vmlinux.tar.bz2' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/vmlinux.fex'
+copying arm secure boot file
+copying additional files
+handle partition_size
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/.uboot.dtb.dts.tmp: Warning (spi_bus_reg): /soc@29000000/spi@4025000/spi_board0: SPI bus unit address format error, expected "0"
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/.uboot.dtb.dts.tmp:661.15-670.6: Warning (spi_bus_reg): /soc@29000000/spi@4025000/spi_board0: SPI bus unit address format error, expected "0"
+'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/temp_ubootnodtb.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/u-boot.fex'
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/.uboot.dts: Warning (spi_bus_reg): /soc@29000000/spi@4025000/spi_board0: SPI bus unit address format error, expected "0"
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/.sunxi.dts: Warning (alias_paths): /aliases: aliases property name must include only lowercase and '-'
+update optee
+do not set LINUX_DTBO_FILE
+pack boot package
+content_count=3
+2:LICHEE_REDUNDANT_ENV_SIZE:0x20000
+--mkenvimage create redundant env data!--
+--redundant env data size 0x20000---
+verity not supported yet
+packing for linux
+normal
+commit : f7388902e9-dirty
+mbr count = 4
 
-```
-ADB 也可以作为文件传输使用，例如：
-``` shell
-C:\System> adb push badapple.mp4 /mnt/UDISK   # 将 badapple.mp4 上传到开发板 /mnt/UDISK 目录内
-C:\System> adb pull /mnt/UDISK/badapple.mp4   # 将 /mnt/UDISK/badapple.mp4 下拉到当前目录内
-```
-**注意： 此方法目前只适用于 使用全志Tina-SDK 构建出来的系统。**
+partitation file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition.bin
+mbr_name file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sunxi_mbr.fex
+download_name file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/dlinfo.fex
 
+mbr size = 16384
+mbr magic softw411
+disk name=boot-resource
+disk name=env
+disk name=env-redund
+disk name=boot
+disk name=rootfs
+disk name=riscv
+disk name=private
+disk name=UDISK
+this is not a partition key
+update_for_part_info 0
+crc 0 = fd3908da
+crc 1 = 68845987
+crc 2 = d32ac21
+crc 3 = 988ffd7c
+MBR addr = 0x8000,logic_offset = 0xa000 GPT:boot-resource: 12000         1a685
+MBR addr = 0x10686,logic_offset = 0xa000 GPT:env         : 1a686         1ae85
+MBR addr = 0x10e86,logic_offset = 0xa000 GPT:env-redund  : 1ae86         1b685
+MBR addr = 0x11686,logic_offset = 0xa000 GPT:boot        : 1b686         24005
+MBR addr = 0x1a006,logic_offset = 0xa000 GPT:rootfs      : 24006         224005
+MBR addr = 0x21a006,logic_offset = 0xa000 GPT:riscv       : 224006        224805
+MBR addr = 0x21a806,logic_offset = 0xa000 GPT:private     : 224806        22c805
+MBR addr = 0x222806,logic_offset = 0xa000 GPT:UDISK       : 22c806        ffffffde
+gpt_head->header_crc32 = 0xc0b73d8e
+GPT----part num 8---
+gpt_entry: 128
+gpt_header: 92
+GPT:boot-resource: 12000         1a685
+GPT:env         : 1a686         1ae85
+GPT:env-redund  : 1ae86         1b685
+GPT:boot        : 1b686         24005
+GPT:rootfs      : 24006         224005
+GPT:riscv       : 224006        224805
+GPT:private     : 224806        22c805
+GPT:UDISK       : 22c806        ffffffde
+update gpt file ok
+update mbr file ok
+commit : f7388902e9-dirty
+temp = 40960
+mbr count = 4 total_sectors = 15269888 logic_offset = 40960 media = 0
 
-## 使用串口登录系统
-### 1. 连接串口线
-将配套的TypeC线一段连接至开发板的串口/供电接口，另一端连接至电脑USB接口，连接成功后板载的红色电源灯会亮起。
-默认情况下系统会自动安装串口设备驱动，如果没有自动安装，可以使用驱动精灵来自动安装。
-* 对于Windows系统
-此时Windows设备管理器 在 端口(COM和LPT) 处会多出一个串口设备，一般是以 `USB-Enhanced-SERIAL CH9102`开头，您需要留意一下后面的具体COM编号，用于后续连接使用。
+partitation file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition.bin
+mbr_name file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sunxi_mbr.fex
+download_name file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/dlinfo.fex
 
-![QuickStart-01](images/QuickStart-01.png)
+mbr size = 16384
+mbr magic softw411
+disk name=boot-resource
+disk name=env
+disk name=env-redund
+disk name=boot
+disk name=rootfs
+disk name=riscv
+disk name=private
+disk name=UDISK
+this is not a partition key
+update_for_part_info 0
+crc 0 = fd3908da
+crc 1 = 68845987
+crc 2 = d32ac21
+crc 3 = 988ffd7c
+MBR addr = 0x8000,logic_offset = 0xa000 GPT:boot-resource: 12000         1a685
+MBR addr = 0x10686,logic_offset = 0xa000 GPT:env         : 1a686         1ae85
+MBR addr = 0x10e86,logic_offset = 0xa000 GPT:env-redund  : 1ae86         1b685
+MBR addr = 0x11686,logic_offset = 0xa000 GPT:boot        : 1b686         24005
+MBR addr = 0x1a006,logic_offset = 0xa000 GPT:rootfs      : 24006         224005
+MBR addr = 0x21a006,logic_offset = 0xa000 GPT:riscv       : 224006        224805
+MBR addr = 0x21a806,logic_offset = 0xa000 GPT:private     : 224806        22c805
+MBR addr = 0x222806,logic_offset = 0xa000 GPT:UDISK       : 22c806        e8ffde
+gpt_head->header_crc32 = 0x5ab3941c
+GPT----part num 8---
+gpt_entry: 128
+gpt_header: 92
+GPT:boot-resource: 12000         1a685
+GPT:env         : 1a686         1ae85
+GPT:env-redund  : 1ae86         1b685
+GPT:boot        : 1b686         24005
+GPT:rootfs      : 24006         224005
+GPT:riscv       : 224006        224805
+GPT:private     : 224806        22c805
+GPT:UDISK       : 22c806        e8ffde
+update gpt file ok
+update mbr file ok
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/tools/pack/pctools/linux/eDragonEx/
+/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out
+Begin Parse sys_partion.fex
+Add partion boot-resource.fex BOOT-RESOURCE_FEX
+Add partion very boot-resource.fex BOOT-RESOURCE_FEX
+FilePath: boot-resource.fex
+FileLength=dad400Add partion env.fex ENV_FEX000000000
+Add partion very env.fex ENV_FEX000000000
+FilePath: env.fex
+FileLength=20000Add partion env.fex ENV_FEX000000000
+Add partion very env.fex ENV_FEX000000000
+FilePath: env.fex
+FileLength=20000Add partion boot.fex BOOT_FEX00000000
+Add partion very boot.fex BOOT_FEX00000000
+FilePath: boot.fex
+FileLength=912800Add partion rootfs.fex ROOTFS_FEX000000
+Add partion very rootfs.fex ROOTFS_FEX000000
+FilePath: rootfs.fex
+FileLength=b20d850Add partion amp_rv0.fex AMP_RV0_FEX00000
+Add partion very amp_rv0.fex AMP_RV0_FEX00000
+FilePath: amp_rv0.fex
+FileLength=29eb8BuildImg 0
+Dragon execute image.cfg SUCCESS !
+----------image is at----------
 
-如上图，COM号是96，我们接下来连接所使用的串口号就是96。
+264M    /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i_linux_evb1_auto_uart0.img
 
-* 对于Linux系统
-可以查看是否多出一个/dev/tty 设备,一般情况设备节点为 /dev/ttyACM0  。
+pack finish
+ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$
+~~~
 
-![QuickStart-02](images/QuickStart-02.png)
+打包成功后，镜像文件保存在 `t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/t113_i_linux_evb1_auto_uart0.img` 
 
-### 2. 打开串口控制台
-#### 获取串口工具
-使用Putty或者MobaXterm等串口工具来开发板设备。
+~~~bash
+ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot$ ls -la
+total 825068
+drwxrwxr-x 4 ubuntu ubuntu      4096 7月  16 18:10 .
+drwxrwxr-x 4 ubuntu ubuntu      4096 7月  16 18:10 ..
+-rw-rw-r-- 1 ubuntu ubuntu         6 7月  16 18:07 arisc
+-rwxrwxr-x 1 ubuntu ubuntu  12985488 7月  16 18:07 bImage
+-rw-rw-r-- 1 ubuntu ubuntu        66 7月  16 18:07 .board.dtb.d.dtc.tmp
+-rw-rw-r-- 1 ubuntu ubuntu     79218 7月  16 18:07 .board.dtb.dts.tmp
+-rw-rw-r-- 1 ubuntu ubuntu     40960 7月  16 16:31 boot0_mmc_car_fastboot_sun8iw20p1.bin
+-rw-rw-r-- 1 ubuntu ubuntu     45056 7月  16 16:31 boot0_mmcfastboot_sun8iw20p1.bin
+-rw-rw-r-- 1 ubuntu ubuntu     49152 7月  16 16:31 boot0_nand_car_fastboot_sun8iw20p1.bin
+-rw-rw-r-- 1 ubuntu ubuntu     53248 7月  16 16:31 boot0_nandfastboot_sun8iw20p1.bin
+-rw-rw-r-- 1 ubuntu ubuntu     49152 7月  16 16:31 boot0_nand_sun8iw20p1.bin
+-rw-rw-r-- 1 ubuntu ubuntu     40960 7月  16 16:31 boot0_sdcard_sun8iw20p1.bin
+-rw-rw-r-- 1 ubuntu ubuntu     32768 7月  16 16:31 boot0_spinor_sun8iw20p1.bin
+-rw-rw-r-- 1 ubuntu ubuntu   9512960 7月  16 18:07 boot.img
+-rw-rw-r-- 1 ubuntu ubuntu      4924 7月  16 18:07 .buildconfig
+drwxrwxr-x 7 ubuntu ubuntu      4096 7月  16 18:07 buildroot
+-rw-rw-r-- 1 ubuntu ubuntu    127053 7月  16 18:07 .config
+lrwxrwxrwx 1 ubuntu ubuntu        18 7月  16 18:07 dist -> lib/modules/5.4.61
+-rwxrwxr-x 1 ubuntu ubuntu    168392 7月  16 18:07 dtc
+-rw-rw-r-- 1 ubuntu ubuntu     21152 7月  16 16:31 fes1_sun8iw20p1.bin
+drwxrwxr-x 3 ubuntu ubuntu      4096 7月  16 18:07 lib
+-rw-rw-r-- 1 ubuntu ubuntu   4000287 7月  16 18:07 rootfs.cpio.gz
+-rw-r--r-- 1 ubuntu ubuntu 186701904 7月  16 18:07 rootfs.ext4
+-rw-r--r-- 1 ubuntu ubuntu  58269696 7月  16 18:08 rootfs.squashfs
+-rw-rw-r-- 1 ubuntu ubuntu  86446080 7月  16 18:08 rootfs.ubifs
+-rw-rw-r-- 1 ubuntu ubuntu     86016 7月  16 16:31 sboot_sun8iw20p1.bin
+-rw-rw-r-- 1 ubuntu ubuntu     57824 7月  16 18:07 sunxi.dtb
+-rw-rw-r-- 1 ubuntu ubuntu     67864 7月  16 18:10 .sunxi.dts
+-rw-rw-r-- 1 ubuntu ubuntu   2351698 7月  16 18:07 System.map
+-rwxrwxr-x 2 ubuntu ubuntu 276633600 7月  16 18:10 t113_i_linux_evb1_auto_uart0.img
+-rw-rw-r-- 1 ubuntu ubuntu    981756 7月  16 16:31 u-boot-sun8iw20p1.bin
+-rw-rw-r-- 1 ubuntu ubuntu   5162016 7月  16 18:07 uImage
+-rwxrwxr-x 1 ubuntu ubuntu 136244496 7月  16 18:07 vmlinux
+-rw-rw-r-- 1 ubuntu ubuntu  62033866 7月  16 18:07 vmlinux.tar.bz2
+-rwxrwxr-x 1 ubuntu ubuntu   5161952 7月  16 18:07 zImage
+ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot$
+~~~
 
-* 其中putty工具可以访问页面  https://www.chiark.greenend.org.uk/~sgtatham/putty/  来获取。
-* MobaXterm可以通过访问页面 https://mobaxterm.mobatek.net/ 获取 (推荐使用)。
+## 3.烧录固件
 
-#### 使用putty登录串口
+拉取打包好的镜像到PC端，打开全志线刷工具 **AllwinnertechPhoeniSuit**，找到**PhoenixSuit.exe** ，双击运行。
 
-![QuickStart-04](images/QuickStart-04.png)
+![image-20240716182751548](images/image-20240716182751548.png)
 
-#### 使用Mobaxterm登录串口
-打开MobaXterm，点击左上角的“Session”，在弹出的界面选中“Serial”，如下图所示选择端口号（前面设备管理器显示的端口号COM21）、波特率（Speed 115200）、流控（Flow Control: none）,最后点击“OK”即可。步骤如下图所示。
-**注意：流控（Flow Control）一定要选择none，否则你将无法在MobaXterm中向串口输入数据**
+![image-20240716182823353](images/image-20240716182823353.png)
 
-![Mobaxterm_serial_set_001](images/Mobaxterm_serial_set_001.png)
+点击**一键刷机**。
 
+![image-20240716182925324](images/image-20240716182925324.png)
 
-### 3. 进入系统shell
-使用串口工具成功打开串口后，可以直接按下 Enter 键 进入shell，当然您也可以按下板子上的 `Reset`复位键，来查看完整的系统信息。
+点击**浏览**，找到拉取下来的镜像，选择**全盘擦除**。
 
-``` bash
+![image-20240716183057447](images/image-20240716183057447.png)
+
+选择好之后，不需要其他的界面操作了。这时拿起已经连接好的开发板，先按住 **FEL** 烧写模式按键，之后按一下 **RESET** 系统复位键，再松开 **FEL **，就可以自动进入烧写模式并开始烧写。
+
+![image-20240716183440834](images/image-20240716183440834.png)
+
+等待烧录完成，串口打印信息如下：
+
+~~~bash
 [27]HELLO! BOOT0 is starting!
 [30]BOOT0 commit : 069ed30b88
 [33]set pll start
@@ -668,8 +1077,19 @@ swu_software: ####
 swu_mode: ####
 no swupdate_cmd to run, wait for next swupdate
 # [    7.115243] android_work: sent uevent USB_STATE=CONNECTED
+
+# ls
+THIS_IS_NOT_YOUR_ROOT_FILESYSTEM  opt
+bin                               proc
+dev                               root
+etc                               run
+init                              sbin
+lib                               sys
+lib32                             system
+linuxrc                           tmp
+lost+found                        usr
+media                             var
+mnt
 #
-```
-**系统默认会自己登录 没有用户名 没有密码。**
-**系统默认会自己登录 没有用户名 没有密码。**
-**系统默认会自己登录 没有用户名 没有密码。**
+~~~
+
