@@ -6,7 +6,7 @@ sidebar_position: 2
 ## 1.获取TinaSDK5源码
 - 打开Tina5-SDK基础包获取：https://forums.100ask.net/t/topic/7393
     - 通过百度网盘下载，大小约3.3G，名称为tina5sdk-bsp-50ae436fe556be2253856af283b1e094.tar.gz 下载完成后通过网络等方式拷贝到虚拟机目录下。
-- 获取T113扩展补丁包：https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK/
+- 获取T113i扩展补丁包：https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK/
 
 在虚拟机上，打开下载好的ubuntu镜像。
 拉取扩展补丁：
