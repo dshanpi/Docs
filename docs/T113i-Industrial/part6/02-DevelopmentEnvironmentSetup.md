@@ -4,26 +4,33 @@ sidebar_position: 2
 # 开发环境搭建
 
 ## 1.获取TinaSDK5源码
-
-获取扩展补丁包：https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK/
+- 打开Tina5-SDK基础包获取：https://forums.100ask.net/t/topic/7393
+    - 通过百度网盘下载，大小约3.3G，名称为tina5sdk-bsp-50ae436fe556be2253856af283b1e094.tar.gz 下载完成后通过网络等方式拷贝到虚拟机目录下。
+- 获取T113扩展补丁包：https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK/
 
 在虚拟机上，打开下载好的ubuntu镜像。
-
 拉取扩展补丁：
-
 ~~~bash
-ubuntu@dshanpi:~/meihao$ git clone https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK.git
+ubuntu@ubuntu1804:~$ git clone https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK.git 
+ubuntu@ubuntu1804:~$ tar -xvf  tina5sdk-bsp-50ae436fe556be2253856af283b1e094.tar.gz 
+ubuntu@ubuntu1804:~$ cd tina5sdk-bsp 
+ubuntu@ubuntu1804:~/tina5sdk-bsp$ git clone https://e.coding.net/weidongshan/tina5/buildroot.git
+ubuntu@ubuntu1804:~/tina5sdk-bsp$ git clone https://e.coding.net/weidongshan/tina5/openwrt.git
+ubuntu@ubuntu1804:~/tina5sdk-bsp$ git clone https://e.coding.net/weidongshan/tina5/platform.git
+ubuntu@ubuntu1804:~/tina5sdk-bsp$ ls
+brandy  build  buildroot  build.sh  device  kernel  openwrt    platform  prebuilt    tools
+ubuntu@ubuntu1804:~/tina5sdk-bsp$ 
 ~~~
 
-进入源码根目录`t113i_tinasdk5.0-v1/`，拷贝扩展补丁：
+进入源码根目录`tina5sdk-bsp/`，拷贝扩展补丁：
 
 ~~~bash
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$ cp ~/meihao/T113i_DevKitF_Tina5SDK/* -rfvd .
+ubuntu@ubuntu1804:~/tina5sdk-bsp$ cp ~/T113i_DevKitF_Tina5SDK/* -rfvd .
 ~~~
 
 ## 2.编译固件
 
-在Ubuntu上，进入源码根目录`t113i_tinasdk5.0-v1/`。
+在Ubuntu上，进入源码根目录`tina5sdk-bsp`。
 
 ①先执行 `source build/envsetup.sh` 初始化环境变量；
 
@@ -36,8 +43,8 @@ ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$ cp ~/meihao/T113i_DevKitF_Tina5SDK/
 - flash : **default**
 
 ~~~bash
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$ source build/envsetup.sh
-NOTE: The SDK(/home/ubuntu/meihao/t113i_tinasdk5.0-v1) was successfully loaded
+ubuntu@ubuntu1804:~/tina5sdk-bsp$ source build/envsetup.sh
+NOTE: The SDK(/home/ubuntu/tina5sdk-bsp) was successfully loaded
 load openwrt... ok
 Please run lunch next for openwrt.
 load buildroot,bsp...ok
@@ -77,8 +84,8 @@ Usage: pack [args]
     pack -d                        - pack firmware with debug info output to card0
     pack -s                        - pack firmware with secureboot
     pack -sd                       - pack firmware with secureboot and debug info output to card0
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$ ./build.sh
+ubuntu@ubuntu1804:~/tina5sdk-bsp$
+ubuntu@ubuntu1804:~/tina5sdk-bsp$ ./build.sh
 All available platform:
    0. android
    1. linux
@@ -109,26 +116,26 @@ Choice [default]: 0
 ~~~bash
 Choice [default]: 0
 INFO: kernel relative recovery defconfig: ../../../../../device/config/chips/t113_i/configs/evb1_auto/linux-5.4/config-5.4-recovery
-INFO: kernel absolute recovery defconfig: /home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto/linux-5.4/config-5.4-recovery
+INFO: kernel absolute recovery defconfig: /home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i/configs/evb1_auto/linux-5.4/config-5.4-recovery
 INFO: Prepare toolchain ...
-INFO: kernel defconfig: generate /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/kernel/build/.config by /home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto/linux-5.4/config-5.4
+INFO: kernel defconfig: generate /home/ubuntu/tina5sdk-bspout/t113_i/kernel/build/.config by /home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i/configs/evb1_auto/linux-5.4/config-5.4
 INFO: Prepare toolchain ...
-make: Entering directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/kernel/linux-5.4'
-make[1]: Entering directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/kernel/build'
+make: Entering directory '/home/ubuntu/tina5sdk-bspkernel/linux-5.4'
+make[1]: Entering directory '/home/ubuntu/tina5sdk-bspout/t113_i/kernel/build'
   GEN     Makefile
 *** Default configuration is based on '../../../../../device/config/chips/t113_i/configs/evb1_auto/linux-5.4/config-5.4'
 #
 # No change to .config
 #
-make[1]: Leaving directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/kernel/build'
-make: Leaving directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/kernel/linux-5.4'
-make: Entering directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/buildroot/buildroot-201902'
-  GEN     /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/buildroot/Makefile
+make[1]: Leaving directory '/home/ubuntu/tina5sdk-bspout/t113_i/kernel/build'
+make: Leaving directory '/home/ubuntu/tina5sdk-bspkernel/linux-5.4'
+make: Entering directory '/home/ubuntu/tina5sdk-bspbuildroot/buildroot-201902'
+  GEN     /home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/buildroot/Makefile
 Config.in.legacy:1769:warning: choice value used outside its choice group
 #
-# configuration written to /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/buildroot/.config
+# configuration written to /home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/buildroot/.config
 #
-make: Leaving directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/buildroot/buildroot-201902'
+make: Leaving directory '/home/ubuntu/tina5sdk-bspbuildroot/buildroot-201902'
 INFO: buildroot defconfig is sun8iw20p1_t113_defconfig
 INFO: clean buildserver
 INFO: prepare_buildserver
@@ -140,13 +147,13 @@ INFO: chip: sun8iw20p1
 INFO: platform: linux
 INFO: kernel: linux-5.4
 INFO: board: evb1_auto
-INFO: output: /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot
+INFO: output: /home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot
 INFO: ----------------------------------------
 INFO: don't build dtbo ...
 INFO: build arisc
-find: '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/brandy-2.0/spl': No such file or directory
-find: '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/dramlib': No such file or directory
-INFO: build_bootloader: brandy_path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/brandy-2.0
+find: '/home/ubuntu/tina5sdk-bspbrandy/brandy-2.0/spl': No such file or directory
+find: '/home/ubuntu/tina5sdk-bspbrandy/dramlib': No such file or directory
+INFO: build_bootloader: brandy_path=/home/ubuntu/tina5sdk-bspbrandy/brandy-2.0
 INFO: skip build brandy.
 INFO: build kernel ...
 INFO: prepare_buildserver
@@ -155,13 +162,13 @@ Makefile:681: arch//Makefile: No such file or directory
 make: *** No rule to make target 'arch//Makefile'.  Stop.
 ERROR: build  Failed
 INFO: build kernel failed
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$
+ubuntu@ubuntu1804:~/tina5sdk-bsp$
 ~~~
 
 加上 `-d` 参数，强行编译，就不会出现报错了。
 
 ~~~bash
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$ ./build.sh -d
+ubuntu@ubuntu1804:~/tina5sdk-bsp$ ./build.sh -d
 ========ACTION List: build_linuxdev;========
 options :
 INFO: ----------------------------------------
@@ -170,23 +177,23 @@ INFO: chip: sun8iw20p1
 INFO: platform: linux
 INFO: kernel: linux-5.4
 INFO: board: evb1_auto
-INFO: output: /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot
+INFO: output: /home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot
 INFO: ----------------------------------------
 INFO: don't build dtbo ...
 INFO: build arisc
-find: '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/brandy-2.0/spl': No such file or directory
-find: '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/dramlib': No such file or directory
-INFO: build_bootloader: brandy_path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/brandy/brandy-2.0
+find: '/home/ubuntu/tina5sdk-bspbrandy/brandy-2.0/spl': No such file or directory
+find: '/home/ubuntu/tina5sdk-bspbrandy/dramlib': No such file or directory
+INFO: build_bootloader: brandy_path=/home/ubuntu/tina5sdk-bspbrandy/brandy-2.0
 INFO: skip build brandy.
 INFO: build kernel ...
 INFO: prepare_buildserver
 INFO: Prepare toolchain ...
 Building kernel
-make[1]: Entering directory '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/kernel/build'
+make[1]: Entering directory '/home/ubuntu/tina5sdk-bspout/t113_i/kernel/build'
   GEN     Makefile
   DTC     arch/arm/boot/dts/board.dtb
-  CALL    /home/ubuntu/meihao/t113i_tinasdk5.0-v1/kernel/linux-5.4/scripts/atomic/check-atomics.sh
-  CALL    /home/ubuntu/meihao/t113i_tinasdk5.0-v1/kernel/linux-5.4/scripts/checksyscalls.sh
+  CALL    /home/ubuntu/tina5sdk-bspkernel/linux-5.4/scripts/atomic/check-atomics.sh
+  CALL    /home/ubuntu/tina5sdk-bspkernel/linux-5.4/scripts/checksyscalls.sh
   CHK     include/generated/compile.h
   Kernel: arch/arm/boot/Image is ready
   Building modules, stage 2.
@@ -222,102 +229,102 @@ INFO: pack rootfs ok ...
 INFO: ----------------------------------------
 INFO: build Tina OK.
 INFO: ----------------------------------------
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$
+ubuntu@ubuntu1804:~/tina5sdk-bsp$
 ~~~
 
 等待一段时间，编译成功后，执行 `./build.sh pack` 进行打包。
 
 ~~~bash
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$ ./build.sh pack
+ubuntu@ubuntu1804:~/tina5sdk-bsp$ ./build.sh pack
 ========ACTION List: mk_pack ;========
 options :
 INFO: packing firmware ...
-INFO: /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/common/keys
+INFO: /home/ubuntu/tina5sdk-bspout/t113_i/common/keys
 copying tools file
 copying configs file
 copying product configs file
 linux copying boardt&linux_kernel_version configs file
-ls: cannot access '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto/linux-5.4/env*': No such file or directory
+ls: cannot access '/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i/configs/evb1_auto/linux-5.4/env*': No such file or directory
 Use u-boot env file:
 Warning: u-boot env file '' not exist! use file in default directory other than 'evb1_auto' directory
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/aultls32.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/aultools.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot_package.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot_package.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot_package_nor.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/cardscript.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/cardscript_secure.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/cardtool.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/diskfs.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/dragon_toc.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env-recovery.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env_ab.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env_burn.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env_dragon.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/env_nor.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/esm.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/image.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/image_crashdump.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/image_linux.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/image_nor.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/parameter.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/split_xxxx.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sunxi.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sw-subimgs-ab-rdiff.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sw-subimgs-ab.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sw-subimgs-recovery.cfg
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_config.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition-recovery.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition_ab.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition_dump.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition_nor.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition_private.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sysrecovery.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc0.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc0_ft.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc0_nand.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc0_sdcard.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc0_ufs.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/toc1.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/usbtool.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/usbtool_crash.fex
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/usbtool_test.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/aultls32.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/aultools.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot_package.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot_package.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot_package_nor.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/cardscript.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/cardscript_secure.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/cardtool.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/diskfs.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/dragon_toc.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/env-recovery.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/env.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/env_ab.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/env_burn.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/env_dragon.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/env_nor.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/esm.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/image.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/image_crashdump.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/image_linux.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/image_nor.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/parameter.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/split_xxxx.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sunxi.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sw-subimgs-ab-rdiff.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sw-subimgs-ab.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sw-subimgs-recovery.cfg
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sys_config.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sys_partition-recovery.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sys_partition.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sys_partition_ab.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sys_partition_dump.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sys_partition_nor.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sys_partition_private.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sysrecovery.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/toc0.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/toc0_ft.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/toc0_nand.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/toc0_sdcard.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/toc0_ufs.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/toc1.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/usbtool.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/usbtool_crash.fex
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/usbtool_test.fex
 copying boot resource
 copying boot file
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/boot0_nand_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_nand.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/boot0_sdcard_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_sdcard.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/boot0_spinor_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_spinor.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/fes1_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/fes1.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/u-boot-sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/u-boot.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/bin/optee_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/optee.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/boot0_nand_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_nand.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/boot0_sdcard_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_sdcard.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/boot0_spinor_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_spinor.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/fes1_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/fes1.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/u-boot-sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/u-boot.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i//bin/optee_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/optee.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto/bin/amp_rv0.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/amp_rv0.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto//bin/amp_rv0.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/amp_rv0.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i/bin/boot0_nand_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot0_nand.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i/bin/boot0_sdcard_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot0_sdcard.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i/bin/boot0_spinor_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot0_spinor.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i/bin/fes1_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/fes1.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i/bin/u-boot-sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/u-boot.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i/bin/optee_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/optee.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i//bin/boot0_nand_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot0_nand.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i//bin/boot0_sdcard_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot0_sdcard.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i//bin/boot0_spinor_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot0_spinor.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i//bin/fes1_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/fes1.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i//bin/u-boot-sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/u-boot.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i//bin/optee_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/optee.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i/configs/evb1_auto/bin/amp_rv0.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/amp_rv0.fex'
+'/home/ubuntu/tina5sdk-bspdevice/config/chips/t113_i/configs/evb1_auto//bin/amp_rv0.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/amp_rv0.fex'
 copying boot file 2.0
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/arisc' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/arisc.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/sunxi.dtb' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sunxi.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/boot0_nand_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_nand.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/boot0_sdcard_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_sdcard.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/boot0_spinor_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/boot0_spinor.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/fes1_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/fes1.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/sboot_sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sboot.bin'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/u-boot-sun8iw20p1.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/u-boot.fex'
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/vmlinux.tar.bz2' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/vmlinux.fex'
+'/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/arisc' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/arisc.fex'
+'/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/sunxi.dtb' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sunxi.fex'
+'/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/boot0_nand_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot0_nand.fex'
+'/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/boot0_sdcard_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot0_sdcard.fex'
+'/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/boot0_spinor_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/boot0_spinor.fex'
+'/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/fes1_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/fes1.fex'
+'/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/sboot_sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sboot.bin'
+'/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/u-boot-sun8iw20p1.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/u-boot.fex'
+'/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/vmlinux.tar.bz2' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/vmlinux.fex'
 copying arm secure boot file
 copying additional files
 handle partition_size
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/.uboot.dtb.dts.tmp: Warning (spi_bus_reg): /soc@29000000/spi@4025000/spi_board0: SPI bus unit address format error, expected "0"
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/.uboot.dtb.dts.tmp:661.15-670.6: Warning (spi_bus_reg): /soc@29000000/spi@4025000/spi_board0: SPI bus unit address format error, expected "0"
-'/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/temp_ubootnodtb.bin' -> '/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/u-boot.fex'
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/.uboot.dts: Warning (spi_bus_reg): /soc@29000000/spi@4025000/spi_board0: SPI bus unit address format error, expected "0"
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/.sunxi.dts: Warning (alias_paths): /aliases: aliases property name must include only lowercase and '-'
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/.uboot.dtb.dts.tmp: Warning (spi_bus_reg): /soc@29000000/spi@4025000/spi_board0: SPI bus unit address format error, expected "0"
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/.uboot.dtb.dts.tmp:661.15-670.6: Warning (spi_bus_reg): /soc@29000000/spi@4025000/spi_board0: SPI bus unit address format error, expected "0"
+'/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/temp_ubootnodtb.bin' -> '/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/u-boot.fex'
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/.uboot.dts: Warning (spi_bus_reg): /soc@29000000/spi@4025000/spi_board0: SPI bus unit address format error, expected "0"
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/buildroot/.sunxi.dts: Warning (alias_paths): /aliases: aliases property name must include only lowercase and '-'
 update optee
 do not set LINUX_DTBO_FILE
 pack boot package
@@ -331,9 +338,9 @@ normal
 commit : f7388902e9-dirty
 mbr count = 4
 
-partitation file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition.bin
-mbr_name file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sunxi_mbr.fex
-download_name file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/dlinfo.fex
+partitation file Path=/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sys_partition.bin
+mbr_name file Path=/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sunxi_mbr.fex
+download_name file Path=/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/dlinfo.fex
 
 mbr size = 16384
 mbr magic softw411
@@ -377,9 +384,9 @@ commit : f7388902e9-dirty
 temp = 40960
 mbr count = 4 total_sectors = 15269888 logic_offset = 40960 media = 0
 
-partitation file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sys_partition.bin
-mbr_name file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/sunxi_mbr.fex
-download_name file Path=/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out/dlinfo.fex
+partitation file Path=/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sys_partition.bin
+mbr_name file Path=/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/sunxi_mbr.fex
+download_name file Path=/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out/dlinfo.fex
 
 mbr size = 16384
 mbr magic softw411
@@ -419,8 +426,8 @@ GPT:private     : 224806        22c805
 GPT:UDISK       : 22c806        e8ffde
 update gpt file ok
 update mbr file ok
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/tools/pack/pctools/linux/eDragonEx/
-/home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/pack_out
+/home/ubuntu/tina5sdk-bsptools/pack/pctools/linux/eDragonEx/
+/home/ubuntu/tina5sdk-bspout/t113_i/evb1_auto/pack_out
 Begin Parse sys_partion.fex
 Add partion boot-resource.fex BOOT-RESOURCE_FEX
 Add partion very boot-resource.fex BOOT-RESOURCE_FEX
@@ -444,16 +451,16 @@ FileLength=29eb8BuildImg 0
 Dragon execute image.cfg SUCCESS !
 ----------image is at----------
 
-264M    /home/ubuntu/meihao/t113i_tinasdk5.0-v1/out/t113_i_linux_evb1_auto_uart0.img
+264M    /home/ubuntu/tina5sdk-bspout/t113_i_linux_evb1_auto_uart0.img
 
 pack finish
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1$
+ubuntu@ubuntu1804:~/tina5sdk-bsp$
 ~~~
 
-打包成功后，镜像文件保存在 `t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/t113_i_linux_evb1_auto_uart0.img` 
+打包成功后，镜像文件保存在 `tina5sdk-bspout/t113_i/evb1_auto/buildroot/t113_i_linux_evb1_auto_uart0.img` 
 
 ~~~bash
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot$ ls -la
+ubuntu@ubuntu1804:~/tina5sdk-bspout/t113_i/evb1_auto/buildroot$ ls -la
 total 825068
 drwxrwxr-x 4 ubuntu ubuntu      4096 7月  16 18:10 .
 drwxrwxr-x 4 ubuntu ubuntu      4096 7月  16 18:10 ..
@@ -490,7 +497,7 @@ drwxrwxr-x 3 ubuntu ubuntu      4096 7月  16 18:07 lib
 -rwxrwxr-x 1 ubuntu ubuntu 136244496 7月  16 18:07 vmlinux
 -rw-rw-r-- 1 ubuntu ubuntu  62033866 7月  16 18:07 vmlinux.tar.bz2
 -rwxrwxr-x 1 ubuntu ubuntu   5161952 7月  16 18:07 zImage
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot$
+ubuntu@ubuntu1804:~/tina5sdk-bspout/t113_i/evb1_auto/buildroot$
 ~~~
 
 ## 3.烧录固件
@@ -644,7 +651,7 @@ ERROR: reserving fdt memory region failed (addr=5c907000 size=3e8000)
 [01.809][mmc]: mmc exit start
 [01.822][mmc]: mmc 2 exit ok
 [    0.000000] Booting Linux on physical CPU 0x0
-[    0.000000] Linux version 5.4.61 (ubuntu@dshanpi) (arm-linux-gnueabi-gcc (Linaro GCC 5.3-2016.05) 5.3.1 20160412, GNU ld (Linaro_Binutils-2016.05) 2.25.0 Linaro 2016_02) #1 SMP PREEMPT Tue Jul 16 16:31:37 CST 2024
+[    0.000000] Linux version 5.4.61 (ubuntu@ubuntu1804) (arm-linux-gnueabi-gcc (Linaro GCC 5.3-2016.05) 5.3.1 20160412, GNU ld (Linaro_Binutils-2016.05) 2.25.0 Linaro 2016_02) #1 SMP PREEMPT Tue Jul 16 16:31:37 CST 2024
 [    0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=10c5387d
 [    0.000000] CPU: div instructions available: patching division code
 [    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
@@ -1092,4 +1099,5 @@ media                             var
 mnt
 #
 ~~~
+
 
