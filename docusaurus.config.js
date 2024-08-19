@@ -92,12 +92,6 @@ const config = {
           },
           {
             type: 'docSidebar',
-            sidebarId: 'd213dkSidebar',
-            position: 'left',
-            label: 'D213-DevKit',
-          },
-          {
-            type: 'docSidebar',
             sidebarId: 'mp135dkSidebar',
             position: 'left',
             label: 'MP135-DevKit',
