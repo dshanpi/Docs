@@ -3,16 +3,29 @@ sidebar_position: 2
 ---
 # 开发环境搭建
 
-## 1.获取TinaSDK5源码
-- 打开Tina5-SDK基础包获取：https://forums.100ask.net/t/topic/7393
-    - 通过百度网盘下载，大小约3.3G，名称为tina5sdk-bsp-50ae436fe556be2253856af283b1e094.tar.gz 下载完成后通过网络等方式拷贝到虚拟机目录下。
-- 获取T113i扩展补丁包：https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK/
+本章节将讲解如何在Ubuntu上搭建一个Tina5-SDK开发环境。
 
-在虚拟机上，打开下载好的ubuntu镜像。
-拉取扩展补丁：
+## 获取Tina5-SDK源码
+
+首先，在Windows上访问下面的论坛地址，
+
+- 打开Tina5-SDK基础包获取：
+
+  https://forums.100ask.net/t/topic/7393
+
+  - 通过百度网盘下载，大小约3.3G，名称为tina5sdk-bsp-50ae436fe556be2253856af283b1e094.tar.gz 下载完成后通过网络等方式拷贝到虚拟机目录下。
+
+把基础包拷贝到虚拟机之后，解压：
+
 ~~~bash
-ubuntu@ubuntu1804:~$ git clone https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK.git 
 ubuntu@ubuntu1804:~$ tar -xvf  tina5sdk-bsp-50ae436fe556be2253856af283b1e094.tar.gz 
+~~~
+
+解压后，基础包的命名是`tina5sdk-bsp`。
+
+以上只是获取一个Tina5-SDK的一个基础包，并**不是完整**的SDK源码，还需要获取执行以下几步，才可以得到一个完整的Tina5-SDK源码包。
+
+~~~bash
 ubuntu@ubuntu1804:~$ cd tina5sdk-bsp 
 ubuntu@ubuntu1804:~/tina5sdk-bsp$ git clone https://e.coding.net/weidongshan/tina5/buildroot.git
 ubuntu@ubuntu1804:~/tina5sdk-bsp$ git clone https://e.coding.net/weidongshan/tina5/openwrt.git
@@ -22,15 +35,27 @@ brandy  build  buildroot  build.sh  device  kernel  openwrt    platform  prebuil
 ubuntu@ubuntu1804:~/tina5sdk-bsp$ 
 ~~~
 
-进入源码根目录`tina5sdk-bsp/`，拷贝扩展补丁：
+看到以上文件，说明Tina5-SDK源码获取成功。
+
+基于T113i-Industrial开发板，我们提供了一个扩展补丁包，获取地址：https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK/
+
+在虚拟机上，拉取扩展补丁：
+
+~~~bash
+ubuntu@ubuntu1804:~$ git clone https://github.com/DongshanPI/T113i_DevKitF_Tina5SDK.git 
+~~~
+
+进入Tina-SDK5源码根目录`tina5sdk-bsp/`，拷贝扩展补丁：
 
 ~~~bash
 ubuntu@ubuntu1804:~/tina5sdk-bsp$ cp ~/T113i_DevKitF_Tina5SDK/* -rfvd .
 ~~~
 
-## 2.编译固件
+自此获取资源完成，接下来将讲解如何编译固件，和存在的问题。
 
-在Ubuntu上，进入源码根目录`tina5sdk-bsp`。
+## 编译固件
+
+在Ubuntu上，进入源码根目录`tina5sdk-bsp/`。
 
 ①先执行 `source build/envsetup.sh` 初始化环境变量；
 
@@ -165,7 +190,7 @@ INFO: build kernel failed
 ubuntu@ubuntu1804:~/tina5sdk-bsp$
 ~~~
 
-加上 `-d` 参数，强行编译，就不会出现报错了。
+加上 `-d` 参数，强行编译，就不会出现报错了（如果是别的错误，强制也无效，可以看看下面的**常见问题**里是否有答案）。
 
 ~~~bash
 ubuntu@ubuntu1804:~/tina5sdk-bsp$ ./build.sh -d
@@ -457,7 +482,7 @@ pack finish
 ubuntu@ubuntu1804:~/tina5sdk-bsp$
 ~~~
 
-打包成功后，镜像文件保存在 `tina5sdk-bspout/t113_i/evb1_auto/buildroot/t113_i_linux_evb1_auto_uart0.img` 
+打包成功后，镜像文件保存在 `t113i_tinasdk5.0-v1/out/t113_i/evb1_auto/buildroot/t113_i_linux_evb1_auto_uart0.img` 
 
 ~~~bash
 ubuntu@ubuntu1804:~/tina5sdk-bspout/t113_i/evb1_auto/buildroot$ ls -la
@@ -500,27 +525,29 @@ drwxrwxr-x 3 ubuntu ubuntu      4096 7月  16 18:07 lib
 ubuntu@ubuntu1804:~/tina5sdk-bspout/t113_i/evb1_auto/buildroot$
 ~~~
 
-## 3.烧录固件
+## 常见问题
 
-拉取打包好的镜像到PC端，打开全志线刷工具 **AllwinnertechPhoeniSuit**，找到**PhoenixSuit.exe** ，双击运行。
+编译报错：
 
-![image-20240716182751548](images/image-20240716182751548.png)
+![image-20240820162454727](images/image-20240820162454727.png)
 
-![image-20240716182823353](images/image-20240716182823353.png)
+如果你是新弄的ubuntu，大概率会遇见上面的问题。这个是ubuntu里缺少了bison这个语法分析器。执行以下指令下载即可：
 
-点击**一键刷机**。
+~~~bash
+sudo apt update
+sudo apt install bison
+~~~
 
-![image-20240716182925324](images/image-20240716182925324.png)
+下次完成后，再次`./build.sh -d`重新编译。
 
-点击**浏览**，找到拉取下来的镜像，选择**全盘擦除**。
+## 烧写固件
 
-![image-20240716183057447](images/image-20240716183057447.png)
+编译完成后，如果不知道如何去烧写固件，可以参考《快速启动》里面的**更新系统固件**文档进行烧写。
 
-选择好之后，不需要其他的界面操作了。这时拿起已经连接好的开发板，先按住 **FEL** 烧写模式按键，之后按一下 **RESET** 系统复位键，再松开 **FEL **，就可以自动进入烧写模式并开始烧写。
+文档地址：[快速开始使用 | 东山Π (100ask.org)](https://dshanpi.100ask.org/docs/T113i-Industrial/part1/03-1_FlashSystem)
 
-![image-20240716183440834](images/image-20240716183440834.png)
 
-等待烧录完成，串口打印信息如下：
+等待烧写完成，串口打印信息如下：
 
 ~~~bash
 [27]HELLO! BOOT0 is starting!
@@ -651,7 +678,7 @@ ERROR: reserving fdt memory region failed (addr=5c907000 size=3e8000)
 [01.809][mmc]: mmc exit start
 [01.822][mmc]: mmc 2 exit ok
 [    0.000000] Booting Linux on physical CPU 0x0
-[    0.000000] Linux version 5.4.61 (ubuntu@ubuntu1804) (arm-linux-gnueabi-gcc (Linaro GCC 5.3-2016.05) 5.3.1 20160412, GNU ld (Linaro_Binutils-2016.05) 2.25.0 Linaro 2016_02) #1 SMP PREEMPT Tue Jul 16 16:31:37 CST 2024
+[    0.000000] Linux version 5.4.61 (ubuntu@dshanpi) (arm-linux-gnueabi-gcc (Linaro GCC 5.3-2016.05) 5.3.1 20160412, GNU ld (Linaro_Binutils-2016.05) 2.25.0 Linaro 2016_02) #1 SMP PREEMPT Tue Jul 16 16:31:37 CST 2024
 [    0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=10c5387d
 [    0.000000] CPU: div instructions available: patching division code
 [    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
@@ -1084,20 +1111,5 @@ swu_software: ####
 swu_mode: ####
 no swupdate_cmd to run, wait for next swupdate
 # [    7.115243] android_work: sent uevent USB_STATE=CONNECTED
-
-# ls
-THIS_IS_NOT_YOUR_ROOT_FILESYSTEM  opt
-bin                               proc
-dev                               root
-etc                               run
-init                              sbin
-lib                               sys
-lib32                             system
-linuxrc                           tmp
-lost+found                        usr
-media                             var
-mnt
-#
 ~~~
-
 

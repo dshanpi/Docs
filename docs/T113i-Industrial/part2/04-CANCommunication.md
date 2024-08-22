@@ -1,57 +1,38 @@
 ---
-sidebar_position: 5
+sidebar_position: 4
 ---
-# 支持CAN功能
+# CAN通信
 
-## 1.使能设备树CAN节点
+本章节将讲解如何测试 T113i-Industrial 开发板的CAN通信功能。
 
-在t113-i开发板的设备树中，CAN的设备树节点不叫can，名称是awlink。
+## CAN通信协议概述
 
-进入`t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto/linux-5.4/board.dts`
+CAN通信协议，全称为Controller Area Network，是一种支持实时控制的串行通信协议，它专为满足汽车和工业环境中的高可靠性和网络灵活性而设计。以下是简要的概述：
 
-~~~bash
-ubuntu@dshanpi:~/meihao/t113i_tinasdk5.0-v1/device/config/chips/t113_i/configs/evb1_auto/linux-5.4$ vim board.dts
-~~~
+- CAN协议由Bosch公司在1980年代开发，主要用于汽车电子系统中的电子控制单元（ECUs）之间的通信。
+- CAN使用**多主站模式**，网络上的任何节点都可以在任何时间点开始发送数据。
+- 它采用**非破坏性仲裁机制**，确保高优先级的消息能够优先传输。
+- CAN协议的数据帧结构紧凑，包括帧起始、仲裁场、控制场、数据场、CRC校验、帧结束等部分。
+- 支持最高**8个字节**的数据载荷，适用于传输控制命令和传感器数据。
+- 集成了强大的错误检测机制，包括循环冗余校验（CRC）和位填充。
+- 在检测到错误时，网络可以自动重传损坏的消息，提高了数据传输的可靠性。
+- CAN网络**支持不同的波特率**，从最低的10kbps到最高的1Mbps，根据不同的应用需求进行配置。
 
-![image-20240718092147186](images/image-20240718092147186.png)
+## 硬件连接
 
-使能awlink0和awlink1，默认处于使能状态。
+测试之前，先使用两根杜邦线，一根将 `CAN0 L` 连接至 `CAN1 L`，另一根将 `CAN0 H`连接 `CAN1 H`。
 
-## 2.配置内核驱动
+连接如下图：
 
-进入SDK源码根目录`t113i_tinasdk5.0-v1/`
+![image-20240718100001191](images/image-20240718100001191.png)
 
-执行`./build.sh menuconfig`，打开内核配置界面。
+## 登录串口终端
 
-点击键盘上的`/`键，搜索`awlink`
+看到这里，如果不知道如何上电，如何打开串口终端，请参考前面《快速启动》章节里的启动开发板文章。
 
-![image-20240718092830534](images/image-20240718092830534.png)
+地址链接：[启动开发板 | 东山Π (100ask.org)](https://dshanpi.100ask.org/docs/T113i-Industrial/part1/QuickStart)
 
-根据路径，找到`Allwinner AWLINK controller`选项。
-
-选择`Networking support`，点击`enter`键进入。![image-20240718093128490](images/image-20240718093128490.png)
-
-找到`CAN bus subsystem support`，点击`enter`键进入。
-
-![image-20240718093520345](images/image-20240718093520345.png)
-
-之后，找到`CAN Device Drivers`，点击`enter`键进入。
-
-![image-20240718093611165](images/image-20240718093611165.png)
-
-找到`Allwinner AWLINK controller`，点击键盘上的`y`键选上。
-
-![image-20240718093905474](images/image-20240718093905474.png)
-
-最后保存，退出。
-
-在SDK源码根目录`t113i_tinasdk5.0-v1/`下，执行`./build.sh kernel`编译内核，再执行`./build.sh `，最后打包`./build.sh pack`。
-
-![image-20240718094531615](images/image-20240718094531615.png)
-
-打包完成后，根据之前的烧录方式，烧录到开发板上。
-
-## 3.测试CAN功能
+## 测试CAN通信
 
 烧录完成后，进入开发板。
 
@@ -110,12 +91,6 @@ sit0      Link encap:IPv6-in-IPv4
 
 可以看到，通过ifconfig命令查看CAN接口功能为正常，下面进行CAN功能的收发测试。
 
-测试之前，先使用两根杜邦线，一根将 `CAN0 L` 连接至 `CAN1 L`，另一根将 `CAN0 H`连接 `CAN1 H`。
-
-连接如下图：
-
-![image-20240718100001191](images/image-20240718100001191.png)
-
 连接好线后，做以下几个步骤进行测试。
 
 **①使用ip命令设置awlink接口的速度为500Kb/s**
@@ -151,5 +126,5 @@ sit0      Link encap:IPv6-in-IPv4
   awlink0  5A1   [8]  11 22 33 44 55 66 77 88
 ~~~
 
-上述cansend命令中，“5A1”是帧ID，“#”后面的“11.22.33.44.55.66.77.88”是要发送的数据，十六进制。CAN2.0一次最多发送8个字节的数据，8字节数据之间用“.”隔开，can-utils会对数据进行解析。
+上述cansend命令中，“5A1”是帧ID，“#”后面的“11.22.33.44.55.66.77.88”是要发送的数据，十六进制。CAN2.0一次最多发送8个字节的数据，8字节数据之间用英文点号`“.”`隔开，can-utils会对数据进行解析。
 
