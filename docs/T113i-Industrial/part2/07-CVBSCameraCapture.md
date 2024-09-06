@@ -37,6 +37,29 @@ tvd 驱动只是负责把tvd的硬件描述完成并注册进V4L2框架，具体
 
 参考地址：[启动开发板 | 东山Π (100ask.org)](https://dshanpi.100ask.org/docs/T113i-Industrial/part1/QuickStart)
 
+## 获取抓图工具
+
+在Ubuntu上，执行以下指令，获取资源：
+~~~bash
+git clone https://e.coding.net/weidongshan/tina5/APP-DevExample.git
+~~~
+
+下载的资源里面，源码在文件夹 `V4L2/camera_demo_v1`。
+
+~~~bash
+ubuntu@dshanpi:~/meihao/APP-DevExample/V4L2/camera_demo_v1$ tree -L 1
+.
+├── camerademo   #一个准备好的应用程序
+├── makefile
+├── Makefile
+├── README.md
+└── src
+
+1 directory, 4 files
+~~~
+
+这个文件夹下的`README.md` 文档里有编译抓图工具的使用教程。
+
 ## 抓图工具使用介绍
 
 抓图工具是使用一个 camerademo 应用测试程序，下面将讲解如何使用。
@@ -73,15 +96,15 @@ camerademo --help
 [CAMERA]**********************************************************
 ~~~
 
-1. **camerademo ：**使用默认参数进行摄像头测试，不输出调试信息。
-2. **camerademo debug ：**使用默认参数进行摄像头测试，并输出更多的调试信息。
-3. **camerademo setting ：**允许用户选择分辨率和数据格式进行测试，不输出调试信息。
-4. **camerademo setting debug ：**允许用户选择分辨率和数据格式进行测试，并输出调试信息。
-5. **camerademo NV21 640 480 30 bmp /tmp 5 ：**使用指定的像素格式（NV21）、分辨率（640x480）、帧率（30fps）、图像格式（bmp）、保存路径（/tmp）和保存图片数量（5）进行测试，可以保存为bmp或yuv格式。
-6. **camerademo NV21 640 480 30 bmp /tmp 5 debug ：**与第5点相同，但额外输出调试信息。
-7. **camerademo NV21 640 480 30 bmp /tmp 5 Num ：**与第5点相同，但允许指定摄像头设备号（Num），用于多摄像头系统。
-8. **camerademo NV21 640 480 30 bmp /tmp 5 Num debug ：**与第6点相同，但允许指定摄像头设备号。
-9. **camerademo NV21 640 480 30 bmp /tmp 5 Num 1 ：**与第8点相同，但额外选择内存管理机制（1代表V4L2_MEMORY_MMAP或USERPTR）。
+1. **camerademo ：** 使用默认参数进行摄像头测试，不输出调试信息。
+2. **camerademo debug ：** 使用默认参数进行摄像头测试，并输出更多的调试信息。
+3. **camerademo setting ：** 允许用户选择分辨率和数据格式进行测试，不输出调试信息。
+4. **camerademo setting debug ：** 允许用户选择分辨率和数据格式进行测试，并输出调试信息。
+5. **camerademo NV21 640 480 30 bmp /tmp 5 ：** 使用指定的像素格式（NV21）、分辨率（640x480）、帧率（30fps）、图像格式（bmp）、保存路径（/tmp）和保存图片数量（5）进行测试，可以保存为bmp或yuv格式。
+6. **camerademo NV21 640 480 30 bmp /tmp 5 debug ：** 与第5点相同，但额外输出调试信息。
+7. **camerademo NV21 640 480 30 bmp /tmp 5 Num ：** 与第5点相同，但允许指定摄像头设备号（Num），用于多摄像头系统。
+8. **camerademo NV21 640 480 30 bmp /tmp 5 Num debug ：** 与第6点相同，但允许指定摄像头设备号。
+9. **camerademo NV21 640 480 30 bmp /tmp 5 Num 1 ：** 与第8点相同，但额外选择内存管理机制（1代表V4L2_MEMORY_MMAP或USERPTR）。
 
 ## 抓图测试
 
