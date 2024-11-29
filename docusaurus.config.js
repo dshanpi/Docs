@@ -107,7 +107,13 @@ const config = {
             sidebarId: 't113iSidebar',
             position: 'left',
             label: 'T113i-Industrial',
-          },          
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 't113s3proSidebar',
+            position: 'left',
+            label: 'T113s3-Pro',
+          },           
           {
             type: 'localeDropdown',
             position: 'right',
