@@ -113,7 +113,13 @@ const config = {
             sidebarId: 't113s3proSidebar',
             position: 'left',
             label: 'T113s3-Pro',
-          },           
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'r818dshanpirosxSidebar',
+            position: 'left',
+            label: 'R818-DshanPI-ROSx',
+          },         
           {
             type: 'localeDropdown',
             position: 'right',
