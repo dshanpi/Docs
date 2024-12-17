@@ -62,7 +62,7 @@ ubuntu@ubuntu1804:~/C-Test/Hello$
 
 ## 上传程序并运行
 
-程序编译之后，通过adb工具上传可执行程序`helloworld`。这里上传至开发板 `/mnt/udisk/` 路径下，
+程序编译之后，通过adb工具上传可执行程序`helloworld`。这里上传至开发板 `/mnt/UDISK/` 路径下，
 
 > 执行adb之前，需要把开发板otg接口连接至ubuntu。
 

@@ -54,7 +54,7 @@ cp ./* -rfvd ~/DshanPI-ROSx-TinaSDK-V1/
 进入SDK源码目录下，执行以下指令，选择相应板卡**r818_sc3917-tina**。
 
 ~~~bash
-ubuntu@ubuntu1804:~/$ cd DshanPI-ROSx-TinaSDK-V1/
+ubuntu@ubuntu1804:~/$ cd ~/DshanPI-ROSx-TinaSDK-V1/
 ubuntu@ubuntu1804:~/DshanPI-ROSx-TinaSDK-V1$ source build/envsetup.sh
 ubuntu@ubuntu1804:~/DshanPI-ROSx-TinaSDK-V1$ lunch
 
@@ -97,7 +97,7 @@ ubuntu@ubuntu1804:~/DshanPI-ROSx-TinaSDK-V1$ make
 ubuntu@ubuntu1804:~/DshanPI-ROSx-TinaSDK-V1$ pack
 ~~~
 
-打包成功后，会在SDK源码的**out/r818-sc3917/**路径下，生成一个用于烧录的镜像**tina_r818-sc3917_uart0.img** 。
+打包成功后，会在SDK源码的 **out/r818-sc3917/** 路径下，生成一个用于烧录的镜像 **tina_r818-sc3917_uart0.img** 。
 
 如下所示：
 

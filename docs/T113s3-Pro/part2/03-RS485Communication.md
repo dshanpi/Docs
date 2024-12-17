@@ -65,9 +65,9 @@ uart4 连接到 端口2（RS485_A2，RS485_B2）
 - 设置uart3波特率。
 
 ~~~bash
-# stty -F /dev/ttyS3 speed 115200
+# stty -F /dev/ttyS4 speed 115200
 9600
-# stty -F /dev/ttyS3 speed 115200
+# stty -F /dev/ttyS4 speed 115200
 115200
 ~~~
 
