@@ -119,6 +119,12 @@ const config = {
             sidebarId: 'r818dshanpirosxSidebar',
             position: 'left',
             label: 'R818-DshanPI-ROSx',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'h616Sidebar',
+            position: 'left',
+            label: 'H616-YuzukiHD-Chameleon',
           },         
           {
             type: 'localeDropdown',
