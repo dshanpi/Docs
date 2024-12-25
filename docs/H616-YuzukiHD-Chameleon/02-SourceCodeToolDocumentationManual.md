@@ -33,5 +33,6 @@ sidebar_position: 2
 
 📙H616-YuzukiHD-Chameleon SDK网盘链接： https://pan.baidu.com/s/1eYxhZguxk-N0p4TfxiWiUQ 提取码: b2ji
 
+📙H616-YuzukiHD-Chameleon 仓库链接： https://github.com/YuzukiHD/YuzukiChameleon
 
 > 具体SDK源码开发环境搭建 参考后面 TinaSDK开发部分的开发环境搭建章节。
