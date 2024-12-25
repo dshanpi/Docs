@@ -92,12 +92,6 @@ const config = {
           },
           {
             type: 'docSidebar',
-            sidebarId: 'mp135dkSidebar',
-            position: 'left',
-            label: 'MP135-DevKit',
-          },
-          {
-            type: 'docSidebar',
             sidebarId: 'd1scvbsSidebar',
             position: 'left',
             label: 'D1s-CVBS',
