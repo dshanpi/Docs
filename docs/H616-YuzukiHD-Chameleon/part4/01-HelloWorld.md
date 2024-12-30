@@ -40,7 +40,7 @@ Hello, world!
 我们要想给 ARM 板编译出 hello 程序，需要使用相应的交叉编译工具链。H616-YuzukiHD-Chameleon 开发板的交叉编译工具是(**实际路径不一定相同**)：
 
 ~~~bash
-/data/h616/h616-tina-v0.8/tina/prebuilt/gcc/linux-x86/aarch64/toolchain-sunxi-glibc/toolchain/bin/aarch64-openwrt-linux-gcc
+/data/h616/h616-tina-v0.8/tina/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-glibc/toolchain/bin/arm-openwrt-linux-gcc
 ~~~
 
 ## 编译程序
@@ -48,14 +48,14 @@ Hello, world!
 编写代码完成后，可以使用上面提到的交叉编译工具来进行编译，
 
 ```bash
-/data/h616/h616-tina-v0.8/tina/prebuilt/gcc/linux-x86/aarch64/toolchain-sunxi-glibc/toolchain/bin/aarch64-openwrt-linux-gcc helloworld.c -o helloworld
+/data/h616/h616-tina-v0.8/tina/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-glibc/toolchain/bin/arm-openwrt-linux-gcc helloworld.c -o helloworld
 ```
 
 执行指令后，会出现一个可执行文件，就是应用程序 `helloworld`，可以看到helloworld程序的文件类型如下，
 
 ```bash
 ubuntu@ubuntu1804:~/C-Test/Hello$ file helloworld
-helloworld: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, for GNU/Linux 3.7.0, not stripped
+hello: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, for GNU/Linux 2.6.32, not stripped
 ubuntu@ubuntu1804:~/C-Test/Hello$
 ```
 
@@ -80,7 +80,7 @@ helloworld: 1 file pushed. 4.1 MB/s (9988 bytes in 0.002s)
 
 ```bash
 root@TinaLinux:/mnt/UDISK# ls
-helloworld  lost+found
+helloworld
 root@TinaLinux:/mnt/UDISK#
 ```
 
