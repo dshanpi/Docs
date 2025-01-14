@@ -37,7 +37,7 @@ Hello, world!
 我们要想给 ARM 板编译出 hello 程序，需要使用相应的交叉编译工具链。T113s3ProV1.3SdNand开发板的交叉编译工具是(实际路径不一定相同)：
 
 ~~~bash
-/home/ubuntu/tina5sdk-bsp/out/toolchain/gcc-linaro-5.3.1-2016.05-x86_64_arm-linux-gnueabi/bin/arm-linux-gnueabi-gcc
+/home/ubuntu/tina5sdk-bsp/out/t113/evb1_auto/buildroot/buildroot/host/bin/arm-linux-gnueabi-gcc
 ~~~
 
 ## 编译程序
@@ -45,14 +45,14 @@ Hello, world!
 编写代码完成后，可以使用上面提到的交叉编译工具来进行编译，
 
 ~~~bash
-/home/ubuntu/tina5sdk-bsp/out/toolchain/gcc-linaro-5.3.1-2016.05-x86_64_arm-linux-gnueabi/bin/arm-linux-gnueabi-gcc helloworld.c -o helloworld
+/home/ubuntu/tina5sdk-bsp/out/t113/evb1_auto/buildroot/buildroot/host/bin/arm-linux-gnueabi-gcc helloworld.c -o helloworld
 ~~~
 
 执行指令后，会出现一个可执行文件，就是应用程序 `helloworld`，可以看到helloworld程序的文件类型如下，
 
 ~~~bash
 ubuntu@ubuntu1804:~/C-Test/Hello$ file helloworld
-helloworld: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.3, for GNU/Linux 2.6.32, BuildID[sha1]=c1991d886f540551747a71e0f3553d9750ca3953, with debug_info, not stripped
+helloworld: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.3, for GNU/Linux 3.2.0, BuildID[sha1]=28c0d7033e0cd411b5a21eca3c31a04f2115c37c, with debug_info, not stripped
 ubuntu@ubuntu1804:~/C-Test/Hello$
 ~~~
 
