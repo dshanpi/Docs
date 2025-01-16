@@ -15,12 +15,14 @@ sidebar_position: 1
 
 **准备工作：**
 
-1. 硬件： T113i-Industrial开发板
-2. 硬件： typeC线 X2 
-3. 硬件： ipex 2.4G天线 X1
-4. 软件： 全志线刷工具：[AllwinnertechPhoeniSuit](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnertechPhoeniSuit.zip)
-5. 软件： 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnerUSBFlashDeviceDriver.zip)
-6. 软件： 镜像（已适配xr829）：t113_i_linux_evb1_auto_uart0.img
+**硬件：**
+1. T113i-Industrial开发板
+2. usb typeC线 X2 
+3. ipex 2.4G天线 X1
+
+**软件：**
+1. 全志线刷工具：[AllwinnertechPhoeniSuit.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnertechPhoeniSuit.zip)
+2. 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnerUSBFlashDeviceDriver.zip)
 
 ## 硬件介绍
 

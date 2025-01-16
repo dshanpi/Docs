@@ -6,12 +6,16 @@
 
 > 操作之前，先做好以下准备。
 
-1. 硬件：T113i-Industrial 开发板
-2. 硬件：typeC线 X2
-3. 硬件：cvbs摄像头
-4. 软件：全志线刷工具：[AllwinnertechPhoeniSuit](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnertechPhoeniSuit.zip)
-5. 软件：全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnerUSBFlashDeviceDriver.zip)
-6. 软件：镜像（支持tvd）：t113_i_linux_evb1_auto_uart0.img
+**硬件：**
+1. T113i-Industrial 开发板
+2. usb typeC线 X2
+3. cvbs摄像头
+
+**软件：**
+1. 全志线刷工具：[AllwinnertechPhoeniSuit.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnertechPhoeniSuit.zip)
+2. 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnerUSBFlashDeviceDriver.zip)
+3. 镜像（支持tvd）：[T113i-DevKit-Support-TVD.7z](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Images/T113i-DevKit-Support-TVD.7z)
+> 镜像说明：支持tvd功能，md5值：855c07003183cfe2d26a7339f962ca0e
 
 ## 硬件连接
 

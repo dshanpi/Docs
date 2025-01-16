@@ -8,14 +8,14 @@ sidebar_position: 2
 
 **硬件：**
 
-* T113-i主板 x1
-* TypeC线 X2
+* USB TypeC线 X2
 
 **软件：**
 
 * 全志线刷工具：[AllwinnertechPhoeniSuit.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnertechPhoeniSuit.zip)
 * 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnerUSBFlashDeviceDriver.zip)
 * 镜像：[T113i-DevKit-DefaultSystem.7z](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Images/T113i-DevKit-DefaultSystem.7z)
+> 镜像说明：该镜像T113i-DevKit-DefaultSystem.7z，不支持tvd，spi-tft，4g功能（需要到相应板载功能文档里下载对应的镜像），其他功能基本支持。md5值：50bc57d6f3ab185394d433871c0d4bbf
 
 ### 连接开发板
 更新系统固件前，先连接开发板，TypeC线连接接口位置如下图所示：
@@ -23,6 +23,8 @@ sidebar_position: 2
 ![image-20250115153308980](images/image-20250115153308980.png)
 
 将两个TypeC线分别连至T113-i开发板 `OTG烧录接口 ` `调试&串口接口`  Typec线另一端 连接至 电脑USB接口，连接成功后，可以先获取软件 `全志线刷工具` 、`全志USB烧录驱动` 和 `镜像` 安装包进行解压缩操作。
+
+> 注意：连接至OTG接口的Typec线的另一端需要接到电脑的usb口，不要接入usb hub口，一些usb hub口不足5V，容易导致后面烧录出现失败。
 
 ### 安装usb驱动
 在我们连接好开发板以后，打开开关，按住 T113-i开发板 `烧录模式按键` 也称为**FEL** 烧写模式按键，不要松开，之后按一下 `系统复位按键`也称 **RESET** 复位键，再松开FEL键，就可以自动进入烧写模式。如下图：
@@ -79,7 +81,7 @@ install.bat
 ### 运行软件烧写
 将下载下来的全志线刷工具 **AllwinnertechPhoeniSuit** 解压缩，同时将**SPI Nand系统镜像 T113i-DevKit-DefaultSystem.7z**下载下来也进行解压缩。
 
-解压后，得到一个**T113i-DevKit-DefaultSystem.img** 镜像，对应MD5值是`50bc57d6f3ab185394d433871c0d4bbf`，用于烧录到SPI NAND镜像。另一个是**AllwinnertechPhoeniSuit**文件夹。
+解压后，得到一个**T113i-DevKit-DefaultSystem.img** 镜像，用于烧录到SPI NAND镜像。另一个是**AllwinnertechPhoeniSuit**文件夹。
 
 首先我们进入到 **AllwinnertechPhoeniSuit** 目录下 找到 **PhoenixSuit.exe** 双击运行。
 

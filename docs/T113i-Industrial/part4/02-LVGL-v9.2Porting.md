@@ -8,17 +8,14 @@
 
 ### 硬件准备
 
-1. 开发板：T113i-Industrial [购买链接](https://item.taobao.com/item.htm?spm=a21n57.1.item.4.7a34523cQFFK9o&priceTId=2147825717249009788255384e1bd6&utparam={"aplus_abtest":"22d7c177efb38df542a2dbab417f24bd"}&id=756032410469&ns=1&abbucket=7&skuId=5214922077238&pisk=fRBnLQ2TT6RQrBew_cJQw5yu4XVtOD9WOaHJyLLz_F8spQ88OaAlyNOPppIdSU7Ar3BdeTfsEis5pk98ApsBFLzYk-QlAM95a8GxZTvNbn-3eXJyTyIeeDaYk-euTcJu-rCJCowybnx2UHRyUVrMAngeUB8Eblxy22lrLarGbFtkzvJyzGuwAHxeUv-E_G-y2Y-eUUlaQFtyUUkuvY8cUO6a8-xevnWlZOxH_CIe7-jdQHxkoMl-UYoWxBYVYF4vJ4l6_gOlF0MkjM5fPn7E8rdC41bMxL2tTKSGaZx1L-3Hf6INPFSmqxsBKHd2UCojhGfpSCX990DPjpI6_9pt8X-DKeAVLCioKMAPsOvdLzGfXGYeidCT1ydJKwfXlBP_5ajMJaWH_249ysIOLCb4WAbWZssJqw2nLZSrbfl4BOHWbuBZNbOefhYvYOBomqK1LNqgjjNBThtLklqiNbOefhYYjlcjRB-6vrC..)
-2. 屏幕：MIPI屏(480*800) [购买链接](https://detail.tmall.com/item.htm?spm=a21n57.1.item.47.7a34523cQFFK9o&priceTId=2147815317249010973624408e1cac&utparam={"aplus_abtest":"be747d2137a72f53186e76e1e5eb9fdc"}&id=732427203033&ns=1&abbucket=7&xxc=taobaoSearch&pisk=fTiiKIxp7Vz6LLtU89r6ke-D3NYpWOZb5jIYMoF28WPCXrPv5j4mMXaqXlHttSl-i-ntDm0CmYMjXdZvClM_coRJw3hmCAZjun_RocjULRHF0irVsAr1QoRJwnbdLPOT0qFBFzeF88NUQ-z4upxUh8Z43rSwKWy0FZ5ZgjkeK-eVbSP406WUB-qV_5z4LyyzHSSa05PeK-NUgcCC07mqADRwqRyTUD-iXR4gimelmRoF2yVPdWScmKegSNHatiSqx2TkjeFwP9FbX5gzIjt5flzmPxemshjZiYiItJlymgFZdY385c-5lzqaOrnavt-ZLkFgzPaGIMMTb5zrfc6NXXU0s2oa-tSqdlP0uqcMsNNZWX47LyWDVJh8TAiZ-K1EQbFgbJzp4LDUu2n_PcdFjuuSBl3qGUQQjxuaxg7N8a-KviweHD7flPyQK7eZvmXlwJiZtpvhPFaadRdJKpbflPyQK7pHKa1_7Jw9w)
-3. 线：typeC线 X2
-4. 电源：12v电源适配器
+1. T113i-Industrial [购买链接](https://item.taobao.com/item.htm?spm=a21n57.1.item.4.7a34523cQFFK9o&priceTId=2147825717249009788255384e1bd6&utparam={"aplus_abtest":"22d7c177efb38df542a2dbab417f24bd"}&id=756032410469&ns=1&abbucket=7&skuId=5214922077238&pisk=fRBnLQ2TT6RQrBew_cJQw5yu4XVtOD9WOaHJyLLz_F8spQ88OaAlyNOPppIdSU7Ar3BdeTfsEis5pk98ApsBFLzYk-QlAM95a8GxZTvNbn-3eXJyTyIeeDaYk-euTcJu-rCJCowybnx2UHRyUVrMAngeUB8Eblxy22lrLarGbFtkzvJyzGuwAHxeUv-E_G-y2Y-eUUlaQFtyUUkuvY8cUO6a8-xevnWlZOxH_CIe7-jdQHxkoMl-UYoWxBYVYF4vJ4l6_gOlF0MkjM5fPn7E8rdC41bMxL2tTKSGaZx1L-3Hf6INPFSmqxsBKHd2UCojhGfpSCX990DPjpI6_9pt8X-DKeAVLCioKMAPsOvdLzGfXGYeidCT1ydJKwfXlBP_5ajMJaWH_249ysIOLCb4WAbWZssJqw2nLZSrbfl4BOHWbuBZNbOefhYvYOBomqK1LNqgjjNBThtLklqiNbOefhYYjlcjRB-6vrC..)
+2. MIPI屏(480*800) [购买链接](https://detail.tmall.com/item.htm?spm=a21n57.1.item.47.7a34523cQFFK9o&priceTId=2147815317249010973624408e1cac&utparam={"aplus_abtest":"be747d2137a72f53186e76e1e5eb9fdc"}&id=732427203033&ns=1&abbucket=7&xxc=taobaoSearch&pisk=fTiiKIxp7Vz6LLtU89r6ke-D3NYpWOZb5jIYMoF28WPCXrPv5j4mMXaqXlHttSl-i-ntDm0CmYMjXdZvClM_coRJw3hmCAZjun_RocjULRHF0irVsAr1QoRJwnbdLPOT0qFBFzeF88NUQ-z4upxUh8Z43rSwKWy0FZ5ZgjkeK-eVbSP406WUB-qV_5z4LyyzHSSa05PeK-NUgcCC07mqADRwqRyTUD-iXR4gimelmRoF2yVPdWScmKegSNHatiSqx2TkjeFwP9FbX5gzIjt5flzmPxemshjZiYiItJlymgFZdY385c-5lzqaOrnavt-ZLkFgzPaGIMMTb5zrfc6NXXU0s2oa-tSqdlP0uqcMsNNZWX47LyWDVJh8TAiZ-K1EQbFgbJzp4LDUu2n_PcdFjuuSBl3qGUQQjxuaxg7N8a-KviweHD7flPyQK7eZvmXlwJiZtpvhPFaadRdJKpbflPyQK7pHKa1_7Jw9w)
+3. usb typeC线 X2
+4. 12v电源适配器 x1
 
 ### 软件准备
 
-1. 镜像(支持触摸和显示)：t113_i_linux_evb1_auto_uart0.img
-2. github仓库：[lvgl/lv_port_linux: LVGL configured to work with a standard Linux framebuffer](https://github.com/lvgl/lv_port_linux)
-3. 全志线刷工具：[AllwinnertechPhoeniSuit](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnertechPhoeniSuit.zip)
-4. 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnerUSBFlashDeviceDriver.zip)
+1. lvgl-Linux对应的github仓库：[lvgl/lv_port_linux: LVGL configured to work with a standard Linux framebuffer](https://github.com/lvgl/lv_port_linux)
 
 ## 硬件接线指南
 

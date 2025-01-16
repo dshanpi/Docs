@@ -9,12 +9,15 @@ sidebar_position: 6
 
 在进入本章节实验之前，请做好以下准备。
 
-1. 硬件：T113i-Industrial开发板
-2. 硬件： typeC线 X2 
-3. 硬件：一根能用来上网的网线
-4. 软件： 全志线刷工具：[AllwinnertechPhoeniSuit](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnertechPhoeniSuit.zip)
-5. 软件： 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnerUSBFlashDeviceDriver.zip)
-6. 软件： 镜像：t113_i_linux_evb1_auto_uart0.img
+**硬件：**
+1. T113i-Industrial开发板
+2. usb typeC线 X2 
+3. 一根能用来上网的网线
+
+**软件：**
+1. 全志线刷工具：[AllwinnertechPhoeniSuit.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnertechPhoeniSuit.zip)
+2. 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnerUSBFlashDeviceDriver.zip)
+
 
 ## 登录开发板终端
 
