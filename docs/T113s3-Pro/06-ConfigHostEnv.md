@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 5
 ---
 # 安装并配置开发环境
 
@@ -65,13 +65,12 @@ sidebar_position: 3
 * 安装必要软件包, 鼠标点击进入 ubuntu界面内，键盘同时 按下 **ctrl + alt + t** 三个按键会快速唤起，终端界面，唤起成功后，在终端里面执行如下命令进行安装必要依赖包。
 
 ```bash
-sudo apt install build-essential subversion git-core libncurses5-dev zlib1g-dev gawk flex quilt libssl-dev xsltproc libxml-parser-perl mercurial bzr ecj cvs unzip lib32z1 lib32z1-dev lib32stdc++6 libstdc++6 bison -y
+sudo apt-get install -y  sed make binutils build-essential  gcc g++ bash patch gzip bzip2 perl  tar cpio unzip rsync file  bc wget python  cvs git mercurial rsync  subversion android-tools-mkbootimg vim  libssl-dev  android-tools-fastboot
 ```
 
 如果你发现你的ubuntu虚拟机 第一次启动 无法 通过 windows下复制 命令 粘贴到 ubuntu内，则需要先手敲 执行如下命令 安装一个 用于 虚拟机和 windows共享剪切板的工具包。
 
 ```bash
-sudo apt install open-vm-tools
 sudo apt install open-vm-tools-desktop 
 ```
 
@@ -83,4 +82,4 @@ sudo apt install open-vm-tools-desktop
 
 ![ConfigHost_008](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/ConfigHost_008.png)
 
-做完这一步以后，就可以继续往下，获取源码 开始 T113s3ProV1.3SdNand 开发板的开发之旅了。
+做完这一步以后，就可以继续往下，获取源码 开始RISC-V 东山哪吒STU开发板的开发之旅了。

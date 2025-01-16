@@ -5,9 +5,9 @@ sidebar_position: 1
 
 开发板启动连接接口如下：
 
-![image-20240719145451499](images/image-20240719145451499.png)
+![image-20250115171457321](images/image-20250115171457321.png)
 
-接入**③12v电源接口**、**①OTG**和**②串口**。拨动电源开关（往电源接口方向拨动的是12vDC电源供电，另外的方向是OTG线供电），即可启动开发板。
+接入**③12v电源接口**、**①OTG**和**②串口**。拨动电源开关（亦支持OTG供电，往电源接口方向拨动的是12vDC电源供电，另外的方向是OTG线供电），即可启动开发板。
 
 ## windows下使用 ADB登录系统
 ### 连接OTG线
@@ -15,7 +15,7 @@ sidebar_position: 1
 将开发板配套的两根typec线，一根 直接连接至 开发板 `OTG烧录接口` 另一头连接至电脑的USB接口，开发板默认有系统，接通otg电源线就会通电并直接启动。
 
 ### 安装windows板ADB
-点击链接下载Windows版ADB工具 [adb-tools](https://gitlab.com/dongshanpi/tools/-/raw/main/ADB.7z)
+点击链接下载Windows版ADB工具 [ADB.7z](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/ADB.7z)
 下载完成后解压，可以看到如下目录，
 
 ![adb-tools-dir](images/adb-tools-dir.png)

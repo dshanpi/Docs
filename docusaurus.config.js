@@ -77,7 +77,13 @@ const config = {
             sidebarId: 't113s3Sidebar',
             position: 'left',
             label: 'T113s3-Industrial',
-          },          
+          }, 
+          {
+            type: 'docSidebar',
+            sidebarId: 't113s3proSidebar',
+            position: 'left',
+            label: 'T113s3-Pro',
+          },         
           {
             type: 'docSidebar',
             sidebarId: 'v851seSidebar',
@@ -104,9 +110,9 @@ const config = {
           },
           {
             type: 'docSidebar',
-            sidebarId: 't113s3proSidebar',
+            sidebarId: 't113s3sdnandSidebar',
             position: 'left',
-            label: 'T113s3-Pro',
+            label: 'T113s3-SdNand',
           },
           {
             type: 'docSidebar',
