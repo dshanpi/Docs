@@ -9,12 +9,14 @@ sidebar_position: 6
 
 在进入本章节实验之前，请做好以下准备。
 
-- 硬件：T113s3ProV1.3SdNand 开发板
-- 硬件： typeC线 X2
-- 硬件：一根能用来上网的网线
-- 软件： 全志线刷工具：[AllwinnertechPhoeniSuit](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnertechPhoeniSuit.zip)
-- 软件： 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnerUSBFlashDeviceDriver.zip)
-- 软件： 镜像：t113_linux_evb1_auto_uart0.img
+**硬件：**
+- T113s3-SDNAND 开发板
+- usb typeC线 X2
+- 一根能用来上网的网线
+
+**软件：**
+- 全志线刷工具：[AllwinnertechPhoeniSuit.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnertechPhoeniSuit.zip)
+- 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnerUSBFlashDeviceDriver.zip)
 
 ## 硬件连接
 

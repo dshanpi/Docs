@@ -22,7 +22,15 @@ SDK源码需要通过百度网盘下载，一共有11个压缩包，如下所示
 拷贝完成之后，执行以下指令，进行解压。
 
 ~~~bash
-cat h616-tina-v0.8.tar.gza* | tar -xzvf -
+cat h616-tina-v0.8.tar.gza* | tar -xv
+cd tina
+.repo/repo/repo sync -l
+~~~
+
+如果出现python问题，执行以下指令：
+
+~~~bash
+/usr/bin/python2 .repo/repo/repo sync -l
 ~~~
 
 ## 2.获取补丁包

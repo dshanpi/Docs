@@ -3,8 +3,21 @@ sidebar_position: 4
 ---
 # CAN通信
 
-本章节将讲解如何测试 T113s3ProV1.3SdNand 开发板的CAN通信功能。
+本章节将讲解如何测试 T113s3-SDNAND 开发板的CAN通信功能。
 
+## 准备工作
+
+在进入本章节实验之前，请做好以下准备。
+
+**硬件：**
+- T113s3-SDNAND 开发板
+- usb typeC线 X2
+
+**软件：**
+- 全志线刷工具：[AllwinnertechPhoeniSuit.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnertechPhoeniSuit.zip)
+- 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnerUSBFlashDeviceDriver.zip)
+- 镜像：[T113s3-SDNAND-Support-CAN.7z](https://dl.100ask.net/Hardware/MPU/T113s3-SDNAND/Images/T113s3-SDNAND-Support-CAN.7z)
+> 镜像说明：支持CAN功能，不支持RGB触摸功能，md5值：0df6410466e823b89e30a0e2c517488e
 ## CAN通信协议概述
 
 CAN通信协议，全称为Controller Area Network，是一种支持实时控制的串行通信协议，它专为满足汽车和工业环境中的高可靠性和网络灵活性而设计。以下是简要的概述：

@@ -30,7 +30,7 @@ sidebar_position: 1
 ## windows下使用 ADB登录系统
 
 ### 1.安装windows板ADB
-点击链接下载Windows版ADB工具 [adb-tools](https://gitlab.com/dongshanpi/tools/-/raw/main/ADB.7z)
+点击链接下载Windows版ADB工具 [ADB.7z](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/ADB.7z)
 下载完成后解压，可以看到如下目录，
 
 ![adb-tools-dir](images/adb-tools-dir.png)
@@ -817,5 +817,7 @@ root@TinaLinux:/#
 root@TinaLinux:/#
 ```
 **系统默认会自己登录 没有用户名 没有密码。**
+
 **系统默认会自己登录 没有用户名 没有密码。**
+
 **系统默认会自己登录 没有用户名 没有密码。**

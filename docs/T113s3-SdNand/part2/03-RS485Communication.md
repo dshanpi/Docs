@@ -3,7 +3,21 @@ sidebar_position: 3
 ---
 # RS485通信
 
-本章节将讲解如何测试 T113s3ProV1.3SdNand 开发板的RS485通信功能。
+本章节将讲解如何测试 T113s3-SDNAND 开发板的RS485通信功能。
+
+## 准备工作
+
+在进入本章节实验之前，请做好以下准备。
+
+**硬件：**
+- T113s3-SDNAND 开发板
+- usb typeC线 X2
+
+**软件：**
+- 全志线刷工具：[AllwinnertechPhoeniSuit.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnertechPhoeniSuit.zip)
+- 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnerUSBFlashDeviceDriver.zip)
+- 镜像：[T113s3-SDNAND-Support-RS485.7z](https://dl.100ask.net/Hardware/MPU/T113s3-SDNAND/Images/T113s3-SDNAND-Support-RS485.7z)
+> 镜像说明：支持CAN功能，不支持RGB触摸功能，md5值：f8ffb49e52fb35e891fb44653afe23e8
 
 ## RS485通信协议概述
 

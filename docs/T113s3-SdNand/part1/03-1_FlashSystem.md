@@ -5,20 +5,25 @@ sidebar_position: 2
 
 ## 烧写固件至SDNand
 ### 准备工作
-* 硬件：T113s3ProV1.3SdNand主板 x1
-* 硬件：TypeC线 X2
-* 软件：全志线刷工具：[AllwinnertechPhoeniSuit](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnertechPhoeniSuit.zip)
-* 软件：全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnerUSBFlashDeviceDriver.zip)
+**硬件：**
+* T113s3-SDNAND主板 x1
+* usb TypeC线 X2
+
+**软件：**
+* 全志线刷工具：[AllwinnertechPhoeniSuit.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnertechPhoeniSuit.zip)
+* 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnerUSBFlashDeviceDriver.zip)
+* 镜像：[T113s3-SDNAND-DefaultSystem.7z](https://dl.100ask.net/Hardware/MPU/T113s3-SDNAND/Images/T113s3-SDNAND-DefaultSystem.7z)
+> 镜像说明：该镜像不支持CAN，RS485功能，与网口，触摸屏引脚冲突，在相应的板载功能文档里有提供对应的镜像。该镜像的md5值：9a559e0814e6c5a8019c8da2c0d4e912
 
 ### 连接开发板
 参考下图所示，
 
 ![image-20241126161856166](images/image-20241126161856166.png)
 
-将两个TypeC线分别连至 T113s3Pro 开发板 ①`OTG烧录接口 ` 、②`调试&串口接口`  Typec线另一端 连接至 电脑USB接口，接着将电源线接入③`电源接口`，连接成功后，开关往上图右边方向拨动。
+将两个TypeC线分别连至 T113s3-SDNAND 开发板 ①`OTG烧录接口 ` 、②`调试&串口接口`  Typec线另一端 连接至 电脑USB接口，接着将电源线接入③`电源接口`，连接成功后，开关往上图右边方向拨动。
 
 ### 安装usb驱动
-在我们连接好开发板以后，先按住 T113s3Pro 开发板 `烧录模式按键` 也称为**FEL** 烧写模式按键，之后按一下 `系统复位按键`也称 **RESET** 复位键，就可以自动进入烧写模式。
+在我们连接好开发板以后，先按住 T113s3-SDNAND 开发板 `烧录模式按键` 也称为**FEL** 烧写模式按键，之后按一下 `系统复位按键`也称 **RESET** 复位键，就可以自动进入烧写模式。
 
 ![image-20241126162218125](images/image-20241126162218125.png)
 
@@ -39,55 +44,55 @@ install.bat
 
 如下图所示，在第一次插入OTG设备，进入烧写模式设备管理器会弹出一个未知设备。
 
-![Windows_FlashDevice_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/Windows_FlashDevice_001.png)
+![Windows_FlashDevice_001](images/Windows_FlashDevice_001.png)
 
 接下来鼠标右键点击这个未知设备，在弹出的对话框里， 点击浏览我计算机以查找驱动程序软件。
 
-![Windows_FlashDevice_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/Windows_FlashDevice_002.png)
+![Windows_FlashDevice_001](images/Windows_FlashDevice_002.png)
 
 之后在弹出新的对话框里，点击浏览找到我们之前下载好的 usb烧录驱动文件夹内，找到 `UsbDriver/` 这个目录，并进入，之后点击确定即可。
 
-![Windows_FlashDevice_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/Windows_FlashDevice_007.png)
+![Windows_FlashDevice_001](images/Windows_FlashDevice_007.png)
 
 注意进入到  `UsbDriver/`  文件夹，然后点击确定，如下图所示。
 
-![Windows_FlashDevice_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/Windows_FlashDevice_003.png)
+![Windows_FlashDevice_001](images/Windows_FlashDevice_003.png)
 
 此时，我们继续点击 **下一页** 按钮，这时系统就会提示安装一个驱动程序。 
 
 在弹出的对话框里，我们点击 始终安装此驱动程序软件 等待安装完成。
 
-![Windows_FlashDevice_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/Windows_FlashDevice_004.png)
+![Windows_FlashDevice_001](images/Windows_FlashDevice_004.png)
 
 安装完成后，会提示，Windows已成功更新你的驱动程序。
 
-![Windows_FlashDevice_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/Windows_FlashDevice_005.png)
+![Windows_FlashDevice_001](images/Windows_FlashDevice_005.png)
 
 
 最后我们可以看到，设备管理器 里面的未知设备 变成了一个 `USB Device(VID_1f3a_efe8)`的设备，这时就表明设备驱动已经安装成功。
 
-![Windows_FlashDevice_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/Windows_FlashDevice_006.png)
+![Windows_FlashDevice_001](images/Windows_FlashDevice_006.png)
 
 
 ### 运行软件烧写
 将下载下来的全志线刷工具 **AllwinnertechPhoeniSuit** 解压缩，同时将**SDNand系统镜像**下载下来也进行解压缩。
 
-解压后，得到一个 **t113_linux_evb1_auto_uart0.img** 镜像，是用于烧录到SDNand镜像得。另一个是**AllwinnertechPhoeniSuit**文件夹。
+解压后，得到一个 **T113s3-SDNAND-DefaultSystem.img** 镜像，是用于烧录到SDNand镜像得。另一个是**AllwinnertechPhoeniSuit**文件夹。
 
-首先我们进入到 **AllwinnertechPhoeniSuit\AllwinnertechPhoeniSuitRelease20201225** 目录下 找到 **PhoenixSuit.exe** 双击运行。
+首先我们进入到 **AllwinnertechPhoeniSuit** 目录下 找到 **PhoenixSuit.exe** 双击运行。
 
 打开软件后 软件主界面如下图所示
 
-![PhoenixSuit_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/PhoenixSuit_001.png)
+![PhoenixSuit_001](images/PhoenixSuit_001.png)
 
 
-​接下来 我们需要切换到 **一键刷机**窗口，如下图所示，点击红框标号①，在弹出的新窗口内，我们点击 红框② **浏览** 找到我们的 SD Nand 最小系统镜像  **t113_linux_evb1_auto_uart0.img** ，选中镜像后，最后点击红框③ **全盘擦除升级** 
+​接下来 我们需要切换到 **一键刷机**窗口，如下图所示，点击红框标号①，在弹出的新窗口内，我们点击 红框② **浏览** 找到我们的 SD Nand 系统镜像  **T113s3-SDNAND-DefaultSystem.img** ，选中镜像后，最后点击红框③ **全盘擦除升级** 
 
 ![image-20241126161345831](images/image-20241126161345831.png)
 
 ​点击完成后，不需要点击 **立即升级** ，这时 我们拿起已经连接好的开发板，先按住 **FEL** 烧写模式按键，之后按一下 **RESET** 系统复位键，就可以自动进入烧写模式并开始烧写。
 
-![PhoenixSuit_003](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/PhoenixSuit_003.png)
+![PhoenixSuit_003](images/PhoenixSuit_003.png)
 
 ​烧写时会提示烧写进度条，烧写完成后 开发板会自己重启。
 
