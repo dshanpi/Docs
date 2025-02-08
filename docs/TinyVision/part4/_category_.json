@@ -1,8 +1,0 @@
-{
-  "label": "TinaLinux NPU开发",
-  "position": 7,
-  "link": {
-    "type": "generated-index",
-    "description": "TinyVision V851s 使用 OpenCV + NPU 实现 Mobilenet v2 物体识别。上一篇已经介绍了如何使用 TinyVision 与 OpenCV 开摄像头，本篇将使用已经训练完成并且转换后的模型来介绍对接 NPU 实现物体识别的功能。"
-  }
-}

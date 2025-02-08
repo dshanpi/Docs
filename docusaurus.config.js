@@ -86,12 +86,6 @@ const config = {
           },         
           {
             type: 'docSidebar',
-            sidebarId: 'v851seSidebar',
-            position: 'left',
-            label: 'TinyVision',
-          },
-          {
-            type: 'docSidebar',
             sidebarId: 'd1hdSidebar',
             position: 'left',
             label: 'D1h-DualDisplay',
