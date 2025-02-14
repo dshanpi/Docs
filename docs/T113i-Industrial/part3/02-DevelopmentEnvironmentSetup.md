@@ -5,6 +5,8 @@ sidebar_position: 2
 
 本章节将讲解如何在Ubuntu上搭建一个Tina5-SDK开发环境。
 
+> 注意：虚拟机的`内存`和`处理器`都要 >= 4，否则会编译固件会出现报错。
+
 ## 获取Tina5-SDK源码
 
 首先，在Windows上访问下面的论坛地址，
@@ -57,9 +59,11 @@ ubuntu@ubuntu1804:~/tina5sdk-bsp$ cp ~/T113i_DevKitF_Tina5SDK/* -rfvd .
 
 在Ubuntu上，进入源码根目录`tina5sdk-bsp/`。
 
-①先执行 `source build/envsetup.sh` 初始化环境变量；
+① 先删除配置文件`rm .buildconfig`
 
-②接着执行 `./build.sh` 选择开发板选项。
+② 接着执行 `source build/envsetup.sh` 初始化环境变量；
+
+③ 最后执行 `./build.sh` 选择开发板选项。
 
 - platform : **linux**
 - linux_dev : **buildroot**
@@ -136,7 +140,7 @@ All available flash:
 Choice [default]: 0
 ~~~
 
-选择完，按下`Enter`键之后，会出现报错。
+选择完，按下`Enter`键之后，会自动开始编译。
 
 ~~~bash
 Choice [default]: 0
@@ -190,7 +194,7 @@ INFO: build kernel failed
 ubuntu@ubuntu1804:~/tina5sdk-bsp$
 ~~~
 
-加上 `-d` 参数，强行编译，就不会出现报错了（如果是别的错误，强制也无效，可以看看下面的**常见问题**里是否有答案）。
+如果出现以上错误，加上 `-d` 参数，强行编译，就不会出现报错了（如果是别的错误，强制也无效，可以看看下面的**常见问题**里是否有答案）。
 
 ~~~bash
 ubuntu@ubuntu1804:~/tina5sdk-bsp$ ./build.sh -d
