@@ -5,10 +5,18 @@ sidebar_position: 2
 
 ## 烧写固件至SPINand
 ### 准备工作
-* 硬件：DongshanPI-D1s主板 x1
-* 硬件：TypeC线 X2
-* 软件：全志线刷工具：[AllwinnertechPhoeniSuit](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnertechPhoeniSuit.zip)
-* 软件：全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnerUSBFlashDeviceDriver.zip)
+
+**硬件：**
+
+* DongshanPI-D1s主板 x1
+* TypeC线 X2
+
+**软件：**
+
+* 全志线刷工具：[AllwinnertechPhoeniSuit](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnertechPhoeniSuit.zip)
+* 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnerUSBFlashDeviceDriver.zip)
+* 镜像：[Tina-D1s-CVBS-Default-Systerm.7z](https://dl.100ask.net/Hardware/MPU/D1s-CVBS/Images/Tina-D1s-CVBS-Default-Systerm.7z)
+> 镜像说明：支持文档所有描述的板载功能。MD5值：6674b0c95e8314e98342577f3dd8bc9c
 
 ### 连接开发板
 参考下图所示，
@@ -72,7 +80,7 @@ install.bat
 ### 运行软件烧写
 将下载下来的全志线刷工具 **AllwinnertechPhoeniSuit** 解压缩，同时将**SPI Nand系统镜像**下载下来也进行解压缩。
 
-解压后，得到一个 **tina_d1s-nezha_nor_uart0_nor.img** 镜像，是用于烧录到SPI NAND镜像得。另一个是**AllwinnertechPhoeniSuit**文件夹。
+解压后，得到一个 **Tina-D1s-CVBS-Default-Systerm.img** 镜像，是用于烧录到SPI NAND镜像得。另一个是**AllwinnertechPhoeniSuit**文件夹。
 
 首先我们进入到 **AllwinnertechPhoeniSuit\AllwinnertechPhoeniSuitRelease20201225** 目录下 找到 **PhoenixSuit.exe** 双击运行。
 
@@ -81,7 +89,7 @@ install.bat
 ![PhoenixSuit_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/PhoenixSuit_001.png)
 
 
-​	接下来 我们需要切换到 **一键刷机**窗口，如下图所示，点击红框标号1，在弹出的新窗口内，我们点击 红框2 **浏览** 找到我们刚才解压过的 SPI Nor 最小系统镜像  **tina_d1s-nezha_nor_uart0_nor.img** ，选中镜像后，点击红框3 **全盘擦除升级** ，最后点击红框4  **立即升级**。
+​	接下来 我们需要切换到 **一键刷机**窗口，如下图所示，点击红框标号1，在弹出的新窗口内，我们点击 红框2 **浏览** 找到我们刚才解压过的 SPI Nor 最小系统镜像  **Tina-D1s-CVBS-Default-Systerm.img** ，选中镜像后，点击红框3 **全盘擦除升级** ，最后点击红框4  **立即升级**。
 
 ​	点击完成后，不需要理会 弹出的信息，这时 我们拿起已经连接好的开发板，先按住 **FEL** 烧写模式按键，之后按一下 **RESET** 系统复位键，就可以自动进入烧写模式并开始烧写。
 
@@ -102,13 +110,20 @@ install.bat
 ## 烧写固件至TF卡
 
 ### 准备工作
-* 硬件： DongshanPI-D1s主板 x1
-* 硬件：USB Type-C线 x2
-* 硬件：TF卡读卡器  x1
-* 硬件：8GB以上的 Micro TF卡 x1
-* 软件：Tina系统TF卡烧录工具: [PhoenixCard-V2.8](https://gitlab.com/dongshanpi/tools/-/raw/main/PhoenixCard-V2.8.zip)
-* 软件：SDcard格式化工具：[SDCardFormatter5](https://gitlab.com/dongshanpi/tools/-/raw/main/SDCardFormatter5.0.1Setup.exe)
 
+**硬件：**
+
+* DongshanPI-D1s主板 x1
+* USB Type-C线 x2
+* TF卡读卡器  x1
+* 8GB以上的 Micro TF卡 x1
+
+**软件：**
+
+* Tina系统TF卡烧录工具: [PhoenixCard-V2.8](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/PhoenixCard-V2.8.zip)
+* SDcard格式化工具：[SDCardFormatter5](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/SDCardFormatter5.0.1Setup.exe.7z)
+* 镜像：[Tina-D1s-CVBS-Default-Systerm.7z](https://dl.100ask.net/Hardware/MPU/D1s-CVBS/Images/Tina-D1s-CVBS-Default-Systerm.7z)
+> 镜像说明：支持文档所有描述的板载功能。MD5值：6674b0c95e8314e98342577f3dd8bc9c
 
 ### 运行烧写软件烧写
 
@@ -122,7 +137,7 @@ install.bat
 ![SDCardFormat_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/SDCardFormat_001.png)
 
 
-步骤二：格式化完成后，使用**PhoenixCard.exe**工具来烧录镜像，参考下图步骤，找到自己的TF卡盘符，点击 `左上角红框1` 固件，选择已经解压过的 `tina_d1s-nezha_sd_uart0.img` 镜像，然后点击 `红框2 启动卡`，最后点击`红框3 烧录` 等待烧录完成即可。
+步骤二：格式化完成后，使用**PhoenixCard.exe**工具来烧录镜像，参考下图步骤，找到自己的TF卡盘符，点击 `左上角红框1` 固件，选择已经解压过的 `Tina-D1s-CVBS-Default-Systerm.img` 镜像，然后点击 `红框2 启动卡`，最后点击`红框3 烧录` 等待烧录完成即可。
 
 ![PhoenixCard_Config_002](https://photos.100ask.net/dongshanpi-docs/d1s/PhoenixCard_Config_001.png)
 

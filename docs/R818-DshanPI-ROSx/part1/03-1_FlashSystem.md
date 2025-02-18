@@ -5,11 +5,19 @@ sidebar_position: 2
 
 ## 烧写固件至EMMC
 ### 准备工作
-* 硬件：R818-DshanPI-ROSx主板 x1
-* 硬件：TypeC线 X2
-* 硬件：OTG&串口二合一模块 x1
-* 软件：全志线刷工具：[AllwinnertechPhoeniSuit](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnertechPhoeniSuit.zip)
-* 软件：全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver](https://gitlab.com/dongshanpi/tools/-/raw/main/AllwinnerUSBFlashDeviceDriver.zip)
+
+**硬件：**
+
+* R818-DshanPI-ROSx主板 x1
+* TypeC线 X2
+* OTG&串口二合一模块 x1
+
+**软件：**
+
+* 全志线刷工具：[AllwinnertechPhoeniSuit](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnertechPhoeniSuit.zip)
+* 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnerUSBFlashDeviceDriver.zip)
+* 镜像：[Tina-R818-DshanPI-ROSx-Default-Systerm.7z](https://dl.100ask.net/Hardware/MPU/R818-DshanPI-ROSx/Images/Tina-R818-DshanPI-ROSx-Default-Systerm.7z)
+> 镜像说明：支持文档所有描述的板载功能。MD5值：9674cb76398b7b36534ba6e0841df3e4
 
 ### 连接开发板
 准备好上面的硬件之后，先连接开发板上电，连接图参考下图所示：
@@ -75,14 +83,14 @@ install.bat
 
 
 ### 运行软件烧写
-将下载下来的全志线刷工具 **AllwinnertechPhoeniSuit** 解压缩，同时将 **EMMC系统镜像** 下载下来也进行解压缩。如果没有镜像，可以通过后面章节自行编译镜像。解压后，得到一个 **tina_r818-sc3917_uart0.img** 镜像，是用于烧录至 EMMC。另一个是**AllwinnertechPhoeniSuit**文件夹。首先我们进入到 **AllwinnertechPhoeniSuit\AllwinnertechPhoeniSuitRelease20201225** 目录下 找到 **PhoenixSuit.exe** 双击运行。
+将下载下来的全志线刷工具 **AllwinnertechPhoeniSuit** 解压缩，同时将 **EMMC系统镜像** 下载下来也进行解压缩。如果没有镜像，可以通过后面章节自行编译镜像。解压后，得到一个 **Tina-R818-DshanPI-ROSx-Default-Systerm.img** 镜像，是用于烧录至 EMMC。另一个是**AllwinnertechPhoeniSuit**文件夹。首先我们进入到 **AllwinnertechPhoeniSuit\AllwinnertechPhoeniSuitRelease20201225** 目录下 找到 **PhoenixSuit.exe** 双击运行。
 
 打开软件后 软件主界面如下图所示：
 
 ![PhoenixSuit_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/PhoenixSuit_001.png)
 
 
-接下来 我们需要切换到 **一键刷机**窗口，如下图所示，点击红框标号① **一键刷机**，在弹出的新窗口内，我们点击 红框② **浏览** 找到我们的 EMMC 系统镜像  **tina_r818-sc3917_uart0.img** ，选中镜像后，最后点击红框③ **全盘擦除升级** 
+接下来 我们需要切换到 **一键刷机**窗口，如下图所示，点击红框标号① **一键刷机**，在弹出的新窗口内，我们点击 红框② **浏览** 找到我们的 EMMC 系统镜像  **Tina-R818-DshanPI-ROSx-Default-Systerm.img** ，选中镜像后，最后点击红框③ **全盘擦除升级** 
 
 ![image-20241216181832718](images/image-20241216181832718.png)
 
