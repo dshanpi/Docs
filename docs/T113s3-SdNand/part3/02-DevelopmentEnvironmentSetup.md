@@ -48,7 +48,7 @@ rm /home/ubuntu/tina5sdk-bsp/brandy/brandy-2.0/spl-pub/* -rf
 
 ~~~bash
 ubuntu@ubuntu1804:~/tina5sdk-bsp$ cd ~/
-ubuntu@ubuntu1804:~$ git clone https://github.com/DongshanPI/T113S3-PRO_TinaSDK5.git
+ubuntu@ubuntu1804:~$ git clone https://github.com/DongshanPI/100ASK_T113s3-SdNand_TinaSDK5.git
 ubuntu@ubuntu1804:~$ cd T113S3-PRO_TinaSDK5
 ubuntu@ubuntu1804:~/T113S3-PRO_TinaSDK5$ git submodule update --init
 ubuntu@ubuntu1804:~/T113S3-PRO_TinaSDK5$ cp ./* -rfvd ~/tina5sdk-bsp
