@@ -8,3 +8,6 @@ sidebar_position: 1
 ## 硬件简述
 
 ![](images/T113s3ProV1.3SdNand.png)
+
+- 购买链接：https://detail.tmall.com/item.htm?id=849164409290
+- qq交流群：120575746
