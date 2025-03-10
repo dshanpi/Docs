@@ -3,19 +3,22 @@ sidebar_position: 2
 ---
 # 快速开始使用
 
-## 烧写固件至SPINand
+## 烧写固件至SpiNand
 ### 准备工作
 
 **硬件：**
 
 * 12v电源适配器
-* TypeC线 X2
+* TypeC线 x2
 
 **软件：**
 
 * 全志线刷工具：[AllwinnertechPhoeniSuit.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnertechPhoeniSuit.zip)
 * 全志USB烧录驱动：[AllwinnerUSBFlashDeviceDriver.zip](https://dl.100ask.net/Hardware/MPU/T113i-Industrial/Tools/AllwinnerUSBFlashDeviceDriver.zip)
-* SPINand系统镜像：[Tina-T113s3-Pro-DefaultSystem.7z](https://dl.100ask.net/Hardware/MPU/100ask_t113-pro/Images/Tina-T113s3-Pro-DefaultSystem.7z)
+* SpiNand系统镜像（XR829版本）：[Tina-T113s3-Pro-DefaultSystem.7z](https://dl.100ask.net/Hardware/MPU/100ask_t113-pro/Images/Tina-T113s3-Pro-DefaultSystem.7z)
+* SpiNand系统镜像（WiFi6增强版本）：[T113s3-WiFi6-DefaultSysterm.7z](https://dl.100ask.net/Hardware/MPU/100ask_t113-pro/Images/T113s3-WiFi6-DefaultSysterm.7z)
+
+> 镜像说明：购买哪款开发板，就下载对应的系统镜像。烧录步骤是一致的，下面以SpiNand系统镜像（XR829版本）举例。
 
 ### 连接开发板
 

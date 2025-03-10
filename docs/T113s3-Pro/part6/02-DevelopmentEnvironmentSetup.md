@@ -3,16 +3,15 @@ sidebar_position: 2
 ---
 # 开发环境搭建
 
-### 获取TinaSDK源码
+本章节将讲解 T113s3-pro(XR829版本) 和 T113s3-pro(WiFi增强版) 两款开发板的环境搭建。
 
-查看上面源码工具文档手册，下载TinaSDK源码：
+> 两款开发板的环境搭建不一样，需要找到下面对应开发板章节。
 
-Tina-SDKV2.0源码网盘链接：https://pan.baidu.com/s/13uKlqDXImmMl9cgKc41tZg?pwd=qcw7
+## 获取TinaSDK源码
 
-T113-Pro开发板扩展补丁： https://github.com/DongshanPI/100ASK_T113-Pro_TinaSDK
+> 注意：两款开发板SDK源码一样，补丁包不一样。
 
-
-上传到ubuntu，创建文件夹用来保存源码：
+查看[源码工具文档手册](/docs/T113s3-Pro/SupportingResources)，下载SDK源码压缩包，上传至ubuntu，创建文件夹用来保存源码：
 
 ~~~bash
 ubuntu@ubuntu1804:~$ mkdir Tina_SDK
@@ -75,7 +74,9 @@ ubuntu@ubuntu1804:~/Tina_SDK$ tree -L 1
 ubuntu@ubuntu1804:~/Tina_SDK$ mv tina-d1-h ../
 ~~~
 
-获取扩展支持仓库，然后加以应用：
+## T113s3-pro(XR829版)补丁获取
+
+T113s3-pro（XR829版）按照如下方式获取扩展支持仓库，然后加以应用：
 
 ~~~bash
 ubuntu@ubuntu1804:~$ git clone https://github.com/DongshanPI/100ASK_T113-Pro_TinaSDK.git
@@ -86,13 +87,26 @@ ubuntu@ubuntu1804:~/100ASK_T113-Pro_TinaSDK$ git submodule update --init
 ubuntu@ubuntu1804:~/100ASK_T113-Pro_TinaSDK$ cp ./* -rfvd ~/tina-d1-h
 ~~~
 
+## T113s3-pro(WiFi6增强版)补丁获取
+
+T113s3-pro（WiFi6增强版）按照如下方式获取扩展支持仓库，然后加以应用：
+
+~~~bash
+ubuntu@ubuntu1804:~$ git clone -b spi-nand-512M https://github.com/DongshanPI/100ASK_T113-Pro_TinaSDK.git
+ubuntu@ubuntu1804:~$ cd 100ASK_T113-Pro_TinaSDK/
+ubuntu@ubuntu1804:~/100ASK_T113-Pro_TinaSDK$ ls
+device  lichee  package  target
+ubuntu@ubuntu1804:~/100ASK_T113-Pro_TinaSDK$ git submodule update --init
+ubuntu@ubuntu1804:~/100ASK_T113-Pro_TinaSDK$ cp ./* -rfvd ~/tina-d1-h
+~~~
+
+## 编译出固件
+
 编译固件之前，先安装一些依赖，否则编译会报错：
 
 ~~~bash
 sudo apt-get install build-essential subversion git libncurses5-dev zlib1g-dev gawk flex quilt libssl-dev xsltproc libxml-parser-perl mercurial bzr ecj cvs unzip lib32z1 lib32z1-dev lib32stdc++6 libstdc++6 libc6:i386 libstdc++6:i386 lib32ncurses5 lib32z1 -y
 ~~~
-
-### 编译出固件
 
 进入源码目录，执行：
 
@@ -107,11 +121,11 @@ You're building on Linux
 Lunch menu... pick a combo:
      1. d1-h_nezha_min-tina
      2. d1-h_nezha-tina
-     3. d1s_cvbs-tina
-     4. d1s_nezha-tina
-     5. t113_100ask-tina
+     3. d1s_nezha-tina
+     4. t113_100ask-tina
 
-Which would you like? [Default t113_100ask]: 5
+
+Which would you like? [Default t113_100ask]: 4
 ============================================
 TINA_BUILD_TOP=/home/ubuntu/tina-d1-h
 TINA_TARGET_ARCH=arm
@@ -135,65 +149,8 @@ ubuntu@ubuntu1804:~/tina-d1-h$ pack
 
 打包成功后，镜像文件保存在`/home/ubuntu/tina-d1-h/out/t113-100ask/tina_t113-100ask_uart3.img`。
 
-### 烧录固件
+> 注意：每次创建一个新的终端，都需要执行source build/envsetup.sh 和 lunch 操作，否则无法初始化环境变量。
 
-把镜像文件传到PC端，打开全志线刷工具 **AllwinnertechPhoeniSuit**，找到**PhoenixSuit.exe** ，双击运行：
+## 烧录固件
 
-![image-20240709111952653](images/image-20240709111952653.png)
-
-选择`一键刷机`:
-
-![image-20240709112026606](images/image-20240709112026606.png)
-
-找到镜像路径，选择全盘擦除升级：
-
-![image-20240709112117543](images/image-20240709112117543.png)
-
-点击完成后，不需要其他界面操作，这时拿起已经连接好的开发板，先按住 **FEL** 烧写模式按键，不要松开，之后按一下 **RESET** 系统复位键，再松开 **FEL** 键，就可以自动进入烧写模式并开始烧写。
-
-![image-20240709112322292](images/image-20240709112322292.png)
-
-串口打印信息，如下：
-
-~~~bash
-...
-insmod: can't insert '/lib/modules/5.4.61/xr829.ko': Operation timed out
-Successfully initialized wpa_supplicant
-Could not read interface wlan0 flags: No such device
-nl80211: Driver does not support authentication/association or connect commands
-nl80211: deinit ifname=wlan0 disabled_11b_rates=0
-Could not read interface wlan0 flags: No such device
-wlan0: Failed to initialize driver interface
-------run rc.final file-----
-numid=30,iface=MIXER,name='Headphone Switch'
-  ; type=BOOLEAN,access=rw------,values=1
-  : values=on
-
-
-BusyBox v1.27.2 () built-in shell (ash)
-
-------run profile file-----
- _____  _              __     _
-|_   _||_| ___  _ _   |  |   |_| ___  _ _  _ _
-  | |   _ |   ||   |  |  |__ | ||   || | ||_'_|
-  | |  | || | || _ |  |_____||_||_|_||___||_,_|
-  |_|  |_||_|_||_|_|  Tina is Based on OpenWrt!
- ---------------------------[    9.916991] file system registered
--------------------
- Tina Linux (Neptune, 61CC0487)
- ----------------------------------------------
-Mon Feb  6 00:00:00 GMT 2023
-nodev   debugfs
-root@TinaLinux:/# [    9.941016] configfs-gadget 4100000.udc-controller: failed to start g1: -19
-sh: write error: No such device
-[   11.008518] sunxi_usb_udc 4100000.udc-controller: 4100000.udc-controller supply udc not found, using dummy regulator
-[   11.024290] read descriptors
-[   11.027508] read strings
-[   11.254062] android_work: sent uevent USB_STATE=CONNECTED
-[   11.471404] configfs-gadget gadget: high-speed config #1: c
-[   11.477684] android_work: sent uevent USB_STATE=CONFIGURED
-[   11.498279] android_work: sent uevent USB_STATE=DISCONNECTED
-[   11.555679] android_work: sent uevent USB_STATE=CONNECTED
-
-root@TinaLinux:/#
-~~~
+烧录固件，参考[快速开始使用](/docs/T113s3-Pro/part1/03-1_FlashSystem)。

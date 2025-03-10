@@ -10,7 +10,7 @@ TinaSDK开发文档：https://tina.100ask.net/
 
 开发板使用文档：https://allwinner-docs.100ask.net/
 
-教程示例
+**教程示例:**
 
 一板懂百板通：https://www.bilibili.com/video/BV1Nx4y1w7AF/?spm_id_from=333.999.0.0
 
