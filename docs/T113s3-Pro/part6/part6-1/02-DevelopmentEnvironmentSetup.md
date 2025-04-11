@@ -1,17 +1,17 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 # 开发环境搭建
 
-本章节将讲解 T113s3-pro(XR829版本) 和 T113s3-pro(WiFi增强版) 两款开发板的环境搭建。
+本章节将讲解 T113s3-pro(XR829版本) 和 T113s3-pro(WiFi6增强版aic8800d80) 两款开发板 Tina4-SDK 的环境搭建。
 
 > 两款开发板的环境搭建不一样，需要找到下面对应开发板章节。
 
-## 获取TinaSDK源码
+## 获取Tina4-SDK源码
 
 > 注意：两款开发板SDK源码一样，补丁包不一样。
 
-查看[源码工具文档手册](/docs/T113s3-Pro/SupportingResources)，下载SDK源码压缩包，上传至ubuntu，创建文件夹用来保存源码：
+查看[源码工具文档手册](/docs/T113s3-Pro/SupportingResources)，下载 `Tina4-SDK源码` 压缩包，上传至ubuntu，创建文件夹用来保存源码：
 
 ~~~bash
 ubuntu@ubuntu1804:~$ mkdir Tina_SDK
@@ -71,7 +71,7 @@ ubuntu@ubuntu1804:~/Tina_SDK$ tree -L 1
 └── tina-d1-h.tar.bz2.08
 
 1 directory, 9 files
-ubuntu@ubuntu1804:~/Tina_SDK$ mv tina-d1-h ../
+ubuntu@ubuntu1804:~/Tina_SDK$ mv tina-d1-h ~/
 ~~~
 
 ## T113s3-pro(XR829版)补丁获取
@@ -79,6 +79,7 @@ ubuntu@ubuntu1804:~/Tina_SDK$ mv tina-d1-h ../
 T113s3-pro（XR829版）按照如下方式获取扩展支持仓库，然后加以应用：
 
 ~~~bash
+ubuntu@ubuntu1804:~/Tina_SDK$ cd ~/
 ubuntu@ubuntu1804:~$ git clone https://github.com/DongshanPI/100ASK_T113-Pro_TinaSDK.git
 ubuntu@ubuntu1804:~$ cd 100ASK_T113-Pro_TinaSDK/
 ubuntu@ubuntu1804:~/100ASK_T113-Pro_TinaSDK$ ls

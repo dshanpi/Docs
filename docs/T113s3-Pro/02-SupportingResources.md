@@ -45,6 +45,16 @@ T113 LVGLUI开发：https://www.bilibili.com/video/BV1a94y1X7gP/?spm_id_from=333
 
 ### Tina-SDK源码
 
-Tina-SDKV2.0源码网盘链接：https://pan.baidu.com/s/13uKlqDXImmMl9cgKc41tZg?pwd=qcw7
+注意甄别以下SDK版本，t113s3-pro(xr829版本wifi5)目前仅支持 tina4，t113s3-pro(aic8800d80版本wifi6)支持 tina4 和 tina5 。
 
-T113-Pro开发板扩展补丁： https://github.com/DongshanPI/100ASK_T113-Pro_TinaSDK
+> 区别：简单来说，使用tina5，就可以用上buildroot。
+
+#### Tina4
+📙Tina4-SDK 源码网盘链接：https://pan.baidu.com/s/13uKlqDXImmMl9cgKc41tZg?pwd=qcw7
+
+📙T113s3-Pro 开发板扩展补丁`(仅支持 tina4sdk)`： https://github.com/DongshanPI/100ASK_T113-Pro_TinaSDK
+
+#### Tina5
+📙Tina5-SDK 源码网盘链接：https://pan.baidu.com/s/1A_HER2QyTk0BIVxOuGoAyQ?pwd=n8ii
+
+📙T113s3-Pro 开发板扩展补丁`(仅支持 tina5sdk)`：https://github.com/DongshanPI/100ASK_T113-PRO_TinaSDK5
