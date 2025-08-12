@@ -36,4 +36,4 @@ jobs:
           github_token: ${{ secrets.CI_TOKEN }}
           # Build output to publish to the `gh-pages` branch:
           publish_dir: ./build
-          cname: dshanpi.100ask.org
+          cname: wiki.dshanpi.org
