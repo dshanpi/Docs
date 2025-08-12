@@ -8,7 +8,7 @@ sidebar_position: 2
 
 ### 下载vmware虚拟机工具
 
-使用浏览器打开网址    https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html   参考下图箭头所示，点击下载安装 Windows版本的VMware Workstation ，点击 **DOWNLOAD NOW**  即可开始下载。
+使用浏览器打开网址 https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html   参考下图箭头所示，点击下载安装 Windows版本的VMware Workstation ，点击 **DOWNLOAD NOW**  即可开始下载。
 
 ![vmwareworkstation_download_001](https://photos.100ask.net/dongshanpi-docs/DongshanNezhaSTU/vmwareworkstation_download_001.png)
 
