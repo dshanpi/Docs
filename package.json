@@ -7,7 +7,7 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
+    "deploy": "docusaurus build && gh-pages -d build",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
@@ -27,6 +27,7 @@
     "@docusaurus/module-type-aliases": "3.0.1",
     "@docusaurus/types": "3.0.1",
     "@types/react": "^19.1.10",
+    "gh-pages": "^6.3.0",
     "react-loadable": "^5.5.0",
     "search-insights": "^2.17.3",
     "typescript": "^5.9.2"
