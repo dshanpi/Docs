@@ -74,45 +74,9 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 't113s3Sidebar',
+            sidebarId: 'dshanpia1Sidebar',
             position: 'left',
-            label: 'T113s3-Industrial',
-          }, 
-          {
-            type: 'docSidebar',
-            sidebarId: 't113s3proSidebar',
-            position: 'left',
-            label: 'T113s3-Pro',
-          },         
-          {
-            type: 'docSidebar',
-            sidebarId: 'd1hdSidebar',
-            position: 'left',
-            label: 'D1h-DualDisplay',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'd1scvbsSidebar',
-            position: 'left',
-            label: 'D1s-CVBS',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 't113iSidebar',
-            position: 'left',
-            label: 'T113i-Industrial',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 't113s3sdnandSidebar',
-            position: 'left',
-            label: 'T113s3-SdNand',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'r818dshanpirosxSidebar',
-            position: 'left',
-            label: 'R818-DshanPI-ROSx',
+            label: 'DshanPi-A1',
           },        
           {
             type: 'localeDropdown',
