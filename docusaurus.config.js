@@ -45,6 +45,8 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/100askTeam/linuxboard-docs/tree/main/',
+        
+          sidebarCollapsed: false,
         },
         blog: {
           showReadingTime: true,

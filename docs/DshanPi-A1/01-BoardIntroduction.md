@@ -1,6 +1,0 @@
----
-sidebar_position: 1
----
-# 资料获取
-
-
