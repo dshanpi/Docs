@@ -63,7 +63,7 @@ sudo apt install ffmpeg -y
 cd test
 ```
 
-2.以input.h264(此文件可在)解码30帧为例，对demo和输出进行说明。运行的命令为：
+2.以[input.h264](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/utils/input.h264)解码30帧为例，对demo和输出进行说明。运行的命令为：
 
 ```
 sudo ./mpi_dec_test -t 7 -i ./input.h264  -n 100 -o output.yuv
