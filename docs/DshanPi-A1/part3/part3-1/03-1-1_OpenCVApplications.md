@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 ---
-# OpenCV应用
+# OpenCV
 
 ​	OpenCV（Open Source Computer Vision Library，开源计算机视觉库）诞生于 1999 年 Intel Research，如今由 OpenCV.org 基金会维护，是目前**全球使用最广泛**的开源计算机视觉与机器学习软件库之一。
 

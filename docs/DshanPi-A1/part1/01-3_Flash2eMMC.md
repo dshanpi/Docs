@@ -25,9 +25,11 @@ TypeC-3.2 10Gbps速率USB线：
 
 软件上，我们需要在 PC 端下载 **系统镜像、烧录工具和驱动安装工具包** 。下载链接如下：
 
-- **ArmBianOS 系统镜像：** 
-- **烧录工具 RKDevTool：** 
-- **驱动安装工具包 DriverAssitant：** 
+> 按住 `ctrl` 键，鼠标 `左键` 点击链接，即可一键下载
+
+- **ArmBianOS 系统镜像：** [DshanPi-A1_ArmbianOS](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/100ASK_Armbian_25.11.0-trunk_Dshanpi-a1_noble_vendor_6.1.115_gnome_desktop.img.7z)
+- **烧录工具 RKDevTool：**  [RKDevTool_Release_v3.32.zip](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/RKDevTool_Release_v3.32.zip)
+- **驱动安装工具包 DriverAssitant：** [DriverAssitant_v5.1.1.zip](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/DriverAssitant_v5.1.1.zip)
 
 ### 3. 烧录驱动安装
 
@@ -37,7 +39,7 @@ TypeC-3.2 10Gbps速率USB线：
 
 ## 烧录系统镜像
 
-准备工作完成后，接上 **usb3.0 otg** 线（数据线另一端接电脑的 USB3.0 蓝色接口），按住 **`MASKROM`** 按键，**先不松开** ，再接上电源，dshanpi-a1 就会进入 **`MASKROM`** 烧录模式。参照下图操作：
+准备工作完成后，①接上 **usb3.0 otg** 线（数据线另一端接电脑的 USB3.0 蓝色接口），②按住 **`MASKROM`** 按键，**先不松开** ，③再接上电源，dshanpi-a1 就会进入 **`MASKROM`** 烧录模式。参照下图操作：
 
 ![image-20250815154004776](images/image-20250815154004776.png)
 
@@ -49,7 +51,7 @@ TypeC-3.2 10Gbps速率USB线：
 - ② 第二个选项设置为 **`EMMC`** ；
 - ③ 地址默认都设置为 **`0x00000000`** ；
 - ④ Loader的路径设置为前面我们下载的引导固件 **`rk3576_spl_loader_v1.09.107.bin`** ；
-- ⑤ Systerm的路径设置为前面我们下载的系统镜像 **`100ASK_xxx_desktop.img`** ；
+- ⑤ Systerm的路径设置为前面我们下载的系统镜像 **`100ASK_xxx-trunk_Dshanpi-a1_noble_vendor_6.1.115_gnome_desktop.img`** ；
 - ⑥ 勾上强制按地址写；
 - ⑦ 点击执行（一定要显示为 **MASKROM** 模型才可以烧录）。
 
@@ -63,5 +65,3 @@ TypeC-3.2 10Gbps速率USB线：
   - **解决方案：** 检查设备管理器是否出现以下设备，烧录驱动是否安装，如果安装了，插拔一下 usb3.0 otg 接口的数据线或者重启电脑。
 
 ![image-20250815174333674](images/image-20250815174333674.png)
-
-
