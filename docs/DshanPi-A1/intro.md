@@ -8,7 +8,7 @@ DshanPi-A1 聚焦 AI 教育场景，以“单板计算机  + 专题项目（付�
 
 ## DshanPi-A1 AI EDU SBC
 
-Avaota-A1 提供中高端性能 SBC 体验，包括 PCIe、USB3.0、双千兆、HDMI、HDMI-IN、DP等丰富的接口。
+DshanPi-A1 提供中高端性能 SBC 体验，包括 PCIe、USB3.0、双千兆、HDMI、HDMI-IN、DP等丰富的接口。
 
 ![DshanPi-A1-StructureDiagram](images/DshanPi-A1-StructureDiagram.png)
 
