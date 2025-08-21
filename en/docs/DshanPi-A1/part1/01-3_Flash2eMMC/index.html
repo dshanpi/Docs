@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.0.1">
 <title data-rh="true">烧录系统至EMMC | 东山Π</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://wiki.dshanpi.org/en/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://wiki.dshanpi.org/en/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://wiki.dshanpi.org/en/docs/DshanPi-A1/part1/01-3_Flash2eMMC"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_Hans"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="烧录系统至EMMC | 东山Π"><meta data-rh="true" name="description" content="本章节将讲解如何把我们提供的 ArmbianOS 系统镜像烧录至EMMC。"><meta data-rh="true" property="og:description" content="本章节将讲解如何把我们提供的 ArmbianOS 系统镜像烧录至EMMC。"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://wiki.dshanpi.org/en/docs/DshanPi-A1/part1/01-3_Flash2eMMC"><link data-rh="true" rel="alternate" href="https://wiki.dshanpi.org/docs/DshanPi-A1/part1/01-3_Flash2eMMC" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://wiki.dshanpi.org/en/docs/DshanPi-A1/part1/01-3_Flash2eMMC" hreflang="en"><link data-rh="true" rel="alternate" href="https://wiki.dshanpi.org/docs/DshanPi-A1/part1/01-3_Flash2eMMC" hreflang="x-default"><link rel="stylesheet" href="/en/assets/css/styles.e3ab61ce.css">
-<script src="/en/assets/js/runtime~main.a0d095a0.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.0672cb3e.js" defer="defer"></script>
 <script src="/en/assets/js/main.11a0033c.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -38,19 +38,20 @@
 <p>准备工作完成后，①接上 <strong>usb3.0 otg</strong> 线（数据线另一端接电脑的 USB3.0 蓝色接口），②按住 <strong><code>MASKROM</code></strong> 按键，<strong>先不松开</strong> ，③再接上电源，dshanpi-a1 就会进入 <strong><code>MASKROM</code></strong> 烧录模式。参照下图操作：</p>
 <p><img loading="lazy" alt="image-20250815154004776" src="/en/assets/images/image-20250815154004776-c4e989fc0ade82de8f837eae9fa3113c.png" width="1765" height="1039" class="img_ev3q"></p>
 <p>打开烧录工具 ，参考下图配置烧录工具：</p>
-<p><img loading="lazy" alt="image-20250814181522592" src="/en/assets/images/image-20250814181522592-2c688865f6728400a3b704a7c4b2eaae.png" width="970" height="461" class="img_ev3q"></p>
+<p><img loading="lazy" alt="image-20250821092501879" src="/en/assets/images/image-20250821092501879-d68a176a0849799f1a2cc1fd8a0f66ee.png" width="964" height="450" class="img_ev3q"></p>
 <ul>
 <li>① 勾上前两个选项；</li>
 <li>② 第二个选项设置为 <strong><code>EMMC</code></strong> ；</li>
 <li>③ 地址默认都设置为 <strong><code>0x00000000</code></strong> ；</li>
-<li>④ Loader的路径设置为前面我们下载的引导固件 <strong><code>rk3576_spl_loader_v1.09.107.bin</code></strong> ；</li>
-<li>⑤ Systerm的路径设置为前面我们下载的系统镜像 <strong><code>100ASK_xxx-trunk_Dshanpi-a1_noble_vendor_6.1.115_gnome_desktop.img</code></strong> ；</li>
-<li>⑥ 勾上强制按地址写；</li>
-<li>⑦ 点击执行（一定要显示为 <strong>MASKROM</strong> 模型才可以烧录）。</li>
+<li>④ 名字照着上图设置；</li>
+<li>⑤ Loader的路径设置为前面我们下载的引导固件 <strong><code>rk3576_spl_loader_v1.09.107.bin</code></strong> ；</li>
+<li>⑥ Systerm的路径设置为前面我们下载的系统镜像 <strong><code>100ASK_xxx.img</code></strong> ；</li>
+<li>⑦ 勾上强制按地址写；</li>
+<li>⑧ 点击执行（一定要显示为 <strong>MASKROM</strong> 模型才可以烧录）。</li>
 </ul>
 <p>开始烧录后，等待下载完成即可启动系统。</p>
 <p><img loading="lazy" alt="image-20250814181827639" src="/en/assets/images/image-20250814181827639-d30c56df6c2c3783ad8ccedec911cc9d.png" width="970" height="461" class="img_ev3q"></p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="常见问题与解 决方案">常见问题与解决方案<a href="#常见问题与解决方案" class="hash-link" aria-label="Direct link to 常见问题与解决方案" title="Direct link to 常见问题与解决方案">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="常见问题与解决方案"> 常见问题与解决方案<a href="#常见问题与解决方案" class="hash-link" aria-label="Direct link to 常见问题与解决方案" title="Direct link to 常见问题与解决方案">​</a></h2>
 <ul>
 <li><strong>问题：执行烧录操作后烧录工具没有显示MASKROM设备？</strong>
 <ul>
