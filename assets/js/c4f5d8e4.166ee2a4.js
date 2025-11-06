@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkdshanpi_website=globalThis.webpackChunkdshanpi_website||[]).push([[2634],{30192:(s,i,a)=>{a.r(i),a.d(i,{default:()=>t});a(96540);var e=a(56347),n=a(74848);function t(){return(0,n.jsx)(e.rd,{to:"docs/DshanPi-A1/intro"})}}}]);
