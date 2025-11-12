@@ -2,7 +2,7 @@
 typora-root-url: ./
 ---
 
-# **DshanPI-A1 RK3576 armbian远程桌面**
+# DshanPI-A1 RK3576 armbian远程桌面
 
 
 
@@ -17,6 +17,8 @@ typora-root-url: ./
 1. 默认创建虚拟桌面，而非物理桌面；
 
 2. 对 Wayland 支持不佳，会以兼容模式开启 X11 桌面，导致 OpenGL 无法调用 GPU 加速。
+
+<!-- truncate -->
 
 ### 解决方案：使用 Armbian 自带远程桌面
 
