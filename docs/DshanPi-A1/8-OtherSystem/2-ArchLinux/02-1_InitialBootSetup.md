@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 ---
-# 烧录系统
+# 烧录ArchLinux系统
 
 本章节将讲解如何把我们提供的 ArchLinux 系统镜像烧录至 EMMC。
 

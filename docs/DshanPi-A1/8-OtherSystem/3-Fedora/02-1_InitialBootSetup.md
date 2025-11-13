@@ -1,3 +1,6 @@
+---
+sidebar_position: 1
+---
 # 烧录Fedora系统
 
 本章节将带领您在 dshanpi-a1 上烧录Fedora系统。
