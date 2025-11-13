@@ -5,6 +5,10 @@ sidebar_position: 1
 
 本章节将讲解如何把我们提供的 ArchLinux 系统镜像烧录至 EMMC。
 
+## ArchLinux系统简介
+
+Arch Linux 是一个轻量级、灵活、滚动更新的 Linux 发行版，专为喜欢动手、追求简洁与控制权的用户设计。它的核心哲学是“KISS（Keep It Simple, Stupid）”，强调简洁、现代、实用、用户中心。
+
 ## 准备工作
 
 ### 1. 硬件准备
