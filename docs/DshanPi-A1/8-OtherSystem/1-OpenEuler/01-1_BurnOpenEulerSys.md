@@ -25,7 +25,7 @@ openEuler 是一个**面向数字基础设施的开源操作系统**，其内核
 
 > 按住 `ctrl` 键，鼠标 `左键` 点击链接，即可一键下载
 
-- **ArchLinux 系统镜像：** [DshanPi-A1_OpenEuler_Image](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/images/openEuler/openEuler-22.03-LTS-SP3-DShanPi-A1-aarch64-alpha1.img.xz)
+- **OpenEuler 系统镜像：** [DshanPi-A1_OpenEuler_Image](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/images/openEuler/openEuler-22.03-LTS-SP3-DShanPi-A1-aarch64-alpha1.img.xz)
 - **烧录工具 RKDevTool：**  [RKDevTool_Release_v3.32.zip](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/RKDevTool_Release_v3.32.zip)
 - **驱动安装工具包 DriverAssitant：** [DriverAssitant_v5.1.1.zip](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/DriverAssitant_v5.1.1.zip)
 - **DshanPi-A1 引导固件：** [rk3576_spl_loader_v1.09.107.bin](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/rk3576_spl_loader_v1.09.107.bin)
