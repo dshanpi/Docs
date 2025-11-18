@@ -34,7 +34,7 @@ sidebar_position: 1
 ### ArchLinux系统
 - ArchLinux系统V1.0
   - 支持功能/亮点：
-  - 默认用户名密码：root alarm
+  - 默认用户名密码：alarm alarm
   - 系统镜像 V1.0：[ArchLinuxARM-100Ask-DShanPi-A1-20250925202048.7z](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/images/ArchLinux/ArchLinuxARM-100Ask-DShanPi-A1-20250925202048.7z)
   - 引导固件： [rk3576_spl_loader_v1.09.107.bin](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/rk3576_spl_loader_v1.09.107.bin)
   - 刷写步骤：参考教程
