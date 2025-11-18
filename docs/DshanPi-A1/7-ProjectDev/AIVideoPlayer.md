@@ -1,3 +1,7 @@
+---
+sidebar_position: 6
+---
+
 # AI 视频播放器
 
 参考链接：
