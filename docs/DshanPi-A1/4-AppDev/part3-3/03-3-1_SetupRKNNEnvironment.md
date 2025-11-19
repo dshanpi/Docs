@@ -176,6 +176,30 @@ pip install -r arm64_requirements_cp38.txt
 
 > 如果是国内用户可使用国内源：pip install -r arm64_requirements_cp38.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
+
+
+**FAQ**：
+
+如果安装报错：ERROR: Failed to build installable wheels for some pyproject.toml based projects (onnxoptimizer)
+
+解决办法：强制兼容低版本cmake检测。
+
+```
+CMAKE_ARGS="-DCMAKE_POLICY_DEFAULT_CMP0048=OLD -DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+```
+
+安装`pybind11`
+
+```
+export CPLUS_INCLUDE_PATH="$(python -c 'import pybind11; print(pybind11.get_include())'):${CPLUS_INCLUDE_PATH}"
+export CMAKE_PREFIX_PATH="$(python -c 'import pybind11; print(pybind11.get_cmake_dir())'):${CMAKE_PREFIX_PATH}"
+pip install --no-build-isolation --no-binary onnxoptimizer --force-reinstall onnxoptimizer
+```
+
+执行完成后重新执行：pip install -r arm64_requirements_cp38.txt
+
+
+
 3.安装rknn_toolkit2
 
 ```
