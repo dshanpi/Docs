@@ -3,7 +3,92 @@ sidebar_position: 2
 ---
 # DeepSeek-R1
 
-## 1.编译可执行程序
+## 0.模型获取
+
+RK推理模型文件下载链接： https://pan.baidu.com/s/14BtJdoOSUiOsdeL_tqtVDg?pwd=rkll 提取码: rkll
+
+
+
+## 1.模型转换(可选)
+
+> 注意：模型转换需要在Linux x86主机上执行！
+
+获取原始模型：
+
+```
+git lfs install
+git clone https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
+```
+
+如果无法获取，可前往我们提供的网盘资料获取： https://pan.baidu.com/s/1eRRds8yKxLXuXwnM7BArHQ?pwd=7fkw 提取码: 7fkw 
+
+### 1.1 激活环境
+
+激活rkllm conda环境：
+
+```
+conda activate rkllm
+```
+
+### 1.2 生成模型量化校准数据集
+
+生成模型量化校准文件:
+
+```
+cd examples/DeepSeek-R1-Distill-Qwen-1.5B_Demo/export
+python3 generate_data_quant.py -m /path/to/DeepSeek-R1-Distill-Qwen-1.5B
+```
+
+假设我的原始模型放在`~/DeepSeek-R1-Distill-Qwen-1.5B/`目录下，则执行：
+
+```
+python3 generate_data_quant.py -m ~/DeepSeek-R1-Distill-Qwen-1.5B/
+```
+
+### 1.3 模型导出源码修改
+
+1.修改导出模型源码`export_rkllm.py`的模型路径：
+
+```
+modelpath = '/path/to/DeepSeek-R1-Distill-Qwen-1.5B'
+```
+
+假设我的原始模型放在`/home/ubuntu/DeepSeek-R1-Distill-Qwen-1.5B`目录下，则修改为：
+
+```
+modelpath = '/home/ubuntu/DeepSeek-R1-Distill-Qwen-1.5B'
+```
+
+2.修改模型上下文最大值 max_context，代码原始为：
+
+```
+ret = llm.build(do_quantization=True, optimization_level=optimization_level, quantized_dtype=quantized_dtype,
+                quantized_algorithm=quantized_algorithm, target_platform=target_platform, num_npu_core=num_npu_core, extra_qparams=qparams, dataset=dataset, hybrid_rate=0, max_context=4096)
+```
+
+默认为4096，该值越大，占用内存越大，建议根据内存版本修改，修改的值必须是32的倍数。(2GB RAM 建议 512，4GB RAM 建议 1024，8GB RAM 建议 2048，12GB RAM 建议 4096)
+
+3.修改NPU核心为`2`
+
+```
+num_npu_core = 2
+```
+
+4.运行模型脚本：
+
+```
+python3 export_rkllm.py
+```
+
+运行效果如下：
+
+![image-20251117171943516](images/image-20251117171943516.png)
+
+模型转换完成后可以看到`DeepSeek-R1-Distill-Qwen-1.5B_W8A8_RK3576.rkllm`模型文件，后续可拷贝至DshanPI A1上运行！
+
+## 2.编译可执行程序
+
+> 注意：模型转换需要在DshanPI A1板端上执行！
 
 1.进入源码目录
 
@@ -89,6 +174,8 @@ cd install/demo_Linux_aarch64/
 
 6.将预训练和转换完成的模型文件传输至开发板端中
 
+模型文件下载链接： https://pan.baidu.com/s/14BtJdoOSUiOsdeL_tqtVDg?pwd=rkll 提取码: rkll
+
 ```
 baiwen@dshanpi-a1:~/rknn-llm/examples/DeepSeek-R1-Distill-Qwen-1.5B_Demo/deploy/install/demo_Linux_aarch64$  ls
 DeepSeek-R1-Distill-Qwen-1.5B_W4A16_RK3576.rkllm  DeepSeek-R1-Distill-Qwen-7B_W4A16_G128_RK3576.rkllm  lib  llm_demo
@@ -96,9 +183,9 @@ DeepSeek-R1-Distill-Qwen-1.5B_W4A16_RK3576.rkllm  DeepSeek-R1-Distill-Qwen-7B_W4
 
 
 
-## 2.模型推理
+## 3.模型推理
 
-### 2.1 DeepSeek-R1 1.5B
+### 3.1 DeepSeek-R1 1.5B
 
 1.导入依赖和环境变量
 
@@ -113,11 +200,11 @@ export RKLLM_LOG_LEVEL=1
 ./llm_demo ./DeepSeek-R1-Distill-Qwen-1.5B_W4A16_RK3576.rkllm 2048 4096
 ```
 
-![image-20250822105053016](${images}/image-20250822105053016.png)
+![image-20250822105053016](images/image-20250822105053016.png)
 
 > 如果想退出可输入`Ctrl+C`。
 
-### 2.2 DeepSeek-R1 7B
+### 3.2 DeepSeek-R1 7B
 
 1.导入依赖和环境变量
 
@@ -132,6 +219,6 @@ export RKLLM_LOG_LEVEL=1
 ./llm_demo ./DeepSeek-R1-Distill-Qwen-7B_W4A16_G128_RK3576.rkllm 2048 4096
 ```
 
-![image-20250822105538997](${images}/image-20250822105538997.png)
+![image-20250822105538997](images/image-20250822105538997.png)
 
 > 如果想退出可输入`Ctrl+C`。
