@@ -87,17 +87,24 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'dshanpia1Sidebar',
-            position: 'left',
-            label: 'DshanPi-A1',
-          },      
           {to: '/blog', label: 'Blog', position: 'right'},
           {
             type: 'localeDropdown',
             position: 'right',
           },
+          {
+            type: 'docSidebar',
+            sidebarId: 'dshanpia1Sidebar',
+            position: 'left',
+            label: 'DshanPi-A1',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'dshanpir1Sidebar',
+            position: 'left',
+            label: 'DshanPi-R1',  
+          },         
+
           {
             href: 'https://github.com/dshanpi/Docs',
             label: 'GitHub',
