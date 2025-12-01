@@ -1,21 +1,21 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 # 网络连接
 
-本章节将讲解如何在百问网 dshanpi-a1 设备上连接网络，连接的方式主要有两种：千兆有线网口 和 无线WiFi。
+本章节将讲解如何在百问网 dshanpi-r1 设备上连接网络，连接的方式主要有两种：千兆有线网口 和 无线WiFi。
 
 > 千兆有线网口连接这里就不做讲解了，接上即可使用，无需配置。
 
 ## 桌面无线WiFi设置
 
-在 dshanpi-a1 桌面上，WiFi连接步骤参考下图：
+在 dshanpi-r1 桌面上，WiFi连接步骤参考下图：
 
-![image-20250808190309109](images/image-20250808190309109.png)
+![image-20251201152236068](images/image-20251201152236068.png)
 
 点击网络名称后，系统要求输入密码，如下图所示：
 
-![image-20250808190507346](images/image-20250808190507346.png)
+![image-20251201152331860](images/image-20251201152331860.png)
 
 输入正确的密码，然后回车，即可连接成功。
 
@@ -53,7 +53,7 @@ sudo nmcli device wifi list
 如下所示：
 
 ~~~bash
-root@dshanpi-a1:~# nmcli device wifi list
+# nmcli device wifi list
 IN-USE  BSSID              SSID                         MODE   CHAN  RATE      >
         F0:92:B4:A6:03:91  ChinaNet-kRAH                Infra  1     130 Mbit/s>
         76:39:89:FE:F0:AE  --                           Infra  40    405 Mbit/s>

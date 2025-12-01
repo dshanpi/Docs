@@ -1,4 +1,4 @@
 ---
-sidebar_position: 12
+sidebar_position: 10
 ---
 # 浏览器使用

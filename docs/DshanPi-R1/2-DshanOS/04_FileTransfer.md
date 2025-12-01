@@ -1,9 +1,9 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 ---
 # 文件传输
 
-本章节将讲解百问网 dshanpi-a1 与不同设备间如何进行文件传输。
+本章节将讲解百问网 dshanpi-r1 与不同设备间如何进行文件传输。
 
 ## 与Windows主机进行文件传输
 
@@ -47,9 +47,9 @@ MobaXterm传输文件的方式还可以通过直接拖拽的方式进行互传�
 
 ![image-20250811180059629](images/image-20250811180059629.png)
 
-- ① 输入 dshanpi-a1 IP 地址；
-- ② 输入 dshanpi-a1 用户名；
-- ③ 输入 dshanpi-a1 用户密码；
+- ① 输入设备 IP 地址；
+- ② 输入设备用户名；
+- ③ 输入设备用户密码；
 - ④ 输入端口号 22（通常是通过 sftp 协议【**SSH 文件传输协议**】来传输文件）；
 - ⑤ 点击快速连接。
 
@@ -95,7 +95,7 @@ scp ubuntu@192.168.1.67:/home/ubuntu/Documents/1.txt .
 如下：
 
 ~~~bash
-baiwen@dshanpi-a1:~/Downloads$ scp ubuntu@192.168.1.67:/home/ubuntu/Documents/1.txt .
+$ scp ubuntu@192.168.1.67:/home/ubuntu/Documents/1.txt .
 The authenticity of host '192.168.1.67 (192.168.1.67)' can't be established.
 ED25519 key fingerprint is SHA256:6u5vPdqrR9X2XtbR83HSI092UBrLPSN13Yx2o4SuaHc.
 This key is not known by any other names.
@@ -103,9 +103,9 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 Warning: Permanently added '192.168.1.67' (ED25519) to the list of known hosts.
 ubuntu@192.168.1.67's password:
 1.txt                                                                          100%    7     0.5KB/s   00:00
-baiwen@dshanpi-a1:~/Downloads$ ls
+$ ls
 1.txt
-baiwen@dshanpi-a1:~/Downloads$ cat 1.txt
+$ cat 1.txt
 100ask
 ~~~
 
@@ -118,8 +118,8 @@ scp ./2.txt ubuntu@192.168.1.67:/home/ubuntu/Documents/
 如下：
 
 ~~~bash
-baiwen@dshanpi-a1:~/Downloads$ touch 2.txt
-baiwen@dshanpi-a1:~/Downloads$ scp ./2.txt ubuntu@192.168.1.67:/home/ubuntu/Documents/
+$ touch 2.txt
+$ scp ./2.txt ubuntu@192.168.1.67:/home/ubuntu/Documents/
 ubuntu@192.168.1.67's password:
 2.txt                                                                          100%    0     0.0KB/s   00:00
 ~~~
@@ -127,20 +127,19 @@ ubuntu@192.168.1.67's password:
 如果需要发送文件夹，如下：
 
 ~~~bash
-baiwen@dshanpi-a1:~/Downloads$ mkdir 100ask
-baiwen@dshanpi-a1:~/Downloads$ scp -r ./100ask ubuntu@192.168.1.67:/home/ubuntu/Documents/
+$ mkdir 100ask
+$ scp -r ./100ask ubuntu@192.168.1.67:/home/ubuntu/Documents/
 ubuntu@192.168.1.67's password:
-baiwen@dshanpi-a1:~/Downloads$
+$
 ~~~
 
 反之：
 
 ~~~bash
-baiwen@dshanpi-a1:~/Downloads$ scp -r ubuntu@192.168.1.67:/home/ubuntu/Documents/dshanpi ~/Downloads/
+$ scp -r ubuntu@192.168.1.67:/home/ubuntu/Documents/dshanpi ~/Downloads/
 ubuntu@192.168.1.67's password:
-baiwen@dshanpi-a1:~/Downloads$ ls
+$ ls
 100ask  1.txt  2.txt  dshanpi
-baiwen@dshanpi-a1:~/Downloads$
+$
 ~~~
-
 

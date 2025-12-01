@@ -1,13 +1,13 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 # 远程登录
 
-本章节将讲解如何通过 SSH工具登录远程百问网 dshanpi-a1 终端。
+本章节将讲解如何通过 SSH工具登录远程设备终端。
 
 ## 满足条件
 
-> 以下条件只是讲解，如果后续开发需要修改配置或是无法SSH连接远程终端，可以参考使用。默认SSH服务已经启动，重点确保本地主机能访问到远程 dshanpi-a1 的 IP 和 端口。
+> 以下条件只是讲解，如果后续开发需要修改配置或是无法SSH连接远程终端，可以参考使用。默认SSH服务已经启动，重点确保本地主机能访问到远程设备的 IP 和 端口。
 
 ### **1. 本地端条件**
 
@@ -52,11 +52,11 @@ sidebar_position: 2
     如下所示：
 
     ~~~bash
-    root@dshanpi-a1:~# sshd -V
+    # sshd -V
     OpenSSH_9.6p1 Ubuntu-3ubuntu13.13, OpenSSL 3.0.13 30 Jan 2024
-    root@dshanpi-a1:~#
-    root@dshanpi-a1:~#
-    root@dshanpi-a1:~# sudo systemctl status ssh
+    #
+    #
+    # sudo systemctl status ssh
     ○ ssh.service - OpenBSD Secure Shell server
          Loaded: loaded (/usr/lib/systemd/system/ssh.service; disabled; preset: ena>
          Active: inactive (dead)
@@ -96,13 +96,12 @@ sidebar_position: 2
 ![image-20250811115001849](images/image-20250811115001849.png)
 
 - ① 选择 **`SSH`** 图标；
-- ② 输入 dshanpi-a1 IP地址（每个人的IP地址都不一样，也许是静态设置或者动态获取的，具体可以登录串口或者屏幕查看）；
+- ② 输入设备 IP 地址（每个设备的IP地址都不一样，也许是静态设置或者动态获取的，具体可以登录串口或者屏幕查看）；
 - ③ 打勾并输入设置的远程用户名；
 - ④ 端口号默认是22；
 - ⑤ 点击 **`OK`**，会自动启动会话。
 
-### 3. 输入远程用户密码
 
-配置完成后，正常情况下，需要输入对应远程用户的密码，密码正确即可登录成功，如下所示：
 
-![image-20250811115103727](images/image-20250811115103727.png)
+
+

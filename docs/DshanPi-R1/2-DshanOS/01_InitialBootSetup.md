@@ -1,11 +1,11 @@
 ---
-sidebar_position: 3
+sidebar_position: 1
 ---
 # 首次启动设置
 
-本章节将带领您完成百网网 dshanpi-a1的首次启动快速配置，从零开始，一步到位。
+本章节将带领您完成百网网 dshanpi-r1的首次启动快速配置，从零开始，一步到位。
 
-> 执行下面操作，遇到问题时，亲，请你别慌，可以在下面结尾的 问题与解决方案 里面找找答案。
+> 执行下面操作，遇到问题时，可以在文档结尾的 问题与解决方案 里面找找答案。
 
 ## 启动设置步骤
 
@@ -67,7 +67,7 @@ sidebar_position: 3
 
 最后选择 `Beijing Time` （北京时间），输入`1`，时区会被系统自动固定为 `Asia/Shanghai`。
 
-![image-20250808174958730](images/image-20250808174958730.png)
+![image-20251201151809155](images/image-20251201151809155.png)
 
 正常情况也是按照这个进行设置即可。设置完成后，系统会自动进入root用户，我们也可以重新启动。
 
@@ -76,27 +76,11 @@ sidebar_position: 3
 - **问题：在屏幕上如何进行设置呢？**
   - **解决方案：** 接上鼠标、键盘，和上面的设置是一样的。设置完成后，会进入如下桌面：
 
-    ![image-20250808175737643](images/image-20250808175737643.png)
-
-- **问题：启动系统之后，隔一段时间，系统无反应**
-  - **解决方案：** 这是系统进入了挂起状态，选择下面其中一个解决方案。
-    1. **重新启动系统：** 断电重新启动系统，即可短暂解决挂起问题。
-    2. **关闭挂起功能：** 在桌面上找到 **设置settings**，接着找到 **电源Power**，参考下图关闭挂起功能。
-    
-    ![image-20250808180618944](images/image-20250808180618944.png)
-    
-    3. **命令行关闭挂起功能：** 打开终端，执行以下指令：
-
-    ~~~bash
-    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
-    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout 0
-    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
-    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
-    ~~~
+    ![image-20251201151250366](images/image-20251201151250366.png)
 
 
 - **问题：第一次拿到板子，进入系统，发现直接提示需要输入用户名和密码，与上面文档操作不符**
-  - **解决方案：** 正常现象，别慌！选择下面其中一个解决方案。
-  
+  - **解决方案：** 正常现象，选择下面其中一个解决方案。
     1. **重新烧录镜像：** 参考烧录教程，重新烧录镜像，即可进入上面文档的操作步骤一样的界面。
-    2. **输入root与root密码：** 说明目前只有一个root用户，输入用户名root，密码1234或者100ask，都试试。
+    2. **输入root与root密码：** 说明目前只有一个root用户，输入用户名root，密码100ask。
+
