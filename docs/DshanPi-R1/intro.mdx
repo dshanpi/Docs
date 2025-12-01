@@ -2,23 +2,23 @@
 sidebar_position: 0
 ---
 
-# DshanPi-R1介绍
+# DshanPi-R1+ 介绍
 
-DshanPi-A1 聚焦 AI 教育场景，以“单板计算机  + 专题项目（付费）”的一体化形态，为从入门到高阶的教学需求提供可持续演进的软硬件生态。
-提供中高端性能 SBC 体验，包括 PCIe、USB3.0、双千兆、HDMI、HDMI-IN、DP等丰富的接口。
+DshanPi-R1+ 提供中高端性能 SBC 体验，包括 PCIe、USB3.0、双千兆、HDMI等丰富的接口。
 
 :::tip
 - 源码仓库：https://github.com/dshanpi/
 - QQ交流群：798273638
-- 商品链接：https://detail.tmall.com/item.htm?id=953384132961
-- 镜像站点：https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/
+- 商品链接：[DShanPi-R1+](https://detail.tmall.com/item.htm?abbucket=2&id=862472411027&mi_id=00007EzWN63NZuNRhmNOKXzCUZhjNk9eKGlf3iK1YlGk5OQ&ns=1&priceTId=2150489f17645779278947485e0e76&skuId=6037094570300&spm=a21n57.1.hoverItem.10&utparam=%7B%22aplus_abtest%22%3A%22dae92bd3a6614310bc40fa47a72554b2%22%7D&xxc=taobaoSearch)
+- 镜像站点：https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/
 :::
 
 
-## DShanPl-A1 Education
+## DshanPi-R1+ Education
 
-DShanPl-A1 Education专为人工智能教育及项目开发深度优化，基于瑞芯微的RK3576处理器设计，集成了4个Cortex-A72和4个Cortex-A53及支持NEON指令集,支持8K@30fps的H.265,VP9AVS2
-和 AV1解码器,4k@60fps的H.264解码器和4K@60fps的AV1解码器;还支持4K@60fps的H.264和H.265编码器。内置3D GPU,能够完全兼容OpenGl ES1.1/2.0/3.2、0penCL2.0和Vulkan 1.1。内嵌的NPU算力高达6TopS,支持INT4/INT8/INT16/FP16混合运算。
+DshanPi-R1+ Education 基于瑞芯微的RK3568处理器设计，集成了4个Cortex-A55及支持NEON指令集，支持4K@60fps的H.265、VP9和H.264解码器。
+还支持1080p@60fps的H.264和H.265编码器。内置Mali-G52 GPU，能够完全兼容OpenGL ES 1.1/2.0/3.2、OpenCL 2.0和Vulkan 1.1。
+内嵌的NPU算力高达1TOPS，支持INT8/INT16/FP16混合运算。
 
 
 import Tabs from '@theme/Tabs';
@@ -26,7 +26,7 @@ import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="apple" label="正面功能示意图" default>
-    ![DshanPi-A1-StructureDiagram](images/10001.jpg)
+    ![DshanPi-A1-StructureDiagram](images/DshanPI-R1+.jpg)
   </TabItem>
   <TabItem value="orange" label="背面功能示意图">
     ![DshanPi-A1-StructureDiagram](images/10002.jpg)
@@ -38,9 +38,9 @@ import TabItem from '@theme/TabItem';
 
 ### 规格参数
 <details>
-<summary>DshanPI-A1 Education RK3576 SBC详细规格参数介绍： </summary>
+<summary>DshanPi-R1+ Education RK3568 SBC详细规格参数介绍： </summary>
 <div>
-![DshanPi-A1-StructureDiagram](images/10003.jpg)
+![DshanPi-A1-StructureDiagram](images/DshanPI-R1+.jpg)
 </div>
 </details>
 
@@ -48,36 +48,21 @@ import TabItem from '@theme/TabItem';
 
 ✅: 支持—  ❌: 暂不支持 —  🚫: 无计划支持   —⚠：支持但未完整测试
 
-| 系统版本       | Armbian  | Buildroot  | OpenWrt-LEDE | ArchLinux  | OpenEuler | Fedora |
-|--------------------|-------------------|----------------|---------------|--------------------|------------------------|---------------------|
-| SPI            | ✅                | ✅             | ✅            | ✅                 | ✅                     | ✅                  |
-| I2C            | ✅                | ✅             | ✅            | ✅                 | ✅                     | ✅                  |
-| PWM            | ✅                | ✅             | ✅            | ✅                 | ✅                     | ✅                  |
-| UART           | ✅                | ✅             | ✅            | ✅                 | ✅                     | ✅                  |
-| MMC            | ✅                | ✅             | ✅            | ✅                 | ❌                     | ✅                  |
-| GPIO           | ✅                | ✅             | ✅            | ✅                 | ✅                     | ✅                  |
-| NPU            | ✅                | ✅             | ⚠            | ✅                 | ❌                     | ❌                  |
-| USB2.0         | ✅                | ✅             | ✅            | ✅                 | ❌                     | ❌                  |
-| USB3.0         | ✅                | ✅             | ✅            | ✅                 | ❌                     | ❌                  |
-| PCI-e         | ✅                | ✅             | ✅            | ✅                 | ❌                    | ❌                  |
-| 视频编码       | ✅                | ✅             | ✅            | ❌                 | ❌                     | ❌                  |
-| 视频解码       | ✅                | ✅             | ✅            | ❌                 | ❌                     | ❌                  |
-| MIPI CSI       | ❌                | ✅             | ❌            | ❌                 | ❌                     | ❌                  |
-| Audio          | ✅                | ✅             | ❌            | ❌                 | ❌                     | ❌                  |
-| WIFI           | ✅                | ✅             | ✅            | ✅                 | ❌                     | ❌                  |
-
-
-## DShanPl-R1+
-
-:::tip
-进度：批量生产中
-:::
-
-<details>
-<summary>DshanPI-R1+ RK3568 SBC 产品图： </summary>
-<div>
-![DshanPi-A1-StructureDiagram](images/DshanPI-R1+.jpg)
-</div>
-</details>
-
+| 系统版本       | Armbian  | Buildroot  | OpenWrt |
+|--------------------|-------------------|----------------|---------------|
+| SPI            | ✅                | ✅             | ✅            |
+| I2C            | ✅                | ✅             | ✅            |
+| PWM            | ✅                | ✅             | ✅            |
+| UART           | ✅                | ✅             | ✅            |
+| MMC            | ✅                | ✅             | ✅            |
+| GPIO           | ✅                | ✅             | ✅            |
+| NPU            | ✅                | ✅             | ✅           |
+| USB2.0         | ✅                | ✅             | ✅            |
+| USB3.0         | ✅                | ✅             | ✅            |
+| PCI-e         | ✅                | ✅             | ✅            |
+| 视频编码       | ✅                | ✅             | ✅            |
+| 视频解码       | ✅                | ✅             | ✅            |
+| MIPI CSI       | ❌                | ❌             | ❌            |
+| Audio          | ✅                | ✅             | ❌            |
+| WIFI           | ✅                | ❌             | ✅            |
 
