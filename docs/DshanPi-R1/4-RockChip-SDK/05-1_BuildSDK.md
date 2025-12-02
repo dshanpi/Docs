@@ -8,7 +8,7 @@ sidebar_position: 1
 
 ---
 
-## 1. 📥 获取开发环境
+## 1. 获取开发环境
 
 为了方便开发者快速上手，我们提供了一个已经配置好 Buildroot SDK 环境的 Ubuntu 虚拟机镜像。
 
@@ -24,7 +24,7 @@ sidebar_position: 1
 
 ---
 
-## 2. 🚀 编译 SDK
+## 2. 编译 SDK
 
 ### 2.1 准备工作
 
@@ -135,7 +135,7 @@ ls -l
 
 ---
 
-## 3. 📖 SDK 命令详解
+## 3. SDK 命令详解
 
 `build.sh` 是 Rockchip SDK 的核心构建脚本，支持多种参数。
 

@@ -1,186 +1,166 @@
 ---
 sidebar_position: 8
 ---
-# ADB功能使用指南
+# ADB 功能使用指南
 
-本章节将讲解如何在 DShanPi-R1 上测试 ADB 功能。
+本章节将讲解如何在 DShanPi-R1 上测试 ADB (Android Debug Bridge) 功能。
 
 ## 准备工作
 
-**硬件准备：**
+| 项目 | 名称 | 数量 | 说明 |
+| :--- | :--- | :--- | :--- |
+| **硬件** | DShanPi-R1 开发板 | 1 | - |
+| | Type-C 数据线 | 1 | 需支持数据传输 |
+| | USB 转串口模块 | 1 | - |
+| | 电源适配器 | 1 | - |
+| **软件** | MobaXterm | - | 串口终端工具 |
 
-- DShanPi-R1板卡 x1
-- TypeC线 x1 
-- USB转串口模块 x1
-- 电源适配器 x1
+## ADB 简介
 
-**软件准备：**
-
-- 终端工具 MobaXterm
-
-## 前言
-
-ADB，全称为 **Android Debug Bridge**，是一个用于与安卓设备进行通信和调试的命令行工具，但现在不仅仅是 安卓设备，在嵌入式开发中，很多 Linux 设备也同样支持 adb 调试，例如 Rockchip 平台。可以使用这个工具在Ubuntu上登录终端，也可以在Windows上登录终端。下面将分别讲解。
+:::info 什么是 ADB？
+ADB (Android Debug Bridge) 是一个用于与设备进行通信的通用命令行工具。虽然名字中带有 "Android"，但在嵌入式 Linux 开发中（如 Rockchip 平台），ADB 也是非常常用的调试工具，支持通过 USB 或网络进行 shell 登录、文件传输等操作。
+:::
 
 ## 硬件连接
 
-使用一根可传输数据的TypeC线，连接板卡如下位置：
+使用 Type-C 数据线连接开发板的 OTG 接口（通常用于 ADB 调试）和电脑。
 
-![image-20251126112250485](images/image-20251126112250485.png)
+![硬件连接示意图](images/image-20251126112250485.png)
 
-## 连接ADB终端
+## 连接 ADB 终端
 
-### Ubuntu下使用ADB
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-#### 连接adb设备
+<Tabs>
+  <TabItem value="ubuntu" label="Ubuntu 环境" default>
 
-打开VMware，进入ubuntu系统，点击虚拟机。
+  ### 1. 连接设备至虚拟机
+  
+  打开 VMware，确保开发板通过 USB 连接到虚拟机中的 Ubuntu 系统。
+  
+  1.  点击虚拟机菜单栏的 **"可移动设备"**。
+  2.  找到开发板对应的 ADB 设备（通常显示为 Google 或 Rockchip 设备）。
+  3.  选择 **"连接 (断开与主机的连接)"**。
 
-![image-20241105195130647](images/image-20241105195130647.png)
+  ![连接至虚拟机](images/image-20241106092533580.png)
 
-找到板卡的ADB端口，断开与主机(windows)的连接连接至ubuntu。
+  ### 2. 安装 ADB 工具
+  
+  在 Ubuntu 终端中执行以下指令安装 ADB：
 
-![image-20241106092533580](images/image-20241106092533580.png)
+  ```bash
+  sudo apt update
+  sudo apt install adb
+  ```
 
-#### 下载adb工具
+  验证安装是否成功：
 
-在ubuntu上，执行快捷键 `ctrl + alt + t` 打开终端。执行以下指令，下载adb工具。
+  ```bash
+  adb version
+  # 输出示例: Android Debug Bridge version 1.0.39 ...
+  ```
 
-~~~bash
-sudo apt update
-sudo apt install adb
-~~~
+  ### 3. 验证连接与登录
+  
+  查看已连接的设备：
 
-下载完成后，执行以下指令，查看是否下载成功，
+  ```bash
+  adb devices
+  ```
+  
+  **输出示例：**
+  ```text
+  List of devices attached
+  cca7b8659f061daf	device
+  ```
 
-~~~bash
-ubuntu@ubuntu2004:~$ adb version
-Android Debug Bridge version 1.0.39
-Version 1:8.1.0+r23-5ubuntu2
-Installed as /usr/lib/android-sdk/platform-tools/adb
-ubuntu@ubuntu2004:~$ 
-~~~
+  如果显示 `device`，则表示连接正常。执行以下指令登录系统：
 
-使用adb登录之前，执行以下指令，查看是否能列出开发板设备并且是否可用。
+  ```bash
+  adb shell
+  ```
 
-~~~bash
-ubuntu@ubuntu2004:~$ adb devices
-List of devices attached
-cca7b8659f061daf	device
+  ![登录成功](images/image-20241106094025975.png)
 
-ubuntu@ubuntu2004:~$
-~~~
+  </TabItem>
+  <TabItem value="windows" label="Windows 环境">
 
-#### 登录系统
+  ### 1. 检查设备管理器
+  
+  将开发板连接至电脑（确保未被虚拟机占用），打开 **设备管理器**，应能看到 ADB 设备。
 
-看到有设备列出，并且显示`device`，表示设备连接正常。确认无误之后，执行以下指令，使用adb登录系统。
+  ![设备管理器](images/image-20241106095952459.png)
 
-~~~
-adb shell
-~~~
+  ### 2. 下载与配置 ADB
+  
+  1.  **下载工具**：访问 [ADB 官方下载页面](https://developer.android.google.cn/tools/releases/platform-tools?hl=zh-cn) 下载 Windows 版本。
+  2.  **解压**：下载后解压得到 `platform-tools` 文件夹。
+  3.  **配置环境变量**：
+      *   复制 `platform-tools` 文件夹的完整路径。
+      *   右键 **此电脑** -> **属性** -> **高级系统设置** -> **环境变量**。
+      *   在 **系统变量** 中找到 `Path`，点击 **编辑** -> **新建**。
+      *   粘贴刚才复制的路径，点击 **确定** 保存。
 
-![image-20241106094025975](images/image-20241106094025975.png)
+  ![配置环境变量](images/image-20241106103404840.png)
 
-### Windows下使用ADB
+  ### 3. 验证连接与登录
+  
+  按 `Win + R` 打开运行对话框，输入 `cmd` 打开命令提示符。
 
-#### 连接adb设备
+  查看已连接的设备：
 
-当板卡otg接口通过TypeC线接上电脑之后，默认是连接至windows，如果之前选择了默认连接至ubuntu，需要断开ubuntu，连接至主机(windows)
+  ```cmd
+  adb devices
+  ```
 
-![image-20241106095818946](images/image-20241106095818946.png)
+  ![CMD输出](images/image-20241106112229678.png)
 
-断开之后，可以在设备管理器，看到有adb设备显示。
+  如果显示 `device`，则表示连接正常。执行以下指令登录系统：
 
-![image-20241106095952459](images/image-20241106095952459.png)
+  ```cmd
+  adb shell
+  ```
 
-#### 下载adb工具
+  </TabItem>
+</Tabs>
 
-想要在windows上使用adb，与在ubuntu使用是类似，需要下载adb工具，进入官网 [adb下载](https://developer.android.google.cn/tools/releases/platform-tools?hl=zh-cn)，
+## ADB 文件互传
 
-![image-20241106100623906](images/image-20241106100623906.png)
+ADB 提供了强大的文件传输功能，主要通过 `push` 和 `pull` 命令实现。
 
-下载完成后，解压，得到一个 `platform-tools`文件，复制该文件夹路径，添加至环境变量。
+### 1. 推送文件 (PC -> 开发板)
 
-![image-20241106101112634](images/image-20241106101112634.png)
+使用 `adb push` 将本地文件发送到开发板。
 
-进入此电脑，鼠标右键选择属性
-
-![image-20241106102047742](images/image-20241106102047742.png)
-
-找到 `高级系统设置`，点击进入。
-
-![image-20241106102347978](images/image-20241106102347978.png)
-
-选择环境变量。
-
-![image-20241106102431624](images/image-20241106102431624.png)
-
-在系统变量里，找到 `Path`选项，点击编辑。
-
-![image-20241106103044132](images/image-20241106103044132.png)
-
-选择 `新建`，
-
-![image-20241106103220930](images/image-20241106103220930.png)
-
-把之前复制的文件夹路径粘贴上去，最后点击确定。
-
-![image-20241106103404840](images/image-20241106103404840.png)
-
-设置好环境变量之后，快捷键`win + r`，输入 `cmd` 运行对话框，执行 `adb devices`，
-
-![image-20241106112229678](images/image-20241106112229678.png)
-
-#### 登录系统
-
-看到有设备列出，并且显示`device`，表示设备连接正常。确认无误之后，执行以下指令，使用adb登录系统。
-
-~~~bash
-adb shell
-~~~
-
-![image-20241106112330654](images/image-20241106112330654.png)
-
-## ADB文件互传
-
-ADB（Android Debug Bridge）提供 主机端 与 设备端 之间的：
-
-- 📤 **文件上传（PC → 设备）**
-- 📥 **文件下载（设备 → PC）**
-
-主要使用：
-
-- `adb push`（推送文件到设备）
-- `adb pull`（从设备拉取文件）
-
-常用的基本指令如下：
-
-**主机 → 设备： `adb push`**
-
-```
+**语法：**
+```bash
 adb push <本地路径> <设备路径>
 ```
 
-例子：
-
-```
+**示例：**
+```bash
+# 将当前目录下的 demo.txt 发送到开发板的 /sdcard/ 目录
 adb push demo.txt /sdcard/
+
+# 将 my.apk 发送到 /data/local/tmp/
 adb push ./my.apk /data/local/tmp/
-adb push build/output.bin /data/
 ```
 
-**设备 → 主机： `adb pull`**
+### 2. 拉取文件 (开发板 -> PC)
 
-```
+使用 `adb pull` 将开发板上的文件复制到本地。
+
+**语法：**
+```bash
 adb pull <设备路径> <本地路径>
 ```
 
-例子：
-
-```
+**示例：**
+```bash
+# 将开发板 /sdcard/demo.txt 复制到当前目录 (.)
 adb pull /sdcard/demo.txt .
-adb pull /data/logs/log.txt ./logs/
-adb pull /system/build.prop ./backup/
-```
 
-上面例子中，点 `.` 表示当前目录。
+# 将日志文件复制到本地 logs 目录
+adb pull /data/logs/log.txt ./logs/
+```

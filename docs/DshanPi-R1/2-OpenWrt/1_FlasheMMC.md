@@ -37,7 +37,7 @@ sidebar_position: 2
 
 | 软件名称 | 说明 | 下载链接 |
 | :--- | :--- | :--- |
-| **OpenWrt 系统镜像** | DShanPi-R1+ OpenWrt 系统镜像 | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/Images/openwrt/istoreos-rockchip-armv8-100ask_dshanpi-r1-ext4-sysupgrade.img.gz) |
+| **OpenWrt 系统镜像** | DShanPi-R1+ OpenWrt 系统镜像 | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/Images/openwrt/immortalwrt-rockchip-armv8-100ask_dshanpi-r1-ext4-sysupgrade.img.gz) |
 | **RKDevTool** | 瑞芯微烧录工具 (v3.32) | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/Tools/RKDevTool_Release_v3.32.zip) |
 | **DriverAssitant** | 驱动安装工具包 (v5.1.1) | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/Tools/DriverAssitant_v5.1.1.zip) |
 | **引导固件** | DShanPi-R1+ 引导固件 (SPL Loader) | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/Images/openwrt/rk356x_spl_loader_v1.16.112.bin) |
@@ -64,6 +64,7 @@ sidebar_position: 2
 
 :::danger 关键步骤
 **请务必按照顺序操作：**
+
 1.  先连接 USB 数据线。
 2.  **按住 MASKROM 按键不放**。
 3.  再接上电源。
@@ -80,7 +81,7 @@ sidebar_position: 2
 
 打开 **RKDevTool** 烧录工具，参考下图进行配置：
 
-![image-20250821092501879](images/image-20250821092501879.png)
+![image-20251202150309904](images/image-20251202150309904.png)
 
 请按照以下步骤仔细配置烧录选项：
 
@@ -93,7 +94,7 @@ sidebar_position: 2
     *   选择之前下载的 **`rk356x_spl_loader_v1.16.112.bin`** 文件。
 6.  **加载系统镜像 (System)**：
     *   点击第二行（System）最右侧的路径选择框。
-    *   选择之前下载并解压得到的 **`openWrt_xxx.img`** 文件。
+    *   选择之前下载并解压得到的 **`xxx.img`** 文件。
 7.  **强制按地址写**：勾选右侧的 **`强制按地址写`** 选项。
 8.  **开始烧录**：
     *   确保底部状态栏显示 **发现一个MASKROM设备**。
@@ -103,19 +104,18 @@ sidebar_position: 2
 开始烧录后，请耐心等待。烧录工具右侧会显示进度，直到出现 **下载完成** 字样，即表明烧录完成。
 :::
 
-![image-20250908180142142](images/image-20250908180142142.png)
+![image-20251202150440731](images/image-20251202150440731.png)
 
-### 3. 启动日志 (可选)
+### 3. 启动日志 
 
 烧录完成后，开发板会自动重启并进入系统。如果连接了串口调试工具，可以看到类似的启动日志：
 
-![image-20250908180559252](images/image-20250908180559252.png)
+![image-20251202162800272](images/image-20251202162800272.png)
 
 ## 常见问题与解决方案
 
 <details>
 <summary>执行烧录操作后，烧录工具没有显示 MASKROM 设备？</summary>
-
 **解决方案：**
 
 1.  **检查驱动**：确保已正确安装 DriverAssitant 驱动。

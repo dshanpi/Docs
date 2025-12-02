@@ -1,85 +1,121 @@
 ---
 sidebar_position: 1
 ---
-# Hello快速入门
+# Hello 快速入门
 
-本章节将讲解如何在DShanPi-R1Buildroot系统上 运行helloworld程序。
+本章节将讲解如何在 DShanPi-R1 Buildroot 系统上编译并运行第一个程序：Hello World。
 
-## 编译工具准备
+## 1. 交叉编译简介
 
-在 Ubuntu 中可以执行以下命令编译、执行：
+在 PC (Ubuntu) 上直接编译的程序无法在 ARM 开发板上运行，因为两者的指令集架构不同。
 
-~~~bash
-gcc -o hello hello.c
-./hello
-Hello, world!
-~~~
+:::info 为什么需要交叉编译？
+*   **PC (Ubuntu)**: 通常使用 x86/x64 架构。
+*   **开发板 (DShanPi-R1)**: 使用 ARM64 (aarch64) 架构。
 
-上述命令编译得到的可执行程序 hello 可以在 Ubuntu 中运行，但是如果把它放到 ARM板子上去，它是无法执行的。因为它是使用 gcc 编译的，是给 PC 机编译的，里面的机器指令是 x86 的。
+因此，我们需要使用 **交叉编译工具链**，在 PC 上生成适用于 ARM 开发板的可执行文件。
+:::
 
-我们要想给 ARM 板编译出 hello 程序，需要使用相应的交叉编译工具链。DShanPi-R1 Buildroot SDK的交叉编译工具是(实际路径不一定相同)：
+DShanPi-R1 Buildroot SDK 提供的交叉编译器路径通常如下（请根据实际 SDK 路径调整）：
 
-~~~bash
+```bash
 /home/ubuntu/100ask-rk3568_linux5.1_sdk/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc
-~~~
+```
 
-## 编写helloworld程序
+为方便使用，建议将编译器路径添加到环境变量，或设置别名。
 
-在 Ubuntu 上，编写一个`helloworld.c`代码，
+## 2. 编写代码
 
-~~~c
+在 Ubuntu 主机上创建一个名为 `helloworld.c` 的文件，内容如下：
+
+```c title="helloworld.c"
 #include <stdio.h>
 
 int main()
 {
-        printf("RK3568,Hello World!\n");
-        return 0;
+    printf("RK3568, Hello World!\n");
+    return 0;
 }
-~~~
+```
 
-## 编译代码
+## 3. 编译代码
 
-编写代码完成后，可以使用上面提到的交叉编译工具来进行编译，
+使用交叉编译器进行编译。
 
-~~~bash
+**命令示例：**
+
+```bash
+# 请将路径替换为您实际的 SDK 路径
 /home/ubuntu/100ask-rk3568_linux5.1_sdk/prebuilts/gcc/linux-x86/aarch64/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc helloworld.c -o helloworld
-~~~
+```
 
-可以看到helloworld程序的文件类型如下：
+**验证文件类型：**
 
-~~~bash
-ubuntu@ubuntu2004:~/appTest/helloworld$ file helloworld
+编译完成后，使用 `file` 命令检查生成的文件是否为 ARM64 格式：
+
+```bash
+file helloworld
+```
+
+**输出示例：**
+
+```text
 helloworld: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, for GNU/Linux 3.7.0, with debug_info, not stripped
-~~~
+```
 
-## 打开串口终端
+:::tip 提示
+看到 `ARM aarch64` 字样说明编译成功，该文件可以在开发板上运行。
+:::
 
-执行后面操作前，需要连接好串口终端。如果不清楚如何连接串口终端，可以先阅读《连接串口终端》章节。
+## 4. 上传与运行
 
-## 上传程序并运行
+### 准备工作
 
-板子启动后，通过adb工具上传可执行程序`helloworld`。这里上传至DShanPi-R1板子`/mnt/udisk/` 路径下，
+*   确保开发板已启动。
+*   确保已通过 ADB 连接开发板（参考 **ADB 功能使用指南**）。
+*   确保已连接串口终端（用于查看运行结果，参考 **连接串口终端**）。
 
-~~~bash
-ubuntu@ubuntu2004:~/appTest/helloworld$ ls
-helloworld  helloworld.c
-ubuntu@ubuntu2004:~/appTest/helloworld$ adb push helloworld /mnt/udisk/
+### 上传程序
+
+在 Ubuntu 主机上，使用 `adb push` 命令将编译好的程序上传到开发板的 `/mnt/udisk/` 目录。
+
+```bash
+adb push helloworld /mnt/udisk/
+```
+
+**输出示例：**
+```text
 helloworld: 1 file pushed. 3.8 MB/s (15416 bytes in 0.004s)
-ubuntu@ubuntu2004:~/appTest/helloworld$
-~~~
+```
 
-可以在开发板的`/mnt/udisk/`目录下，看到可执行程序`helloworld`
+### 运行程序
 
-~~~bash
-root@RK356X:/mnt/udisk# ls
-helloworld
-root@RK356X:/mnt/udisk#
-~~~
+在开发板的串口终端中，执行以下操作：
 
-运行如下：
+1.  **进入目录**：
 
-~~~bash
-root@RK356X:/mnt/udisk# ./helloworld
-RK3568,Hello World!
-root@RK356X:/mnt/udisk#
-~~~
+    ```bash
+    cd /mnt/udisk/
+    ```
+
+2.  **查看文件**：
+
+    ```bash
+    ls
+    # 应能看到 helloworld 文件
+    ```
+
+3.  **运行程序**：
+
+    ```bash
+    ./helloworld
+    ```
+
+    **运行结果：**
+    ```text
+    RK3568, Hello World!
+    ```
+
+:::success 成功
+如果终端打印出 `RK3568, Hello World!`，恭喜您，您已成功在 DShanPi-R1 上运行了第一个应用程序！
+:::

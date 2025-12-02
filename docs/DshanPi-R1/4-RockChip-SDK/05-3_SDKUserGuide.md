@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 
 ---
 
-## 🌰 U-Boot 开发
+## U-Boot 开发
 
 U-Boot 是嵌入式系统的引导加载程序。虽然 Rockchip 原生 U-Boot 对硬件支持已非常完善，但有时我们仍需进行定制。
 
@@ -88,7 +88,7 @@ U-Boot 是嵌入式系统的引导加载程序。虽然 Rockchip 原生 U-Boot �
 
 ---
 
-## 🐧 Kernel 开发
+## Kernel 开发
 
 内核开发主要涉及驱动程序的增减和设备树的修改，以适配特定的板载硬件。
 
@@ -148,7 +148,7 @@ U-Boot 是嵌入式系统的引导加载程序。虽然 Rockchip 原生 U-Boot �
 
 ---
 
-## 🛠️ Buildroot 开发
+## Buildroot 开发
 
 Buildroot 用于构建根文件系统（RootFS）。DshanPi-R1 SDK 默认使用 Buildroot 进行系统构建。
 
