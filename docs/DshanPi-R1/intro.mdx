@@ -2,67 +2,115 @@
 sidebar_position: 0
 ---
 
-# DshanPi-R1+ 介绍
+# DshanPi-R1+ 简介
 
-DshanPi-R1+ 提供中高端性能 SBC 体验，包括 PCIe、USB3.0、双千兆、HDMI等丰富的接口。
+**DshanPi-R1+** (RK3568) 是一款专为中高端性能需求设计的单板计算机 (SBC)。它集成了 **PCIe**、**USB 3.0**、**双千兆网口** 以及 **HDMI** 等丰富的高速接口，为您带来极致的连接与扩展体验。
 
-:::tip
-- 源码仓库：https://github.com/dshanpi/
-- QQ交流群：798273638
-- 商品链接：[DShanPi-R1+](https://detail.tmall.com/item.htm?abbucket=2&id=862472411027&mi_id=00007EzWN63NZuNRhmNOKXzCUZhjNk9eKGlf3iK1YlGk5OQ&ns=1&priceTId=2150489f17645779278947485e0e76&skuId=6037094570300&spm=a21n57.1.hoverItem.10&utparam=%7B%22aplus_abtest%22%3A%22dae92bd3a6614310bc40fa47a72554b2%22%7D&xxc=taobaoSearch)
-- 镜像站点：https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/
+---
+
+## 🌟 核心亮点
+
+<div className="row">
+  <div className="col col--6">
+    <div className="card-demo" style={{height: '100%', marginBottom: '20px'}}>
+      <div className="card" style={{height: '100%'}}>
+        <div className="card__header">
+          <h3>🔥 强劲核心</h3>
+        </div>
+        <div className="card__body">
+          <p>搭载 <strong>瑞芯微 RK3568</strong> 处理器</p>
+          <ul>
+            <li>四核 <strong>Cortex-A55</strong> 架构 (2.0GHz)</li>
+            <li>集成 <strong>1TOPS</strong> 算力 NPU (支持 INT8/INT16/FP16)</li>
+            <li>高效能耗比，适合边缘计算与 AI 应用</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div className="col col--6">
+    <div className="card-demo" style={{height: '100%', marginBottom: '20px'}}>
+      <div className="card" style={{height: '100%'}}>
+        <div className="card__header">
+          <h3>🎬 卓越视听</h3>
+        </div>
+        <div className="card__body">
+          <p>多媒体娱乐与商业显示的理想选择</p>
+          <ul>
+            <li>支持 <strong>4K@60fps</strong> 视频解码 (H.265/VP9/H.264)</li>
+            <li>支持 1080p@60fps 编码</li>
+            <li>Mali-G52 GPU (OpenGL ES 3.2 / Vulkan 1.1)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+:::tip 资源快速访问
+*   💻 **源码仓库**: [GitHub - dshanpi](https://github.com/dshanpi/)
+*   👥 **QQ 交流群**: `798273638`
+*   🛒 **购买链接**: [淘宝官方店](https://detail.tmall.com/item.htm?abbucket=2&id=862472411027&mi_id=00007EzWN63NZuNRhmNOKXzCUZhjNk9eKGlf3iK1YlGk5OQ&ns=1&priceTId=2150489f17645779278947485e0e76&skuId=6037094570300&spm=a21n57.1.hoverItem.10&utparam=%7B%22aplus_abtest%22%3A%22dae92bd3a6614310bc40fa47a72554b2%22%7D&xxc=taobaoSearch)
+*   💾 **镜像下载**: [下载中心](https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/)
 :::
 
+---
 
-## DshanPi-R1+ Education
-
-DshanPi-R1+ Education 基于瑞芯微的RK3568处理器设计，集成了4个Cortex-A55及支持NEON指令集，支持4K@60fps的H.265、VP9和H.264解码器。
-还支持1080p@60fps的H.264和H.265编码器。内置Mali-G52 GPU，能够完全兼容OpenGL ES 1.1/2.0/3.2、OpenCL 2.0和Vulkan 1.1。
-内嵌的NPU算力高达1TOPS，支持INT8/INT16/FP16混合运算。
-
+## 📸 产品图赏
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs>
-  <TabItem value="apple" label="正面功能示意图" default>
-    ![DshanPi-A1-StructureDiagram](images/DshanPI-R1+.jpg)
+<Tabs className="unique-tabs">
+  <TabItem value="front" label="正面视图" default>
+    <div style={{textAlign: 'center'}}>
+      <img src={require('./images/DshanPI-R1+.jpg').default} alt="正面功能示意图" style={{maxWidth: '100%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
+      <p style={{marginTop: '10px', color: '#888'}}><em>DshanPi-R1+ 正面接口布局</em></p>
+    </div>
   </TabItem>
-  <TabItem value="orange" label="背面功能示意图">
-    ![DshanPi-A1-StructureDiagram](images/10002.jpg)
+  <TabItem value="back" label="背面视图">
+    <div style={{textAlign: 'center'}}>
+      <img src={require('./images/10002.jpg').default} alt="背面功能示意图" style={{maxWidth: '100%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
+      <p style={{marginTop: '10px', color: '#888'}}><em>DshanPi-R1+ 背面接口布局</em></p>
+    </div>
   </TabItem>
-  <TabItem value="banana" label="产品宣传主图">
-    ![DshanPi-A1-StructureDiagram](images/10005.jpg)
+  <TabItem value="promo" label="产品宣传">
+    <div style={{textAlign: 'center'}}>
+      <img src={require('./images/10005.jpg').default} alt="产品宣传主图" style={{maxWidth: '100%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
+    </div>
   </TabItem>
 </Tabs>
 
-### 规格参数
+---
+
+## 🛠️ 规格与驱动支持
+
+### 📋 详细规格参数
+
 <details>
-<summary>DshanPi-R1+ Education RK3568 SBC详细规格参数介绍： </summary>
-<div>
-![DshanPi-A1-StructureDiagram](images/DshanPI-R1+.jpg)
-</div>
+  <summary style={{fontWeight: 'bold', cursor: 'pointer'}}>点击查看 DshanPi-R1+ (RK3568) 完整规格表</summary>
+  <div style={{textAlign: 'center', marginTop: '20px'}}>
+    <img src={require('./images/DshanPI-R1+.jpg').default} alt="规格参数" style={{maxWidth: '100%'}} />
+  </div>
 </details>
 
-### 系统支持的外设驱动
+### 🔌 系统驱动适配状态
 
-✅: 支持—  ❌: 暂不支持 —  🚫: 无计划支持   —⚠：支持但未完整测试
+我们致力于提供完善的系统支持。以下是各主流系统对外设的适配情况：
 
-| 系统版本       | Armbian  | Buildroot  | OpenWrt |
-|--------------------|-------------------|----------------|---------------|
-| SPI            | ✅                | ✅             | ✅            |
-| I2C            | ✅                | ✅             | ✅            |
-| PWM            | ✅                | ✅             | ✅            |
-| UART           | ✅                | ✅             | ✅            |
-| MMC            | ✅                | ✅             | ✅            |
-| GPIO           | ✅                | ✅             | ✅            |
-| NPU            | ✅                | ✅             | ✅           |
-| USB2.0         | ✅                | ✅             | ✅            |
-| USB3.0         | ✅                | ✅             | ✅            |
-| PCI-e         | ✅                | ✅             | ✅            |
-| 视频编码       | ✅                | ✅             | ✅            |
-| 视频解码       | ✅                | ✅             | ✅            |
-| MIPI CSI       | ❌                | ❌             | ❌            |
-| Audio          | ✅                | ✅             | ❌            |
-| WIFI           | ✅                | ❌             | ✅            |
+> ✅: 支持 | ❌: 暂不支持 | 🚫: 无计划支持 | ⚠: 测试中
 
+| 功能类别 | 功能 / 接口 | Armbian | Buildroot | OpenWrt | 备注 |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| **基础外设** | UART / GPIO / PWM | ✅ | ✅ | ✅ | 基础控制正常 |
+| | SPI / I2C | ✅ | ✅ | ✅ | 通讯接口正常 |
+| **存储与网络** | MMC (eMMC/TF) | ✅ | ✅ | ✅ | 存储读写正常 |
+| | USB 2.0 / 3.0 | ✅ | ✅ | ✅ | 高速传输正常 |
+| | PCIe | ✅ | ✅ | ✅ | 扩展正常 |
+| | WIFI | ✅ | ❌ | ✅ | 无线连接 |
+| **多媒体 & AI** | NPU (AI 加速) | ✅ | ✅ | ✅ | 1TOPS 算力 |
+| | 视频编解码 | ✅ | ✅ | ✅ | 4K 硬解支持 |
+| | Audio | ✅ | ✅ | ❌ | 音频输出 |
+| | MIPI CSI | ❌ | ❌ | ❌ | 摄像头接口 |
+
+<br/>

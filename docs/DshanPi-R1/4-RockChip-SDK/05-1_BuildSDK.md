@@ -1,88 +1,116 @@
 ---
 sidebar_position: 1
 ---
-# Buildroot系统构建
 
-本章节将讲解如何基于DshanPi-R1 Buildroot SDK快速构建系统镜像。
+# Buildroot 系统构建
 
-## 1. 获取虚拟机
+本章节将指导您如何基于 **DshanPi-R1 Buildroot SDK** 快速构建系统镜像。
 
-> 注意：提供的虚拟机包含了 Buildroot SDK，环境也已搭建好，Ubuntu默认版本是20.04，不要升级系统版本！！！
+---
 
-获取链接如下：
+## 1. 📥 获取开发环境
 
-https://pan.baidu.com/s/15M8zuHOwl_SITl6cSk_7Vg?pwd=eaax 提取码: eaax
+为了方便开发者快速上手，我们提供了一个已经配置好 Buildroot SDK 环境的 Ubuntu 虚拟机镜像。
 
-## 2. 编译SDK
+:::danger 重要提示
+*   提供的虚拟机基于 **Ubuntu 20.04**，环境已完全搭建好。
+*   **请勿升级系统版本**，否则可能导致编译环境被破坏。
+:::
 
-打开虚拟机，等待一会，进入登录界面（虚拟机用户名： **`ubuntu`** ，密码： **`ubuntu`** ），新建终端，执行以下命令，进入SDK根目录：
+:::tip 下载链接
+*   **百度网盘**: [点击下载](https://pan.baidu.com/s/15M8zuHOwl_SITl6cSk_7Vg?pwd=eaax)
+*   **提取码**: `eaax`
+:::
 
-~~~bash
-cd 100ask-rk3568_linux5.1_sdk/
-~~~
+---
 
-如下：
+## 2. 🚀 编译 SDK
 
-~~~bash
-.
-├── app
-├── buildroot
-├── build.sh -> device/rockchip/common/scripts/build.sh
-├── debian
-├── device
-├── docs
-├── envsetup.sh -> buildroot/build/envsetup.sh
-├── external
-├── kernel
-├── Makefile -> device/rockchip/common/Makefile
-├── output
-├── prebuilts
-├── README.md -> device/rockchip/common/README.md
-├── rkbin
-├── rkflash.sh -> device/rockchip/common/scripts/rkflash.sh
-├── rockdev -> output/firmware
-├── tools
-├── u-boot
-└── yocto
+### 2.1 准备工作
 
-14 directories, 5 files
-~~~
+1.  启动虚拟机，使用以下账户登录：
+    *   **用户名**: `ubuntu`
+    *   **密码**: `ubuntu`
+2.  打开终端，进入 SDK 根目录：
 
-编译SDK命令只需两条：
+    ```bash
+    cd 100ask-rk3568_linux5.1_sdk/
+    ```
 
-**① 选择板级配置文件**
+    <details>
+    <summary>查看 SDK 目录结构</summary>
 
-在SDK根目录下，执行以下命令，选择 **`rockchip_rk3568_dshanpi-r1_defconfig`** ：
+    ```bash
+    .
+    ├── app
+    ├── buildroot
+    ├── build.sh -> device/rockchip/common/scripts/build.sh
+    ├── debian
+    ├── device
+    ├── docs
+    ├── envsetup.sh -> buildroot/build/envsetup.sh
+    ├── external
+    ├── kernel
+    ├── Makefile -> device/rockchip/common/Makefile
+    ├── output
+    ├── prebuilts
+    ├── README.md -> device/rockchip/common/README.md
+    ├── rkbin
+    ├── rkflash.sh -> device/rockchip/common/scripts/rkflash.sh
+    ├── rockdev -> output/firmware
+    ├── tools
+    ├── u-boot
+    └── yocto
+    
+    14 directories, 5 files
+    ```
+    </details>
 
-~~~bash
+### 2.2 执行编译
+
+编译过程非常简单，只需两步操作：
+
+#### 步骤 ①：选择板级配置文件
+
+在 SDK 根目录下执行 `lunch` 命令：
+
+```bash
 ./build.sh lunch
-~~~
+```
 
-如下：
+在弹出的菜单中，选择 **`rockchip_rk3568_dshanpi-r1_defconfig`**。
 
-![image-20251125171429244](images/image-20251125171429244.png)
+![选择配置文件](images/image-20251125171429244.png)
 
-**② 编译SDK**
+#### 步骤 ②：开始全量编译
 
-继续在当前路径下，执行以下命令，编译SDK:
+继续执行以下命令开始编译：
 
-~~~bash
+```bash
 ./build.sh
-~~~
+```
 
-编译耗时因电脑性能而异，请耐心等待。完成后如下：
+:::info 编译时间
+编译耗时取决于您的电脑性能，请耐心等待。
+:::
 
-![image-20251125172012576](images/image-20251125172012576.png)
+编译成功后，您将看到类似如下的输出：
 
-编译完成，镜像将自动生成于路径 `output/update/Image/`。
+![编译成功](images/image-20251125172012576.png)
 
-~~~bash
+### 2.3 获取镜像
+
+编译完成后，所有镜像文件会自动生成在 `output/update/Image/` 目录下。
+
+```bash
 cd /home/ubuntu/100ask-rk3568_linux5.1_sdk/output/update/Image
-~~~
+ls -l
+```
 
-如下：
+<details>
+<summary>查看生成的镜像文件列表</summary>
 
-~~~bash
+```bash
 .
 ├── boot.img -> ../../../kernel/boot.img
 ├── MiniLoaderAll.bin -> ../../../u-boot/rk356x_spl_loader_v1.16.112.bin
@@ -98,48 +126,56 @@ cd /home/ubuntu/100ask-rk3568_linux5.1_sdk/output/update/Image
 └── userdata.img -> ../../firmware/userdata.img
 
 0 directories, 12 files
-~~~
+```
+</details>
 
-其中 `update.img` 正是用于烧录到 DshanPi-R1 的最终镜像。
+:::success 关键文件
+**`update.img`** 即为最终生成的系统镜像，可直接用于烧录到 DshanPi-R1 开发板。
+:::
 
-## 3. SDK命令使用
+---
 
-在SDK根目录下，执行以下命令，可以看到 `./build.sh` 的使用参数：
+## 3. 📖 SDK 命令详解
 
-~~~bash
+`build.sh` 是 Rockchip SDK 的核心构建脚本，支持多种参数。
+
+在 SDK 根目录下执行 `./build.sh help` 可查看完整帮助信息：
+
+```bash
 cd ~/100ask-rk3568_linux5.1_sdk/
 ./build.sh help
-~~~
+```
 
-如下：
+<details>
+<summary>点击查看完整命令参数说明</summary>
 
-~~~bash
+```bash
 Usage: build.sh [OPTIONS]
 Available options:
-chip               - choose chip
-defconfig          - choose defconfig
- *_defconfig       - switch to specified defconfig
+chip               - choose chip (选择芯片平台)
+defconfig          - choose defconfig (选择配置文件)
+ *_defconfig       - switch to specified defconfig (直接切换到指定配置)
     Available defconfigs:
-	rockchip_defconfig
-	rockchip_rk3566_evb2_lp4x_v10_32bit_defconfig
-	rockchip_rk3566_evb2_lp4x_v10_defconfig
-	rockchip_rk3568_dshanpi-r1_defconfig
-	rockchip_rk3568_evb1_ddr4_v10_32bit_defconfig
-	rockchip_rk3568_evb1_ddr4_v10_defconfig
-	rockchip_rk3568_uvc_evb1_ddr4_v10_defconfig
+    rockchip_defconfig
+    rockchip_rk3566_evb2_lp4x_v10_32bit_defconfig
+    rockchip_rk3566_evb2_lp4x_v10_defconfig
+    rockchip_rk3568_dshanpi-r1_defconfig
+    rockchip_rk3568_evb1_ddr4_v10_32bit_defconfig
+    rockchip_rk3568_evb1_ddr4_v10_defconfig
+    rockchip_rk3568_uvc_evb1_ddr4_v10_defconfig
  olddefconfig      - resolve any unresolved symbols in .config
  savedefconfig     - save current config to defconfig
- menuconfig        - interactive curses-based configurator
-kernel             - build kernel
-modules            - build kernel modules
+ menuconfig        - interactive curses-based configurator (图形化配置菜单)
+kernel             - build kernel (单独编译内核)
+modules            - build kernel modules (编译内核模块)
 linux-headers      - build linux-headers
 loader             - build loader (uboot|spl)
-uboot              - build u-boot
+uboot              - build u-boot (单独编译 U-Boot)
 spl                - build spl
 uefi               - build uefi
 wifibt             - build Wifi/BT
 rootfs             - build default rootfs
-buildroot          - build buildroot rootfs
+buildroot          - build buildroot rootfs (单独编译 Buildroot 文件系统)
 yocto              - build yocto rootfs
 debian             - build debian rootfs
 recovery           - build recovery
@@ -149,19 +185,19 @@ createkeys         - build secureboot root keys
 security_uboot     - build uboot with security paramter
 security_boot      - build boot with security paramter
 security_recovery  - build recovery with security paramter
-security_rootfs    - build rootfs and some relevant images with security paramter (just for dm-v)
-firmware           - generate and check firmwares
-updateimg          - build update image
+security_rootfs    - build rootfs and some relevant images with security paramter
+firmware           - generate and check firmwares (打包固件)
+updateimg          - build update image (生成 update.img)
 otapackage         - build OTA update image
 sdpackage          - build SDcard update image
 all                - build all basic image
 save               - save images and build info
-allsave            - build all & firmware & updateimg & save
-cleanall           - cleanup
+allsave            - build all & firmware & updateimg & save (默认选项：全编译并打包)
+cleanall           - cleanup (清理编译产物)
 post-rootfs        - trigger post-rootfs hook scripts
 shell              - setup a shell for developing
 help               - usage
 
 Default option is 'allsave'.
-~~~
-
+```
+</details>

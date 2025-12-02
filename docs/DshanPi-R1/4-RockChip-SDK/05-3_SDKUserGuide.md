@@ -1,188 +1,216 @@
 ---
 sidebar_position: 3
 ---
-# SDK开发指南
 
-本章节将讲解如何在RK的SDK-Linux5.10版本中进行 u-boot、kernel 和 buildroot单独编译与配置。默认已选择过板级配置文件，以下操作皆在ubuntu虚拟机里执行。
+# SDK 开发指南
 
-## U-boot使用
+本章节深入讲解如何在 **Rockchip Linux 5.10 SDK** 中对 **U-Boot**、**Kernel** 和 **Buildroot** 进行独立的配置与编译。
 
-### 配置u-boot
+:::info 前置条件
+*   所有操作默认在 **Ubuntu 虚拟机** 中执行。
+*   假设您已经完成了 SDK 的下载和基础环境搭建（参考 [Buildroot系统构建](./05-1_BuildSDK.md)）。
+*   **默认已执行过板级配置文件选择** (`./build.sh lunch`)。
+:::
 
-u-boot是一个引导加载程序，用于初始化硬件并引导操作系统。一般并不需要修改，RK对于原生的u-boot有了完善的支持，例如初始化硬件，uboot会使用kernel的设备树来初始化。
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-如果需要修改u-boot，往往是修改相应处理器的uboot配置文件、设备树。例如rk3568处理器，配置文件是 u-boot/configs/rk3568_defconfig，设备树在 u-boot/arch/arm/dts/目录里。uboot配置文件可以在板级配置文件里查看需要修改那个文件。
+---
 
-#### uboot配置修改
+## 🌰 U-Boot 开发
 
-进入 SDK/u-boot/ 目录下，执行以下指令，打开配置界面，
+U-Boot 是嵌入式系统的引导加载程序。虽然 Rockchip 原生 U-Boot 对硬件支持已非常完善，但有时我们仍需进行定制。
 
-~~~bash
-cd /home/ubuntu/100ask-rk3568_linux5.1_sdk/u-boot/
-make rk3568_defconfig
-make menuconfig
-~~~
+<Tabs>
+  <TabItem value="config" label="配置 U-Boot" default>
 
-如下：
+    ### 修改 U-Boot 配置
+    
+    如果需要修改 U-Boot 的功能（如启动延时、命令支持等），请按以下步骤操作：
 
-![image-20250114120312921](images/image-20250114120312921.png)
+    1.  **进入 U-Boot 目录并加载默认配置**：
+        ```bash
+        cd /home/ubuntu/100ask-rk3568_linux5.1_sdk/u-boot/
+        make rk3568_defconfig
+        ```
 
-如果执行了修改，需要进行保存`Save` 然后 退出`Exit`。仅仅这样操作并不会修改 `rk3568_defconfig`，需要进行以下操作：
+    2.  **打开图形化配置菜单**：
+        ```bash
+        make menuconfig
+        ```
+        ![U-Boot Menuconfig](images/image-20250114120312921.png)
 
-~~~bash
-make savedefconfig
-cp defconfig configs/rk3568_defconfig
-~~~
+    3.  **保存配置**：
+        在菜单中修改完成后，选择 `<Save>` 保存并 `<Exit>` 退出。
+        
+        :::caution 注意
+        仅退出菜单不会永久保存更改到源码中。必须执行以下命令更新 `defconfig` 文件：
+        :::
 
-#### uboot设备树修改
+        ```bash
+        make savedefconfig
+        cp defconfig configs/rk3568_defconfig
+        ```
 
-如果需要修改设备树，在 SDK/u-boot/arch/arm/dts/ 目录下，找到相应的设备树文件进行修改，rk3568的设备树文件包含关系如下：
+    ### 修改设备树 (Device Tree)
+    
+    U-Boot 的设备树文件位于 `u-boot/arch/arm/dts/` 目录下。RK3568 的设备树包含关系如下：
 
-~~~bash
-rk3568-evb.dts
-	rk3568.dtsi
-		rk3568-pinctrl.dtsi
-	rk3568-u-boot.dtsi
-~~~
+    ```mermaid
+    graph LR
+    A[rk3568-evb.dts] --> B[rk3568.dtsi]
+    B --> C[rk3568-pinctrl.dtsi]
+    A --> D[rk3568-u-boot.dtsi]
+    ```
+    
+    *   **rk3568-evb.dts**: 主板级设备树
+    *   **rk3568.dtsi**: 芯片级通用配置
+    *   **rk3568-u-boot.dtsi**: U-Boot 特有配置
 
-### 编译uboot部分
+  </TabItem>
+  <TabItem value="compile" label="编译 U-Boot">
 
-RK的SDK源码，有提供一个编译脚本 `./build.sh`，我们可以根据脚本使用指令来查看如何编译u-boot。
+    ### 独立编译 U-Boot
 
-进入SDK源码根目录，执行以下指令，编译uboot：
+    Rockchip SDK 提供了便捷的编译脚本 `./build.sh`。
 
-~~~bash
-cd ~/100ask-rk3568_linux5.1_sdk
-./build.sh uboot
-~~~
+    在 **SDK 根目录** 下执行以下命令：
 
-## Kernel使用
+    ```bash
+    cd ~/100ask-rk3568_linux5.1_sdk
+    ./build.sh uboot
+    ```
 
-### 配置kernel
+    编译完成后，生成的镜像位于 `output/firmware/` 或 `u-boot/` 目录下。
 
-在kernel阶段，常常需要增减驱动、设备树节点，来适配板载硬件功能。kernel源码在 SDK/kernel/ 目录下。
+  </TabItem>
+</Tabs>
 
-![image-20251125173351111](images/image-20251125173351111.png)
+---
 
-####  修改内核配置
+## 🐧 Kernel 开发
 
-如果想对内核源码进行配置，例如把某个驱动编译进内核或者编译成模块，进入kernel源码目录，执行以下指令，打开内核的配置界面：
+内核开发主要涉及驱动程序的增减和设备树的修改，以适配特定的板载硬件。
 
-~~~bash
-cd /home/ubuntu/100ask-rk3568_linux5.1_sdk/kernel/
-make ARCH=arm64 menuconfig
-~~~
+<Tabs>
+  <TabItem value="config" label="配置 Kernel" default>
 
-执行后，会进入内核配置界面，如下：
+    ### 修改内核配置
+    
+    如果需要将某个驱动编译进内核（Built-in）或编译成模块（Module）：
 
-![image-20250114152615241](images/image-20250114152615241.png)
+    1.  **进入 Kernel 目录**：
+        ```bash
+        cd /home/ubuntu/100ask-rk3568_linux5.1_sdk/kernel/
+        ```
+        
+    2.  **打开图形化配置菜单**：
+        ```bash
+        make ARCH=arm64 menuconfig
+        ```
+        ![Kernel Menuconfig](images/image-20250114152615241.png)
 
-如果修改了内核配置信息，除了保存退出，还需要执行以下操作，否则编译时会复原为修改前的配置。
+    3.  **保存配置**：
+        修改完成后，需将配置保存回 `defconfig` 文件，防止下次编译时丢失：
 
-~~~bash
-cd /home/ubuntu/100ask-rk3568_linux5.1_sdk/kernel/
-make ARCH=arm64 savedefconfig
-cp defconfig arch/arm64/configs/rockchip_dshanpi-r1_linux_defconfig
-~~~
+        ```bash
+        make ARCH=arm64 savedefconfig
+        cp defconfig arch/arm64/configs/rockchip_dshanpi-r1_linux_defconfig
+        ```
 
-#### 内核设备树修改
+    ### 修改设备树
+    
+    DshanPi-R1 的内核设备树文件路径为：
+    
+    `SDK/kernel/arch/arm64/boot/dts/rockchip/rk3568-dshanpi-r1-linux.dts`
 
-设备树文件是 `rk3568-dshanpi-r1-linux.dts`，存放在 SDK/kernel/arch/arm64/boot/dts/rockchip/目录下
+    ```bash
+    ls kernel/arch/arm64/boot/dts/rockchip/rk3568-dshanpi-r1-linux.dts
+    ```
 
-~~~bash
-ubuntu@ubuntu2004:~/100ask-rk3568_linux5.1_sdk/kernel/arch/arm64/boot/dts/rockchip$ ls rk3568-dshanpi-r1-linux.dts 
-rk3568-dshanpi-r1-linux.dts
-~~~
+  </TabItem>
+  <TabItem value="compile" label="编译 Kernel">
 
-### 编译kernel部分
+    ### 独立编译 Kernel
 
-RK的SDK源码，有提供一个编译脚本 `./build.sh`，我们可以根据脚本使用指令来查看如何编译kernel。
+    在 **SDK 根目录** 下执行以下命令：
 
-进入SDK源码根目录，执行以下指令，编译kernel：
+    ```bash
+    cd ~/100ask-rk3568_linux5.1_sdk
+    ./build.sh kernel
+    ```
 
-~~~bash
-cd ~/100ask-rk3568_linux5.1_sdk
-./build.sh kernel
-~~~
+    *   生成的内核镜像 (`boot.img`) 将位于 `output/firmware/`。
+    *   设备树二进制文件 (`.dtb`) 将位于 `kernel/arch/arm64/boot/dts/rockchip/`。
 
-## Buildroot使用
+  </TabItem>
+</Tabs>
 
-### 配置buildroot
+---
 
-Buildroot 是一个开源工具，用于快速生成嵌入式 Linux 系统的根文件系统、内核和引导加载程序。RK的SDK里还有Yocto构建工具，默认是使用 Buildroot ，这里使用的也是 Buildroot。
+## 🛠️ Buildroot 开发
 
-Buildroot 的源码存放在 SDK/buildroot/ 目录底下，
+Buildroot 用于构建根文件系统（RootFS）。DshanPi-R1 SDK 默认使用 Buildroot 进行系统构建。
 
-![image-20251125173623978](images/image-20251125173623978.png)
+<Tabs>
+  <TabItem value="structure" label="目录结构" default>
+  
+    Buildroot 源码位于 `SDK/buildroot/` 目录下。核心目录说明如下：
 
-~~~bash
-├── arch               #存放与特定架构相关的代码和配置文件，例如不同处理器架构的支持。
-├── board              #包含特定硬件平台的支持文件和配置，用于定义特定板卡的构建过程和设置。
-├── boot               #包含与引导相关的文件和脚本，处理引导加载程序的构建和配置。
-├── build              #临时构建目录，用于存放构建过程中产生的中间文件。
-├── CHANGES
-├── Config.in          #配置文件，定义了可供选择的配置选项，并指定其依赖关系，通常用于配置菜单。
-├── Config.in.legacy
-├── configs            #包含预定义的配置文件（.config），适用于特定硬件或项目，可以通过这些文件快速开始构建。
-├── COPYING
-├── DEVELOPERS
-├── dl                 #下载目录，存放在构建过程中下载的软件包和源代码。
-├── docs			   #包含文档和说明，帮助理解和使用 Buildroot。
-├── fs				   #存放与文件系统相关的代码和配置。
-├── linux              #包含内核相关的配置和文件，支持构建 Linux 内核。
-├── Makefile           #主要的构建文件，定义了如何构建整个项目，包含构建流程的规则和目标。
-├── Makefile.legacy
-├── output             #存放最终构建结果，包括生成的根文件系统和其他产物的目录。
-├── package            #包含所有可用软件包的定义和构建信息，允许选择和集成不同的软件包。
-├── README
-├── support            #包含用于支持构建的工具和脚本，可能包括调试工具和测试脚本。
-├── system             #与系统级配置和服务相关的文件和设置。
-├── toolchain          #存放与工具链相关的文件和配置，包括交叉编译器的设置。
-└── utils              #实用工具和辅助脚本，用于支持构建过程或提供其他功能。
+    | 目录 | 说明 |
+    | :--- | :--- |
+    | **configs/** | 存放预定义的板级配置文件 (`*_defconfig`) |
+    | **board/** | 存放特定硬件平台的板级支持文件 (脚本、补丁等) |
+    | **package/** | 包含所有可用软件包的定义和构建规则 (如 `ffmpeg`, `qt5` 等) |
+    | **output/** | 存放构建产物 (镜像、文件系统、工具链) |
+    | **dl/** | 存放下载的源码包 (Download) |
 
-15 directories, 8 files
-~~~
+  </TabItem>
+  <TabItem value="config" label="配置 Buildroot">
 
-进入SDK源码根目录，
+    ### 修改 Buildroot 配置
+    
+    例如：添加新的软件包（Package）或修改系统设置。
 
-在当前目录下，执行以下操作，可以打开buildroot配置界面。
+    1.  **初始化环境并选择配置**：
+        在 **SDK 根目录** 下执行：
+        ```bash
+        cd ~/100ask-rk3568_linux5.1_sdk
+        source envsetup.sh
+        ```
+        在弹出的菜单中选择 `rockchip_rk3568_dshanpi-r1` (通常是编号对应选项)。
+        
+        ![Buildroot Selection](images/image-20251125173817444.png)
 
-~~~bash
-cd ~/100ask-rk3568_linux5.1_sdk
-source envsetup.sh
-~~~
+    2.  **进入配置菜单**：
+        ```bash
+        cd buildroot
+        make menuconfig
+        ```
+        ![Buildroot Menuconfig](images/image-20250114162538975.png)
 
-选择buildroot配置文件 `rockchip_rk3568_dshanpi-r1`：
+    3.  **保存配置**：
+        修改完成后，执行以下命令保存到默认配置文件：
 
-![image-20251125173817444](images/image-20251125173817444.png)
+        ```bash
+        make savedefconfig BR2_DEFCONFIG=configs/rockchip_rk3568_dshanpi-r1_defconfig
+        ```
 
-进入buildroot源码路径，执行以下指令：
+  </TabItem>
+  <TabItem value="compile" label="编译 Buildroot">
 
-~~~bash
-cd /home/ubuntu/100ask-rk3568_linux5.1_sdk/buildroot
-make menuconfig
-~~~
+    ### 独立编译 Buildroot
 
-执行后，会进入buildroot配置界面，如下：
+    在 **SDK 根目录** 下执行以下命令：
 
-![image-20250114162538975](images/image-20250114162538975.png)
+    ```bash
+    cd ~/100ask-rk3568_linux5.1_sdk
+    ./build.sh buildroot
+    ```
 
-可以在配置界面，选上一些需要的package等，配置完成后，选择保存`Save`，然后退出`Exit`。
+    :::tip 提示
+    编译 Buildroot 通常耗时较长，因为它需要下载并编译选定的所有软件包。
+    :::
 
-执行以下指令即可保存：
-
-~~~bash
-make savedefconfig BR2_DEFCONFIG=configs/rockchip_rk3568_dshanpi-r1_defconfig
-~~~
-
-### 编译buildroot部分
-
-RK的SDK源码，有提供一个编译脚本 `./build.sh`，我们可以根据脚本使用指令来查看如何编译buildroot。
-
-进入SDK源码根目录，执行以下指令，编译buildroot：
-
-~~~bash
-cd ~/100ask-rk3568_linux5.1_sdk
-./build.sh buildroot
-~~~
-
+  </TabItem>
+</Tabs>
