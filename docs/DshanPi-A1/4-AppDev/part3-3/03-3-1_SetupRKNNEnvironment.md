@@ -45,7 +45,7 @@ cd Projects
 # 下载 RKNN-Toolkit2 仓库
 git clone -b v2.3.2 https://github.com/airockchip/rknn-toolkit2.git
 # 下载 RKNN Model Zoo 仓库
-git clone -b v2.3.2 https://github.com/airockchip/rknn_model_zoo.git.
+git clone -b v2.3.2 https://github.com/airockchip/rknn_model_zoo.git
 ```
 
 如果无法通过git获取可访问下面的链接下载：
