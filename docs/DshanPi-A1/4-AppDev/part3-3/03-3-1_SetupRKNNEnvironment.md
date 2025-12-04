@@ -187,13 +187,18 @@ pip install -r arm64_requirements_cp38.txt
 ```
 CMAKE_ARGS="-DCMAKE_POLICY_DEFAULT_CMP0048=OLD -DCMAKE_POLICY_VERSION_MINIMUM=3.5"
 ```
-
-安装`pybind11`
-
+回到本地环境安装依赖包:
+```
+sudo apt-get update
+sudo apt-get install -y libcrypt-dev
+sudo apt-get install -y build-essential cmake protobuf-compiler libprotobuf-dev
+```
+回到rknn_toolkit2环境,安装`pybind11`
 ```
 export CPLUS_INCLUDE_PATH="$(python -c 'import pybind11; print(pybind11.get_include())'):${CPLUS_INCLUDE_PATH}"
 export CMAKE_PREFIX_PATH="$(python -c 'import pybind11; print(pybind11.get_cmake_dir())'):${CMAKE_PREFIX_PATH}"
-pip install --no-build-isolation --no-binary onnxoptimizer --force-reinstall onnxoptimizer
+cp /usr/include/crypt.h $CONDA_PREFIX/include/
+pip install --no-build-isolation --no-binary onnxoptimizer --force-reinstall  --no-cache-dir -v onnxoptimizer
 ```
 
 执行完成后重新执行：pip install -r arm64_requirements_cp38.txt
