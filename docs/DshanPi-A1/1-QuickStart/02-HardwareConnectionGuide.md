@@ -1,124 +1,134 @@
 ---
 sidebar_position: 2
 ---
+
 # 硬件连接指南
 
-## 首次启动
-:::tip
-本指南针对首次使用百问网 dshanpi-a1 开发板用户，结合各配套外设模块，详细阐述标准的接线与开机流程，确保系统能够安全、正常运行。
-首次启动请务必按照如下步骤操作，A1板内默认烧录为100ASK定制armbian系统，拿到手后初次启动要参考如下步骤连接硬件，之后阅读 首次启动初始化账号 页面 设置网络等基本信息。
+:::tip 提示
+本指南针对首次使用 **DshanPi-A1** 开发板的用户，详细阐述标准的接线与开机流程，确保系统能够安全、正常运行。
+
+开发板出厂默认烧录 **Armbian** 系统，请务必按照以下步骤完成硬件连接，再进行首次启动设置。
 :::
 
-```plaintext
-[电源适配器]---(Type-C接口)-->[dshanpi-a1开发板]<---(HDMI线)---[显示器]
-                                            |          |
-                                     [USB鼠标]   [USB键盘]
-                                     [TF/SD卡] (可选)
-                                     [以太网线] (可选)
-```                                     
+## 快速启动连接图
 
+```mermaid
+flowchart TD
+    Power["电源适配器"] -->|"Type-C 30W"| Board["DshanPi-A1 开发板"]
+    Board -->|"HDMI"| Monitor["显示器"]
+    Mouse["USB 鼠标"] -->|"USB"| Board
+    Keyboard["USB 键盘"] -->|"USB"| Board
+    Ethernet["网线"] -.->|"RJ45 (可选)"| Board
+    TFCard["TF/SD 卡"] -.->|"Slot (可选)"| Board
+```
 
-### 1. USB鼠标键盘连接
+## 基础硬件连接
 
-- 准备工作：请准备一套标准 USB 接口的鼠标和键盘（有线或无线均可，但无线需配 USB 接收器）。
-- 操作步骤：
-  - 将 USB 键盘和 USB 鼠标分别插入 dshanpi-a1 板上的 USB 接口（通常有多个 USB2.0/USB3.0端口可选）。
-  - 若为无线套装，将无线接收器插入任一 USB 接口即可。
-- 注意事项：
-  - 务必插牢，避免接触不良。
-  - 无法使用蓝牙鼠标键盘。
+### 1. 连接鼠标与键盘
 
-![DSC04493](images/connect-rk3576.png)
-![DSC04493](images/mousekey.png)
+*   **准备工作**：一套标准 USB 接口的鼠标和键盘（有线或无线均可）。
+*   **操作步骤**：
+    1.  将 USB 键盘和鼠标分别插入开发板的 USB 接口（支持 USB 2.0/3.0）。
+    2.  如果是无线键鼠套装，将无线接收器插入任一 USB 接口即可。
+*   **注意事项**：
+    *   暂不支持蓝牙键盘/鼠标在 BIOS/Bootloader 阶段使用。
+    *   请确保接口插紧，避免接触不良。
 
+<div style={{display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap'}}>
+  <img src={require('./images/connect-rk3576.png').default} alt="连接示意图" style={{maxWidth: '45%', borderRadius: '8px'}} />
+  <img src={require('./images/mousekey.png').default} alt="键鼠连接" style={{maxWidth: '45%', borderRadius: '8px'}} />
+</div>
 
-### 2. HDMI 连接
+### 2. 连接显示器 (HDMI)
 
-- **准备工作**：
-  - 1 根标准 HDMI 线；
-  - 1 台支持 HDMI 输入的显示器、电视或带 HDMI 输入的笔记本电脑（如有需要，也可用 USB 转 HDMI 模块作为中转适配）。
-- **操作步骤**：
-  1. 将 HDMI 线一端插入 dshanpi-a1 开发板的 HDMI 输出口；
-  2. 另一端插入显示设备的 HDMI 输入口；
-  3. 确保显示器已切换至正确 HDMI 通道，并处于开机状态。
-- **扩展说明**：
-  - 如需连接高清电视，建议使用高品质 HDMI 线确保信号稳定；
-  - 若使用 USB 转 HDMI，需先将 USB 插入板载 USB 口，HDMI 插到模块上。
+*   **准备工作**：
+    *   1 根标准 HDMI 线。
+    *   1 台支持 HDMI 输入的显示器或电视。
+*   **操作步骤**：
+    1.  将 HDMI 线的一端插入开发板的 **HDMI OUT** 接口。
+    2.  另一端连接至显示设备的 HDMI 输入口。
+    3.  开启显示器并切换至对应的 HDMI 信号源。
+*   **说明**：建议使用高质量 HDMI 线材以确保 4K/8K 画面传输稳定。
 
-准备一根 HDMI 线，接入 dshanpi-a1的 HDMI 接口（另一端可以连接电脑的 HDMI 接口或USB转HDMI模块的接口），连接接口如下：
+<img src={require('./images/DSC04484.JPG').default} alt="HDMI 连接" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px'}} />
 
-![DSC04484](images/DSC04484.JPG)
+### 3. 连接电源 (PD 30W)
 
-### 3. PD 电源适配器连接
+*   **推荐设备**：官方认证的 **30W PD 电源适配器**。
+*   **操作步骤**：
+    1.  确认所有外设（显示器、键鼠等）已连接完毕。
+    2.  将 Type-C 电源线插入开发板的 **Type-C 供电接口**。
+    3.  接通电源，开发板将自动启动。
+*   **⚠️ 警告**：
+    *   **严禁使用非 PD 协议或功率低于 30W 的电源适配器**，这可能导致系统不稳定或重启。
+    *   使用非官方电源适配器造成的硬件损坏不在保修范围内。
 
-- **推荐设备**：建议使用官方认证的 30W PD 电源适配器，确保供电稳定可靠。
-- **操作步骤**：
-  1. 使用电源适配器自带的 Type-C 线缆；
-  2. Type-C 一端插入 dshanpi-a1 板的 PD 供电接口；
-  3. 另一端插入电源适配器；
-  4. 插好适配器后接通电源，开发板即会自动启动。
+<img src={require('./images/DSC04493.JPG').default} alt="电源连接" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px'}} />
 
-- **注意事项**：
-  - 切勿用电流小于 30W 的非 PD 适配器，以免影响系统稳定性；
-  - 使用第三方 PD 电源适配器时请注意电压电流参数与官方一致（使用第三方PD电源导致板子硬件损坏不保修）。
-电源适配器推荐购买我们的 30W PD电源适配器，其他的没有测试过，连接接口如下：
+---
 
-![DSC04493](images/DSC04493.JPG)
+## 进阶硬件连接
 
-## 其他设备连接
-### 串口连接
+### 串口调试 (Serial Debug)
 
-串口debug引脚在 dshanpi-a1 扩展引脚上，我们需要借助 USB转TTL模块 来登录我们的串口终端，需要注意的是：
+通过 USB 转 TTL 模块连接开发板的调试串口，可用于底层调试和系统日志查看。
 
-- dshanpi-a1 的 **TX** 引脚需要接到 -》USB转TTL模块的 **RX** 引脚；
-- dshanpi-a1 的 **RX** 引脚需要接到 -》USB转TTL模块的 **TX** 引脚；
-- dshanpi-a1 的 **GND** 引脚需要接到 -》USB转TTL模块的 **GND** 引脚；
+**接线定义：**
 
-串口连接只需接这三根线即可，无需接上VCC引脚。扩展引脚参考如下：
+| DshanPi-A1 引脚 | USB 转 TTL 模块引脚 |
+| :---: | :---: |
+| **TX** | RX |
+| **RX** | TX |
+| **GND** | GND |
+| VCC | (无需连接) |
 
-![image-20250815181740800](images/image-20250815181740800.png)
+**引脚位置示意：**
 
-实物连接参考如下图：
+为了清晰展示引脚定义，请参考下图：
 
-![DSC04501](images/DSC04501.JPG)
+<img src={require('./images/image-20250815181740800.png').default} alt="引脚定义" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', border: '1px solid #eee'}} />
 
+**实物连接效果：**
 
+<img src={require('./images/DSC04501.JPG').default} alt="实物连接" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px'}} />
 
+### PCIe WiFi 模块安装
 
-### PCIE WiFi模块连接
+开发板背面预留了 M.2 Key-E 接口，支持安装 PCIe WiFi 6 模块。
 
-准备一块PCIE WiFi6模块，我们将需要接入到 dshanpi-a1 的 M.2 KEKY 接口上，如下：
+1.  **对准接口**：将模块金手指对准 M.2 插槽缺口插入。
+2.  **固定模块**：按下模块尾部，拧紧固定螺丝。
 
-![image-20250815183138116](images/image-20250815183138116.png)
+<div style={{display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap'}}>
+  <img src={require('./images/image-20250815183138116.png').default} alt="M.2 接口" style={{maxWidth: '45%', borderRadius: '8px'}} />
+  <img src={require('./images/DSC04479.JPG').default} alt="安装完成" style={{maxWidth: '45%', borderRadius: '8px'}} />
+</div>
 
-接入后，我们需要拧上螺丝，即可固定住 PCIE WiFi6模块。如下：
+### 散热器安装
 
-![DSC04479](images/DSC04479.JPG)
+为保证高性能运行时的稳定性，建议安装主动散热器。
 
-### 金属散热器连接
+1.  **对准孔位**：将散热器底座对准开发板上的两个安装孔。
+2.  **按压固定**：分别按下两个固定柱的卡扣，直至听到“咔哒”声。
+3.  **连接风扇**：将风扇电源线插入板载风扇接口（注意正负极防呆设计）。
 
-散热器连接参考实物图如下：
+<div style={{display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap'}}>
+  <img src={require('./images/image-20250815182521338.png').default} alt="对准孔位" style={{maxWidth: '45%', borderRadius: '8px'}} />
+  <img src={require('./images/DSC04465.JPG').default} alt="安装完成" style={{maxWidth: '45%', borderRadius: '8px'}} />
+</div>
 
-![DSC04463](images/DSC04463.JPG)
+### HDMI-IN 视频输入
 
-这里接口引脚需要对准位置，否则无法接入。
+DshanPi-A1 支持 **HDMI-IN** 功能，可作为视频采集卡使用。
 
-然后参考下图，散热器对准这两个孔。
+*   使用 Micro HDMI 转标准 HDMI 线缆，将 PC 或其他视频源连接至开发板的 **HDMI IN** 接口。
 
-![image-20250815182521338](images/image-20250815182521338.png)
+<img src={require('./images/DSC04498.JPG').default} alt="HDMI-IN 连接" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px'}} />
 
-分别按下两个固定柱，即可安装完成，如下图所示：
+### DP 显示输出 (Type-C)
 
-![DSC04465](images/DSC04465.JPG)
+开发板的 USB 3.0 OTG 接口支持 **DP Alt Mode**，可连接 Type-C 显示器或通过转接线连接 DP 显示器。
 
-###  HDMI-IN 连接
+*   将 Type-C 线缆一端插入开发板的 **USB 3.0 OTG** 接口，另一端连接显示设备。
 
-借助板载 HDMI-IN 接口，使用一根 MicroHDMI 线将 dshanpi-a1 与 PC 相连，即可把 PC 画面当作一路“虚拟摄像头”实时捕获，并随时录制、保存 PC 屏幕的全部内容（包括声音）。连接接口如下：
-
-![DSC04498](images/DSC04498.JPG)
-
-### DP 显示连接
-
-除了可以通过 HDMI 显示，还可以通过 DP 接口显示我们 dshanpi-a1 的桌面。准备一根 TYPeC DP 数据线，TYPeC一端接入 dshanpi-a1 的 usb3.0 otg 接口上，另一端接入显示屏的 DP 接口。连接接口如下：
-
-![DSC04497](images/DSC04497.JPG)
+<img src={require('./images/DSC04497.JPG').default} alt="DP 连接" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px'}} />

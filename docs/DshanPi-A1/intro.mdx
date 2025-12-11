@@ -2,82 +2,85 @@
 sidebar_position: 0
 ---
 
-# DshanPi-A1介绍
+# DshanPi-A1 Education
 
-DshanPi-A1 聚焦 AI 教育场景，以“单板计算机  + 专题项目（付费）”的一体化形态，为从入门到高阶的教学需求提供可持续演进的软硬件生态。
-提供中高端性能 SBC 体验，包括 PCIe、USB3.0、双千兆、HDMI、HDMI-IN、DP等丰富的接口。
+**赋能 AI 教育，定义高性能开发新标准**
 
-:::tip
-- 源码仓库：https://github.com/dshanpi/
-- QQ交流群：798273638
-- 商品链接：https://detail.tmall.com/item.htm?id=953384132961
-- 镜像站点：https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/
+**DshanPi-A1 Education** 是一款专为人工智能教育及高端项目开发量身打造的单板计算机 (SBC)。基于瑞芯微 **RK3576** 处理器，它以强大的算力和丰富的接口，为您提供从入门到高阶的可持续演进开发平台。
+
+<img src={require('./images/10005.jpg').default} alt="DshanPi-A1 主图" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '12px', boxShadow: '0 8px 16px rgba(0,0,0,0.15)'}} />
+
+---
+
+## 🚀 核心亮点
+
+:::info 强劲算力，AI 触手可及
+*   **8 核处理器**: 集成 4 个 Cortex-A72 和 4 个 Cortex-A53，兼顾高性能与低功耗。
+*   **6 TOPS NPU**: 内嵌高性能 NPU，支持 INT4/INT8/INT16/FP16 混合运算，轻松应对各类边缘 AI 推理任务。
+*   **卓越图形性能**: 内置 3D GPU，完全兼容 OpenGL ES1.1/2.0/3.2、OpenCL 2.0 和 Vulkan 1.1。
 :::
 
+:::tip 极致视听与连接
+*   **8K 超清解码**: 支持 8K@30fps (H.265/VP9/AVS2/AV1) 及 4K@60fps 解码。
+*   **4K 编解码**: 支持 4K@60fps H.264/H.265 编码及解码。
+*   **丰富接口**: 配备 **PCIe**、**USB 3.0**、**双千兆网口**、HDMI、HDMI-IN、DP 等高速接口，满足多样化扩展需求。
+:::
 
-## DShanPl-A1 Education
+## � 购买与交流
 
-DShanPl-A1 Education专为人工智能教育及项目开发深度优化，基于瑞芯微的RK3576处理器设计，集成了4个Cortex-A72和4个Cortex-A53及支持NEON指令集,支持8K@30fps的H.265,VP9AVS2
-和 AV1解码器,4k@60fps的H.264解码器和4K@60fps的AV1解码器;还支持4K@60fps的H.264和H.265编码器。内置3D GPU,能够完全兼容OpenGl ES1.1/2.0/3.2、0penCL2.0和Vulkan 1.1。内嵌的NPU算力高达6TopS,支持INT4/INT8/INT16/FP16混合运算。
+| 资源类型 | 链接 | 说明 |
+| :--- | :--- | :--- |
+| **购买渠道** | [淘宝店铺](https://detail.tmall.com/item.htm?id=953384132961) | 官方正品保证 |
+| **技术交流** | QQ群: `798273638` | 加入开发者社区 |
 
+---
+
+## 🔍 产品视图
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs>
-  <TabItem value="apple" label="正面功能示意图" default>
-    ![DshanPi-A1-StructureDiagram](images/10001.jpg)
+  <TabItem value="front" label="正面接口" default>
+    <img src={require('./images/10001.jpg').default} alt="正面功能示意图" style={{width: '100%', borderRadius: '8px'}} />
   </TabItem>
-  <TabItem value="orange" label="背面功能示意图">
-    ![DshanPi-A1-StructureDiagram](images/10002.jpg)
-  </TabItem>
-  <TabItem value="banana" label="产品宣传主图">
-    ![DshanPi-A1-StructureDiagram](images/10005.jpg)
+  <TabItem value="back" label="背面接口">
+    <img src={require('./images/10002.jpg').default} alt="背面功能示意图" style={{width: '100%', borderRadius: '8px'}} />
   </TabItem>
 </Tabs>
 
-### 规格参数
+## ⚙️ 详细规格
+
 <details>
-<summary>DshanPI-A1 Education RK3576 SBC详细规格参数介绍： </summary>
-<div>
-![DshanPi-A1-StructureDiagram](images/10003.jpg)
+<summary style={{fontWeight: 'bold', cursor: 'pointer'}}>点击查看 DshanPI-A1 Education 完整硬件规格表</summary>
+<div style={{textAlign: 'center', marginTop: '10px'}}>
+  <img src={require('./images/10003.jpg').default} alt="规格参数" style={{maxWidth: '100%', borderRadius: '8px', border: '1px solid #eee'}} />
 </div>
 </details>
 
-### 系统支持的外设驱动
+## 💻 系统与驱动支持
 
-✅: 支持—  ❌: 暂不支持 —  🚫: 无计划支持   —⚠：支持但未完整测试
+我们致力于提供广泛的开源系统支持，以下是各系统版本的驱动适配情况：
 
-| 系统版本       | Armbian  | Buildroot  | OpenWrt-LEDE | ArchLinux  | OpenEuler | Fedora |
-|--------------------|-------------------|----------------|---------------|--------------------|------------------------|---------------------|
-| SPI            | ✅                | ✅             | ✅            | ✅                 | ✅                     | ✅                  |
-| I2C            | ✅                | ✅             | ✅            | ✅                 | ✅                     | ✅                  |
-| PWM            | ✅                | ✅             | ✅            | ✅                 | ✅                     | ✅                  |
-| UART           | ✅                | ✅             | ✅            | ✅                 | ✅                     | ✅                  |
-| MMC            | ✅                | ✅             | ✅            | ✅                 | ❌                     | ✅                  |
-| GPIO           | ✅                | ✅             | ✅            | ✅                 | ✅                     | ✅                  |
-| NPU            | ✅                | ✅             | ⚠            | ✅                 | ❌                     | ❌                  |
-| USB2.0         | ✅                | ✅             | ✅            | ✅                 | ❌                     | ❌                  |
-| USB3.0         | ✅                | ✅             | ✅            | ✅                 | ❌                     | ❌                  |
-| PCI-e         | ✅                | ✅             | ✅            | ✅                 | ❌                    | ❌                  |
-| 视频编码       | ✅                | ✅             | ✅            | ❌                 | ❌                     | ❌                  |
-| 视频解码       | ✅                | ✅             | ✅            | ❌                 | ❌                     | ❌                  |
-| MIPI CSI       | ❌                | ✅             | ❌            | ❌                 | ❌                     | ❌                  |
-| Audio          | ✅                | ✅             | ❌            | ❌                 | ❌                     | ❌                  |
-| WIFI           | ✅                | ✅             | ✅            | ✅                 | ❌                     | ❌                  |
+> **图例说明**: ✅ 支持 | ❌ 暂不支持 | ⚠ 支持但未完整测试 | 🚫 无计划支持
 
+| 功能模块 | Armbian | Buildroot | OpenWrt | ArchLinux | OpenEuler | Fedora |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **SPI** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **I2C** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **PWM** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **UART** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **MMC** | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
+| **GPIO** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **NPU** | ✅ | ✅ | ⚠ | ✅ | ❌ | ❌ |
+| **USB 2.0** | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| **USB 3.0** | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| **PCI-e** | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| **视频编码** | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| **视频解码** | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| **MIPI CSI** | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Audio** | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **WIFI** | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
 
-## DShanPl-R1+
-
-:::tip
-进度：批量生产中
-:::
-
-<details>
-<summary>DshanPI-R1+ RK3568 SBC 产品图： </summary>
-<div>
-![DshanPi-A1-StructureDiagram](images/DshanPI-R1+.jpg)
-</div>
-</details>
-
+---
 

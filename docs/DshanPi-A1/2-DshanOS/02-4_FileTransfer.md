@@ -1,146 +1,109 @@
 ---
 sidebar_position: 3
 ---
-# 文件传输
 
-本章节将讲解百问网 dshanpi-a1 与不同设备间如何进行文件传输。
+# 文件传输指南
 
-## 与Windows主机进行文件传输
+:::tip 提示
+本章节将介绍如何在 **DshanPi-A1** 开发板与 **Windows/Linux/macOS** 主机之间高效地传输文件。
+:::
 
-在开发过程中，常常需要与Windows主机进行文件传输，这里将介绍两种方式：
+## 场景一：与 Windows 主机传输文件
 
-### 1. 通过MobaXterm实现文件传输
+在 Windows 环境下，我们推荐使用图形化工具，操作简单直观。
 
-通过之前对 MobaXterm 的使用可以发现，它是一款非常强大且功能丰富的终端工具。在使用 SSH 登录远程终端时，MobaXterm 还支持便捷的文件传输功能，具体操作参考如下：
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-进入 SSH 终端界面时，左侧会自动显示当前初始目录的文件：
+<Tabs>
+  <TabItem value="mobaxterm" label="方案 A：MobaXterm (推荐)" default>
 
-![image-20250811172951329](images/image-20250811172951329.png)
+  如果您已经使用 MobaXterm 进行 SSH 连接，那么文件传输功能已经内置其中，无需额外安装软件。
 
-勾上 `Follow terminal folder` ，无论在终端中切换到哪个路径，左侧都会自动同步显示该路径下的文件和文件夹内容。
+  **1. 自动同步目录**
+  登录 SSH 后，勾选左侧侧边栏上方的 `Follow terminal folder` 复选框。此时，左侧文件列表会自动跟随您在终端中的 `cd` 目录切换。
 
-![image-20250811173121162](images/image-20250811173121162.png)
+  <div style={{display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap'}}>
+  <img src={require('./images/image-20250811172951329.png').default} alt="Moba界面" style={{maxWidth: '45%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
+  <img src={require('./images/image-20250811173121162.png').default} alt="跟随目录" style={{maxWidth: '45%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
+  </div>
 
-选中需要传输的文件，点击 `下载` 蓝色箭头，选择Windows存放的路径，即可下载。
+  **2. 下载文件 (开发板 -> Windows)**
+  在左侧列表中选中文件，点击顶部的 **蓝色向下箭头** 图标，或直接**右键 -> Download**。
 
-![image-20250811173554317](images/image-20250811173554317.png)
+  <img src={require('./images/image-20250811173554317.png').default} alt="下载文件" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-从Windows主机上传文件，点击 `拉取` 绿色箭头即可上传文件（文件保存在当前路径下）。
+  **3. 上传文件 (Windows -> 开发板)**
+  点击顶部的 **绿色向上箭头** 图标，或直接将 Windows 桌面上的文件**拖拽**到左侧文件列表中。
 
-![image-20250811174121238](images/image-20250811174121238.png)
+  <div style={{display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap'}}>
+  <img src={require('./images/image-20250811174121238.png').default} alt="上传按钮" style={{maxWidth: '45%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
+  <img src={require('./images/image-20250811174752462.png').default} alt="拖拽上传" style={{maxWidth: '45%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
+  </div>
 
-MobaXterm传输文件的方式还可以通过直接拖拽的方式进行互传。
+  </TabItem>
 
-![image-20250811174752462](images/image-20250811174752462.png)
+  <TabItem value="filezilla" label="方案 B：FileZilla">
 
-> 如果发现，新增的文件没有在左边的显示框上，可以刷新一下。
+  [FileZilla](https://filezilla-project.org/download.php?type=client) 是一款专业的免费开源 FTP/SFTP 客户端。
 
-### 2. 通过FileZilla实现文件传输
+  **1. 建立连接**
+  打开 FileZilla，在顶部快速连接栏输入：
+  *   **主机**: 开发板 IP 地址 (如 `192.168.1.100`)
+  *   **用户名**: `root` 或 `baiwen`
+  *   **密码**: 对应的用户密码
+  *   **端口**: `22` (SFTP 协议默认端口)
 
-除了使用 MobaXterm，我们还可以通过 FileZilla 客户端工具来进行文件传输。FileZilla下载地址如下：
+  <img src={require('./images/image-20250811180059629.png').default} alt="FileZilla配置" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-[Download FileZilla Client for Windows (64bit x86)](https://filezilla-project.org/download.php?type=client)
+  **2. 传输文件**
+  连接成功后，左侧为**本地站点**，右侧为**远程站点**。直接双击文件或左右拖拽即可传输。
 
-![image-20250811175429055](images/image-20250811175429055.png)
+  <img src={require('./images/image-20250811180845418.png').default} alt="传输界面" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-打开 FileZilla 客户端工具，参考下图配置：
+  </TabItem>
+</Tabs>
 
-![image-20250811180059629](images/image-20250811180059629.png)
+---
 
-- ① 输入 dshanpi-a1 IP 地址；
-- ② 输入 dshanpi-a1 用户名；
-- ③ 输入 dshanpi-a1 用户密码；
-- ④ 输入端口号 22（通常是通过 sftp 协议【**SSH 文件传输协议**】来传输文件）；
-- ⑤ 点击快速连接。
+## 场景二：与 Linux/macOS 设备传输文件
 
-连接成功后，会提示 `是否信任`，选择 `总是信任` ：
+对于 Linux 或 macOS 用户，使用命令行工具 `scp` (Secure Copy) 是最高效的方式。
 
-![image-20250811180157887](images/image-20250811180157887.png)
-
-后续我们就可以通过拖拽或者双击的方式来互传文件。
-
-![image-20250811180845418](images/image-20250811180845418.png)
-
-## 与Linux、Mac设备进行文件传输
-
-这里推荐使用 **scp 来与Linux、Mac OS设备**来互传文件，一条指令即可完成文件互传。scp使用指令如下：
-
-~~~bash
-scp /path/to/local/file username@remote_mac_or_linux:/path/to/remote/directory/
-~~~
-
-反之，也可以从远程设备拷贝文件到本地：
+### 基本语法
 
 ```bash
-scp username@remote_mac_or_linux:/path/to/remote/file /path/to/local/directory/
+scp [选项] 源文件 目标路径
 ```
 
-- **`/path/to/local/file`：** 本地设备上的具体文件路径
-- **`username@remote_mac_or_linux:/path/to/remote/file`：** 远程设备上的具体文件路径。
-- **`/path/to/local/directory/`：** 地设备上的目标目录路径。
-- **`username@remote_mac_or_linux:/path/to/remote/directory/`：** 远程设备上的目标目录路径。
+### 常用操作示例
 
-> 注意：如果需要传输文件夹则需加 **`-r`** 参数递归复制整个文件夹。scp 在哪个设备使用，哪个设备就是本地设备。
+假设开发板 IP 为 `192.168.1.100`，用户名为 `baiwen`。
 
-scp使用举例如下：
+#### 1. 上传文件 (本地 -> 开发板)
 
-这里将与**用户名**为ubuntu、**IP地址**为192.168.1.67（该地址 dshanpi-a1能 ping 通）Linux设备进行互传文件。
+将本地当前目录下的 `app_test` 文件上传到开发板的 `~/downloads` 目录：
 
-从远程Linux设备获取文件到当前路径，在终端执行以下的命令：
+```bash
+scp ./app_test baiwen@192.168.1.100:~/downloads/
+```
 
-~~~bash
-scp ubuntu@192.168.1.67:/home/ubuntu/Documents/1.txt .
-~~~
+#### 2. 下载文件 (开发板 -> 本地)
 
-如下：
+将开发板上的 `/var/log/syslog` 日志文件下载到本地当前目录：
 
-~~~bash
-baiwen@dshanpi-a1:~/Downloads$ scp ubuntu@192.168.1.67:/home/ubuntu/Documents/1.txt .
-The authenticity of host '192.168.1.67 (192.168.1.67)' can't be established.
-ED25519 key fingerprint is SHA256:6u5vPdqrR9X2XtbR83HSI092UBrLPSN13Yx2o4SuaHc.
-This key is not known by any other names.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added '192.168.1.67' (ED25519) to the list of known hosts.
-ubuntu@192.168.1.67's password:
-1.txt                                                                          100%    7     0.5KB/s   00:00
-baiwen@dshanpi-a1:~/Downloads$ ls
-1.txt
-baiwen@dshanpi-a1:~/Downloads$ cat 1.txt
-100ask
-~~~
+```bash
+scp baiwen@192.168.1.100:/var/log/syslog .
+```
 
-反过来，从本地Linux设备发送文件到远程设备：
+#### 3. 传输文件夹
 
-~~~bash
-scp ./2.txt ubuntu@192.168.1.67:/home/ubuntu/Documents/
-~~~
+传输文件夹需要加上 **`-r`** (recursive) 参数。例如上传 `src` 文件夹：
 
-如下：
+```bash
+scp -r ./src baiwen@192.168.1.100:~/workspace/
+```
 
-~~~bash
-baiwen@dshanpi-a1:~/Downloads$ touch 2.txt
-baiwen@dshanpi-a1:~/Downloads$ scp ./2.txt ubuntu@192.168.1.67:/home/ubuntu/Documents/
-ubuntu@192.168.1.67's password:
-2.txt                                                                          100%    0     0.0KB/s   00:00
-~~~
-
-如果需要发送文件夹，如下：
-
-~~~bash
-baiwen@dshanpi-a1:~/Downloads$ mkdir 100ask
-baiwen@dshanpi-a1:~/Downloads$ scp -r ./100ask ubuntu@192.168.1.67:/home/ubuntu/Documents/
-ubuntu@192.168.1.67's password:
-baiwen@dshanpi-a1:~/Downloads$
-~~~
-
-反之：
-
-~~~bash
-baiwen@dshanpi-a1:~/Downloads$ scp -r ubuntu@192.168.1.67:/home/ubuntu/Documents/dshanpi ~/Downloads/
-ubuntu@192.168.1.67's password:
-baiwen@dshanpi-a1:~/Downloads$ ls
-100ask  1.txt  2.txt  dshanpi
-baiwen@dshanpi-a1:~/Downloads$
-~~~
-
-
+:::warning 注意
+首次连接某个 IP 时，终端会询问 `Are you sure you want to continue connecting (yes/no)?`，请输入 `yes` 并回车确认，随后输入密码即可开始传输。
+:::
