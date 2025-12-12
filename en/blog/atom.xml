@@ -8,85 +8,6 @@
     <subtitle>东山Π Blog</subtitle>
     <icon>https://wiki.dshanpi.org/en/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[DshanPI-A1 RK3576 armbian远程桌面]]></title>
-        <id>https://wiki.dshanpi.org/en/blog/DshanPI-A1 RK3576 armbian远程桌面/DshanPI-A1 RK3576 armbian远程桌面</id>
-        <link href="https://wiki.dshanpi.org/en/blog/DshanPI-A1 RK3576 armbian远程桌面/DshanPI-A1 RK3576 armbian远程桌面"/>
-        <updated>2025-11-08T09:09:45.000Z</updated>
-        <summary type="html"><![CDATA[背景与问题]]></summary>
-        <content type="html"><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="背景与问题">背景与问题<a href="https://wiki.dshanpi.org/en/blog/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2#%E8%83%8C%E6%99%AF%E4%B8%8E%E9%97%AE%E9%A2%98" class="hash-link" aria-label="Direct link to 背景与问题" title="Direct link to 背景与问题" translate="no">​</a></h3>
-<ul>
-<li class="">
-<p>使用设备：DshanPI-A1，搭载 Armbian 系统，窗口系统为 Wayland，GPU 采用开源驱动。</p>
-</li>
-<li class="">
-<p>初始尝试：使用 NoMachine 实现远程桌面，但存在两个问题：</p>
-</li>
-</ul>
-<ol>
-<li class="">
-<p>默认创建虚拟桌面，而非物理桌面；</p>
-</li>
-<li class="">
-<p>对 Wayland 支持不佳，会以兼容模式开启 X11 桌面，导致 OpenGL 无法调用 GPU 加速。</p>
-</li>
-</ol>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="解决方案使用-armbian-自带远程桌面">解决方案：使用 Armbian 自带远程桌面<a href="https://wiki.dshanpi.org/en/blog/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%BD%BF%E7%94%A8-armbian-%E8%87%AA%E5%B8%A6%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2" class="hash-link" aria-label="Direct link to 解决方案：使用 Armbian 自带远程桌面" title="Direct link to 解决方案：使用 Armbian 自带远程桌面" translate="no">​</a></h3>
-<ol>
-<li class="">
-<p><strong>安装必要环境</strong></p>
-<p>由于系统默认未预装远程桌面组件，先通过命令安装：</p>
-</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install gnome-remote-desktop</span><br></span></code></pre></div></div>
-<ol start="2">
-<li class=""><strong>配置远程桌面</strong></li>
-</ol>
-<ul>
-<li class="">
-<p>重启设置窗口（关闭后重新打开），依次进入 <code>Settings → System → Remote Desktop</code>。</p>
-</li>
-<li class="">
-<p>勾选 <code>Desktop Sharing</code>（桌面共享）和 <code>Remote Control</code>（远程控制）。</p>
-</li>
-<li class="">
-<p>初始密码为随机生成，需手动修改为自定义密码。</p>
-<p><img decoding="async" loading="lazy" alt="set" src="https://wiki.dshanpi.org/en/assets/images/set-0ab7e51436a587e4c9ad7984e1898ccd.png" width="1006" height="661" class="img_ev3q"></p>
-</li>
-</ul>
-<ol start="3">
-<li class=""><strong>连接与验证</strong></li>
-</ol>
-<ul>
-<li class="">
-<p>在 Windows 端打开「远程桌面连接」，输入设备 IP、用户名及密码。</p>
-</li>
-<li class="">
-<p>首次登录可能黑屏，重启设备后连接成功。</p>
-<p><img decoding="async" loading="lazy" alt="remote" src="https://wiki.dshanpi.org/en/assets/images/remote-ee2a7ab6fedbfcc41c66aad0fc9e5ffc.png" width="1920" height="1080" class="img_ev3q"></p>
-</li>
-</ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="功能验证">功能验证<a href="https://wiki.dshanpi.org/en/blog/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2#%E5%8A%9F%E8%83%BD%E9%AA%8C%E8%AF%81" class="hash-link" aria-label="Direct link to 功能验证" title="Direct link to 功能验证" translate="no">​</a></h3>
-<p>通过命令测试 GPU 加速是否正常：</p>
-<ul>
-<li class="">
-<p>执行 <code>glxinfo -B</code>，输出显示 Mali GPU 信息（OpenGL 支持正常）；</p>
-<p><img decoding="async" loading="lazy" alt="opengl" src="https://wiki.dshanpi.org/en/assets/images/opengl-e7396ca1af43b845717bc8a2dc0e409a.png" width="1072" height="745" class="img_ev3q"></p>
-</li>
-<li class="">
-<p>执行 <code>es2_info</code>，同样检测到 Mali GPU（OpenGLES 支持正常）。</p>
-<p><img decoding="async" loading="lazy" alt="opengles" src="https://wiki.dshanpi.org/en/assets/images/opengles-96533f698426cf0075b60b1e4a315dfb.png" width="1067" height="744" class="img_ev3q"></p>
-</li>
-</ul>
-<p>结论：远程桌面可正常调用 GPU 加速，满足需求。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="参考资料">参考资料<a href="https://wiki.dshanpi.org/en/blog/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99" class="hash-link" aria-label="Direct link to 参考资料" title="Direct link to 参考资料" translate="no">​</a></h3>
-<ul>
-<li class="">
-<p>《Armbian 25.5.1 Noble Gnome 开启远程桌面功能》</p>
-<p>（<a href="https://blog.csdn.net/u013833472/article/details/149032655" target="_blank" rel="noopener noreferrer" class="">https://blog.csdn.net/u013833472/article/details/149032655</a>）</p>
-</li>
-</ul>]]></content>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[DshanPI-A1 RK3576 gmrender-resurrect B站投屏]]></title>
         <id>https://wiki.dshanpi.org/en/blog/DshanPI-A1 RK3576 gmrender-resurrect B站投屏/DshanPI-A1 RK3576 gmrender-resurrect B站投屏</id>
         <link href="https://wiki.dshanpi.org/en/blog/DshanPI-A1 RK3576 gmrender-resurrect B站投屏/DshanPI-A1 RK3576 gmrender-resurrect B站投屏"/>
@@ -170,6 +91,85 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="七补充恢复-pulseaudio-服务如需">七、补充：恢复 PulseAudio 服务（如需）<a href="https://wiki.dshanpi.org/en/blog/DshanPI-A1%20RK3576%20gmrender-resurrect%20B%E7%AB%99%E6%8A%95%E5%B1%8F/DshanPI-A1%20RK3576%20gmrender-resurrect%20B%E7%AB%99%E6%8A%95%E5%B1%8F#%E4%B8%83%E8%A1%A5%E5%85%85%E6%81%A2%E5%A4%8D-pulseaudio-%E6%9C%8D%E5%8A%A1%E5%A6%82%E9%9C%80" class="hash-link" aria-label="Direct link to 七、补充：恢复 PulseAudio 服务（如需）" title="Direct link to 七、补充：恢复 PulseAudio 服务（如需）" translate="no">​</a></h2>
 <p>若后续需要使用 PulseAudio，执行以下命令解除屏蔽：</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">systemctl --user unmask pulseaudio</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">systemctl --user unmask pulseaudio.socket</span><br></span></code></pre></div></div>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[DshanPI-A1 RK3576 armbian远程桌面]]></title>
+        <id>https://wiki.dshanpi.org/en/blog/DshanPI-A1 RK3576 armbian远程桌面/DshanPI-A1 RK3576 armbian远程桌面</id>
+        <link href="https://wiki.dshanpi.org/en/blog/DshanPI-A1 RK3576 armbian远程桌面/DshanPI-A1 RK3576 armbian远程桌面"/>
+        <updated>2025-11-08T09:09:45.000Z</updated>
+        <summary type="html"><![CDATA[背景与问题]]></summary>
+        <content type="html"><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="背景与问题">背景与问题<a href="https://wiki.dshanpi.org/en/blog/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2#%E8%83%8C%E6%99%AF%E4%B8%8E%E9%97%AE%E9%A2%98" class="hash-link" aria-label="Direct link to 背景与问题" title="Direct link to 背景与问题" translate="no">​</a></h3>
+<ul>
+<li class="">
+<p>使用设备：DshanPI-A1，搭载 Armbian 系统，窗口系统为 Wayland，GPU 采用开源驱动。</p>
+</li>
+<li class="">
+<p>初始尝试：使用 NoMachine 实现远程桌面，但存在两个问题：</p>
+</li>
+</ul>
+<ol>
+<li class="">
+<p>默认创建虚拟桌面，而非物理桌面；</p>
+</li>
+<li class="">
+<p>对 Wayland 支持不佳，会以兼容模式开启 X11 桌面，导致 OpenGL 无法调用 GPU 加速。</p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="解决方案使用-armbian-自带远程桌面">解决方案：使用 Armbian 自带远程桌面<a href="https://wiki.dshanpi.org/en/blog/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%BD%BF%E7%94%A8-armbian-%E8%87%AA%E5%B8%A6%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2" class="hash-link" aria-label="Direct link to 解决方案：使用 Armbian 自带远程桌面" title="Direct link to 解决方案：使用 Armbian 自带远程桌面" translate="no">​</a></h3>
+<ol>
+<li class="">
+<p><strong>安装必要环境</strong></p>
+<p>由于系统默认未预装远程桌面组件，先通过命令安装：</p>
+</li>
+</ol>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">sudo apt install gnome-remote-desktop</span><br></span></code></pre></div></div>
+<ol start="2">
+<li class=""><strong>配置远程桌面</strong></li>
+</ol>
+<ul>
+<li class="">
+<p>重启设置窗口（关闭后重新打开），依次进入 <code>Settings → System → Remote Desktop</code>。</p>
+</li>
+<li class="">
+<p>勾选 <code>Desktop Sharing</code>（桌面共享）和 <code>Remote Control</code>（远程控制）。</p>
+</li>
+<li class="">
+<p>初始密码为随机生成，需手动修改为自定义密码。</p>
+<p><img decoding="async" loading="lazy" alt="set" src="https://wiki.dshanpi.org/en/assets/images/set-0ab7e51436a587e4c9ad7984e1898ccd.png" width="1006" height="661" class="img_ev3q"></p>
+</li>
+</ul>
+<ol start="3">
+<li class=""><strong>连接与验证</strong></li>
+</ol>
+<ul>
+<li class="">
+<p>在 Windows 端打开「远程桌面连接」，输入设备 IP、用户名及密码。</p>
+</li>
+<li class="">
+<p>首次登录可能黑屏，重启设备后连接成功。</p>
+<p><img decoding="async" loading="lazy" alt="remote" src="https://wiki.dshanpi.org/en/assets/images/remote-ee2a7ab6fedbfcc41c66aad0fc9e5ffc.png" width="1920" height="1080" class="img_ev3q"></p>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="功能验证">功能验证<a href="https://wiki.dshanpi.org/en/blog/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2#%E5%8A%9F%E8%83%BD%E9%AA%8C%E8%AF%81" class="hash-link" aria-label="Direct link to 功能验证" title="Direct link to 功能验证" translate="no">​</a></h3>
+<p>通过命令测试 GPU 加速是否正常：</p>
+<ul>
+<li class="">
+<p>执行 <code>glxinfo -B</code>，输出显示 Mali GPU 信息（OpenGL 支持正常）；</p>
+<p><img decoding="async" loading="lazy" alt="opengl" src="https://wiki.dshanpi.org/en/assets/images/opengl-e7396ca1af43b845717bc8a2dc0e409a.png" width="1072" height="745" class="img_ev3q"></p>
+</li>
+<li class="">
+<p>执行 <code>es2_info</code>，同样检测到 Mali GPU（OpenGLES 支持正常）。</p>
+<p><img decoding="async" loading="lazy" alt="opengles" src="https://wiki.dshanpi.org/en/assets/images/opengles-96533f698426cf0075b60b1e4a315dfb.png" width="1067" height="744" class="img_ev3q"></p>
+</li>
+</ul>
+<p>结论：远程桌面可正常调用 GPU 加速，满足需求。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="参考资料">参考资料<a href="https://wiki.dshanpi.org/en/blog/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99" class="hash-link" aria-label="Direct link to 参考资料" title="Direct link to 参考资料" translate="no">​</a></h3>
+<ul>
+<li class="">
+<p>《Armbian 25.5.1 Noble Gnome 开启远程桌面功能》</p>
+<p>（<a href="https://blog.csdn.net/u013833472/article/details/149032655" target="_blank" rel="noopener noreferrer" class="">https://blog.csdn.net/u013833472/article/details/149032655</a>）</p>
+</li>
+</ul>]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[DshanPI-A1 RK3576 gstreamer播放16路视频与硬件加速]]></title>
