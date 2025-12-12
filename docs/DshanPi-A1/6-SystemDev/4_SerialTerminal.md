@@ -1,80 +1,80 @@
 ---
 sidebar_position: 4
 ---
+
 # 串口访问终端
 
-在本章节中，我们将详细讲解如何配置和使用 MobaXterm 作为功能强大的串口终端工具。我们将一步步引导您完成从准备工作到成功建立通信的全过程。
+:::tip 提示
+本章节将指导您如何配置和使用 **MobaXterm** 串口终端工具，与 DshanPi-A1 建立稳定的串行通信连接。
+:::
 
-## 获取MobaXerm工具
+## 1. 准备工作
 
-我们可以在主机windows上选择下载 MobaXterm 的 **安装包** 或者 **便携包**（如果主机是macOS/Linux，推荐 WindTerm）。MobaXterm 官方下载地址如下：
+### 1.1 获取 MobaXterm
 
-[MobaXterm Xserver with SSH, telnet, RDP, VNC and X11 - Home Edition](https://mobaxterm.mobatek.net/download-home-edition.html)
+**MobaXterm** 是一款功能强大的全能型终端软件，支持 SSH、串口、VNC 等多种协议。
+对于 Windows 用户，我们推荐下载 **Portable edition (便携版)**，无需安装，解压即用。
 
-这里我们下载的是免费版本，已足够我们日常开发使用。下面有 Portable edition（便携包）和 Installer edition（安装包）：
+*   **官方下载地址**：[MobaXterm Home Edition](https://mobaxterm.mobatek.net/download-home-edition.html)
 
-![image-20250808110010419](images/image-20250808110010419.png)
+<img src={require('./images/image-20250808110010419.png').default} alt="MobaXterm下载页面" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-根据个人需求，选择其中一个下载即可（不知道安装哪个的，不要犹豫，就下载便携包，即下即用免安装）。
+:::info macOS/Linux 用户
+如果您使用的是 macOS 或 Linux 系统，推荐使用 **WindTerm** 或 **Minicom** 作为替代工具。
+:::
 
-## 连接前的检查
+### 1.2 确认串口设备
 
-根据前面连接串口之后，打开 **设备管理器**，展开 **“端口 (COM和LPT)”** 分类，我们可以看到类似如下端口号（记住它，后面有大用）：
+将 USB 转串口模块连接到电脑后，请打开 **设备管理器**，查看端口号。
 
-![image-20250808111937052](images/image-20250808111937052.png)
+1.  **打开设备管理器**：右键点击“开始”菜单 -> 设备管理器。
+2.  **查看端口**：展开 **“端口 (COM 和 LPT)”** 列表。
+3.  **确认端口号**：找到对应的 USB Serial 设备（如 `USB-SERIAL CH340`），并记下其端口号（例如 `COM144`）。
 
-- **USB-SERIAL CH340 ：** 就是我们使用的USB转串口模块（如 CH340, CP2102等）。
-- **COM144：** 这个是电脑识别到USB转串口模块 **自动随机分配** 的端口号。
+<img src={require('./images/image-20250808111937052.png').default} alt="设备管理器查看端口" style={{display: 'block', margin: '20px auto', maxWidth: '60%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-> **注意！！！**
-> 如果这里没有显示对应的端口号，需要检查如下：
-> ①主机系统是否是window11以上，是则会自动安装USB转串口模块对应的驱动；如果是windows11以下，需要安装对应的驱动（怎么安装？安装驱动精灵或者前往对应官网手动下载驱动）。
-> ②串口在硬件上是否连接正确（如果不知道怎么连接，可以完完全全参考我们的连接教程）。
+:::warning 驱动安装提示
+如果在设备管理器中未发现端口，或设备显示黄色感叹号：
+1.  **检查连接**：确保 USB 线连接牢固。
+2.  **安装驱动**：Windows 10/11 通常会自动安装驱动。如果未安装，请下载并安装 **CH340** 或 **CP2102** 驱动（根据您的模块型号）。
+:::
 
-## MobaXterm配置步骤
+## 2. 配置 MobaXterm
 
-准备工作就绪后，请按照以下步骤在 MobaXterm 中配置串口会话（这里以百问网 dshanpi-a1(RK3576) 为例）：
+### 2.1 创建新会话
 
-### 1. 启动新会话
+打开 MobaXterm，点击左上角的 **`Session` (会话)** 按钮，或者使用快捷键 `Ctrl + Shift + N`。
 
-打开 MobaXterm ，点击左上角的 **`会话 (Session)`** 按钮，或使用快捷键 **`Ctrl+Shift+N`**，如下图所示：
+<img src={require('./images/image-20250808115942583.png').default} alt="创建新会话" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-![image-20250808115942583](images/image-20250808115942583.png)
+### 2.2 设置串口参数
 
-### 2. 选择会话类型
+在弹出的会话设置窗口中，选择 **`Serial` (串口)** 标签页，并进行如下配置：
 
-MobaXterm 这个工具比较强大，支持很多会话类型（如SSH、Serial、VNC等）。这里我们需要选择 **`串口 (Serial)`** 图标、做相应的配置，如下所示：
+1.  **Serial port (串口号)**：选择在设备管理器中看到的端口号（如 `COM144`）。
+2.  **Speed (波特率)**：设置为 **`1500000`** (1.5M)。
+    *   *注意：DshanPi-A1 (RK3576) 的默认调试波特率为 1500000。*
+3.  **Flow control (流控)**：点击 "Advanced Serial settings" (高级串口设置) 查看，通常默认为 **None**，无需更改。确保不要勾选 RTS/CTS 硬件流控。
 
-![image-20250808144728518](images/image-20250808144728518.png)
+<img src={require('./images/image-20250808144728518.png').default} alt="配置串口参数" style={{display: 'block', margin: '20px auto', maxWidth: '60%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-- ① 选择 **`串口 (Serial)`** 图标；
-- ② 从下拉菜单中选择记下的 COM 端口号（如COM144）；
-- ③ 设置数据传输的速率。此值必须与目标设备的波特率设置一致（以百问网 dshanpi-a1(RK3576) 为例，波特率是1500000）；
-- ④ 点击高级串口设置 (Advanced Serial settings)；
-- ⑤ **Flow control (流控制)** 此选项用于协调设备间的数据流。在绝大多数调试场景中，应将其设置为 **`None`**；
-- ⑥ 点击 **`OK`**，会自动启动会话。
+设置完成后，点击 **`OK`** 即可打开串口终端窗口。
 
-## 常见问题与解决方案
+## 3. 常见问题排查
 
-如果在连接或通信中遇到问题，请尝试以下检查：
+如果连接后无法正常通信，请对照下表进行检查：
 
-- **问题：终端无任何显示或显示乱码。**
-  - **解决方案**: 这是最常见的问题。
-    1. **检查波特率**：确保 MobaXterm 中设置的波特率与设备固件中的设置**绝对一致**。
-    2. **检查接线**：尝试交换 `TX` 和 `RX` 的接线。
-    3. **检查 COM 端口**：确认选择了正确的 COM 端口。
+| 现象 | 可能原因 | 解决方案 |
+| :--- | :--- | :--- |
+| **无显示 / 乱码** | 波特率不匹配 | 检查 MobaXterm 波特率是否为 **1500000**。 |
+| | 接线错误 | 检查 **TX** 和 **RX** 是否接反（TX 接 RX，RX 接 TX）。 |
+| | 地线未接 | 确保 USB 转串口模块与板子 **GND 共地**。 |
+| **无法打开串口** | 端口被占用 | 关闭其他可能占用串口的软件（如串口助手、烧录工具）。 |
+| | 驱动异常 | 检查设备管理器中是否有黄色感叹号，重装驱动。 |
+| **只能收不能发** | TX 线断路 | 检查 PC 端 TX 到板子 RX 的连接是否正常。 |
+| | 流控开启 | 确保 MobaXterm 中 Flow control 设置为 **None**。 |
+| **无打印信息** | 系统已启动 | 如果上电很久后才打开串口，可能错过了启动日志。**按回车键** 看是否有 shell 提示符，或 **重新上电** 。 |
 
-- **问题：提示 "Unable to open serial port" (无法打开串口)。**
-  - **解决方案**:
-    1. **端口被占用**：检查是否有其他软件（如其他终端工具）正在使用该 COM 端口。关闭它们后再试。
-    2. **驱动问题**：返回设备管理器，确认驱动程序状态正常，没有黄色感叹号标志。
-
-- **问题：可以接收数据（看到打印信息），但无法发送数据（输入命令无反应）。**
-  - **解决方案**:
-    1. **检查 `TX` 连接**：确认 MobaXterm 所在电脑的 `TX` 线已正确连接到目标设备的 `RX` 引脚。
-    2. **检查地线 (GND)**：确保两边的地线已经共地连接，这是稳定通信的必要条件。
-
-- **问题：会话启动之后，没看到打印信息。**
-  - **解决方案**:
-    1. **尝试点击回车键**：如果设备上电启动过久，打印信息已跳过，随后打开的串口终端会话会看不见打印信息。
-    2. **复位设备**：重新启动设备，在设备串口连接正常情况下，即可看到打印信息。
+:::success 成功标志
+当您在终端中看到类似 `root@localhost:~#` 的提示符，或者能看到系统启动滚动的日志信息，说明串口终端已成功连接！
+:::

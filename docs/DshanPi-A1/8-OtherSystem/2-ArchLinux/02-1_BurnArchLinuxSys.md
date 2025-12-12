@@ -1,76 +1,106 @@
 ---
 sidebar_position: 1
 ---
-# 烧录ArchLinux系统
 
-本章节将讲解如何把我们提供的 ArchLinux 系统镜像烧录至 EMMC。
+# 烧录 ArchLinux 系统
 
-## ArchLinux系统简介
+:::tip 提示
+本章节将讲解如何将 **Arch Linux** 系统镜像烧录至 DshanPi-A1 板卡的 eMMC 存储中。
+:::
 
-Arch Linux 是一个轻量级、灵活、滚动更新的 Linux 发行版，专为喜欢动手、追求简洁与控制权的用户设计。它的核心哲学是“KISS（Keep It Simple, Stupid）”，强调简洁、现代、实用、用户中心。
+## 1. Arch Linux 系统简介
 
-## 准备工作
+**Arch Linux** 是一个轻量级、灵活、滚动更新的 Linux 发行版。它的核心哲学是“KISS (Keep It Simple, Stupid)”，强调简洁、现代、实用和以用户为中心。
+Arch Linux 专为喜欢动手、追求系统完全控制权的用户设计，拥有庞大且活跃的社区支持 (Arch Wiki/AUR)。
 
-### 1. 硬件准备
+## 2. 准备工作
 
-烧录系统镜像，除了dshanpi-a1板子，还需要准备 **TypeC-3.2 10Gbps速率USB线 、30W PD电源适配器** （建议韦东山店铺购买，其他的没测试）。如下所示：
+### 2.1 硬件准备
 
-| TypeC-3.2 10Gbps速率USB线：                                  | 30W PD电源适配器：                                           |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ![image-20251013102017500](1_FlasheMMC.assets\image-20251013102017500.png) | ![image-20251013102118065](1_FlasheMMC.assets\image-20251013102118065.png) |
+进行烧录操作前，请准备以下硬件设备：
 
-### 2. 软件下载
+1.  **DshanPi-A1 板卡**
+2.  **Type-C 数据线**：须支持 USB 3.0 或以上协议（建议 10Gbps 速率），用于连接电脑传输数据。
+3.  **电源适配器**：推荐使用 30W PD 电源适配器，确保供电稳定。
 
-软件上，我们需要在 PC 端下载 **系统镜像、烧录工具和驱动安装工具包** 。下载链接如下：
+<div style={{display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap'}}>
+  <div style={{textAlign: 'center'}}>
+    <img src={require('./images/image-20251013102017500.png').default} alt="Type-C 数据线" style={{borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', height: '350px'}} />
+    <p>Type-C 10Gbps 数据线</p>
+  </div>
+  <div style={{textAlign: 'center'}}>
+    <img src={require('./images/image-20251013102118065.png').default} alt="30W PD 电源" style={{borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', height: '350px'}} />
+    <p>30W PD 电源适配器</p>
+  </div>
+</div>
 
-> 按住 `ctrl` 键，鼠标 `左键` 点击链接，即可一键下载
+### 2.2 软件资源下载
 
-- **ArchLinux 系统镜像：** [DshanPi-A1_ArchLinux_Image](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/images/ArchLinux/ArchLinuxARM-100Ask-DShanPi-A1-20250925202048.7z)
-- **烧录工具 RKDevTool：**  [RKDevTool_Release_v3.32.zip](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/RKDevTool_Release_v3.32.zip)
-- **驱动安装工具包 DriverAssitant：** [DriverAssitant_v5.1.1.zip](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/DriverAssitant_v5.1.1.zip)
-- **DshanPi-A1 引导固件：** [rk3576_spl_loader_v1.09.107.bin](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/rk3576_spl_loader_v1.09.107.bin)
+请在 Windows 电脑上下载以下必要的软件工具和系统镜像：
 
-### 3. 烧录驱动安装
+| 资源名称 | 说明 | 下载链接 |
+| :--- | :--- | :--- |
+| **ArchLinux 镜像** | 适用于 DshanPi-A1 的系统镜像 (.7z) | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/images/ArchLinux/ArchLinuxARM-100Ask-DShanPi-A1-20250925202048.7z) |
+| **SPL Loader** | 引导固件 (MiniLoader) | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/rk3576_spl_loader_v1.09.107.bin) |
+| **RKDevTool** | 瑞芯微开发工具 (烧录工具) | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/RKDevTool_Release_v3.32.zip) |
+| **DriverAssistant** | USB 驱动安装助手 | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/DriverAssitant_v5.1.1.zip) |
 
-在烧录之前，我们需要先安装烧录驱动，在前面下载的资料里找到驱动安装工具包 **`DriverAssitant_vxxx`** ，打开启动下载程序 **`DriverInstall.exe`** ，点击驱动安装即，如下：
+:::info 注意
+下载完成后，请解压 `ArchLinuxARM-xxx.7z` 得到 `.img` 镜像文件（通常命名为 `sdmmc.img` 或类似）。
+:::
 
-> 如果之前安装过了，这里可以选择跳过。
+### 2.3 安装 USB 驱动
 
-![image-20250815172019920](images/image-20250815172019920.png)
+在进行烧录前，必须确保电脑已安装 Rockchip USB 驱动。
 
-## 系统镜像烧录
+1.  解压 `DriverAssitant_v5.1.1.zip`。
+2.  运行 **`DriverInstall.exe`**。
+3.  点击 **“驱动安装”** (Install Driver) 按钮。
 
-准备工作完成后，
+<img src={require('./images/image-20250815172019920.png').default} alt="驱动安装界面" style={{display: 'block', margin: '20px auto', maxWidth: '60%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-① 接上 **usb3.0 otg** 线（数据线另一端接电脑的 USB3.0 蓝色接口），
+## 3. 进入烧录模式 (MASKROM)
 
-② 按住 **`MASKROM`** 按键，**先不松开** ，
+DshanPi-A1 需要进入 **MASKROM** 模式才能进行底层的系统烧录。请严格按照以下顺序操作：
 
-③ 再接上电源，dshanpi-a1 就会进入 **`MASKROM`** 烧录模式。参照下图操作：
+1.  **连接数据线**：将 USB Type-C 线的一端连接电脑的 **USB 3.0 接口**（通常为蓝色），另一端连接板卡的 **Type-C OTG 接口**。
+2.  **按住按键**：按住板卡上的 **`MASKROM`** 按键，**保持不松手**。
+3.  **连接电源**：接入 PD 电源适配器给板卡上电。
+4.  **松开按键**：等待约 2-3 秒后，松开 `MASKROM` 按键。此时板卡应已进入 MASKROM 模式。
 
-![image-20250815154004776](images/image-20250815154004776.png)
+<img src={require('./images/image-20250815154004776.png').default} alt="进入烧录模式示意图" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-### 运行烧录工具
+## 4. 执行烧录步骤
 
-打开烧录工具 ，参考下图配置烧录工具：
+打开解压后的 **RKDevTool** (瑞芯微开发工具)，按照以下配置进行烧录：
 
-![image-20250821092501879](images/image-20250821092501879.png)
+### 4.1 配置烧录选项
 
-- ① 勾上前两个选项；
-- ② 第二个选项设置为 **`EMMC`** ；
-- ③ 地址默认都设置为 **`0x00000000`** ；
-- ④ 名字照着上图设置；
-- ⑤ Loader的路径设置为前面我们下载的引导固件 **`rk3576_spl_loader_v1.09.107.bin`** ；
-- ⑥ Systerm的路径设置为前面我们下载并解压的系统镜像 **`sdmmc.img`** ；
-- ⑦ 勾上强制按地址写；
-- ⑧ 点击执行（一定要显示为 **MASKROM** 模型才可以烧录）。
+1.  **勾选选项**：勾选列表中的前两项（Loader 和 System）。
+2.  **设置 Loader**：
+    *   点击第一行右侧的 `...` 按钮，选择下载好的 `rk3576_spl_loader_v1.09.107.bin`。
+3.  **设置 System**：
+    *   点击第二行右侧的 `...` 按钮，选择解压后的 ArchLinux 镜像文件 (如 `sdmmc.img`)。
+    *   **存储类型**：确保第二行的存储类型选择为 **`EMMC`**。
+    *   **地址**：通常默认为 `0x00000000`。
+4.  **强制按地址写**：勾选右侧的 **"强制按地址写"** 选项。
 
-开始烧录后，需要给点耐心，等待烧录工具右下角出现 **下载完成** ，即表明烧录完成。
+<img src={require('./images/image-20250821092501879.png').default} alt="RKDevTool配置" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-![image-20251112191444143](images/image-20251112191444143.png)
+### 4.2 开始烧录
 
-### 启动logs
+1.  确认工具下方显示 **"发现一个MASKROM设备"**。
+2.  点击 **"执行"** 按钮开始烧录。
+3.  等待右侧日志显示 **"下载完成"**。
 
-烧录完成后，会自行启动系统，输入用户名： **alarm** ，密码： **alarm** ，如下：
+<img src={require('./images/image-20251112191444143.png').default} alt="烧录完成" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-![image-20251112191719579](images/image-20251112191719579.png)
+## 5. 系统启动与登录
+
+烧录完成后，设备会自动重启。您可以通过串口终端或 HDMI 查看系统启动日志。
+
+*   **默认用户名**：`alarm`
+*   **默认密码**：`alarm`
+*   *(root 用户默认密码通常也是 `root` 或 `alarm`，具体取决于镜像构建配置)*
+
+<img src={require('./images/image-20251112191719579.png').default} alt="ArchLinux登录界面" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />

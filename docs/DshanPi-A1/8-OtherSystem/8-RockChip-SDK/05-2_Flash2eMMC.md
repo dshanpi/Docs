@@ -1,81 +1,96 @@
 ---
 sidebar_position: 2
 ---
-# 烧录系统至EMMC
 
-本章节将讲解如何把 Buildroot 系统镜像烧录至 EMMC。
+# 烧录系统至 eMMC
 
-## 准备工作
+:::tip 提示
+本章节将讲解如何将构建好的 (或下载的) **Buildroot** 系统镜像烧录至 DshanPi-A1 板卡的 eMMC 存储中。
+:::
 
-### 1. 硬件准备
+## 1. 准备工作
 
-烧录系统镜像，除了dshanpi-a1板子，还需要准备 **TypeC-3.2 10Gbps速率USB线 、30W PD电源适配器** （建议韦东山店铺购买，其他的没测试）。如下所示：
+### 1.1 硬件准备
 
-TypeC-3.2 10Gbps速率USB线：
+进行烧录操作前，请准备以下硬件设备：
 
-![DSC04505](images/DSC04505.JPG)
+1.  **DshanPi-A1 板卡**
+2.  **Type-C 数据线**：须支持 USB 3.0 或以上协议（建议 10Gbps 速率），用于连接电脑传输数据。
+3.  **电源适配器**：推荐使用 30W PD 电源适配器，确保供电稳定。
 
- 30W PD电源适配器：
+<div style={{display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap'}}>
+  <div style={{textAlign: 'center'}}>
+    <img src={require('./images/DSC04505.JPG').default} alt="Type-C 数据线" style={{borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', height: '350px'}} />
+    <p>Type-C 10Gbps 数据线</p>
+  </div>
+  <div style={{textAlign: 'center'}}>
+    <img src={require('./images/DSC04493.JPG').default} alt="30W PD 电源" style={{borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', height: '350px'}} />
+    <p>30W PD 电源适配器</p>
+  </div>
+</div>
 
-![DSC04493](images/DSC04493.JPG)
+### 1.2 软件资源下载
 
-### 2. 软件下载
+请在 Windows 电脑上下载以下必要的软件工具和系统镜像：
 
-软件上，我们需要在 PC 端下载 **系统镜像、烧录工具和驱动安装工具包** 。下载链接如下：
+| 资源名称 | 说明 | 下载链接 |
+| :--- | :--- | :--- |
+| **Buildroot 系统镜像** | 官方提供的默认镜像 (.7z) | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/DshanPi-A1_Default_Buildroot.7z) |
+| **RKDevTool** | 瑞芯微开发工具 (烧录工具) | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/RKDevTool_Release_v3.32.zip) |
+| **DriverAssistant** | USB 驱动安装助手 | [点击下载](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/DriverAssitant_v5.1.1.zip) |
 
-> 按住 `ctrl` 键，鼠标 `左键` 点击链接，即可一键下载
+:::info 镜像说明
+上述镜像为官方编译好的默认 Buildroot 镜像。如果您已自行编译 SDK，请使用您编译生成的 `update.img`。
+:::
 
-- **Buildroot 系统镜像：** [DshanPi-A1_Buildroot_Image](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/DshanPi-A1_Default_Buildroot.7z)
+### 1.3 安装 USB 驱动
 
-  `md5校验值：ec4ef18bbbdf4b69cff1c9c5bcfa7e99` 
+在进行烧录前，必须确保电脑已安装 Rockchip USB 驱动。
 
-- **烧录工具 RKDevTool：**  [RKDevTool_Release_v3.32.zip](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/RKDevTool_Release_v3.32.zip)
-- **驱动安装工具包 DriverAssitant：** [DriverAssitant_v5.1.1.zip](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/DriverAssitant_v5.1.1.zip)
+1.  解压 `DriverAssitant_v5.1.1.zip`。
+2.  运行 **`DriverInstall.exe`**。
+3.  点击 **“驱动安装”** (Install Driver) 按钮。
 
-### 3. 烧录驱动安装
+<img src={require('./images/image-20250815172019920.png').default} alt="驱动安装界面" style={{display: 'block', margin: '20px auto', maxWidth: '60%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-在烧录之前，我们需要先安装烧录驱动，在前面下载的资料里找到驱动安装工具包 **`DriverAssitant_vxxx`** ，打开启动下载程序 **`DriverInstall.exe`** ，点击驱动安装即，如下：
+## 2. 进入烧录模式 (MASKROM)
 
-> 如果之前安装过了，这里可以选择跳过。
+DshanPi-A1 需要进入 **MASKROM** 模式才能进行底层的系统烧录。请严格按照以下顺序操作：
 
-![image-20250815172019920](images/image-20250815172019920.png)
+1.  **连接数据线**：将 USB Type-C 线的一端连接电脑的 **USB 3.0 接口**（通常为蓝色），另一端连接板卡的 **Type-C OTG 接口**。
+2.  **按住按键**：按住板卡上的 **`MASKROM`** 按键，**保持不松手**。
+3.  **连接电源**：接入 PD 电源适配器给板卡上电。
+4.  **松开按键**：等待约 2-3 秒后，松开 `MASKROM` 按键。此时板卡应已进入 MASKROM 模式。
 
-## 烧录系统镜像
+<img src={require('./images/image-20250815154004776.png').default} alt="进入烧录模式示意图" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-准备工作完成后，① 接上 **usb3.0 otg** 线（数据线另一端接电脑的 USB3.0 蓝色接口），② 按住 **`MASKROM`** 按键，**先不松开** ，③ 再接上电源，dshanpi-a1 就会进入 **`MASKROM`** 烧录模式。参照下图操作：
+## 3. 执行烧录步骤
 
-![image-20250815154004776](images/image-20250815154004776.png)
+打开解压后的 **RKDevTool** (瑞芯微开发工具)，按照以下步骤进行烧录：
 
-打开瑞芯微烧录工具 ，参考下图配置烧录工具：
+1.  **确认设备状态**：工具界面下方应显示 **"发现一个MASKROM设备"**。
+2.  **切换页面**：点击顶部的 **"升级固件"** 选项卡。
+3.  **加载固件**：点击 **"固件"** 按钮，选择下载并解压得到的 Buildroot 镜像文件 (`.img`) 或自行编译的 `update.img`。
+4.  **开始烧录**：点击 **"升级"** 按钮，开始烧录过程。
 
-![image-20250910161039437](images/image-20250910161039437.png)
+<img src={require('./images/image-20250910161039437.png').default} alt="RKDevTool配置" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-- ① 进入 **`升级固件`** 界面；
-- ② 点击 **`固件`** ，找到前面下载的 buildroot 系统镜像 或者 自行编译的系统镜像；
-- ③ 点击 **`升级`** ，进行烧录（一定要显示为 **MASKROM** 模型才可以烧录）
+等待右侧日志显示 **"下载固件成功"**，烧录即完成。
 
-开始烧录后，需要给点耐心，等待烧录工具右下角出现 **下载固件成功** ，即表明烧录完成。
+<img src={require('./images/image-20250910161534056.png').default} alt="烧录成功" style={{display: 'block', margin: '20px auto', maxWidth: '80%', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)'}} />
 
-![image-20250910161534056](images/image-20250910161534056.png)
+:::success 完成
+烧录成功后，设备会自动重启并进入 Buildroot 系统。
+:::
 
-烧录完成后，会自行启动系统。
+## 4. 常见问题排查
 
-## 常见问题与解决方案
+| 问题现象 | 解决方案 |
+| :--- | :--- |
+| **工具未发现 MASKROM 设备** | 1. 检查 USB 驱动是否已安装（设备管理器中应无黄色感叹号）。<br/>2. 确认使用的是 USB 3.0 数据线且连接牢固。<br/>3. 尝试更换电脑 USB 接口或重启电脑。<br/>4. 严格按照“先按键，后上电”的顺序操作。 |
+| **设备管理器显示未知设备** | 重新运行 `DriverInstall.exe`，先点击“驱动卸载”，再点击“驱动安装”。 |
+| **系统启动后无 WiFi 节点** | Buildroot 系统可能需要手动加载 WiFi 驱动模块。在串口终端执行以下命令：<br/>`insmod /lib/modules/6.1.75/kernel/drivers/net/wireless/realtek/rtw89/rtw89_core.ko`<br/>`insmod /lib/modules/6.1.75/kernel/drivers/net/wireless/realtek/rtw89/rtw89_pci.ko`<br/>`insmod /lib/modules/6.1.75/kernel/drivers/net/wireless/realtek/rtw89/rtw89_8852c.ko`<br/>`insmod /lib/modules/6.1.75/kernel/drivers/net/wireless/realtek/rtw89/rtw89_8852ce.ko`<br/>*(注：路径可能随内核版本变化，可用 `find / -name "rtw89_core.ko"` 查找)* |
 
-- **问题：执行烧录操作后烧录工具没有显示MASKROM设备？**
-  - **解决方案：** 检查设备管理器是否出现以下设备，烧录驱动是否安装，如果安装了，插拔一下 usb3.0 otg 接口的数据线或者重启电脑。
-
-![image-20250815174333674](images/image-20250815174333674.png)
-
-- **问题：烧录 buildroot 系统后，没有看见 wlp1s0 WiFi节点**
-
-  - **解决方案：** 驱动未装载，执行以下命令，安装驱动。
-
-    ~~~bash
-    insmod rtw89_core.ko
-    insmod rtw89_pci.ko
-    insmod rtw89_8852c.ko
-    insmod rtw89_8852ce.ko
-    ~~~
-
-    
+:::warning WiFi 驱动说明
+Buildroot 系统通常用于极简环境或底层开发，部分驱动可能未配置为自动加载，需要手动加载内核模块。
+:::
