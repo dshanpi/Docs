@@ -2,7 +2,7 @@
 sidebar_position: 9
 ---
 
-# 输入法配置：Fcitx5 + 雾凇拼音
+# 输入法配置指南
 
 本文档将带领你在 **Ubuntu 24.04 (Armbian)** 的 **Wayland** 桌面环境下，打造极致流畅的中文输入体验。我们将部署 **Fcitx5** 输入法框架，并配置备受好评的 **雾凇拼音 (Rime Ice)** 方案。
 
@@ -134,7 +134,7 @@ sudo reboot
 
 ### 功能验证
 
-使用快捷键（通常为 `Ctrl + Space` 或 `Super + Space`）切换输入法进行测试：
+使用快捷键（通常为 `Ctrl + Space` ）切换输入法进行测试：
 
 *   **基础输入**：输入 `nihao`，应显示中文候选词。
 *   **翻页测试**：输入 `=` 翻下一页，`-` 翻上一页。
@@ -142,3 +142,25 @@ sudo reboot
 :::tip 小技巧
 如果配置后仍无法输入中文，再次重启系统通常能解决问题。
 :::
+
+## ❓ 常见问题与解决
+
+### 冲突排查：移除 IBus 框架
+
+如果配置无误且多次重启后仍无法输入中文，可能是因为系统预装的 **IBus** 输入法框架与 Fcitx5 产生冲突。
+
+:::danger 风险操作
+以下命令将彻底卸载 IBus 及其相关组件。这通常是安全的，但如果你的系统中有其他依赖 IBus 的关键应用，请谨慎操作。
+:::
+
+执行以下命令彻底清除 IBus：
+
+```bash title="彻底卸载 IBus 框架"
+sudo apt purge ibus*
+rm -rf ~/.config/ibus
+rm -rf ~/.cache/ibus
+sudo apt autoremove --purge
+sudo apt autoclean
+```
+
+**执行完毕后，请再次重启系统**。这将清除潜在的冲突，让 Fcitx5 能够正常接管输入法服务。
