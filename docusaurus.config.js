@@ -4,7 +4,7 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from 'prism-react-renderer';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -56,6 +56,8 @@ const config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -87,7 +89,7 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
-          {to: '/blog', label: 'Blog', position: 'right'},
+          { to: '/blog', label: 'Blog', position: 'right' },
           {
             type: 'localeDropdown',
             position: 'right',
@@ -102,8 +104,8 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'dshanpir1Sidebar',
             position: 'left',
-            label: 'DshanPi-R1',  
-          },         
+            label: 'DshanPi-R1',
+          },
 
           {
             href: 'https://github.com/dshanpi/Docs',
@@ -121,7 +123,7 @@ const config = {
         darkTheme: prismThemes.dracula,
       },
     }),
-     // Add the Mermaid plugin and enable it in markdown
+  // Add the Mermaid plugin and enable it in markdown
   markdown: {
     mermaid: true,
   },
