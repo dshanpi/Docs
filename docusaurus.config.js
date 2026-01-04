@@ -72,13 +72,19 @@ const config = {
     ],
   ],
 
-  themeConfig:
+themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       colorMode: {
         respectPrefersColorScheme: true,
+      },
+      docs: {
+        sidebar: {
+          autoCollapseCategories: true,
+          hideable: true,
+        },
       },
       navbar: {
         title: '东山Π',
@@ -87,24 +93,41 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
-          {to: '/blog', label: 'Blog', position: 'right'},
+          { to: '/blog', label: 'Blog', position: 'right' },
           {
-            type: 'localeDropdown',
-            position: 'right',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'dshanpia1Sidebar',
-            position: 'left',
+            type: 'dropdown',
             label: 'DshanPi-A1',
+            position: 'left',
+            items: [
+              {
+              type: 'docSidebar',
+              sidebarId: 'dshanpia1Sidebar',
+              label: 'DshanPi-A1',
+              },
+              {
+              type: 'docSidebar',
+              sidebarId: 'dshanpia1cm5Sidebar',
+              label: 'DshanPi-A1(CM5)',
+              },         
+            ],
           },
           {
-            type: 'docSidebar',
-            sidebarId: 'dshanpir1Sidebar',
+            type: 'dropdown',
+            label: 'RK3568系列',
             position: 'left',
-            label: 'DshanPi-R1',  
-          },         
-
+            items: [
+              {
+              type: 'docSidebar',
+              sidebarId: 'dshanpir1Sidebar',
+              label: 'DshanPi-R1',
+              },
+              {
+              type: 'docSidebar',
+              sidebarId: 'dshanpirk3568Sidebar',
+              label: '100ASK-RK3568',
+              },
+            ],
+          },  
           {
             href: 'https://github.com/dshanpi/Docs',
             label: 'GitHub',
@@ -121,10 +144,12 @@ const config = {
         darkTheme: prismThemes.dracula,
       },
     }),
-     // Add the Mermaid plugin and enable it in markdown
+
+  // Add the Mermaid plugin and enable it in markdown
   markdown: {
     mermaid: true,
   },
+
   themes: ['@docusaurus/theme-mermaid'],
 };
 

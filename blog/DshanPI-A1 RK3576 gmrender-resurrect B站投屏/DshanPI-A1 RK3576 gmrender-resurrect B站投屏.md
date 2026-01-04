@@ -1,3 +1,6 @@
+---
+sidebar_position: 2
+---
 # DshanPI-A1 RK3576 gmrender-resurrect B站投屏
 
 ## 演示效果
