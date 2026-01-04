@@ -72,7 +72,7 @@ const config = {
     ],
   ],
 
-themeConfig:
+  themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
@@ -151,7 +151,16 @@ themeConfig:
   },
 
   themes: ['@docusaurus/theme-mermaid'],
-};
 
+  plugins: [
+    [
+      "@easyops-cn/docusaurus-search-local",
+      {
+        hashed: true,
+        language: ["en", "zh"],
+      },
+    ],
+  ],
+};
 
 export default config;
