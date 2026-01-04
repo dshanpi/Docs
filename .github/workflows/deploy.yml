@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-
+      - uses: actions/checkout@v4
       - name: Install dependencies
         run: npm install
       - name: Build website
@@ -37,3 +37,14 @@ jobs:
           # Build output to publish to the `gh-pages` branch:
           publish_dir: ./build
           cname: wiki.dshanpi.org
+
+      - uses: actions/checkout@v4
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "./build/*"
+          target: /www/wwwroot/rockchip.100ask.net/
