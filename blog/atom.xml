@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wiki.dshanpi.org/blog</id>
     <title>东山Π Blog</title>
-    <updated>2026-01-04T07:14:07.000Z</updated>
+    <updated>2026-01-04T07:36:04.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wiki.dshanpi.org/blog"/>
     <subtitle>东山Π Blog</subtitle>
@@ -11,7 +11,7 @@
         <title type="html"><![CDATA[DshanPI-A1 RK3576 armbian远程桌面]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1 RK3576 armbian远程桌面/DshanPI-A1 RK3576 armbian远程桌面</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1 RK3576 armbian远程桌面/DshanPI-A1 RK3576 armbian远程桌面"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[背景与问题]]></summary>
         <content type="html"><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="背景与问题">背景与问题<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/DshanPI-A1%20RK3576%20armbian%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2#%E8%83%8C%E6%99%AF%E4%B8%8E%E9%97%AE%E9%A2%98" class="hash-link" aria-label="背景与问题的直接链接" title="背景与问题的直接链接" translate="no">​</a></h3>
 <ul>
@@ -90,7 +90,7 @@
         <title type="html"><![CDATA[DshanPI-A1 RK3576 gmrender-resurrect B站投屏]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1 RK3576 gmrender-resurrect B站投屏/DshanPI-A1 RK3576 gmrender-resurrect B站投屏</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1 RK3576 gmrender-resurrect B站投屏/DshanPI-A1 RK3576 gmrender-resurrect B站投屏"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[演示效果]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="演示效果">演示效果<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%20RK3576%20gmrender-resurrect%20B%E7%AB%99%E6%8A%95%E5%B1%8F/DshanPI-A1%20RK3576%20gmrender-resurrect%20B%E7%AB%99%E6%8A%95%E5%B1%8F#%E6%BC%94%E7%A4%BA%E6%95%88%E6%9E%9C" class="hash-link" aria-label="演示效果的直接链接" title="演示效果的直接链接" translate="no">​</a></h2>
 <p><a href="https://www.bilibili.com/video/BV1Z646zhEBP" target="_blank" rel="noopener noreferrer" class="">https://www.bilibili.com/video/BV1Z646zhEBP</a></p>
@@ -175,7 +175,7 @@
         <title type="html"><![CDATA[DshanPI-A1 RK3576 gstreamer播放16路视频与硬件加速]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1 RK3576 gstreamer播放16路视频与硬件加速/DshanPI-A1 RK3576 gstreamer播放16路视频与硬件加速</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1 RK3576 gstreamer播放16路视频与硬件加速/DshanPI-A1 RK3576 gstreamer播放16路视频与硬件加速"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[演示视频]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="演示视频">演示视频<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%20RK3576%20gstreamer%E6%92%AD%E6%94%BE16%E8%B7%AF%E8%A7%86%E9%A2%91%E4%B8%8E%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F/DshanPI-A1%20RK3576%20gstreamer%E6%92%AD%E6%94%BE16%E8%B7%AF%E8%A7%86%E9%A2%91%E4%B8%8E%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F#%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91" class="hash-link" aria-label="演示视频的直接链接" title="演示视频的直接链接" translate="no">​</a></h2>
 <p><a href="https://www.bilibili.com/video/BV1m34VziE2s" target="_blank" rel="noopener noreferrer" class="">https://www.bilibili.com/video/BV1m34VziE2s</a></p>
@@ -270,7 +270,7 @@ x11窗口系统中，需要额外元件将nv12图像转成rgb才能渲染;
         <title type="html"><![CDATA[DshanPI-A1 Weston多屏配置]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1 Weston多屏配置/Weston多屏配置</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1 Weston多屏配置/Weston多屏配置"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[在嵌入式系统开发中，显示配置是用户界面实现的基础环节。Weston作为Wayland合成器的参考实现，广泛应用于嵌入式设备和桌面环境。面对不同的硬件配置和应用场景，需要精确控制显示输出。下面基于DShanPi-A1的buildroot固件版本，提供Weston在单屏独占、双屏同显和双屏异显三种典型场景下的配置方法，提供详细的操作指南。]]></summary>
         <content type="html"><![CDATA[<p>在嵌入式系统开发中，显示配置是用户界面实现的基础环节。Weston作为Wayland合成器的参考实现，广泛应用于嵌入式设备和桌面环境。面对不同的硬件配置和应用场景，需要精确控制显示输出。下面基于DShanPi-A1的buildroot固件版本，提供Weston在单屏独占、双屏同显和双屏异显三种典型场景下的配置方法，提供详细的操作指南。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="weston基础架构与配置原理">Weston基础架构与配置原理<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%20Weston%E5%A4%9A%E5%B1%8F%E9%85%8D%E7%BD%AE/Weston%E5%A4%9A%E5%B1%8F%E9%85%8D%E7%BD%AE#weston%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86" class="hash-link" aria-label="Weston基础架构与配置原理的直接链接" title="Weston基础架构与配置原理的直接链接" translate="no">​</a></h2>
@@ -411,7 +411,7 @@ Weston默认的屏幕排列可能不符合实际物理布局。可以通过<code
         <title type="html"><![CDATA[DshanPI-A1buildroot下搭建RKNN环境]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1 buildroot下搭建RKNN环境/buildroot下搭建RKNN环境</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1 buildroot下搭建RKNN环境/buildroot下搭建RKNN环境"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[开发环境]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="开发环境">开发环境<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%20buildroot%E4%B8%8B%E6%90%AD%E5%BB%BARKNN%E7%8E%AF%E5%A2%83/buildroot%E4%B8%8B%E6%90%AD%E5%BB%BARKNN%E7%8E%AF%E5%A2%83#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83" class="hash-link" aria-label="开发环境的直接链接" title="开发环境的直接链接" translate="no">​</a></h2>
 <blockquote>
@@ -490,7 +490,7 @@ Weston默认的屏幕排列可能不符合实际物理布局。可以通过<code
         <title type="html"><![CDATA[RK3576 实现sox降噪和rnnoise降噪]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1 实现sox降噪和rnnoise降噪/音频降噪</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1 实现sox降噪和rnnoise降噪/音频降噪"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[概述]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="概述">概述<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%20%E5%AE%9E%E7%8E%B0sox%E9%99%8D%E5%99%AA%E5%92%8Crnnoise%E9%99%8D%E5%99%AA/%E9%9F%B3%E9%A2%91%E9%99%8D%E5%99%AA#%E6%A6%82%E8%BF%B0" class="hash-link" aria-label="概述的直接链接" title="概述的直接链接" translate="no">​</a></h2>
 <p>音频降噪技术的发展，经历了从对抗物理噪声到智能识别分离的演变。</p>
@@ -641,7 +641,7 @@ Weston默认的屏幕排列可能不符合实际物理布局。可以通过<code
         <title type="html"><![CDATA[DshanPI-A1测评一构建buildroot系统，调试IMX415摄像头和问题解决]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1第一篇构建buildroot系统调试IMX415摄像头和问题解决/第一篇</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1第一篇构建buildroot系统调试IMX415摄像头和问题解决/第一篇"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[板子介绍]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="板子介绍">板子介绍<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%E7%AC%AC%E4%B8%80%E7%AF%87%E6%9E%84%E5%BB%BAbuildroot%E7%B3%BB%E7%BB%9F%E8%B0%83%E8%AF%95IMX415%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/%E7%AC%AC%E4%B8%80%E7%AF%87#%E6%9D%BF%E5%AD%90%E4%BB%8B%E7%BB%8D" class="hash-link" aria-label="板子介绍的直接链接" title="板子介绍的直接链接" translate="no">​</a></h2>
 <p>DshanPi-A1是深圳百问网(韦东山团队)开发的一款高性能AI嵌入式开发板，基于瑞芯微RK3576芯片设计，专为AI教育、边缘计算和智能设备开发打造。</p>
@@ -786,7 +786,7 @@ Weston默认的屏幕排列可能不符合实际物理布局。可以通过<code
         <title type="html"><![CDATA[DshanPI-A1第三篇opencv调试与cpu直接推理识别手势]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1第三篇opencv调试与cpu直接推理识别手势/第三篇</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1第三篇opencv调试与cpu直接推理识别手势/第三篇"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[前面我们已经调试好了摄像头和屏幕，终于可以开始我们的手势识别啦！]]></summary>
         <content type="html"><![CDATA[<p>前面我们已经调试好了摄像头和屏幕，终于可以开始我们的手势识别啦！</p>
 <p>这次我会在RK3576 Buildroot系统上实现一个基于OpenCV的实时手势识别系统。系统能够识别五种手势（拳头/一指、二指、三指、四指、五指），并在屏幕上实时显示处理结果。</p>
@@ -928,7 +928,7 @@ Weston默认的屏幕排列可能不符合实际物理布局。可以通过<code
         <title type="html"><![CDATA[DshanPI-A1测评第二篇:手势识别编程环境搭建与屏幕调试]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1第二篇手势识别编程环境搭建与屏幕调试/第二篇</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1第二篇手势识别编程环境搭建与屏幕调试/第二篇"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[本次测评我将会安装手势识别系统的必要工具和调试屏幕]]></summary>
         <content type="html"><![CDATA[<p>本次测评我将会安装手势识别系统的必要工具和调试屏幕</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="硬件与环境准备">硬件与环境准备<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%E7%AC%AC%E4%BA%8C%E7%AF%87%E6%89%8B%E5%8A%BF%E8%AF%86%E5%88%AB%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%B1%8F%E5%B9%95%E8%B0%83%E8%AF%95/%E7%AC%AC%E4%BA%8C%E7%AF%87#%E7%A1%AC%E4%BB%B6%E4%B8%8E%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87" class="hash-link" aria-label="硬件与环境准备的直接链接" title="硬件与环境准备的直接链接" translate="no">​</a></h2>
@@ -1049,7 +1049,7 @@ Weston默认的屏幕排列可能不符合实际物理布局。可以通过<code
         <title type="html"><![CDATA[DshanPI-A1第五篇NPU实战YOLOv5实时目标检测加速]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1第五篇NPU实战YOLOv5实时目标检测加速/第五篇</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1第五篇NPU实战YOLOv5实时目标检测加速/第五篇"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[前言]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="前言">前言<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%E7%AC%AC%E4%BA%94%E7%AF%87NPU%E5%AE%9E%E6%88%98YOLOv5%E5%AE%9E%E6%97%B6%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%8A%A0%E9%80%9F/%E7%AC%AC%E4%BA%94%E7%AF%87#%E5%89%8D%E8%A8%80" class="hash-link" aria-label="前言的直接链接" title="前言的直接链接" translate="no">​</a></h2>
 <p>在前面的文章中,我们已经实现了基于CPU的MediaPipe手势识别,虽然能跑起来,但15-25 FPS的性能还是有点吃力,而且CPU占用率很高。这次我要榨干RK3576的硬件潜力——使用板载的NPU(神经网络处理单元)来加速深度学习推理。首先外我们需要要来了解一下一些概念</p>
@@ -1325,7 +1325,7 @@ NPU(Neural Processing Unit)是专门为AI运算设计的硬件加速器。和CPU
         <title type="html"><![CDATA[DshanPI-A1第四篇开源手势项目改造]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1第四篇开源手势项目改造/第四篇</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1第四篇开源手势项目改造/第四篇"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[本次所有的项目改造主要基于兼容性、流畅性、屏幕显示方式和摄像头调用等方面。]]></summary>
         <content type="html"><![CDATA[<p>本次所有的项目改造主要基于兼容性、流畅性、屏幕显示方式和摄像头调用等方面。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="显示输出适配">显示输出适配<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%E7%AC%AC%E5%9B%9B%E7%AF%87%E5%BC%80%E6%BA%90%E6%89%8B%E5%8A%BF%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0/%E7%AC%AC%E5%9B%9B%E7%AF%87#%E6%98%BE%E7%A4%BA%E8%BE%93%E5%87%BA%E9%80%82%E9%85%8D" class="hash-link" aria-label="显示输出适配的直接链接" title="显示输出适配的直接链接" translate="no">​</a></h2>
@@ -1466,7 +1466,7 @@ GUI依赖的键盘/鼠标事件需改为文件控制或GPIO触发。</p>
         <title type="html"><![CDATA[DshanPI-A1音频录制播放与噪声分析]]></title>
         <id>https://wiki.dshanpi.org/blog/DshanPI-A1音频录制播放与噪声分析/音频录制播放与噪声分析</id>
         <link href="https://wiki.dshanpi.org/blog/DshanPI-A1音频录制播放与噪声分析/音频录制播放与噪声分析"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[音频播放]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="音频播放">音频播放<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%E9%9F%B3%E9%A2%91%E5%BD%95%E5%88%B6%E6%92%AD%E6%94%BE%E4%B8%8E%E5%99%AA%E5%A3%B0%E5%88%86%E6%9E%90/%E9%9F%B3%E9%A2%91%E5%BD%95%E5%88%B6%E6%92%AD%E6%94%BE%E4%B8%8E%E5%99%AA%E5%A3%B0%E5%88%86%E6%9E%90#%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE" class="hash-link" aria-label="音频播放的直接链接" title="音频播放的直接链接" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="扬声器设备">扬声器设备<a href="https://wiki.dshanpi.org/blog/DshanPI-A1%E9%9F%B3%E9%A2%91%E5%BD%95%E5%88%B6%E6%92%AD%E6%94%BE%E4%B8%8E%E5%99%AA%E5%A3%B0%E5%88%86%E6%9E%90/%E9%9F%B3%E9%A2%91%E5%BD%95%E5%88%B6%E6%92%AD%E6%94%BE%E4%B8%8E%E5%99%AA%E5%A3%B0%E5%88%86%E6%9E%90#%E6%89%AC%E5%A3%B0%E5%99%A8%E8%AE%BE%E5%A4%87" class="hash-link" aria-label="扬声器设备的直接链接" title="扬声器设备的直接链接" translate="no">​</a></h3>
@@ -1737,7 +1737,7 @@ GUI依赖的键盘/鼠标事件需改为文件控制或GPIO触发。</p>
         <title type="html"><![CDATA[OPENWRT系统1. A1主板介绍与开发环境搭建]]></title>
         <id>https://wiki.dshanpi.org/blog/OPENWRT系统 1. 单板介绍与开发环境搭建/单板介绍与开发环境搭建</id>
         <link href="https://wiki.dshanpi.org/blog/OPENWRT系统 1. 单板介绍与开发环境搭建/单板介绍与开发环境搭建"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[DShanPl-A1 Education专为人工智能教育及项目开发深度优化，基于瑞芯微的RK3576处理器设计，集成了4个Cortex-A72和4个Cortex-A53及支持NEON指令集,支持8K@30fps的H.265,VP9AVS2 和 AV1解码器,4k@60fps的H.264解码器和4K@60fps的AV1解码器;还支持4K@60fps的H.264和H.265编码器。内置3D GPU,能够完全兼容OpenGl ES1.1/2.0/3.2、0penCL2.0和Vulkan 1.1。内嵌的NPU算力高达6TopS,支持INT4/INT8/INT16/FP16混合运算。]]></summary>
         <content type="html"><![CDATA[<font style="color:rgb(28, 30, 33)">DShanPl-A1 Education专为人工智能教育及项目开发深度优化，基于瑞芯微的RK3576处理器设计，集成了4个Cortex-A72和4个Cortex-A53及支持NEON指令集,支持8K@30fps的H.265,VP9AVS2 和 AV1解码器,4k@60fps的H.264解码器和4K@60fps的AV1解码器;还支持4K@60fps的H.264和H.265编码器。内置3D GPU,能够完全兼容OpenGl ES1.1/2.0/3.2、0penCL2.0和Vulkan 1.1。内嵌的NPU算力高达6TopS,支持INT4/INT8/INT16/FP16混合运算。</font>
 <p><img decoding="async" loading="lazy" src="https://wiki.dshanpi.org/assets/images/1764557028656-169f1d59-fd75-4a71-a02c-8176588b3407-27ce38b515cb6df6504b0c8484a94d86.png" width="1600" height="1600" class="img_ev3q"></p>
@@ -1842,7 +1842,7 @@ GUI依赖的键盘/鼠标事件需改为文件控制或GPIO触发。</p>
         <title type="html"><![CDATA[OPENWRT系统 2.构建自定义系统]]></title>
         <id>https://wiki.dshanpi.org/blog/OPENWRT系统 2.构建自定义系统/构建自定义系统</id>
         <link href="https://wiki.dshanpi.org/blog/OPENWRT系统 2.构建自定义系统/构建自定义系统"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[序言]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="序言">序言<a href="https://wiki.dshanpi.org/blog/OPENWRT%E7%B3%BB%E7%BB%9F%202.%E6%9E%84%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B3%BB%E7%BB%9F/%E6%9E%84%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B3%BB%E7%BB%9F#%E5%BA%8F%E8%A8%80" class="hash-link" aria-label="序言的直接链接" title="序言的直接链接" translate="no">​</a></h2>
 <p><font style="color:rgb(17, 17, 51)">本文档旨在为开发者和爱好者提供一份清晰、简洁的 OpenWrt（LEDE）固件编译指南，专用于 </font><strong><font style="color:rgb(17, 17, 51)">DshanPi A1（基于瑞芯微 RK3576 平台）</font></strong><font style="color:rgb(17, 17, 51)"> 开发板。通过本流程，您将完成从源码获取、依赖更新、配置定制（包括 OP 域与 Kernel 域）、到最终固件生成的完整编译过程。文档同时涵盖最小化配置生成方法、常见问题提示及镜像输出说明，帮助用户高效构建适配硬件的稳定固件，为后续开发、调试或部署奠定基础。无论您是初次接触 OpenWrt 编译，还是希望针对 RK3576 平台进行深度定制，本文均可作为实用参考。</font></p>
@@ -1967,7 +1967,7 @@ GUI依赖的键盘/鼠标事件需改为文件控制或GPIO触发。</p>
         <title type="html"><![CDATA[OPENWRT系统 3.现有功能优化/现有功能优化]]></title>
         <id>https://wiki.dshanpi.org/blog/OPENWRT系统 3.现有功能优化/现有功能优化</id>
         <link href="https://wiki.dshanpi.org/blog/OPENWRT系统 3.现有功能优化/现有功能优化"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[在下载百问网官方适配后的Openwrt源码后，发现使用上有很多功能没有完全适配，出现部分使用过程中体验不好的问题，下面是针对笔者使用中发现的问题的记录与解决办法分析，希望给读者遇到类似问题后，一些解决问题的思路。因为本人知识有限，有什么错误的地方，欢迎交流讨论。]]></summary>
         <content type="html"><![CDATA[<p>在下载百问网官方适配后的Openwrt源码后，发现使用上有很多功能没有完全适配，出现部分使用过程中体验不好的问题，下面是针对笔者使用中发现的问题的记录与解决办法分析，希望给读者遇到类似问题后，一些解决问题的思路。因为本人知识有限，有什么错误的地方，欢迎交流讨论。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="安装第三方ipk无法使用">安装第三方ipk无法使用<a href="https://wiki.dshanpi.org/blog/OPENWRT%E7%B3%BB%E7%BB%9F%203.%E7%8E%B0%E6%9C%89%E5%8A%9F%E8%83%BD%E4%BC%98%E5%8C%96/%E7%8E%B0%E6%9C%89%E5%8A%9F%E8%83%BD%E4%BC%98%E5%8C%96#%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9ipk%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8" class="hash-link" aria-label="安装第三方ipk无法使用的直接链接" title="安装第三方ipk无法使用的直接链接" translate="no">​</a></h2>
@@ -2124,7 +2124,7 @@ GUI依赖的键盘/鼠标事件需改为文件控制或GPIO触发。</p>
         <title type="html"><![CDATA[OPENWRT系统 4.轻NAS玩法介绍]]></title>
         <id>https://wiki.dshanpi.org/blog/OPENWRT系统 4.轻NAS玩法介绍/轻NAS玩法介绍</id>
         <link href="https://wiki.dshanpi.org/blog/OPENWRT系统 4.轻NAS玩法介绍/轻NAS玩法介绍"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[方案介绍与选择]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="方案介绍与选择">方案介绍与选择<a href="https://wiki.dshanpi.org/blog/OPENWRT%E7%B3%BB%E7%BB%9F%204.%E8%BD%BBNAS%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/%E8%BD%BBNAS%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D#%E6%96%B9%E6%A1%88%E4%BB%8B%E7%BB%8D%E4%B8%8E%E9%80%89%E6%8B%A9" class="hash-link" aria-label="方案介绍与选择的直接链接" title="方案介绍与选择的直接链接" translate="no">​</a></h2>
 <p>让 OpenWrt 上的 轻NAS（局域网文件共享）能在外网访问，也就是说，从任何地方都能安全地访问你的家用存储。  这是最简单的视线自建私有云的方式，只需要开发板要USB接口，3.0接口更佳，就可以接入USB移动硬盘，化身具有轻NAS功能的OpenWrt设备，下面是实现的步骤分析。</p>
@@ -2247,7 +2247,7 @@ GUI依赖的键盘/鼠标事件需改为文件控制或GPIO触发。</p>
         <title type="html"><![CDATA[OPENWRT系统 5.Docker玩法介绍]]></title>
         <id>https://wiki.dshanpi.org/blog/OPENWRT系统 5.Docker玩法介绍/Docker玩法介绍</id>
         <link href="https://wiki.dshanpi.org/blog/OPENWRT系统 5.Docker玩法介绍/Docker玩法介绍"/>
-        <updated>2026-01-04T07:14:07.000Z</updated>
+        <updated>2026-01-04T07:36:04.000Z</updated>
         <summary type="html"><![CDATA[Docker 是一种开源的容器化平台，它通过“容器”来封装应用及其运行环境，使应用能够在不同系统之间快速、稳定地运行。容器轻量、启动快，占用资源少，适合微服务部署与持续集成/交付。Docker 还提供镜像管理、版本控制和环境一致性，让开发、测试、生产环境保持统一，大幅提升部署效率与可移植性。 Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。]]></summary>
         <content type="html"><![CDATA[<p>Docker 是一种开源的容器化平台，它通过“容器”来封装应用及其运行环境，使应用能够在不同系统之间快速、稳定地运行。容器轻量、启动快，占用资源少，适合微服务部署与持续集成/交付。Docker 还提供镜像管理、版本控制和环境一致性，让开发、测试、生产环境保持统一，大幅提升部署效率与可移植性。 Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。</p>
 <p>硬件环境：OpenWrt 跑在 ARM 高性能 SBC 上（比如 本文使用的Dshanpi-A1），家里还有光猫 + 交换机/AC/AP 等常规设备。<br>
