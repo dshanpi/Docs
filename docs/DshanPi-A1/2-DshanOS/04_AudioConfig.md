@@ -19,7 +19,7 @@ Armbian 系统默认已开启**扬声器 (Speaker)** 和**耳机 (Headphone)** �
 如果您有本地音频文件（例如 `output.wav`），可以使用 `aplay` 工具进行播放：
 
 ```bash title="播放本地音频"
-aplay -f cd output.wav
+aplay -D "plughw:0,0"   -f cd output.wav
 ```
 
 :::info 声卡信息
@@ -42,7 +42,7 @@ Armbian 系统默认开启的是**板载麦克风 (Mic)** 输入通道。
 ```bash title="录制音频"
 # -f cd: 使用 CD 音质 (16bit, 44.1kHz)
 # -vvv: 显示实时音量柱
-arecord -f cd output.wav -vvv
+arecord -D "plughw:0,0"  -f cd output.wav -vvv
 ```
 
 录制过程中，终端会显示实时的音频数据流信息和音量柱（VU meter）：
