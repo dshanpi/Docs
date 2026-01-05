@@ -56,15 +56,15 @@ const config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          blogSidebarTitle: 'All posts',
+          blogSidebarTitle: '所有文章',
           blogSidebarCount: 'ALL',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/dshanpi/Docs/tree/main/packages/create-docusaurus/templates/shared/',
           // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
+          onInlineTags: 'ignore',
+          onInlineAuthors: 'ignore',
           onUntruncatedBlogPosts: 'ignore',
         },
         theme: {
