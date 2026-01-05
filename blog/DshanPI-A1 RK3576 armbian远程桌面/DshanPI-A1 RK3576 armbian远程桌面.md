@@ -1,7 +1,6 @@
 ---
-typora-root-url: ./
+sidebar_position: 1
 ---
-
 # DshanPI-A1 RK3576 armbian远程桌面
 
 

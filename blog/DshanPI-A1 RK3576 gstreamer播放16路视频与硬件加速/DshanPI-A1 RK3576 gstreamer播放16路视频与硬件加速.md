@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # DshanPI-A1 RK3576 gstreamer播放16路视频与硬件加速
 
 ## 演示视频
