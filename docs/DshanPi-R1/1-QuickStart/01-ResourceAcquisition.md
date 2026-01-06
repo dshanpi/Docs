@@ -28,7 +28,7 @@ import TabItem from '@theme/TabItem';
     | **默认用户名/密码** | 无 (默认登录即可) |
     | **系统镜像 V1.0** | [点击下载 (img.gz)](https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/Images/openwrt/immortalwrt-rockchip-armv8-100ask_dshanpi-r1-ext4-sysupgrade.img.gz) |
     | **引导固件 (Loader)** | [点击下载 (.bin)](https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/Images/openwrt/rk356x_spl_loader_v1.16.112.bin) |
-    | **刷写步骤** | [参考教程](../2-OpenWrt/1_FlasheMMC.md) |
+    | **刷写步骤** | [参考教程](/docs/DshanPi-R1/QuickStart/ResourceAcquisition) |
 
   </TabItem>
   
@@ -55,7 +55,7 @@ import TabItem from '@theme/TabItem';
     | **ArmbianOS 带桌面版** | [点击下载 (V1.0)](https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/Images/armbian/100ASK_Armbian_25.11.0-trunk_Dshanpi-r1_trixie_vendor_6.1.115_xfce_desktop.img.7z) |
     | **ArmbianOS 无桌面版** | [点击下载 (V1.0)](https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/Images/armbian/Armbian_community_25.11.0-trunk.413_Dshanpi-r1_trixie_vendor_6.1.115_minimal.img.xz) |
     | **引导固件 (Loader)** | [点击下载 (.bin)](https://dl.100ask.net/Hardware/MPU/RK3568-DshanPI-R1%2B/Images/armbian/rk356x_spl_loader_v1.16.112.bin) |
-    | **刷写步骤** | [参考教程](../3-DshanOS/01_FlasheMMC.md) |
+    | **刷写步骤** | [参考教程](/docs/DshanPi-R1/QuickStart/ResourceAcquisition) |
 
   </TabItem>
 </Tabs>

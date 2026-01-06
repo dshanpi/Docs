@@ -121,7 +121,7 @@ const config = {
               {
               type: 'docSidebar',
               sidebarId: 'dshanpir1Sidebar',
-              label: 'DshanPi-R1',
+              label: 'DshanPi-R1+',
               },
               {
               type: 'docSidebar',
