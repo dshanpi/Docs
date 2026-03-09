@@ -1,12 +1,12 @@
 ---
-sidebar_position: 9
+sidebar_position: 10
 ---
 
-# Clawbot个人AI助手
+# OpenClaw个人AI助手
 
 ![image-20260225102829350](images/image-20260225102829350.png)
 
-参考资料：Clawbot官方网址：[https://clawbot.ai/](https://clawbot.ai/)
+参考资料：OpenClaw官方网址：[https://clawbot.ai/](https://clawbot.ai/)
 
 ## 1.快速开始
 
