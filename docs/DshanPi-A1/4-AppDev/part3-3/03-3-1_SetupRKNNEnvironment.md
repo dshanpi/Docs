@@ -57,24 +57,21 @@ git clone -b v2.3.2 https://github.com/airockchip/rknn_model_zoo.git
 
 ## 3.安装模型转换环境
 
-> 如果您有x86 PC可安装RKNN-Toolkit2，后续可用于模型训练和转换，只需要将安装的程序和库切换为x86版本即可！
->
-> 由于x86 PC版本众多，无法逐一做演示，统一以板端安装RKNN-Toolkit2演示模型转换。
+> 需要使用x86 PC安装RKNN-Toolkit2，后续可用于模型训练和转换！
+> 强烈建议使用X86 Linux平台，如果实在没有可以在Windows下使用WSL2配置Linux子系统。
 
 ### 3.1 安装Conada
 
 1.获取conda安装脚本
 
 ```
-wget -c https://repo.anaconda.com/archive/Anaconda3-2025.06-1-Linux-aarch64.sh
+wget -c https://repo.anaconda.com/archive/Anaconda3-2025.06-1-Linux-x86_64.sh
 ```
-
-如果无法通过wget获取可通过这里下载：[Anaconda3-2025.06-1-Linux-aarch64.sh](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/utils/Anaconda3-2025.06-1-Linux-aarch64.sh)
 
 2.启动安装脚本
 
 ```
-bash Anaconda3-2025.06-1-Linux-aarch64.sh
+bash Anaconda3-2025.06-1-Linux-x86_64.sh
 ```
 
 - 按下回车确认安装：
@@ -160,10 +157,8 @@ python --version
 1.激活rknn-toolkit2环境，进入RKNN-Toolkit2仓库目录
 
 ```
-cd ~/Projects/rknn-toolkit2/rknn-toolkit2/packages/arm64/
+cd ~/Projects/rknn-toolkit2/rknn-toolkit2/packages/x86_64/
 ```
-
-![image-20250814111857679](${images}/image-20250814111857679.png)
 
 2.根据架构平台和 Python 版本安装依赖
 
@@ -171,10 +166,10 @@ cd ~/Projects/rknn-toolkit2/rknn-toolkit2/packages/arm64/
 #安装编译依赖
 conda install compilers cmake
 #安装RKNN依赖
-pip install -r arm64_requirements_cp38.txt
+pip install -r requirements_cp38-2.3.2.txt
 ```
 
-> 如果是国内用户可使用国内源：pip install -r arm64_requirements_cp38.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+> 如果是国内用户可使用国内源：pip install -r requirements_cp38-2.3.2.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 
 
@@ -208,7 +203,7 @@ pip install --no-build-isolation --no-binary onnxoptimizer --force-reinstall  --
 3.安装rknn_toolkit2
 
 ```
-pip install ./rknn_toolkit2-2.3.2-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+pip install ./rknn_toolkit2-2.3.2-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
 ```
 
 
@@ -228,7 +223,7 @@ from rknn.api import RKNN
 
 ## 4.安装模型推理环境
 
-> 注意：端侧推理环境可安装在开发板的本地环境！
+> 注意：端侧推理环境需要安装在开发板的本地环境！
 
 ### 4.1 安装RKNN Toolkit Lite2
 
