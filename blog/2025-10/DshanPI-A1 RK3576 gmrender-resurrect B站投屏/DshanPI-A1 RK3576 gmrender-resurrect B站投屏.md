@@ -1,7 +1,12 @@
 ---
 sidebar_position: 2
+title: "DshanPI-A1 RK3576 gmrender-resurrect B站投屏"
+description: "使用 gmrender-resurrect 在 RK3576 上实现 DLNA 投屏，将 B 站等内容投放到开发板播放。"
+tags: [RK3576, gmrender, 投屏, DLNA]
+authors: yuxuan
+date: 2025-11-10
+slug: gmrender-bilibili-cast
 ---
-# DshanPI-A1 RK3576 gmrender-resurrect B站投屏
 
 ## 演示效果
 

@@ -1,7 +1,12 @@
 ---
 sidebar_position: 1
+title: "DshanPI-A1 RK3576 Armbian 远程桌面"
+description: "在 Wayland 与开源 GPU 驱动环境下，使用 Armbian 自带远程桌面解决 NoMachine 虚拟桌面与 GPU 加速失效问题。"
+tags: [RK3576, Armbian, 远程桌面, Wayland]
+authors: yuxuan
+date: 2025-11-08
+slug: armbian-remote-desktop
 ---
-# DshanPI-A1 RK3576 armbian远程桌面
 
 
 

@@ -1,4 +1,12 @@
-# OPENWRT系统 5.Docker玩法介绍
+---
+sidebar_position: 17
+title: "OPENWRT 系统 5：Docker 玩法介绍"
+description: "在 OpenWrt 上使用 Docker 部署应用。"
+tags: [OpenWrt, Docker, RK3576]
+authors: yuxuan
+date: 2025-12-10
+slug: openwrt-docker
+---
  Docker 是一种开源的容器化平台，它通过“容器”来封装应用及其运行环境，使应用能够在不同系统之间快速、稳定地运行。容器轻量、启动快，占用资源少，适合微服务部署与持续集成/交付。Docker 还提供镜像管理、版本控制和环境一致性，让开发、测试、生产环境保持统一，大幅提升部署效率与可移植性。 Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。
 
 硬件环境：OpenWrt 跑在 ARM 高性能 SBC 上（比如 本文使用的Dshanpi-A1），家里还有光猫 + 交换机/AC/AP 等常规设备。  

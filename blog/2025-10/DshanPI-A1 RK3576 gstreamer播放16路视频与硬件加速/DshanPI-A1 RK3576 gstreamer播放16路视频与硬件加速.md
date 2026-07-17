@@ -1,8 +1,12 @@
 ---
 sidebar_position: 3
+title: "DshanPI-A1 RK3576 GStreamer 播放 16 路视频与硬件加速"
+description: "使用 GStreamer 在 RK3576 上实现 16 路视频硬解播放，充分利用 MPP 硬件加速。"
+tags: [RK3576, GStreamer, 硬件加速, MPP]
+authors: yuxuan
+date: 2025-11-12
+slug: gstreamer-16ch-hw-acceleration
 ---
-
-# DshanPI-A1 RK3576 gstreamer播放16路视频与硬件加速
 
 ## 演示视频
 

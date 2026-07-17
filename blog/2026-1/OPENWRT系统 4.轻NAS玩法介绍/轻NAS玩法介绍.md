@@ -1,4 +1,12 @@
-# OPENWRT系统 4.轻NAS玩法介绍
+---
+sidebar_position: 16
+title: "OPENWRT 系统 4：轻 NAS 玚法介绍"
+description: "在 OpenWrt 上搭建轻量 NAS，介绍玩法。"
+tags: [OpenWrt, NAS, RK3576]
+authors: yuxuan
+date: 2025-12-08
+slug: openwrt-nas
+---
 ## 方案介绍与选择
 让 OpenWrt 上的 轻NAS（局域网文件共享）能在外网访问，也就是说，从任何地方都能安全地访问你的家用存储。  这是最简单的视线自建私有云的方式，只需要开发板要USB接口，3.0接口更佳，就可以接入USB移动硬盘，化身具有轻NAS功能的OpenWrt设备，下面是实现的步骤分析。
 

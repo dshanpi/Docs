@@ -1,4 +1,12 @@
-# DshanPI-A1 Weston多屏配置
+---
+sidebar_position: 4
+title: "DshanPI-A1 Weston 多屏配置"
+description: "基于 Weston 配置 RK3576 的多屏显示，实现异屏同显与扩展显示。"
+tags: [Weston, 多屏, Wayland, RK3576]
+authors: yuxuan
+date: 2025-11-14
+slug: weston-multi-screen
+---
 
 在嵌入式系统开发中，显示配置是用户界面实现的基础环节。Weston作为Wayland合成器的参考实现，广泛应用于嵌入式设备和桌面环境。面对不同的硬件配置和应用场景，需要精确控制显示输出。下面基于DShanPi-A1的buildroot固件版本，提供Weston在单屏独占、双屏同显和双屏异显三种典型场景下的配置方法，提供详细的操作指南。
 
