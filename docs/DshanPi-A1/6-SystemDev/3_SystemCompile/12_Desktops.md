@@ -127,7 +127,7 @@ Python 辅助脚本是给定（桌面、发行版、架构、层级）组合下�
 | --- | --- | --- |
 | `packages` | 列表 | 在此层级添加的软件包。与 `common.yaml` 同层级的软件包以及遍历中所有更早层级的软件包合并。 |
 | `packages_remove` | 列表 | 在此层级从累积列表中移除的软件包。用于移除不适合该桌面环境的 `common.yaml` 条目（例如 KDE Plasma 在 mid 层移除 `gnome-text-editor` 并插入 `kate`）。 |
-| `packages_uninstall` | 列表 | （仅 minimal 层级）安装后要清除的软件包。用于元包引入但我们希望移除的无关垃圾（例如 `apport`、`python3-apport`）。**重要提示**：切勿列出任何作为安装所附带元包的硬 `Depends:` 的软件包，否则 apt 的自动移除会级联并扯掉桌面的一大块。 |
+| `packages_uninstall` | 列表 | （仅 minimal 层级）安装后要清除的软件包。用于元包引入但希望移除的无关垃圾（例如 `apport`、`python3-apport`）。**重要提示**：切勿列出任何作为安装所附带元包的硬 `Depends:` 的软件包，否则 apt 的自动移除会级联并扯掉桌面的一大块。 |
 
 第一个通过所有筛选的桌面环境专属软件包成为 `DESKTOP_PRIMARY_PKG`，供 `module_desktops status` 用于 `dpkg -l` 检查。它必须来自桌面环境自身的 `tiers.minimal.packages` 块，而非来自 `common.yaml`，否则每个桌面环境都会共享同一个主软件包。
 
@@ -852,7 +852,7 @@ tools/modules/desktops/github/
 └── maintenance-desktop-audit.yml   # 定时工作流
 ```
 
-只有扫描器与网络通信；LLM 从不自行获取软件包元数据。这使得"哪里坏了"的信号可重现且易于缓存，并将所有非确定性限制在"我们应该如何修复"这一步。
+只有扫描器与网络通信；LLM 从不自行获取软件包元数据。这使得"哪里坏了"的信号可重现且易于缓存，并将所有非确定性限制在"如何修复"这一步。
 
 ### 13.2 audit.py
 
@@ -940,7 +940,7 @@ permissions:
 
 ### 14.1 packages_uninstall 级联
 
-在 `tiers.minimal.packages_uninstall` 中列出一个软件包会在安装后对其运行 `apt-get remove --purge`。如果该软件包是桌面环境安装引入的任何元包的硬 `Depends:`，apt 的自动移除级联会将该元包一起扯掉 — 而在设置了 `APT::Get::AutomaticRemove "true"` 的系统上（Ubuntu noble/resolute），级联会继续并撕掉桌面的一大块。我们遇到的真实例子：
+在 `tiers.minimal.packages_uninstall` 中列出一个软件包会在安装后对其运行 `apt-get remove --purge`。如果该软件包是桌面环境安装引入的任何元包的硬 `Depends:`，apt 的自动移除级联会将该元包一起扯掉 — 而在设置了 `APT::Get::AutomaticRemove "true"` 的系统上（Ubuntu noble/resolute），级联会继续并撕掉桌面的一大块。实际场景中的例子：
 
 - 列出任何 `xfce4-goodies` 插件（例如 `xfce4-clipman-plugin`）会扯掉 `xfce4-goodies` 本身，然后是半个桌面。
 - 列出 `language-selector-gnome` 会扯掉 `gnome-control-center`（它在 Ubuntu 上将其作为硬 Depends），因此用户会丢失设置。

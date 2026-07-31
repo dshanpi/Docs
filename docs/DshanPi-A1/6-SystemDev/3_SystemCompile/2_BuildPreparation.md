@@ -135,7 +135,7 @@ env TERM=xterm-256color ./compile.sh
 
 ## 6. GitHub Actions
 
-如果你没有合适的设备自行构建镜像，可以使用我们的 [GitHub Action](https://github.com/marketplace/actions/rebuild-armbian)。
+如果你没有合适的设备自行构建镜像，可以使用 Armbian 官方的 [GitHub Action](https://github.com/marketplace/actions/rebuild-armbian)。
 
 ### 6.1 最小工作流示例
 

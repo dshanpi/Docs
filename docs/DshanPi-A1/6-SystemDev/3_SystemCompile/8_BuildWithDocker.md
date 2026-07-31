@@ -70,7 +70,7 @@ sidebar_position: 8
 
 在这里，`RELEASE=bullseye BOARD=rockpi-4a BRANCH=edge` 会被传递到 shell 中，并设置为环境变量。
 
-接下来，我们可以简单地开始构建镜像：
+接下来，即可开始构建镜像：
 
 ```bash
 ./compile.sh
