@@ -1,0 +1,9 @@
+{
+  "label": "Common 通用文档",
+  "position": 1,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "description": "Rockchip 平台通用开发文档，适用于 RK3576 / RK3568 等系列芯片。"
+  }
+}
