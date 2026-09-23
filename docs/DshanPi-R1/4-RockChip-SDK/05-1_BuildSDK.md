@@ -18,8 +18,8 @@ sidebar_position: 1
 :::
 
 :::tip 下载链接
-*   **百度网盘**: [点击下载](https://pan.baidu.com/s/15M8zuHOwl_SITl6cSk_7Vg?pwd=eaax)
-*   **提取码**: `eaax`
+*   **百度网盘**:RK3568-DshanPI-R1+ https://pan.baidu.com/s/18mChwDawI0Y_w6PYkueRUQ
+*   **提取码**: `x9wi`
 :::
 
 ---
