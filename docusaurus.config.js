@@ -30,6 +30,7 @@ const config = {
   projectName: 'Docs', // Usually your repo name.
 
   onBrokenLinks: 'throw',
+  onBrokenAnchors: 'throw',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -159,6 +160,7 @@ const config = {
   themes: ['@docusaurus/theme-mermaid'],
 
   plugins: [
+    './plugins/blog-catalog',
     [
       "@easyops-cn/docusaurus-search-local",
       {

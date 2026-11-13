@@ -116,7 +116,7 @@ Python 辅助脚本是给定（桌面、发行版、架构、层级）组合下�
 | `description` | 字符串 | 信息性 | 单行摘要，通过 `DESKTOP_DESC` 暴露。 |
 | `display_manager` | 字符串 | 是 | 欢迎界面软件包：`gdm3`、`sddm`、`lightdm` 或 `none`。 |
 | `status` | 字符串 | 是 | 编辑标签 — 为 `supported`、`community`、`unsupported` 之一。通过 `DESKTOP_STATUS` 报告。仅影响标签和目录过滤 — 不阻止安装。`community` 用于可用但以尽力而为方式维护的桌面环境；`unsupported` 用于已知损坏或未经验证的桌面环境。 |
-| `tiers` | 映射 | 是 | 各层级软件包列表，以 `minimal`、`mid`、`full` 为键。参见 [层级块](#层级块)。 |
+| `tiers` | 映射 | 是 | 各层级软件包列表，以 `minimal`、`mid`、`full` 为键。参见 [层级块](#52-层级块)。 |
 | `tier_overrides` | 映射 | 可选 | 按架构和/或按发行版-按架构的软件包移除（及添加），用于填补层级空缺。参见 [tier_overrides](#tier-overrides)。 |
 | `releases` | 映射 | 是 | 按发行版的覆盖，以发行版代号（`bookworm`、`trixie`、`forky`、`sid`、`jammy`、`noble`、`resolute` 等）为键。 |
 | `repo` | 映射 | 可选 | 自定义 APT 仓库，见下文。 |
@@ -517,7 +517,7 @@ module_desktops <command> [de=<name>] [tier=<tier>] [arch=<arch>] [release=<rele
 
 | 命令 | 行为 | 必填参数 |
 | --- | --- | --- |
-| `install` | 完整安装流水线（参见 [生命周期：安装](#生命周期安装)）。在 `pkg_install` 失败时干净地中止，不改变系统状态。使用 `mode=build`：跳过用户检测、组成员身份、skel 传播和 DM 启动/自动登录 — 用于镜像构建时不存在真实用户的场景。 | `de=`、`tier=`（可选：`mode=build`） |
+| `install` | 完整安装流水线（参见 [生命周期：安装](#8-生命周期安装)）。在 `pkg_install` 失败时干净地中止，不改变系统状态。使用 `mode=build`：跳过用户检测、组成员身份、skel 传播和 DM 启动/自动登录 — 用于镜像构建时不存在真实用户的场景。 | `de=`、`tier=`（可选：`mode=build`） |
 | `remove` | 禁用自动登录、停止显示管理器、清除 `<de>.packages` 中记录的每个软件包、运行 `pkg_clean`、将 `default.target` 切换回 `multi-user`、隔离到 multi-user.target 以便正在运行的会话也回落到控制台。 | `de=` |
 | `upgrade` | 将已安装的桌面环境升级到更高层级。如果目标相同或更低则拒绝（请使用 `downgrade`）。 | `de=`、`tier=` |
 | `downgrade` | 将已安装的桌面环境降级到更低层级。可移除集合与安装清单求交集，因此绝不会触及用户手动安装的软件包。 | `de=`、`tier=` |
@@ -775,7 +775,7 @@ module_appimage <install|remove|status> app=<name>
 
 ## 12. 添加新桌面环境
 
-1. **创建 YAML。** 在 `tools/modules/desktops/yaml/<de_name>.yaml` 处新建一个文件，遵循 [架构](#yaml-架构)。最低必填字段：`display_manager`、`status`、`tiers.minimal.packages`，以及 `releases.<代号>` 下至少一个带有 `architectures` 列表的条目。
+1. **创建 YAML。** 在 `tools/modules/desktops/yaml/<de_name>.yaml` 处新建一个文件，遵循 [架构](#5-yaml-架构)。最低必填字段：`display_manager`、`status`、`tiers.minimal.packages`，以及 `releases.<代号>` 下至少一个带有 `architectures` 列表的条目。
 2. **（可选）各桌面环境的层级覆盖。** 仅当需要覆盖 common 默认值时才添加 `tiers.mid` 和/或 `tiers.full` 块。大多数桌面环境直接继承 common 的 mid/full。
 3. **（可选）`tier_overrides`。** 仅当存在此桌面环境特有的已知软件包可用性空缺时，才添加按架构或按发行版-按架构的移除项。跨桌面环境的空缺应放在 `common.yaml` 中。
 4. **（可选）自定义仓库。** 如果桌面环境不在发行版的默认仓库中，则添加 `repo:` 块。将密钥环路径固定在 `/usr/share/keyrings/` 下。

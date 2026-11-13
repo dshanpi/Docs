@@ -1,0 +1,80 @@
+import frontPhoto from '@site/docs/DshanPi-A1/images/10005.jpg';
+import backPhoto from '@site/docs/DshanPi-A1/images/10002.jpg';
+
+const ROOT='/docs/DshanPi-A1';
+const CONNECTION=`${ROOT}/QuickStart/HardwareConnectionGuide`;
+const FLASH=`${ROOT}/SystemDev/Flash2eMMC`;
+const CAMERA=`${ROOT}/AppDev/part3-1/03-1-0_CameraAndHDMIINUSerGuide`;
+const GPIO=`${ROOT}/AppDev/part3-0/03-0-1_GPIO`;
+
+// Pixel coordinates are tied to A1's own original product photographs.
+export const VIEWS={
+  front:{label:'正面',photo:frontPhoto,imageWidth:1600,crop:{x:566,y:505,width:932,height:796},defaultPort:'hdmi-out'},
+  back:{label:'背面',photo:backPhoto,imageWidth:1600,crop:{x:280,y:402,width:1050,height:853},defaultPort:'tfcard'},
+};
+
+export const PORTS=[
+  {id:'hdmi-out',number:'01',name:'HDMI OUT',side:'front',group:'常用接口',kind:'显示输出',rect:[1020,1050,72,242],
+    description:'连接显示器，查看 A1 的桌面和终端。接口位于两个网口左侧。',supplies:['HDMI 线','支持 HDMI 输入的显示器'],
+    note:'显示器接 HDMI OUT；主板上沿的 Micro HDMI IN 用于采集输入。',href:CONNECTION,link:'查看显示器连接方法'},
+  {id:'power',number:'02',name:'PD 电源',side:'front',group:'常用接口',kind:'供电',rect:[1328,511,88,80],
+    description:'正面右上角标有 PWR_IN 的 Type-C 接口，用于给主板供电。',supplies:['硬件指南推荐的 30W PD 电源','配套 Type-C 电源线'],
+    note:'按硬件连接指南核对电源。下沿 USB/DP 接口与此处供电接口用途不同。',href:CONNECTION,link:'查看电源连接方法'},
+  {id:'usb-otg',number:'03',name:'USB / DP',side:'front',group:'常用接口',kind:'数据与显示',rect:[748,1125,65,159],
+    description:'下沿耳机插座右侧的 Type-C 接口，产品图标注为 USB0/DP，板上标有 USB3.0 OTG。',supplies:['与任务对应的数据线或显示转接线'],
+    note:'刷机时使用支持数据传输的线材；具体连线顺序按 eMMC 教程操作。',href:FLASH,link:'查看 eMMC 刷机教程'},
+  {id:'usb-host',number:'04',name:'USB HOST',side:'front',group:'常用接口',kind:'USB 外设',rect:[837,1095,151,199],
+    description:'双 USB-A 接口，可连接键盘、鼠标等 USB 外设。',supplies:['USB 键盘、鼠标或其他外设'],
+    note:'外设是否可用还取决于系统驱动及供电需求。',href:CONNECTION,link:'查看键鼠连接方法'},
+  {id:'eth0',number:'05',name:'ETH0',side:'front',group:'常用接口',kind:'有线网络',rect:[1128,1080,160,212],
+    description:'左侧有线网口，连接路由器后可继续进行联网和远程操作。',supplies:['网线','路由器或交换机'],
+    note:'板上 ETH0 丝印不必然等于系统中的网卡名称，实际接口名在系统内确认。',href:CONNECTION,link:'查看基础连接指南'},
+  {id:'eth1',number:'06',name:'ETH1',side:'front',group:'常用接口',kind:'有线网络',rect:[1317,1080,167,212],
+    description:'右侧有线网口，位于主板右下角。',supplies:['网线'],
+    note:'双网口的地址、路由和用途按实际网络环境配置。',href:CONNECTION,link:'查看基础连接指南'},
+  {id:'hdmi-in',number:'07',name:'Micro HDMI IN',side:'front',group:'常用接口',kind:'视频输入',rect:[1190,511,79,81],
+    description:'正面上沿、PD 电源接口左侧的 Micro HDMI 视频输入口，板上标有 HDMI_IN，用于采集外部视频信号。',supplies:['Micro HDMI 转标准 HDMI 线','提供 HDMI 输出的视频源'],
+    note:'用于向主板输入画面，采集应用和驱动按对应系统教程确认。',href:CAMERA,link:'查看视频采集教程'},
+  {id:'maskrom',number:'08',name:'MASKROM',side:'front',group:'常用接口',kind:'系统烧录按键',rect:[578,723,39,43],
+    description:'位于主板左侧上部，旁边标有 MASKROM，用于进入烧录相关模式。',supplies:['USB 数据线','镜像与烧录工具'],
+    note:'按住、上电和松开按键的顺序，以及工具识别结果，按 A1 刷机教程确认。',href:FLASH,link:'查看烧录步骤'},
+  {id:'gpio',number:'09',name:'40Pin GPIO 排针',side:'front',group:'常用接口',kind:'引脚扩展',rect:[631,525,512,63],
+    description:'正面上沿左侧的双排 40Pin 彩色排针，用于 GPIO 与复用外设连接。',supplies:['A1 引脚表','与电平要求匹配的外设'],
+    note:'先核对针脚编号、电压和复用配置，再连接外设。',href:GPIO,link:'查看 GPIO 教程'},
+  {id:'pcie',number:'10',name:'PCIe · M.2 Key-E',side:'front',group:'扩展接口',kind:'扩展模块',rect:[1220,645,219,68],
+    description:'正面右上区域的 M.2 Key-E 插槽，可按硬件指南安装配套扩展模块。',supplies:['兼容的 M.2 Key-E 模块','固定螺丝'],
+    note:'插槽位于正面，以产品图和实物位置为准；安装前断开电源。',href:CONNECTION,link:'查看模块安装方法'},
+  {id:'fan',number:'11',name:'风扇接口',side:'front',group:'常用接口',kind:'散热',rect:[577,833,34,58],
+    description:'主板正面左侧中部的白色插座，旁边标有 FAN，用于连接配套散热风扇。',supplies:['配套风扇或散热器'],
+    note:'按硬件指南核对插头方向和供电要求。',href:CONNECTION,link:'查看散热器安装方法'},
+  {id:'audio',number:'12',name:'3.5mm 音频',side:'front',group:'常用接口',kind:'音频',rect:[635,1133,78,143],
+    description:'正面左下角的 3.5mm 音频插座。',supplies:['适配的耳机或音频线'],
+    note:'在系统中选择对应音频输出，设备能力按镜像与驱动确认。',href:`${ROOT}/DshanOS/AudioConfig`,link:'查看音频配置'},
+  {id:'emmc',number:'13',name:'eMMC',side:'front',group:'扩展接口',kind:'板载存储',rect:[713,599,126,110],
+    description:'板载系统存储器，位于 GPIO 排针下方。',supplies:['需要重装时准备匹配镜像和烧录工具'],
+    note:'重新烧录会覆盖目标存储上的系统与数据，请按教程备份后操作。',href:FLASH,link:'查看 eMMC 安装教程'},
+  {id:'recovery',number:'14',name:'RECOVERY',side:'front',group:'扩展接口',kind:'恢复按键',rect:[576,1183,37,46],
+    description:'左下侧边靠近音频口的按键，丝印为 RECOVERY。',supplies:['对应系统的恢复操作说明'],
+    note:'按键行为取决于启动程序与系统，不将它与 MASKROM 按键混用。',href:FLASH,link:'查看系统恢复相关步骤'},
+  {id:'user1',number:'15',name:'用户按键 K1',side:'front',group:'扩展接口',kind:'用户输入',rect:[574,1067,38,42],
+    description:'主板左下侧边的上方用户按键，产品图标注为 K1。',supplies:['使用按键的应用或开发环境'],
+    note:'具体输入事件和应用功能需在运行系统中确认。',href:GPIO,link:'查看引脚开发资料'},
+  {id:'user2',number:'16',name:'用户按键 K2',side:'front',group:'扩展接口',kind:'用户输入',rect:[575,1126,38,42],
+    description:'位于 K1 下方、RECOVERY 上方的用户按键。',supplies:['使用按键的应用或开发环境'],
+    note:'具体输入事件和应用功能需在运行系统中确认。',href:GPIO,link:'查看引脚开发资料'},
+  {id:'rtc',number:'17',name:'RTC 电池接口',side:'front',group:'常用接口',kind:'时钟供电',rect:[1460,834,30,73],
+    description:'主板正面右侧中部的白色电池插座，旁边标有 RTC、VBAT 与 GND，用于连接 RTC 备用电池。',supplies:['符合硬件规格的 RTC 电池'],
+    note:'电池电压、接口定义和极性必须按原理图核对。',href:CONNECTION,link:'查看硬件连接资料'},
+  {id:'tfcard',number:'18',name:'TF 卡槽',side:'back',group:'常用接口',kind:'可移动存储',rect:[361,690,66,121],
+    description:'背面左侧的 TF 卡槽，可按教程将支持的系统镜像写入 TF 卡。',supplies:['TF（microSD）卡','读卡器'],
+    note:'TF 卡与板载 eMMC 的烧录路线不同，请选用对应教程。',href:`${ROOT}/SystemDev/Flash2TFCard`,link:'查看 TF 卡烧录教程'},
+  {id:'csi12',number:'19',name:'MIPI CSI 1/2',side:'back',group:'扩展接口',kind:'摄像头',rect:[1230,499,44,153],
+    description:'背面右上方的摄像头排线接口，产品图标注为摄像头 1/2。',supplies:['适配摄像头','对应规格的排线与驱动'],
+    note:'连接方向和摄像头兼容性按配套资料确认，排线安装在断电状态下完成。',href:CAMERA,link:'查看摄像头使用教程'},
+  {id:'csi34',number:'20',name:'MIPI CSI 3/4',side:'back',group:'扩展接口',kind:'摄像头',rect:[372,500,42,151],
+    description:'背面左上方的摄像头排线接口，产品图标注为摄像头 3/4。',supplies:['适配摄像头','对应规格的排线与驱动'],
+    note:'通道配置和镜像支持范围按具体摄像头方案确认。',href:CAMERA,link:'查看摄像头使用教程'},
+  {id:'dsi',number:'21',name:'MIPI DSI',side:'back',group:'扩展接口',kind:'显示扩展',rect:[1247,670,46,187],
+    description:'背面右侧的显示排线接口，位于 CSI 1/2 下方。',supplies:['适配屏幕','对应排线和显示配置'],
+    note:'排线外形不能证明屏幕兼容，连接前核对引脚、方向与驱动。',href:CONNECTION,link:'查看硬件连接资料'},
+];

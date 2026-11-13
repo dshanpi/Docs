@@ -1,0 +1,82 @@
+{
+  "welcome": {
+    "src": "/img/blog/welcome.jpg",
+    "source": "blog/2025-10/2025-11-6-welcome/images/10001.jpg",
+    "fit": "cover"
+  },
+  "armbian-remote-desktop": {
+    "src": "/img/blog/armbian-remote-desktop.jpg",
+    "source": "blog/2025-10/DshanPI-A1 RK3576 armbian远程桌面/res/remote.png",
+    "fit": "cover"
+  },
+  "buildroot-imx415-camera": {
+    "src": "/img/blog/buildroot-imx415-camera.jpg",
+    "source": "blog/2025-11/DshanPI-A1第一篇构建buildroot系统调试IMX415摄像头和问题解决/images/wps14.png",
+    "fit": "cover"
+  },
+  "opencv-cpu-gesture": {
+    "src": "/img/blog/opencv-cpu-gesture.jpg",
+    "source": "blog/2025-11/DshanPI-A1第三篇opencv调试与cpu直接推理识别手势/images/wps45.png",
+    "fit": "cover"
+  },
+  "gesture-env-screen": {
+    "src": "/img/blog/gesture-env-screen.jpg",
+    "source": "blog/2025-11/DshanPI-A1第二篇手势识别编程环境搭建与屏幕调试/images/wps30.png",
+    "fit": "cover"
+  },
+  "npu-yolov5-detection": {
+    "src": "/img/blog/npu-yolov5-detection.jpg",
+    "source": "blog/2025-11/DshanPI-A1第五篇NPU实战YOLOv5实时目标检测加速/images/image-20251222175836265.png",
+    "fit": "cover"
+  },
+  "open-gesture-project-modify": {
+    "src": "/img/blog/open-gesture-project-modify.jpg",
+    "source": "blog/2025-11/DshanPI-A1第四篇开源手势项目改造/images/wps49.png",
+    "fit": "cover"
+  },
+  "buildroot-rknn-setup": {
+    "src": "/img/blog/buildroot-rknn-setup.jpg",
+    "source": "blog/2025-12/DshanPI-A1 buildroot下搭建RKNN环境/images/b70deb69-aaeb-4e8f-a09f-c77091008511.png",
+    "fit": "cover"
+  },
+  "weston-multi-screen": {
+    "src": "/img/blog/weston-multi-screen.jpg",
+    "source": "blog/2025-12/DshanPI-A1 Weston多屏配置/images/77539c1e9693010348396a61507bc998.jpg",
+    "fit": "cover"
+  },
+  "sox-rnnoise-denoise": {
+    "src": "/img/blog/sox-rnnoise-denoise.jpg",
+    "source": "blog/2025-12/DshanPI-A1 实现sox降噪和rnnoise降噪/images/sox.png",
+    "fit": "contain"
+  },
+  "audio-record-noise-analysis": {
+    "src": "/img/blog/audio-record-noise-analysis.jpg",
+    "source": "blog/2025-12/DshanPI-A1音频录制播放与噪声分析/images/noise_spectrogram.png",
+    "fit": "cover"
+  },
+  "openwrt-board-env-setup": {
+    "src": "/img/blog/openwrt-board-env-setup.jpg",
+    "source": "blog/2026-1/OPENWRT系统 1. 单板介绍与开发环境搭建/images/1764557028656-169f1d59-fd75-4a71-a02c-8176588b3407.png",
+    "fit": "cover"
+  },
+  "openwrt-custom-build": {
+    "src": "/img/blog/openwrt-custom-build.jpg",
+    "source": "blog/2026-1/OPENWRT系统 2.构建自定义系统/images/1764833872756-fe32f0f2-f13b-4cf5-beab-bf7cf7ea1f97.png",
+    "fit": "cover"
+  },
+  "openwrt-feature-optimize": {
+    "src": "/img/blog/openwrt-feature-optimize.jpg",
+    "source": "blog/2026-1/OPENWRT系统 3.现有功能优化/images/1763802563349-7e6b7ecd-1eff-4d59-8541-332c8f355573.png",
+    "fit": "cover"
+  },
+  "openwrt-nas": {
+    "src": "/img/blog/openwrt-nas.jpg",
+    "source": "blog/2026-1/OPENWRT系统 4.轻NAS玩法介绍/images/1764724154706-e0412e6e-4f71-4738-8a6c-fe5e3738c618.png",
+    "fit": "cover"
+  },
+  "openwrt-docker": {
+    "src": "/img/blog/openwrt-docker.jpg",
+    "source": "blog/2026-1/OPENWRT系统 5.Docker玩法介绍/images/1765163193214-654acb4e-e3b7-40f9-9c56-e81d1d699340.png",
+    "fit": "cover"
+  }
+}

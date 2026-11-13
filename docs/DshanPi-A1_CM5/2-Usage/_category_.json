@@ -1,0 +1,12 @@
+{
+  "label": "日常使用",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "日常使用",
+    "description": "连接网络、安装 ARM64 软件，使用显示、音频和移动存储。",
+    "slug": "/DshanPi-A1_CM5/category/usage"
+  }
+}

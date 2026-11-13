@@ -1,0 +1,12 @@
+{
+  "label": "更新与排障",
+  "position": 3,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "更新与排障",
+    "description": "核对系统版本，理解更新与恢复，并按现象定位问题。",
+    "slug": "/DshanPi-A1_CM5/category/maintenance"
+  }
+}

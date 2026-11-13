@@ -1,0 +1,12 @@
+{
+  "label": "资料与验证说明",
+  "position": 5,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "资料与验证说明",
+    "description": "查看资源关系、当前版本差异与教程验证范围。",
+    "slug": "/DshanPi-A1_CM5/category/reference"
+  }
+}

@@ -1,43 +1,54 @@
-name: Deploy to GitHub Pages
+name: Validate and deploy documentation
 
 on:
+  pull_request:
+    branches: [master]
   push:
-    branches:
-      - master
+    branches: [master]
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: documentation-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  deploy:
-    name: Deploy to GitHub Pages
+  build:
+    name: Validate both locales
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout master
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Test, build and verify output
+        run: npm run check
+      - name: Retain verified site
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation-build
+          path: build/
+          include-hidden-files: true
+          if-no-files-found: error
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build website
-        run: npm run build
-
-      - name: Check build output
-        run: |
-          echo "PWD=$(pwd)"
-          ls -lah
-          ls -lah build
-          find build -maxdepth 2 -type f | head -n 20
-
+  deploy:
+    name: Publish verified build
+    needs: build
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: documentation-build
+          path: build
       - name: Copy build to server via SSH
         uses: appleboy/scp-action@v1
         with:
@@ -48,13 +59,9 @@ jobs:
           source: "build/**"
           target: /www/wwwroot/rockchip.100ask.net/
           strip_components: 1
-
-      # Popular action to deploy to GitHub Pages:
-      # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Build output to publish to the `gh-pages` branch:
           publish_dir: ./build
           cname: wiki.dshanpi.org

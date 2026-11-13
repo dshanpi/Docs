@@ -1,0 +1,44 @@
+Use case: ui-mockup
+Asset type: high fidelity desktop web UI design proposal for the existing Chinese DshanPi developer documentation blog, at /blog. This is a NEW UI concept image, not a screenshot of implemented code.
+Primary request: redesign the blog homepage around grouped article categories, with concise series entry points. Render a single beautiful, realistic, shippable Chinese desktop webpage, flat front-on, a full page composition on an approximately 1600 by 1500 canvas. No browser chrome, no device frame, no arrows or design annotations. Crisp readable simplified Chinese typography.
+
+Brand and style: preserve DshanPi / 百问网 documentation identity. White background, very pale warm green page sections, restrained forest green accent #176C4B, near-black green text #18332B, secondary gray #6A756F, fine neutral borders. Clean professional engineering editorial style, generous but efficient spacing, 10 to 14px corner radii, extremely subtle shadows. Modern Chinese sans-serif typography, carefully aligned baseline grid. Avoid massive marketing banners, neon effects, glassmorphism, purple gradients and 3D gimmicks. The interface should make scanning real article topics effortless.
+
+Exact page architecture:
+1. Full-width slim white global navbar at top, height about 68px. Left typographic brand "百问网" in green followed by "东山Π" in black. Navigation items "DshanPi-A1", "RK3568系列", "Blog", "GitHub", "简体中文", and a small theme icon. Blog is active with a delicate green underline.
+2. Main content max width about 1370px centered, no left archive sidebar. Compact editorial masthead. Tiny eyebrow "DSHANPI JOURNAL". Big title "开发者博客". Subtitle "从系统搭建到 AI 应用，按主题找到你的下一步。" On the right a real rounded search field with magnifying glass and placeholder "搜索文章、技术或关键词". Small readable metadata "18 篇文章 · 4 个分类".
+3. Horizontal category navigation with exact labels/counts: active filled green "全部 18", then "系统与硬件 3", "AI 与视觉 5", "音视频与显示 5", "网络与服务 5". Use a thin divider beneath and plenty of room.
+4. A compact "系列专题" row with TWO wide low horizontal feature tiles, not giant heroes, a total height around 150px. Left tile deep forest green, tiny technical line motif in background and a restrained abstract camera/chip icon at far right, text "A1 视觉实战", subtitle "从摄像头调试到 NPU 加速", badge "5 篇", CTA "按顺序阅读 →". Right tile very pale mint, fine network-node illustration at far right, title "OpenWrt 从入门到部署", subtitle "环境搭建 · 系统构建 · NAS · Docker", badge "5 篇", CTA "查看系列 →". These are editorial series entries, do not show completion progress.
+5. Main emphasis is FOUR clear category sections in a two-column, two-row editorial arrangement. Each section has a strong heading, a small count, a slim green accent rule and a "查看全部 →" link. Inside each category show THREE compact article rows separated by fine horizontal lines. Give only the first row in each section a small 100x76 illustrative thumbnail on the right; other rows use compact text so the page feels like a curated developer publication, not a wall of huge cards. Each row: concise bold article title, subdued single-line summary or two relevant small tags, subtle right arrow. Do not repeat common DshanPi-A1 prefixes on every article card. Category rows should have readable airy spacing and consistent hierarchy.
+
+Top left category: "系统与硬件" small "3 篇".
+Articles exact titles:
+"DshanPi-A1 开发板介绍" / summary "认识主板与开发生态"
+"Armbian 远程桌面" / small tags "Armbian" "Wayland"
+"Buildroot 系统构建与 IMX415 调试" / tags "Buildroot" "摄像头"
+First thumbnail: a small restrained green single-board-computer editorial illustration, do not imply exact pinout accuracy.
+
+Top right category: "AI 与视觉" small "5 篇".
+Articles:
+"Buildroot 下搭建 RKNN 环境" / tags "RKNN" "模型部署"
+"NPU 实战：YOLOv5 实时目标检测" / tags "NPU" "YOLOv5"
+"OpenCV 与 CPU 手势识别" / tags "OpenCV" "手势识别"
+First thumbnail: minimal green chip illustration with tiny connected neural nodes, elegant and flat.
+
+Bottom left category: "音视频与显示" small "5 篇".
+Articles:
+"GStreamer 16 路视频硬件加速" / tags "GStreamer" "MPP"
+"Weston 多屏配置" / tags "Weston" "多屏"
+"sox 与 rnnoise 音频降噪" / tags "音频" "降噪"
+First thumbnail: a restrained four-panel video grid visual with simple tonal frames, not fake screenshots.
+
+Bottom right category: "网络与服务" small "5 篇".
+Articles:
+"OpenWrt 开发环境搭建" / tags "OpenWrt" "入门"
+"构建自定义 OpenWrt 系统" / tags "OpenWrt" "构建"
+"OpenWrt Docker 玩法介绍" / tags "Docker" "应用部署"
+First thumbnail: an understated network node or ethernet editorial illustration.
+
+6. Bottom thin footer with "东山Π · 开发者文档与实践" and small links "文档首页" "GitHub" "文章归档". Do not add newsletter signup, login buttons, follower counts, ratings, fake views or likes.
+
+Constraints: Show all four category headings and all twelve listed article titles legibly in the single complete image. No duplicate categories. All category counts must total 18. Preserve exact Chinese labels and technology capitalization. Whitespace balanced to fit page, mostly text with only small tasteful thematic visuals. Generate a polished implementable UI layout, not a moodboard, not a collage.
