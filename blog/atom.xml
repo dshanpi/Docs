@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wiki.dshanpi.org/blog</id>
     <title>东山Π Blog</title>
-    <updated>2026-09-23T03:00:34.000Z</updated>
+    <updated>2026-11-17T10:59:59.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wiki.dshanpi.org/blog"/>
     <subtitle>东山Π Blog</subtitle>
@@ -11,7 +11,7 @@
         <title type="html"><![CDATA[DshanPI-A1buildroot下搭建RKNN环境]]></title>
         <id>https://wiki.dshanpi.org/blog/2025-12/DshanPI-A1 buildroot下搭建RKNN环境/buildroot下搭建RKNN环境</id>
         <link href="https://wiki.dshanpi.org/blog/2025-12/DshanPI-A1 buildroot下搭建RKNN环境/buildroot下搭建RKNN环境"/>
-        <updated>2026-09-23T03:00:34.000Z</updated>
+        <updated>2026-11-17T10:59:59.000Z</updated>
         <summary type="html"><![CDATA[开发环境]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="开发环境">开发环境<a href="https://wiki.dshanpi.org/blog/2025-12/DshanPI-A1%20buildroot%E4%B8%8B%E6%90%AD%E5%BB%BARKNN%E7%8E%AF%E5%A2%83/buildroot%E4%B8%8B%E6%90%AD%E5%BB%BARKNN%E7%8E%AF%E5%A2%83#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83" class="hash-link" aria-label="开发环境的直接链接" title="开发环境的直接链接" translate="no">​</a></h2>
 <blockquote>
