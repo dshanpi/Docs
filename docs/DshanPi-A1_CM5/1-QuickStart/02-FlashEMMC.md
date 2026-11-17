@@ -1,67 +1,70 @@
 ---
 title: 向 eMMC 烧录系统
 sidebar_label: 向 eMMC 烧录系统
-sidebar_position: 2
+sidebar_position: 3
 slug: /DshanPi-A1_CM5/QuickStart/FlashEMMC
 custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5/1-QuickStart/02-FlashEMMC.md
 ---
 
 # 向 eMMC 烧录系统
 
-目标是使用 Windows 电脑，将 CM5 专用 Armbian 原始磁盘镜像写入官方底板上 CM5 模组的 eMMC。
+在 Windows 上使用 RKDevTool，将 DshanPI A1 CM5 的 Armbian 整盘镜像写入核心板 eMMC。以下接线适用于官方 **V1.2 底板**。
 
-**本章为待实板验证的流程初稿。** 现有厂商逐步刷机页面针对 A1；CM5 的下载口位置、MASKROM 按键操作、供电规格与配套 Loader 尚需按实际底板确认。补齐这些信息后才能将本章作为直接照做的刷机教程。
+:::warning 先备份 eMMC 数据
+整盘写入会覆盖 eMMC 上的分区和文件。开始操作前，先将需要保留的数据备份到其他设备。
+:::
 
-## 刷机前准备
+## 1. 准备镜像和刷机工具
 
-准备 CM5 核心板与官方底板、符合该底板规格的电源、能够传输数据的 USB 线、Windows 电脑，以及上一章校验过的镜像。首次启动还需显示器与有线键鼠，或者已确认接线和电平的调试串口。
+1. 在 Windows 电脑上下载 CM5 的 GNOME 或 CLI 镜像（`.img.xz`）及同一版本的 `SHA256SUMS`。确认文件名含 `Dshanpi-a1-cm5`，按发布页校验压缩包。校验一致后解压，得到烧录用的 **`.img`** 文件。[镜像下载与校验](01-Resources.md)
+2. 下载 **DriverAssitant v5.1.1**、**RKDevTool v3.32** 和 **`rk3576_spl_loader_v1.09.107.bin`**。解压驱动和工具压缩包，按下载页的 SHA-256 校验 Loader 文件。[Windows 刷机资料](Downloads.md#flash-tools)
+3. 首次使用时，在驱动目录中以管理员身份运行 `DriverInstall.exe`，点击 **驱动安装**。安装完成后打开工具目录中的 `RKDevTool.exe`。
+4. 准备底板配套的 **12V 直流电源**和一根支持数据传输的 **USB Type-C 线**。使用其他适配器时，先核对输出电压、额定电流、插头尺寸和极性。
 
-刷写整盘会覆盖目标 eMMC 的分区和数据。先导出需要保留的文件、配置及应用数据；断电后取下 TF 卡和无关 USB 存储，以便烧录后确认系统确实从 eMMC 启动。核心板与底板的装配、拆卸均在断电状态下进行。
+如果手里的是为 CM5 构建的 Buildroot 打包固件 `update.img`，请在 RKDevTool 的 **升级固件** 页加载。本页的 **下载镜像** 配置用于 Armbian 整盘镜像。[Buildroot 固件说明](../4-Development/01-BuildrootSDK.md)
 
-不要凭 Type-C 外形判断功能。电源输入、USB OTG 下载、DP 输出需要在 CM5 底板实物图中分别标注。电源规格以 CM5 底板标识或对应原理图为准。
+## 2. 接线并进入 MASKROM 下载模式
 
-## 分清两种 img
+底板正面朝上，将双网口朝向自己。左端 HDMI 旁的 **USB1（Type-C）** 接电脑，右端的 **DC1（DC12V）** 接电源。**SW5（MASKROM）** 在底板右边缘，紧挨 RESET 键上方。[定位 USB1](/cm5/explorer?port=typec) · [定位 DC1](/cm5/explorer?port=power) · [定位 SW5](/cm5/explorer?port=maskrom)
 
-| 文件类别 | 示例 | RKDevTool 中的操作路线 |
+![CM5 V1.2 底板正面，左下为 Type-C 下载口，右下为 DC12V，右侧 RESET 上方为 MASKROM 按键](/img/cm5-explorer/base-ver1.2-front.jpg)
+
+1. 在底板断电时确认核心板已装好，取出 TF 卡，拔下 USB 存储设备。
+2. 保持 **DC1 断电**，用 Type-C 数据线将电脑连接到 **USB1**。
+3. **按住 SW5，再将 12V 电源接入 DC1**。上电后松开 SW5。A1 参考教程在上电约 2～3 秒后松键，**CM5 的松键时机待实板确认**。
+4. 查看 RKDevTool 窗口底部。显示 **发现一个 MASKROM 设备** 后，继续配置镜像。
+
+如果显示 **没有发现设备**，检查数据线是否接在 USB1，并在 Windows 设备管理器中检查 Rockusb 驱动。如果显示 **LOADER** 或开发板正常启动，先停止烧录。若系统已启动，请正常关机。断开电源和数据线，确认按键为 SW5，再按上述顺序重试。
+
+供电、下载口和按键分别见底板原理图第 6、3、11 页。其他底板版本请按相应图纸核对位置。[V1.2 底板原理图](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1-CM5/SCH_DshanPI-A1-CM5-Base.pdf) · [底板位号图第 1 页](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1-CM5/RDM_DshanPI-A1-CM5-Base.pdf#page=1)
+
+## 3. 写入并校验镜像
+
+在 RKDevTool 打开 **下载镜像** 页，只勾选前两行 **Loader** 和 **System**。在 **System** 行的 **存储** 列选择 **EMMC**，点击各行最右侧的单元格选择文件。
+
+| 勾选行 | 地址 | 选择的文件 |
 | --- | --- | --- |
-| Armbian 原始磁盘镜像 | 从 CM5 `.img.xz` 解压的 `.img` | 下载镜像，使用匹配 Loader，向 eMMC 起始地址写入整盘镜像 |
-| Rockchip 打包固件 | Buildroot SDK 生成的 `update.img` | 升级固件，读取固件内部的分区与镜像信息 |
+| Loader | `0x00000000` | `rk3576_spl_loader_v1.09.107.bin` |
+| System | `0x00000000` | 已解压的 CM5 Armbian 整盘镜像（`.img`） |
 
-两者的扩展名都可能是 `.img`，选择工具页面时必须看镜像来源和格式。不能仅凭文件名把 Armbian 镜像放入“升级固件”，也不能把打包 `update.img` 当作普通整盘镜像写到地址零。
+![RKDevTool v3.32 下载镜像页，标出 EMMC、两行文件、写入地址和执行按钮](../../DshanPi-A1/6-SystemDev/images/image-20250821092501879.png)
 
-## 安装驱动并识别设备
+图为 A1 教程中的工具界面，用于定位控件。请在本机选择第 1 节准备的 CM5 文件。**此 Loader 和写入配置在 CM5 上的完整烧录流程待实板验证。**
 
-在 Windows 电脑上解压驱动包，以管理员身份运行 `DriverInstall.exe` 并安装驱动。解压 RKDevTool，运行 `RKDevTool.exe`。
+1. 勾选 **强制按地址写**。确认目标为 **EMMC**、System 行选中 CM5 的 `.img`、窗口底部仍显示 **MASKROM**，再点击 **执行**。
+2. 保持 12V 供电和 USB 数据线连接。右侧日志会依次显示 Loader 下载（`Download Boot`）、镜像写入（`Download Image`）和校验（`Check Image`）。**等校验成功、任务结束后，再进行启动检查。**
 
-待补齐 CM5 实物图后，连接顺序应明确说明：使用哪个下载接口、按住哪个按键、何时上电以及何时松开。现有 A1 文档的参考顺序是“连接 OTG 数据线 → 按住 MASKROM → 接入电源 → 松开按键”，CM5 需实板复核，不直接沿用 A1 按键位置照片。
+若 Loader 下载失败，先核对 Loader 文件和 USB 连接。若写入或校验失败，保留右侧完整日志，检查供电、数据线和镜像校验值。[刷机故障排查](../3-Maintenance/02-Troubleshooting.md)
 
-通过条件是 RKDevTool 底部显示发现 MASKROM 设备，并且 Windows 设备管理器中 Rockusb 设备无驱动异常。界面无设备时，先处理数据线、接口、供电和驱动，不能继续写入。
+## 4. 确认系统从 eMMC 启动
 
-## Armbian 原始镜像的配置
+保持 TF 卡取出、SW5 松开。校验成功后，观察开发板是否进入 Armbian。**烧录后是否自动重启待 CM5 实板确认。** 若任务已结束，且确认系统尚未启动，断开 DC1 和 USB1，再仅接回 12V 电源开机。
 
-以下为完成 CM5 配套验证后使用的配置表。参考依据是厂商 A1 的 [eMMC 刷写页面](https://github.com/dshanpi/Docs/blob/master/docs/DshanPi-A1/6-SystemDev/5_Flash2eMMC.md)，表中的 CM5 Loader 必须由本板验证结果补齐。
+登录 Armbian 后，在**开发板终端**执行以下命令。
 
-| 设置项 | 应填写的内容 | 核对方式 |
-| --- | --- | --- |
-| 工具页面 | 下载镜像 | 与“升级固件”区分 |
-| Loader | 经验证的 CM5 USB 下载 Loader | 固定文件名、来源与 SHA-256 |
-| System | 已校验并解压的 CM5 Armbian `.img` | 文件名含 `Dshanpi-a1-cm5` |
-| 存储类型 | `EMMC` | 与实际安装目标一致 |
-| 原始镜像写入地址 | `0x00000000` | 对应整盘镜像起点 |
-| 写入选项 | 厂商参考流程使用“强制按地址写” | 以 CM5 实测截图最终确认 |
+```bash
+findmnt -n -o SOURCE /
+lsblk -o NAME,SIZE,TYPE,MOUNTPOINTS
+```
 
-当前 CM5 Release 没有独立 Loader 资产。现有构建服务器包含 `rk3576_spl_loader_v1.09.108.bin`，但“服务器上存在”不能证明它与本版 Armbian、所有内存规格的 CM5 组合均匹配。暂不把该文件或 A1 文档中的 `v1.09.107` 写成默认推荐。
-
-## 写入和首次启动的验收
-
-配套信息齐全后，核对目标存储、镜像与 Loader，执行写入。等待下载和校验阶段全部结束，保存完整日志；写入过程中保持供电与数据连接稳定。
-
-烧录完成和能够正常开机是两个验收步骤。工具报告完成后，让设备按正常启动方式重启，记录 U-Boot、内核启动和登录界面。若返回 MASKROM 或出现引导错误，保留日志，按 [常见问题排查](../3-Maintenance/02-Troubleshooting.md) 定位。
-
-首次进入系统后执行 [首次启动与登录](03-FirstBoot.md) 中的检查，确认实际板型、发行版本和根文件系统所在介质，再保存一次正常关机后冷启动的结果。
-
-## Buildroot 固件的独立路线
-
-拿到针对同一 CM5 底板确认过的 Rockchip 打包固件时，在 RKDevTool 的“升级固件”页加载 `update.img`，核对工具识别的信息后执行升级。其参考流程见 [厂商 Buildroot eMMC 文档](https://wiki.dshanpi.org/docs/DshanPi-A1/OtherSystem/RockChip-SDK/05-2_Flash2eMMC/)。该来源的板型仍是 A1，CM5 固件与接线需独立验证。
-
-本教程的 Ubuntu 首次登录、APT 和 dspi-config 章节不适用于 Buildroot。它的源码与固件位置见 [认识 Buildroot 与 SDK](../4-Development/01-BuildrootSDK.md)。
+第一条命令显示根文件系统所在设备。用第二条命令找到该分区所属的整盘，再按首次启动教程核对其设备类型为 `MMC`。**根分区位于 eMMC，并能在正常关机后从 eMMC 冷启动**，即可确认烧录结果。设备编号以板端输出为准。[首次登录与启动介质检查](03-FirstBoot.md#确认根文件系统位于-emmc)

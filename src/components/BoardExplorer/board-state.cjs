@@ -17,7 +17,7 @@ function validateBoard(views, ports) {
     if (x < crop.x || y < crop.y || x + width > crop.x + crop.width || y + height > crop.y + crop.height) {
       throw new Error('Port rectangle is outside the photograph crop: ' + port.id);
     }
-    if (!FILTERS.slice(0, 2).includes(port.group)) throw new Error('Unknown port group: ' + port.id);
+    if (!['常用接口', '扩展接口', '核心板'].includes(port.group)) throw new Error('Unknown port group: ' + port.id);
     if (!port.name || !port.href || !Array.isArray(port.supplies)) throw new Error('Incomplete port details: ' + port.id);
   }
   for (const [side, view] of Object.entries(views)) {

@@ -14,8 +14,9 @@ CM5 的硬件资料、可下载镜像、板端配置工具和系统源码分布�
 
 | 入口 | 包含什么 | 适合谁 |
 | --- | --- | --- |
+| [CM5 硬件资料](00-Hardware.md) | 底板原理图、位号图、开源 PCB 工程与硬件版本说明 | 查找接口定义、器件位置或修改底板的用户 |
 | [CM5 硬件资料帖](https://forums.100ask.net/t/topic/10577) | 核心板尺寸、封装、原理图、位号图与镜像入口 | 核对硬件或查找资料的用户 |
-| [ArmBianOS Releases](https://github.com/dshanpi/ArmBianOS/releases) | 多款产品的系统镜像与发行说明 | 首次安装和恢复系统的用户 |
+| [CM5 Armbian 镜像发行页](https://github.com/dshanpi/ArmBianOS/releases#release-dshanpi-a1-cm5-2026.10.10-1) | CM5 系统镜像、校验文件与发行说明 | 首次安装和恢复系统的用户 |
 | [dspi-config](https://github.com/dshanpi/dspi-config) | 板端状态、Overlay、软件源、升级与回滚工具 | 已经运行配套 Armbian 镜像的用户 |
 | [ArmBianOS](https://github.com/dshanpi/ArmBianOS) | 基于 Armbian 的板级适配和镜像构建框架 | 系统与驱动开发者 |
 | [DshanPi-A1_CM5-BuildrootSDK](https://github.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK) | 部分 Buildroot 与内核适配文件 | Buildroot 开发者 |
@@ -25,21 +26,7 @@ CM5 的硬件资料、可下载镜像、板端配置工具和系统源码分布�
 
 ## CM5 核心板图
 
-下面保留仓库原有的 CM5 V1.0 核心板 PCB 图，用于辨认核心板外形与连接器布局。它们不是官方底板的接线图；刷机口和供电口仍需按底板资料确认。
-
-<details>
-<summary>查看核心板正面 PCB 图</summary>
-
-![CM5 V1.0 核心板正面 PCB 图](../images/dshanpi-a1-cm5_v1.0-top.png)
-
-</details>
-
-<details>
-<summary>查看核心板背面 PCB 图</summary>
-
-![CM5 V1.0 核心板背面 PCB 图](../images/dshanpi-a1-cm5_v1.0-bootom.png)
-
-</details>
+CM5 V1.0 核心板正反面 PCB 图已集中放在 [硬件资料](00-Hardware.md) 中；该页同时提供官方底板原理图、位号图与开源 PCB 工程。核心板与底板版本分别核对。
 
 ## 两条系统路线
 
@@ -74,7 +61,7 @@ Armbian 使用 Ubuntu 软件包和板级 BSP，Buildroot 使用 SDK 构建的根
 
 ### A1 与 CM5 的说明需要区分
 
-原 A1 文档已有详细刷机步骤，可用于理解工具界面；CM5 的电源口、下载口、MASKROM 和实际供电规格仍须按其官方底板核对。论坛中也有位号图与原理图不对应的反馈，使用时应核对文件版本。
+原 A1 文档已有详细刷机步骤，可用于理解工具界面；CM5 的电源口、下载口、MASKROM 和实际供电规格须按 [CM5 底板硬件资料](00-Hardware.md) 核对。原理图、位号图与实物应使用匹配版本，具体接线和刷机顺序还需实板验证。
 
 摄像头等外设的“支持”可能指适配源码、镜像内有驱动或已经实板测试。教程按实际镜像说明范围，不将通用产品功能表当作全部版本的验收结果。
 

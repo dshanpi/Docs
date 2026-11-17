@@ -1,76 +1,159 @@
-import React, {useId, useState} from 'react';
+import React, {useEffect, useId, useRef, useState} from 'react';
+import {createPortal} from 'react-dom';
 import Link from '@docusaurus/Link';
 import Viewer from '../BoardExplorer/PhotoViewer';
-import PortDetails from '../BoardExplorer/PortDetails';
-import PortDirectory from '../BoardExplorer/PortDirectory';
 import useBoardSelection from '../BoardExplorer/useBoardSelection';
-import {getVisiblePorts} from '../BoardExplorer/board-state.cjs';
 import {VIEWS, PORTS, GUIDE, DAILY, DOCS} from './board-data';
-import styles from '../BoardExplorer/styles.module.css';
+import PortRegions from './PortRegions';
+import ui from './inspector.module.css';
 
-function Icon({name, size=18}) {
-  const paths = {
-    arrow: <path d="M4 12h15m-6-6 6 6-6 6"/>,
-    photo: <><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m4 18 5-5 4 4 3-4 5 5"/></>,
-    info: <><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-11v2"/></>,
-  };
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
-}
+const GROUPS = ['核心板', '常用接口', '扩展接口'];
+const MODES = {explore: '全部部件', guide: '连接与刷机', daily: '日常使用'};
 
-export default function CM5BoardExplorer({embedded=false}) {
-  const [tab,setTab]=useState('explore');
-  const {selected,current,side,filter,setFilter,select,changeSide,changeFilter,visiblePorts}=useBoardSelection({views:VIEWS,ports:PORTS});
-  const panelId=useId();
-  const step=GUIDE.findIndex(item=>item.port===selected);
-  const tabs=[['explore','01','认识主板'],['guide','02','连接与刷机'],['daily','03','日常使用']];
-  const switchSide=value=> {if(value!==side) {setTab('explore');changeSide(value);}};
-  const switchTab=value=> {
-    setTab(value);
-    if(value==='guide') select(GUIDE[0].port);
-    else {setFilter('常用接口');select(VIEWS.front.defaultPort);}
-  };
-  const changeStep=index=> {if(GUIDE[index]) select(GUIDE[index].port);};
-  const allowed=tab==='guide'?GUIDE.map(item=>item.port):tab==='daily'?DAILY.flatMap(item=>item.relatedPorts || [item.port]):null;
-  const displayedPorts=allowed?getVisiblePorts(PORTS,side,filter,selected,allowed):visiblePorts;
-  const onTabKeyDown=(event,index)=> {
-    const offsets={ArrowRight:1,ArrowLeft:-1,Home:-index,End:tabs.length-1-index};
-    if(!(event.key in offsets)) return;
-    event.preventDefault();
-    const next=(index+offsets[event.key]+tabs.length)%tabs.length;
-    switchTab(tabs[next][0]);
-    event.currentTarget.parentElement.querySelectorAll('[role="tab"]')[next].focus();
-  };
+export default function CM5BoardExplorer({embedded = false}) {
+  const {selected, side, select, browseSide, pinnedId} = useBoardSelection({
+    views: VIEWS, ports: PORTS, initialFilter: '全部',
+  });
+  const [preview, setPreview] = useState(null);
+  const [query, setQuery] = useState('');
+  const [groupFilter, setGroupFilter] = useState('全部类别');
+  const [mode, setMode] = useState('explore');
+  const [viewResetKey, setViewResetKey] = useState(0);
+  const explorerRef = useRef(null);
+  const readoutRef = useRef(null);
+  const [compact, setCompact] = useState(false);
+  const [fullscreenHost, setFullscreenHost] = useState(null);
+  useEffect(() => {
+    const root = explorerRef.current;
+    const observer = new ResizeObserver(([entry]) => setCompact(entry.contentRect.width <= 680));
+    const onFullscreen = () => setFullscreenHost(document.fullscreenElement === root ? root : null);
+    observer.observe(root);
+    document.addEventListener('fullscreenchange', onFullscreen);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('fullscreenchange', onFullscreen);
+    };
+  }, []);
+  const searchId = useId();
+  const shown = PORTS.find(port => port.side === side && port.id === preview)
+    ?? PORTS.find(port => port.side === side && port.id === pinnedId);
+  const showingPin = Boolean(shown && shown.id === pinnedId);
+  useEffect(() => {
+    if (readoutRef.current) readoutRef.current.scrollTop = 0;
+  }, [shown?.id]);
+  const steps = mode === 'guide' ? GUIDE : DAILY;
+  const currentStep = GUIDE.findIndex(item => item.port === pinnedId);
+  const allowed = mode === 'explore' ? PORTS : PORTS.filter(port =>
+    steps.some(item => (item.relatedPorts || [item.port]).includes(port.id)));
+  const scoped = allowed.filter(port => groupFilter === '全部类别' || port.group === groupFilter);
+  const onBoard = scoped.filter(port => port.side === side);
+  const needle = query.trim().toLowerCase();
+  const results = scoped.filter(port =>
+    [port.name, port.group, port.kind, port.id, port.note, VIEWS[port.side].label]
+      .some(value => value.toLowerCase().includes(needle)));
 
-  return <div className={`${styles.explorer} ${embedded?styles.embedded:''}`}>
-    <div className={styles.breadcrumb}><Link to={`${DOCS}/intro`}>CM5 使用指南</Link><span>/</span><span>交互认识主板</span></div>
-    <header className={styles.heading}>
-      <div><p className={styles.eyebrow}>DSHANPI · BOARD EXPLORER</p><h1>认识你的 CM5<span>Base ver1.2</span></h1>
-      <p className={styles.subtitle}>从接口开始，找到连接方法与下一步教程。</p></div>
-      <div className={styles.engineBadge}><Icon name="photo" size={22}/><div>正反面交互导览<small>实物照片 · 接口说明</small></div></div>
-    </header>
-    <div className={styles.tabs} role="tablist" aria-label="学习场景">
-      {tabs.map(([id,n,label],index)=>
-        <button key={id} type="button" role="tab" id={panelId+id} tabIndex={tab===id?0:-1} aria-selected={tab===id} aria-controls={panelId} onKeyDown={event=>onTabKeyDown(event,index)} onClick={()=>switchTab(id)}><span>{n}</span>{label}</button>)}
-      <Link to={`${DOCS}/intro`} className={styles.returnLink}>全部教程 <Icon name="arrow" size={16}/></Link>
-    </div>
-    <div id={panelId} role="tabpanel" aria-labelledby={panelId+tab}>
-      {tab==='guide' && <div className={styles.guideBar}>
-        <div><strong>刷机前导览</strong><span>先认识位置，再阅读经过核对的操作步骤。</span></div>
-        <div className={styles.guideSteps}>{GUIDE.map((item,index)=><button type="button" key={item.port} aria-pressed={step===index} onClick={()=>changeStep(index)}><span>{index+1}</span>{item.title}</button>)}</div>
-      </div>}
-      {tab==='daily' && <div className={styles.dailyBar}><span>今天想做什么？</span>{DAILY.map(item=><button type="button" key={item.port} aria-pressed={selected===item.port} onClick={()=>select(item.port)}>{item.title}<Icon name="arrow" size={15}/></button>)}</div>}
-      <div className={styles.workspace}>
-        <Viewer selected={selected} onSelect={select} visible={displayedPorts.map(port=>port.id)} views={VIEWS} ports={PORTS} boardName="CM5" side={side} onSideChange={switchSide} embedded={embedded}/>
-        <PortDetails port={current} views={VIEWS} count={PORTS.length} noteIcon={<Icon name="info" size={17}/>} linkIcon={<Icon name="arrow"/>}>
-          {tab==='guide' ? <div className={styles.stepNavigation}>
-            <button type="button" disabled={step<=0} onClick={()=>changeStep(step-1)}>上一步</button>
-            {step<GUIDE.length-1 ? <button type="button" onClick={()=>changeStep(step+1)}>下一个位置 →</button> : <span>导览结束 · 请核对操作条件</span>}
-          </div> : <button type="button" className={styles.allPorts} onClick={()=>{setTab('explore');setFilter('全部');}}>查看全部接口 <Icon name="arrow" size={16}/></button>}
-        </PortDetails>
+  function locate(id) {
+    setPreview(null);
+    setViewResetKey(key => key + 1);
+    select(id);
+  }
+  function browse(nextSide) {
+    setPreview(null);
+    browseSide(nextSide);
+  }
+  function switchMode(next) {
+    setMode(next);
+    setGroupFilter('全部类别');
+    setQuery('');
+    if (next === 'guide') locate(GUIDE[0].port);
+    else browse('front');
+  }
+
+  const reference = showingPin && <div className={ui.reference}>
+    <p>{shown.note}</p>
+    {shown.supplies.length > 0 && <p>所需设备：{shown.supplies.join('、')}</p>}
+    <Link to={shown.href}>{shown.link} ↗</Link>
+  </div>;
+  const readout = <aside ref={readoutRef} className={compact ? ui.mobileCard : ui.readout}
+    data-pinned={showingPin} aria-label="部件说明">
+    {shown ? <>
+      <div className={ui.detailHeading}>
+        <div><small>{showingPin ? '已固定 · ' : ''}{shown.kind}</small><h3>{shown.name}</h3></div>
+        {showingPin && <button type="button" className={ui.close} onClick={() => browse(side)}
+          title="关闭固定展示（Esc）" aria-label="关闭固定展示">×</button>}
       </div>
-      <PortDirectory ports={displayedPorts} selected={selected} onSelect={select} filter={filter}
-        onFilterChange={tab==='explore'?changeFilter:undefined} hint="选择名称，在主板上定位"/>
-      <div className={styles.scopeNote}><Icon name="info"/><p>正反面均为实物照片。接口位置按照片标注；供电规格、针脚定义、PCIe 设备兼容性与刷机操作请以对应底板资料和实板验证为准。</p></div>
+      <p>
+        {shown.emphasizeDescription ? <strong>{shown.description}</strong> : shown.description}
+        {shown.warning && <strong>{shown.warning}</strong>}
+      </p>
+      {compact && reference
+        ? <details key={shown.id}><summary>更多说明与资料</summary>{reference}</details>
+        : reference}
+    </> : <div className={ui.idle}><strong>部件说明</strong>
+      <span>将鼠标移到照片中的部件上，即可在这里查看用途。</span>
+    </div>}
+  </aside>;
+
+  return <div ref={explorerRef} className={`${ui.explorer} ${embedded ? ui.embedded : ''}`}
+    onKeyDown={event => {
+      if (event.key === 'Escape' && pinnedId) {event.preventDefault();browse(side);}
+    }}>
+    <header className={ui.heading}>
+      <div>{embedded ? <h2>DshanPI A1 <b>CM5</b></h2> : <h1>DshanPI A1 <b>CM5</b></h1>}
+        <p>悬停查看器件功能，点击固定说明。</p>
+      </div>
+      {!embedded && <Link className={ui.headerLink} to={`${DOCS}/Reference/Hardware`}>硬件图纸 ↗</Link>}
+    </header>
+
+    <div className={ui.layout}>
+      <Viewer selected={selected} onSelect={select} visible={onBoard.map(port => port.id)}
+        views={VIEWS} ports={PORTS} boardName="CM5" side={side} embedded={embedded}
+        onSideChange={next => {if (next !== side) {setMode('explore');setGroupFilter('全部类别');browse(next);}}}
+        appearance={ui} viewResetKey={viewResetKey} photoFallback={VIEWS[side].photo}
+        hint="放大后可拖动空白区域平移"
+        overlay={<PortRegions key={side} ports={onBoard} crop={VIEWS[side].crop}
+          activeId={shown?.id} pinnedId={pinnedId} onPreview={setPreview} onSelect={select}/>}
+        fullscreenTarget={explorerRef}/>
+
+      <div className={ui.rail}>
+        {compact ? shown && createPortal(readout, fullscreenHost || document.body) : readout}
+        <aside className={ui.catalog} aria-label="部件目录">
+          <div className={ui.catalogHeading}><h2>部件目录</h2>
+            {mode === 'explore' && <select aria-label="按部件类别筛选" value={groupFilter}
+              onChange={event => {browse(side);setGroupFilter(event.target.value);}}>
+              {['全部类别', ...GROUPS].map(group => <option key={group}>{group}</option>)}
+            </select>}
+          </div>
+          <div className={ui.modes} aria-label="浏览范围">
+            {Object.entries(MODES).map(([id, label]) => <button type="button" key={id}
+              aria-pressed={id === mode} onClick={() => switchMode(id)}>{label}</button>)}
+          </div>
+          <label className={ui.search} htmlFor={searchId}>
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8">
+              <circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/>
+            </svg>
+            <input id={searchId} type="search" aria-label="搜索部件" placeholder="搜索部件、位号或型号" value={query} onChange={event => setQuery(event.target.value)}/>
+          </label>
+          {mode !== 'explore' && <div className={ui.steps}>{steps.map(item => <button type="button" key={item.port}
+            onClick={() => locate(item.port)} aria-pressed={pinnedId === item.port}>{item.title}</button>)}
+            {mode === 'guide' && currentStep >= 0 && currentStep < GUIDE.length - 1 && <button type="button" onClick={() => locate(GUIDE[currentStep + 1].port)}>下一步 →</button>}
+          </div>}
+          <div className={ui.catalogList}>
+            {GROUPS.map(group => {
+              const items = results.filter(port => port.group === group);
+              if (!items.length) return null;
+              return <section key={group}>
+                <h3>{group}<span>{items.length}</span></h3>
+                {items.map(port => <button type="button" key={port.id} aria-pressed={pinnedId === port.id}
+                  onClick={() => locate(port.id)}>
+                  <span>{port.name}</span><small>{port.kind}</small>
+                </button>)}
+              </section>;
+            })}
+            {!results.length && <p>没有匹配的部件。可尝试位号 U6 或 U10。</p>}
+          </div>
+        </aside>
+      </div>
     </div>
   </div>;
 }

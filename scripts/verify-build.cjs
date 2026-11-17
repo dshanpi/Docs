@@ -42,6 +42,7 @@ for (const [id, thumbnail] of Object.entries(thumbnails)) {
 const routes = [
   '', 'blog', 'blog/archive', 'blog/tags', 'blog/page/2',
   'docs/DshanPi-A1/intro', 'docs/DshanPi-A1_CM5/intro',
+  'docs/DshanPi-A1_CM5/Reference/Hardware',
   'docs/DshanPi-A1_CM5/QuickStart/BoardExplorer', 'cm5/explorer',
 ];
 

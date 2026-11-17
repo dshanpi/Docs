@@ -14,7 +14,7 @@ custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5
 第一次接触开发板，可以从 Armbian Ubuntu 桌面版入手。需要运行终端服务时选择 CLI 版；需要定制固件和修改驱动时，再阅读 Buildroot 与 SDK 章节。
 
 :::info 教程版本
-当前内容为 **2026 年 11 月 12 日整理的初稿**，以 CM5 Armbian Ubuntu 24.04 为使用主线。eMMC 刷机仍需补齐官方底板接线图、匹配 Loader 和实板验证。详细范围见 [验证状态与后续内容](./5-Reference/02-Verification.md)。
+当前内容为 **2026 年 11 月 12 日整理的初稿**，以 CM5 Armbian Ubuntu 24.04 为使用主线。[eMMC 烧录教程](./1-QuickStart/02-FlashEMMC.md) 已按 V1.2 底板图纸标明 12V 供电口、USB 下载口与 MASKROM 按键。下载时序、实际写入和冷启动仍待实板验证。详细范围见 [验证状态与后续内容](./5-Reference/02-Verification.md)。
 :::
 
 ## 第一次使用
@@ -51,8 +51,9 @@ custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5
 
 ## 资料入口
 
+- [资料下载](./1-QuickStart/Downloads.md)（底板图纸、开源 PCB、系统镜像与刷机工具）
 - [核心板硬件资料与讨论](https://forums.100ask.net/t/topic/10577)
-- [CM5 系统镜像](https://github.com/dshanpi/ArmBianOS/releases/tag/dshanpi-a1-cm5-2026.10.10-1)
+- [CM5 Armbian 系统镜像](https://github.com/dshanpi/ArmBianOS/releases#release-dshanpi-a1-cm5-2026.10.10-1)
 - [ArmBianOS 源码](https://github.com/dshanpi/ArmBianOS)
 - [Buildroot 适配文件](https://github.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK)
 - [dspi-config 板端配置工具](https://github.com/dshanpi/dspi-config)

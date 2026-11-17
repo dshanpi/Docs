@@ -25,7 +25,7 @@ custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5
 | SSH connection refused | 板已可达但服务未监听，核对 ssh 服务状态 | `systemctl status ssh` |
 | 登录密码不正确 | 镜像版本、是否首次登录后已改密、是否误用构建机账号 | 镜像文件名与登录方式，不提交密码 |
 | 没有 Wi-Fi 接口 | 本板无线硬件、驱动模块、固件和 rfkill | `nmcli device status`、`rfkill list`、内核日志 |
-| USB 接口启用 PCIe1 后不可用 | 是否切换了共享 USB1/PCIe1 路径 | Overlay 配置及实际接线 |
+| 启用 PCIe1 后，两个 USB 2.0 Type-A 口均无法识别外设 | 两个插座共用 USB2_OTG1，使用 USB 外设需切回 USB 模式并重启 | Overlay 配置及实际接线 |
 | 软件安装提示架构错误 | 包是否为 ARM64 | `dpkg --print-architecture`、包架构 |
 | APT 提示签名或 404 | 系统时间、网络、本板源与版本是否完整公开 | 原始 APT 错误、`source show` |
 | 系统版本没有出现在更新列表 | 索引是否刷新、渠道、本板元包和公开发布状态 | `status` 与 `update list` |

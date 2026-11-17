@@ -1,12 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import styles from './styles.module.css';
+import sharedStyles from './styles.module.css';
 
 export default function PhotoViewer({selected, onSelect, visible, side, onSideChange, embedded,
-  views, ports, boardName}) {
+  views, ports, boardName, overlay, fullscreenTarget, hint, sceneClassName = '', photoFallback, viewResetKey, appearance}) {
+  const styles = appearance ? {...sharedStyles, ...appearance} : sharedStyles;
   const view=views[side], crop=view.crop;
+  const mediaLabel=view.mediaLabel || '实物照片';
   const photoUrl=useBaseUrl(view.photo);
   const frame=useRef(null), board=useRef(null), drag=useRef(null);
+  const resetKey=overlay ? viewResetKey : selected;
   const [zoom,setZoom]=useState(1);
   const [pan,setPan]=useState({x:0,y:0});
   const [fullscreen,setFullscreen]=useState(false);
@@ -16,18 +19,18 @@ export default function PhotoViewer({selected, onSelect, visible, side, onSideCh
 
   const reset=()=> {setZoom(1);setPan({x:0,y:0});};
   useEffect(()=> {reset();setMessage('');setFailed(false);},[side,photoUrl]);
-  // Interface selection always brings the whole photograph back into view.
-  useEffect(()=> {reset();},[selected]);
+  useEffect(()=> {reset();},[resetKey]);
   useEffect(()=> {
-    const update=()=> {setFullscreen(document.fullscreenElement===frame.current);reset();};
+    const update=()=> {setFullscreen(document.fullscreenElement===(fullscreenTarget?.current || frame.current));reset();};
     document.addEventListener('fullscreenchange',update);
     return ()=>document.removeEventListener('fullscreenchange',update);
-  },[]);
+  },[fullscreenTarget]);
   const changeZoom=delta=> {setZoom(value=>Math.min(2.5,Math.max(1,Math.round((value+delta)*100)/100)));setPan({x:0,y:0});};
   const toggleFullscreen=async()=> {
+    const target=fullscreenTarget?.current || frame.current;
     try {
       if (document.fullscreenElement) await document.exitFullscreen();
-      else if (frame.current?.requestFullscreen) await frame.current.requestFullscreen();
+      else if (target?.requestFullscreen) await target.requestFullscreen();
       else setMessage('当前浏览器不支持全屏，可使用放大按钮查看。');
     } catch {setMessage('浏览器未开启全屏，仍可使用放大按钮。');}
   };
@@ -48,22 +51,26 @@ export default function PhotoViewer({selected, onSelect, visible, side, onSideCh
 
   return <section className={styles.viewer} ref={frame} aria-label={`${boardName} 主板展示区`}>
     <div className={styles.viewerHeader}>
-      <span className={styles.viewLabel}><span className={styles.liveDot}/>主板{view.label}</span>
-      <div className={styles.viewToggle} aria-label="主板正反面">
+      <span className={styles.viewLabel}><span className={styles.liveDot}/>{view.label}</span>
+      <div className={styles.viewToggle} aria-label="选择板面">
         {Object.entries(views).map(([id,item])=><button type="button" key={id} aria-pressed={side===id} onClick={()=>onSideChange(id)}>{item.label}</button>)}
       </div>
     </div>
-    <div className={styles.scene} style={{'--board-ratio':crop.width/crop.height,'--photo-zoom':zoom}}>
+    <div className={`${styles.scene} ${sceneClassName}`} style={{'--board-ratio':crop.width/crop.height,'--photo-zoom':zoom}}>
       <div className={styles.photoWrap} onPointerDown={startDrag} onPointerMove={moveDrag}
         onPointerUp={endDrag} onPointerCancel={endDrag} onLostPointerCapture={endDrag}
         style={{touchAction:zoom>1?'none':'pan-y',cursor:zoom>1?'grab':'default'}}>
         <div className={styles.photoCrop} ref={board} style={{aspectRatio:`${crop.width}/${crop.height}`,transform:`translate(${pan.x}px, ${pan.y}px) scale(${zoom})`}}>
           <div className={styles.photoImage}>
-            <img src={photoUrl} alt={`${boardName} 主板${view.label}实物照片`} draggable="false" onError={()=>setFailed(true)}
+            <img src={photoUrl} alt={`${boardName} ${view.label}${mediaLabel}`} draggable="false" onError={event=>{
+                const img=event.currentTarget;
+                if (photoFallback && img.getAttribute('src')!==photoFallback) img.src=photoFallback;
+                else setFailed(true);
+              }}
               onLoad={()=>setFailed(false)} style={{width:`${view.imageWidth/crop.width*100}%`,left:`${-crop.x/crop.width*100}%`,top:`${-crop.y/crop.height*100}%`}}/>
           </div>
-          {!failed && current.side===side && <div className={styles.photoHighlight} style={{left:`${(current.rect[0]-crop.x)/crop.width*100}%`,top:`${(current.rect[1]-crop.y)/crop.height*100}%`,width:`${current.rect[2]/crop.width*100}%`,height:`${current.rect[3]/crop.height*100}%`}}/>}
-          {!failed && ports.filter(port=>port.side===side && visible.includes(port.id)).map(port=> {
+          {!failed && !overlay && current.side===side && <div className={styles.photoHighlight} style={{left:`${(current.rect[0]-crop.x)/crop.width*100}%`,top:`${(current.rect[1]-crop.y)/crop.height*100}%`,width:`${current.rect[2]/crop.width*100}%`,height:`${current.rect[3]/crop.height*100}%`}}/>}
+          {!failed && (overlay || ports.filter(port=>port.side===side && visible.includes(port.id)).map(port=> {
             const [x,y,w,h]=port.rect;
             const relativeX=(x+w/2-crop.x)/crop.width;
             const relativeY=(y+h/2-crop.y)/crop.height;
@@ -77,11 +84,11 @@ export default function PhotoViewer({selected, onSelect, visible, side, onSideCh
               aria-label={`查看 ${port.name}`} aria-pressed={selected===port.id} title={port.name} onClick={()=>onSelect(port.id)}>
               <span>{port.number}</span><strong style={labelStyle}>{port.name}</strong>
             </button>;
-          })}
+          }))}
         </div>
       </div>
       {failed && <div className={styles.imageError} role="status">图片暂时无法加载，请使用下方接口索引查看说明。</div>}
-      <span className={styles.sceneCaption}>DSHANPI {boardName}<span>{view.label}实物图</span></span>
+      <span className={styles.sceneCaption}>DSHANPI {boardName}<span>{view.label} · {mediaLabel}</span></span>
     </div>
     <div className={styles.viewerControls}>
       <div className={styles.cameraControls}>
@@ -94,8 +101,8 @@ export default function PhotoViewer({selected, onSelect, visible, side, onSideCh
       {!embedded && <button type="button" className={styles.fullscreen} onClick={toggleFullscreen}>{fullscreen?'退出全屏':'全屏查看'}</button>}
     </div>
     <div className={styles.viewerFootnote} role="status">
-      {message || (zoom>1?'拖动平移图片 · 点击热点查看接口':'切换正反面 · 点击热点查看接口')}
-      <span>实物照片 · {ports.filter(port=>port.side===side).length} 个标注位置</span>
+      {message || hint || (zoom>1?'拖动平移图片 · 点击热点查看接口':'切换正反面 · 点击热点查看接口')}
+      <span>{mediaLabel} · {ports.filter(port=>port.side===side).length} 个标注位置</span>
     </div>
   </section>;
 }

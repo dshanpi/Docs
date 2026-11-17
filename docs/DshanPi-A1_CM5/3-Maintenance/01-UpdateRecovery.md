@@ -78,7 +78,9 @@ fi
 
 ## PCIe1 与 USB1 模式
 
-根据 [CM5 适配说明](https://github.com/dshanpi/ArmBianOS/blob/main/docs/dshanpi-a1-cm5/README.md)，基础配置使用 USB1 路径，PCIe1 通过可选 Overlay 启用。启用 PCIe1 会关闭共享 USB1 DWC3/PHY 路径。
+**底板背面的 PCIe1 与正面的两个 USB 2.0 Type-A 接口不能同时使用。** 两个插座（位号 USB2、USB3）通过 CH334F 集线器接到 RK3576 的 USB2_OTG1。芯片的 Combo PHY1 切换为 PCIe1 时，USB2_OTG1 无法工作。Type-C 下载口使用独立的 OTG0。[底板原理图第 4 页](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1-CM5/SCH_DshanPI-A1-CM5-Base.pdf#page=4) · [核心板原理图第 11 页](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1-CM5/DshanPI-A1%28CM5%29_Core_SCH_V1.pdf#page=11)
+
+CM5 Armbian 默认启用 USB1 控制器。启用 `pcie1` Overlay 并重启后，系统关闭 USB1 控制器及其 USB 2.0 PHY，启用 PCIe1。[CM5 适配说明](https://github.com/dshanpi/ArmBianOS/blob/main/docs/dshanpi-a1-cm5/README.md)
 
 先确认 `overlay list` 存在 `pcie1`，对应 DTBO 可用，并且镜像使用 `/boot/armbianEnv.txt`。该工具不会自动修改 extlinux 启动配置。
 
