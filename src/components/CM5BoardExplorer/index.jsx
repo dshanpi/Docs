@@ -35,21 +35,22 @@ export default function CM5BoardExplorer({embedded = false}) {
     };
   }, []);
   const searchId = useId();
-  const shown = PORTS.find(port => port.side === side && port.id === preview)
-    ?? PORTS.find(port => port.side === side && port.id === pinnedId);
-  const showingPin = Boolean(shown && shown.id === pinnedId);
-  useEffect(() => {
-    if (readoutRef.current) readoutRef.current.scrollTop = 0;
-  }, [shown?.id]);
   const steps = mode === 'guide' ? GUIDE : DAILY;
   const currentStep = GUIDE.findIndex(item => item.port === pinnedId);
   const allowed = mode === 'explore' ? PORTS : PORTS.filter(port =>
     steps.some(item => (item.relatedPorts || [item.port]).includes(port.id)));
   const scoped = allowed.filter(port => groupFilter === '全部类别' || port.group === groupFilter);
   const onBoard = scoped.filter(port => port.side === side);
+  const shown = PORTS.find(port => port.side === side && port.id === preview)
+    ?? PORTS.find(port => port.side === side && port.id === pinnedId)
+    ?? onBoard.find(port => mode === 'explore' && side === 'front' && port.id === VIEWS.front.defaultPort);
+  const showingPin = Boolean(shown && shown.id === pinnedId);
+  useEffect(() => {
+    if (readoutRef.current) readoutRef.current.scrollTop = 0;
+  }, [shown?.id]);
   const needle = query.trim().toLowerCase();
   const results = scoped.filter(port =>
-    [port.name, port.group, port.kind, port.id, port.note, VIEWS[port.side].label]
+    [port.name, port.designator || '', port.group, port.kind, port.id, port.note, VIEWS[port.side].label]
       .some(value => value.toLowerCase().includes(needle)));
 
   function locate(id) {
@@ -107,7 +108,7 @@ export default function CM5BoardExplorer({embedded = false}) {
 
     <div className={ui.layout}>
       <Viewer selected={selected} onSelect={select} visible={onBoard.map(port => port.id)}
-        views={VIEWS} ports={PORTS} boardName="CM5" side={side} embedded={embedded}
+        views={VIEWS} ports={PORTS} boardName="DshanPI A1 CM5" side={side} embedded={embedded}
         onSideChange={next => {if (next !== side) {setMode('explore');setGroupFilter('全部类别');browse(next);}}}
         appearance={ui} viewResetKey={viewResetKey} photoFallback={VIEWS[side].photo}
         hint="放大后可拖动空白区域平移"
@@ -116,7 +117,7 @@ export default function CM5BoardExplorer({embedded = false}) {
         fullscreenTarget={explorerRef}/>
 
       <div className={ui.rail}>
-        {compact ? shown && createPortal(readout, fullscreenHost || document.body) : readout}
+        {compact ? shown && (preview || pinnedId) && createPortal(readout, fullscreenHost || document.body) : readout}
         <aside className={ui.catalog} aria-label="部件目录">
           <div className={ui.catalogHeading}><h2>部件目录</h2>
             {mode === 'explore' && <select aria-label="按部件类别筛选" value={groupFilter}

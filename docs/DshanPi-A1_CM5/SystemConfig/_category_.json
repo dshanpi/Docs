@@ -1,0 +1,12 @@
+{
+  "label": "系统配置与应用",
+  "position": 2.5,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "系统配置与应用",
+    "description": "在 DshanPI A1 CM5 上配置网络、传输文件或使用桌面应用。执行板端命令时，在 GNOME 桌面按 Super（Windows 徽标键），搜索“终端”或 terminal，按回车打开。",
+    "slug": "/DshanPi-A1_CM5/category/system-config"
+  }
+}

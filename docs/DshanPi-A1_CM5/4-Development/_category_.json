@@ -1,11 +1,11 @@
 {
-  "label": "进阶开发",
+  "label": "进阶系统开发",
   "position": 4,
   "collapsible": true,
   "collapsed": true,
   "link": {
     "type": "generated-index",
-    "title": "进阶开发",
+    "title": "进阶系统开发",
     "description": "认识 Buildroot、完整 SDK 与固件构建的关系。",
     "slug": "/DshanPi-A1_CM5/category/development"
   }

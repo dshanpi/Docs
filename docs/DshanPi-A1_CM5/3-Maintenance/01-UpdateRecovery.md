@@ -8,82 +8,71 @@ custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5
 
 # 系统更新与恢复
 
-CM5 Armbian 产品镜像使用 `dspi-config` 查看板型与版本、管理软件源、配置 Overlay，以及按发行版本安装配套软件包。正式命令名称是 **dspi-config**。
+本页适用于 DshanPI A1 CM5 的 Armbian 系统。请在开发板终端操作。升级前先备份个人文件和配置，并确认目标发行版及其依赖都能从本板的软件源下载。
 
-## 当前版本先核对更新条件
+## 1. 查看当前版本与软件源
 
-2026 年 11 月 12 日直接读取公开下载和 CM5 包索引时：
-
-| 项目 | 观察结果 |
-| --- | --- |
-| GitHub CM5 镜像 Release | `2026.10.10-1`，预发布 |
-| stable 的 CM5 arm64/all 索引 | 空 |
-| testing 的 CM5 发行元包 | `2026.10.08-3`、`2026.10.09-1` |
-| 镜像声明的 `25.11.0-trunk.20261010.1` headers 下载 | HTTP 404 |
-
-这次检查说明公开镜像与包仓库尚未形成完整对应关系，不代表安装于镜像中的软件包必然缺失。对本基线，先完成首次使用和状态检查；不要把“刷机后立即升级/回滚”列为必做步骤。安装外部 DKMS 驱动前也要先恢复完全匹配的 headers 供应。
-
-实际安装以板端 APT 验签后的可用版本和依赖结果为准；本文的 HTTP 索引观察不替代 APT 验签。
-
-## 只读查看系统
-
-在板端执行：
+**查看当前系统和软件源。** 先记下已安装的版本和正在使用的源。
 
 ```bash
 sudo dspi-config status
 sudo dspi-config source show
-sudo dspi-config overlay list
-sudo dspi-config update list
 ```
 
-`status` 显示系统发行元包版本和当前运行内核。`update list` 读取本地 APT 索引，不会自动刷新。需要刷新时执行 `sudo apt-get update`，遇到网络、签名或依赖错误，先保留并处理错误。
-
-无参数执行 `sudo dspi-config` 可打开终端菜单。工具能力与命令参考：[dspi-config 使用说明](https://github.com/dshanpi/dspi-config/blob/main/README.md)。本教程所用子命令也已对照镜像锁定的 [工具源码版本](https://github.com/dshanpi/dspi-config/blob/69f441a1e7d01feaaf9c936cc5db6ac793805668/bin/dspi-config)。
-
-## 区分下载镜像源和系统渠道
-
-Ubuntu 下载速度慢，可在本板配套源正常的前提下选择下载镜像：
-
-```bash
-sudo dspi-config source mirror tuna
-sudo dspi-config source show
-```
-
-可用预设还包括 `official` 和 `ustc`。这改变 Ubuntu Ports 的下载地址，不改变 CM5 板型和系统渠道。
-
-`stable` 与 `testing` 是 DShanPI 软件包渠道，分别对应 `noble` 与 `noble-testing`。只有目标渠道确实包含适用于本板的配套发行时，才安排切换。当前 stable 空的观察结果不能当成“切回 stable 即恢复正常”的依据。
-
-CM5 使用 `common` 与 `dshanpi-a1-cm5` components，不能添加 A1、R1 的 component 来凑依赖。签名密钥配置应由配套 repository 和 keyring 软件包提供。
-
-## 有可用配套发行时再更新
-
-以下流程用于后续已恢复完整发布、且确认目标版适用于本板的情况。更新前将个人文件和重要配置备份到另一台设备，保存当前 `status` 输出，确保供电和网络稳定。
+**刷新软件包索引，再列出可更新版本。** 下一步要从这个列表中选取版本号。
 
 ```bash
 sudo apt-get update
 sudo dspi-config update list
-read -r -p '输入已核实且列表可见的目标系统发行版本：' TARGET_VERSION
+```
+
+记下 `status` 显示的发行元包版本和运行内核，在 `source show` 中核对渠道与板型组件。索引刷新成功后，再从 `update list` 中选目标版本。若刷新出现签名错误或 404，先解决软件源问题。[常见问题排查](02-Troubleshooting.md)
+
+<details>
+<summary>教程镜像的软件源核对记录（2026 年 11 月 12 日）</summary>
+
+当时镜像 `2026.10.10-1` 标记为预发布，公开 stable 索引为空，testing 元包列出 `2026.10.08-3` 和 `2026.10.09-1`。`25.11.0-trunk.20261010.1` 的内核头文件链接返回 404。安装外部驱动前，应另行确认能取得与运行内核匹配的头文件。
+
+</details>
+
+### 按需更换 Ubuntu 下载镜像
+
+下载较慢时，可用 `sudo dspi-config source mirror tuna` 切换 Ubuntu Ports 下载地址，再用 `sudo dspi-config source show` 核对。可选预设还有 `official` 和 `ustc`。
+
+板级包由独立渠道提供。stable 对应 `noble`，testing 对应 `noble-testing`。核对组件为 `common` 与 `dshanpi-a1-cm5`，并使用配套 repository 和 keyring 包提供的签名配置。
+
+## 2. 安装指定版本
+
+更新期间保持供电和网络稳定。
+
+**输入目标版本。** 照上一步的列表填写，在同一终端继续。
+
+```bash
+read -r -p '输入目标发行版本：' TARGET_VERSION
+```
+
+**安装选中的版本。** 整段复制，输入为空时会跳过安装。
+
+```bash
 if [ -n "$TARGET_VERSION" ]; then
     sudo dspi-config update install "$TARGET_VERSION"
 fi
 ```
 
-工具先展示 APT 模拟结果，再请求安装确认。逐项检查升级、降级和删除内容；模拟失败时先解决原因，不强行删除本板元包。安装成功后，如果变更涉及内核、BSP 或驱动，保存工作并重启，再检查系统状态及受影响外设。
+工具先显示 APT 模拟结果。核对将安装、降级或删除的包，再确认执行。如果模拟失败或提示移除板级元包，请退出并保留报错。涉及内核、BSP 或驱动的变更，安装完成后保存工作并重启，运行 `sudo dspi-config status` 核对版本，再测试受影响的外设。[工具命令说明](https://github.com/dshanpi/dspi-config/blob/69f441a1e7d01feaaf9c936cc5db6ac793805668/bin/dspi-config)
 
-## 回滚的含义
+## 3. 恢复旧版系统
 
-`sudo dspi-config update rollback` 会从当时本地索引可见版本中选择低于当前版本的最高版本，再进入配套安装流程。它不是文件系统快照，也不保证回到上一次安装的版本。
-
-需要恢复到指定版本时，优先在刷新索引后用 `update install` 指定可用旧版，并核对所有依赖是否可下载。切换渠道本身不会降级已安装的软件。系统无法启动时需要恢复启动配置或重新刷写已确认的镜像，不能靠板端升级命令处理。
+- **能登录，需恢复指定版本。** 刷新索引并确认所需旧版和依赖可下载，再按上一步指定该版本安装。
+- **能登录，需退到最近的可用旧版。** `sudo dspi-config update rollback` 从本地索引中选择低于当前版本的最高版本。确认模拟结果后再安装。个人文件和配置需从备份恢复。
+- **无法启动。** 若刚调整启动配置，优先恢复已知可用的配置。需要重刷时，先保存可读取的数据，再使用已核实的镜像。[向 eMMC 烧录系统](../1-QuickStart/02-FlashEMMC.md)
 
 ## PCIe1 与 USB1 模式
 
-**底板背面的 PCIe1 与正面的两个 USB 2.0 Type-A 接口不能同时使用。** 两个插座（位号 USB2、USB3）通过 CH334F 集线器接到 RK3576 的 USB2_OTG1。芯片的 Combo PHY1 切换为 PCIe1 时，USB2_OTG1 无法工作。Type-C 下载口使用独立的 OTG0。[底板原理图第 4 页](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1-CM5/SCH_DshanPI-A1-CM5-Base.pdf#page=4) · [核心板原理图第 11 页](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1-CM5/DshanPI-A1%28CM5%29_Core_SCH_V1.pdf#page=11)
+底板正面的两个 USB 2.0 Type-A 插座（USB2、USB3）经 CH334F 共用 USB2_OTG1。Armbian 默认启用 USB1。切换为 PCIe1 后，两个 Type-A 口都将停止数据传输，Type-C 下载口使用独立的 OTG0。[底板原理图第 4 页](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1-CM5/SCH_DshanPI-A1-CM5-Base.pdf#page=4) · [核心板原理图第 11 页](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1-CM5/DshanPI-A1%28CM5%29_Core_SCH_V1.pdf#page=11)
 
-CM5 Armbian 默认启用 USB1 控制器。启用 `pcie1` Overlay 并重启后，系统关闭 USB1 控制器及其 USB 2.0 PHY，启用 PCIe1。[CM5 适配说明](https://github.com/dshanpi/ArmBianOS/blob/main/docs/dshanpi-a1-cm5/README.md)
+1. 在板端运行 `sudo dspi-config overlay list`，确认有 `pcie1` 及对应的 DTBO 文件，且系统使用 `/boot/armbianEnv.txt` 启动。工具仅修改该启动配置。若当前依赖 Type-A 键鼠，请先准备好重启后的其他操作方式。
+2. **使用 PCIe1** 时运行 `sudo dspi-config overlay enable pcie1`。**恢复 USB** 时运行 `sudo dspi-config overlay disable pcie1`。
+3. 保存工作并重启。PCIe 模式下检查目标设备是否枚举成功，USB 模式下插入键盘或 U 盘验证能否使用。[板级适配说明](https://github.com/dshanpi/ArmBianOS/blob/main/docs/dshanpi-a1-cm5/README.md)
 
-先确认 `overlay list` 存在 `pcie1`，对应 DTBO 可用，并且镜像使用 `/boot/armbianEnv.txt`。该工具不会自动修改 extlinux 启动配置。
-
-确认共享接口不会影响当前操作后，可执行 `sudo dspi-config overlay enable pcie1`，保存工作并重启。恢复则执行 `sudo dspi-config overlay disable pcie1`，再次重启。重启后要用实际外设检验；配置显示 enabled 只表示启动文件已修改。
-
-`armbianEnv.txt.dspi-config.bak` 只保留最近一次启动配置写入前的备份，不等同于完整系统备份。
+`armbianEnv.txt.dspi-config.bak` 仅保留上一次写入前的启动配置。

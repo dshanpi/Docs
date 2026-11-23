@@ -1,0 +1,16 @@
+---
+title: 系统配置与应用
+slug: /DshanPi-A1_CM5/category/usage
+unlisted: true
+---
+
+import {Redirect, useLocation} from '@docusaurus/router';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+export function UsageCategoryRedirect() {
+  const pathname = useBaseUrl('/docs/DshanPi-A1_CM5/category/system-config');
+  const {search} = useLocation();
+  return <Redirect to={{pathname, search}} />;
+}
+
+<UsageCategoryRedirect />

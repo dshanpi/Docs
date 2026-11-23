@@ -1,0 +1,26 @@
+---
+title: 日常使用
+slug: /DshanPi-A1_CM5/Usage/DailyUse
+unlisted: true
+---
+
+import {Redirect, useLocation} from '@docusaurus/router';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+export function DailyUseRedirect() {
+  const {hash, search} = useLocation();
+  const common = 'SystemConfig/CommonOperations';
+  const sections = [
+    ['连接-wi-fi', 'SystemConfig/NetworkConnectionGuide', '在终端连接-wi-fi'],
+    ['安装常用软件', common, '安装常用软件'],
+    ['调整显示和音频', 'QuickStart/FirstBoot', 'display-output'],
+    ['使用-u-盘和移动存储', common, '使用-u-盘和移动存储'],
+    ['查看负载与温度', common, '查看负载与温度'],
+  ];
+  const fragment = hash.slice(1);
+  const match = sections.find(([id]) => fragment === id || fragment === encodeURIComponent(id));
+  const pathname = useBaseUrl('/docs/DshanPi-A1_CM5/' + (match ? match[1] : common));
+  return <Redirect to={{pathname, search, hash: match ? '#' + match[2] : ''}} />;
+}
+
+<DailyUseRedirect />

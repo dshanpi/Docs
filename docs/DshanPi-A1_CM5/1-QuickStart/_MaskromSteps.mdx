@@ -1,0 +1,21 @@
+1. 底板断电时取出 TF 卡，拔下 USB 存储设备。用 **Type-C 数据线**连接电脑和底板的 [Type-C 下载口](/cm5/explorer?port=typec)，再将 **12V 电源**插入 [DC12V](/cm5/explorer?port=power)。
+2. **按住上方的 MASKROM 键不放，短按一下下方的 RST（RESET）键。** 先松开 RST，再松开 MASKROM。
+3. 确认 RKDevTool 底部显示 **发现一个 MASKROM 设备**，再开始写入。
+
+<svg viewBox="0 350 929 660" width="740" style={{display:'block', maxWidth:'100%', height:'auto', marginBottom:'1rem'}} role="img" aria-label="进入烧录模式接线图：左下角 Type-C 接电脑，右下角 DC12V 接电源。右侧两枚白色按键中，按住上键 MASKROM，短按下键 RST。">
+  <image href={require('./wiring/flash-maskrom.png').default} width="929" height="1024" />
+  <g fill="none" stroke="white" strokeWidth="9" strokeLinejoin="round" strokeLinecap="round">
+    <path d="M166 906 L192 840 M183 849 L192 840 L193 853 M637 913 L698 850 M686 854 L698 850 L694 863 M796 556 L718 614 M724 602 L718 614 L732 610 M800 700 L719 646 M732 648 L719 646 L725 658" />
+  </g>
+  <g fill="none" stroke="#5b21b6" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round">
+    <path d="M166 906 L192 840 M183 849 L192 840 L193 853 M637 913 L698 850 M686 854 L698 850 L694 863 M796 556 L718 614 M724 602 L718 614 L732 610 M800 700 L719 646 M732 648 L719 646 L725 658" />
+  </g>
+  <g fill="#5b21b6" stroke="white" strokeWidth="2">
+    <rect x="17" y="904" width="239" height="45" rx="8" /><rect x="493" y="908" width="208" height="45" rx="8" />
+    <rect x="711" y="515" width="209" height="45" rx="8" /><rect x="741" y="696" width="178" height="45" rx="8" />
+  </g>
+  <g fill="white" textAnchor="middle" fontFamily="system-ui, sans-serif" fontSize="21" fontWeight="650">
+    <text x="136" y="934">① Type-C 接电脑</text><text x="597" y="938">② 接 12V 电源</text>
+    <text x="815" y="545">③ 按住 MASKROM</text><text x="830" y="726">④ 短按 RST</text>
+  </g>
+</svg>

@@ -110,7 +110,7 @@ const config = {
               {
               type: 'docSidebar',
               sidebarId: 'dshanpia1cm5Sidebar',
-              label: 'DshanPi-A1(CM5)',
+              label: 'DshanPI A1 CM5',
               },         
             ],
           },

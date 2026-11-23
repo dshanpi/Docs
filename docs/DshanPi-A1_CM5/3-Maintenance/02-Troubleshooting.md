@@ -8,69 +8,73 @@ custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5
 
 # 常见问题排查
 
-先确定故障发生在哪个阶段：电脑未识别设备、刷写中断、刷完无法启动、系统能启动但外设异常，或更新失败。不同阶段需要不同证据。
+先找到操作停止在哪一步，记下首次报错。刷机问题先看 Windows 电脑上的 RKDevTool；能登录 Armbian 后，再用开发板终端查看系统状态。
 
-## 按现象检查
+## 刷机与启动
 
-| 现象 | 先检查什么 | 应保留的信息 |
-| --- | --- | --- |
-| RKDevTool 没发现设备 | 数据线是否能传数据，是否接下载口，Rockusb 驱动与 MASKROM 操作 | 底板版本、接线照片、设备管理器状态 |
-| 下载 Loader 失败 | Loader 是否匹配 RK3576、CM5 内存规格与此刷机流程，供电和 USB 是否稳定 | Loader 文件名/哈希、完整下载日志 |
-| 镜像解析错误 | 原始 Armbian img 与 Rockchip update.img 是否选错页面，压缩包是否已解压 | 镜像来源、文件名、SHA-256、工具页面 |
-| 写入或校验失败 | 文件校验、供电、线材、USB 连接与 eMMC 识别 | 完整日志与首次失败位置 |
-| 刷完仍启动旧系统 | 是否插着 TF 卡，启动配置是否来自另一介质 | 串口启动日志、`findmnt`、`lsblk` |
-| 显示器黑屏 | 显示器输入、HDMI OUT 接口、系统是否已在串口或网络启动 | 启动日志、显示器型号、接口与线材 |
-| 串口乱码 | 调试口接线、电平、波特率、流控及适配器是否支持目标速率 | 适配器型号、串口参数和截图 |
-| SSH 连接超时 | 板端实际 IP、路由器隔离、防火墙和是否同网段 | `ip -br addr`、`ip route`、客户端报错 |
-| SSH connection refused | 板已可达但服务未监听，核对 ssh 服务状态 | `systemctl status ssh` |
-| 登录密码不正确 | 镜像版本、是否首次登录后已改密、是否误用构建机账号 | 镜像文件名与登录方式，不提交密码 |
-| 没有 Wi-Fi 接口 | 本板无线硬件、驱动模块、固件和 rfkill | `nmcli device status`、`rfkill list`、内核日志 |
-| 启用 PCIe1 后，两个 USB 2.0 Type-A 口均无法识别外设 | 两个插座共用 USB2_OTG1，使用 USB 外设需切回 USB 模式并重启 | Overlay 配置及实际接线 |
-| 软件安装提示架构错误 | 包是否为 ARM64 | `dpkg --print-architecture`、包架构 |
-| APT 提示签名或 404 | 系统时间、网络、本板源与版本是否完整公开 | 原始 APT 错误、`source show` |
-| 系统版本没有出现在更新列表 | 索引是否刷新、渠道、本板元包和公开发布状态 | `status` 与 `update list` |
-| 摄像头有节点但没图像 | 传感器、媒体拓扑、ISP/AIQ 服务和本镜像支持状态 | 镜像/底板/摄像头版本与相关日志 |
+| 现象 | 下一步检查 |
+| --- | --- |
+| RKDevTool 没发现设备 | 核对 12V 供电、Type-C 下载口和 USB 数据线，重新进入 MASKROM 模式。Windows 设备管理器应出现 **Rockusb Device**。[驱动安装与接线](../1-QuickStart/02-FlashEMMC.md#driver-setup) |
+| 下载 Loader 失败 | 核对 Loader 文件名、校验值与核心板内存规格，检查供电和 USB 连接。保存首次失败位置和完整工具日志。 |
+| 固件解析失败 | 先解压。Armbian 原始 `.img` 使用 **下载镜像** 页，Buildroot 打包固件使用 **升级固件** 页。[按系统选择烧录步骤](../1-QuickStart/02-FlashEMMC.md) |
+| eMMC 写入或校验失败 | 复核镜像 SHA-256，检查 eMMC 识别、供电与线材，保留完整日志。 |
+| 刷完仍进入旧系统 | 查看 TF 卡是否插入。能登录时，用 `findmnt -n -o SOURCE /` 找到根分区，再核对父设备类型。[判断根文件系统所在介质](../1-QuickStart/03-FirstBoot.md#确认根文件系统位于-emmc) |
+| HDMI 黑屏 | 核对显示器输入源和底板 HDMI 接口，通过串口或网络确认系统是否已启动。已进入 GNOME 时核对主显示器。[设置桌面显示输出](../1-QuickStart/03-FirstBoot.md#display-output) |
+| 调试串口乱码 | 核对接线、TTL 电平、流控及适配器支持的速率。Buildroot SDK 记录为 1,500,000 baud，其他镜像按各自说明设置；确认电平前请勿接适配器供电脚。 |
 
-Buildroot SDK 记录中的调试串口为 1,500,000 baud；具体 Armbian 镜像和硬件接法仍以对应版本说明为准。确认 TTL 电平前不要连接串口适配器的供电脚。
+## 网络、登录与外设
 
-## 收集最小诊断信息
+| 现象 | 下一步检查 |
+| --- | --- |
+| SSH 连接超时 | 在开发板运行 `ip -br addr` 和 `ip route`，核对目标 IP、同网段连接、防火墙及路由器隔离设置。[网络连接指南](../SystemConfig/01-NetworkConnectionGuide.md) |
+| SSH 提示 `Connection refused` | 在开发板运行 `systemctl status ssh.socket ssh.service --no-pager`，检查监听状态。[远程登录指南](../SystemConfig/02-RemoteConfig.md) |
+| 密码不正确 | 核对镜像类型、登录账号及首次启动时设置的密码。[首次启动与登录](../1-QuickStart/03-FirstBoot.md) |
+| 找不到 Wi-Fi 接口 | 运行 `nmcli device status` 与 `rfkill list`，检查无线接口和禁用状态，再查看内核日志中的驱动或固件报错。 |
+| 启用 PCIe1 后两个 Type-A 口都不能用 | 若需要 USB 外设，切回 USB 模式并重启，再插入键盘或 U 盘测试。[PCIe1 与 USB1 模式](01-UpdateRecovery.md#pcie1-与-usb1-模式) |
+| 摄像头有设备节点但没有图像 | 核对传感器型号、媒体拓扑、ISP 通道及 AIQ 服务，记录实际设备节点和采集报错。[摄像头采集教程](../AppDev/Vision/Camera.md) |
 
-在能够正常登录的 Armbian 板端逐条执行：
+## 软件安装与更新
+
+| 现象 | 下一步检查 |
+| --- | --- |
+| 安装包架构错误 | 用 `dpkg --print-architecture` 核对系统架构，再查看 DEB 包的 `Architecture` 字段。板端可安装 `arm64` 或 `all` 架构的软件包。[检查本地安装包](../SystemConfig/09-CommonOperations.md#安装常用软件) |
+| APT 报签名错误或 404 | 核对系统时间、网络和 `sudo dspi-config source show` 的输出，记录报错的软件源及包版本。 |
+| 目标版本未出现在列表 | 刷新索引后运行 `sudo dspi-config update list`，核对板型组件和渠道。[系统更新与恢复](01-UpdateRecovery.md) |
+
+## 收集诊断信息
+
+在能登录的 Armbian 开发板上，先记录系统、内核和本次启动的错误。网络、存储、更新问题再附上对应表格中所列的命令输出。
+
+**记录系统和内核版本。** 反馈问题时附上这三条输出。
 
 ```bash
 cat /etc/os-release
 cat /etc/armbian-release
 uname -a
-sudo dspi-config status
-sudo dspi-config source show
-sudo dspi-config overlay list
-findmnt -n -o SOURCE /
-lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS,MODEL
-ip -br addr
-ip route
+```
+
+**找出启动失败的服务。** 重点看服务名。
+
+```bash
 systemctl --failed --no-pager
+```
+
+**查看本次启动日志。** 保留与故障发生时间接近的警告和错误。
+
+```bash
 sudo journalctl -b -p warning --no-pager -n 100
 ```
 
-某条命令不存在时记录提示并继续其他项。Buildroot 不一定有 systemd、journalctl 和 dspi-config，应改用其镜像提供的日志工具。
-
-提交反馈前检查输出，去掉密码、令牌、无线凭据和不希望公开的地址、设备序列号。不要上传整个 `/etc`、用户主目录或 SSH 私钥。
+Buildroot 使用镜像提供的启动日志和诊断工具。提交前请移除密码、令牌、私钥、无线凭据和需要保密的地址。
 
 ## 反馈模板
 
 ```text
-核心板型号与内存/eMMC规格：
-官方底板PCB版本：
-镜像完整文件名与下载页面：
-镜像SHA-256：
-烧录工具版本与Loader文件名：
-供电、下载口、显示器等接线：
-复现步骤：
-预期现象：
-实际现象与首次报错：
-是否插有TF卡：
-能否串口登录或SSH：
-附带的最小日志：
+核心板型号、内存/eMMC 规格、底板版本：
+镜像完整文件名、下载地址、SHA-256：
+供电与接线、是否插有 TF 卡：
+操作步骤、预期结果：
+实际现象、首次报错与相关日志：
 ```
 
-现有硬件资料讨论入口：[CM5 资料帖](https://forums.100ask.net/t/topic/10577)。报告问题时始终附上完整 CM5 型号和镜像版本，避免与原 A1 的问题混淆。
+刷机问题请附 RKDevTool 版本和 Loader 文件名；启动问题请说明串口是否有输出、能否登录。[硬件资料与讨论](https://forums.100ask.net/t/topic/10577)

@@ -1,21 +1,18 @@
 ---
-title: DshanPi A1 CM5 使用指南
+title: DshanPI A1 CM5 使用指南
 sidebar_label: 使用指南
 sidebar_position: 0
 slug: /DshanPi-A1_CM5/intro
-description: DshanPi A1 CM5 官方底板的镜像选择、eMMC 刷机、首次启动和日常使用教程。
+description: 使用 DshanPI A1 CM5 核心板与官方底板，完成接线、系统烧录和首次登录，再按需配置系统、开发应用或编译固件。
 custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5/intro.mdx
 ---
 
-# DshanPi A1 CM5 使用指南
+# 使用指南
 
-这套指南面向 **DshanPi A1 CM5 核心板与官方底板**，从选择系统镜像开始，介绍通过 Windows 电脑向 eMMC 安装系统，再完成首次登录、联网和日常使用。
+本指南适用于 **DshanPI A1 CM5 核心板与官方底板**。需要图形桌面时，选择 Armbian GNOME 桌面版。只用命令行可选 Armbian CLI 版，需要定制嵌入式系统可选 Buildroot。
 
-第一次接触开发板，可以从 Armbian Ubuntu 桌面版入手。需要运行终端服务时选择 CLI 版；需要定制固件和修改驱动时，再阅读 Buildroot 与 SDK 章节。
-
-:::info 教程版本
-当前内容为 **2026 年 11 月 12 日整理的初稿**，以 CM5 Armbian Ubuntu 24.04 为使用主线。[eMMC 烧录教程](./1-QuickStart/02-FlashEMMC.md) 已按 V1.2 底板图纸标明 12V 供电口、USB 下载口与 MASKROM 按键。下载时序、实际写入和冷启动仍待实板验证。详细范围见 [验证状态与后续内容](./5-Reference/02-Verification.md)。
-:::
+- **第一次使用开发板**，按顺序准备工具、连接硬件、下载镜像，再用 Windows 电脑将系统写入 eMMC。[从第一步开始](#第一次使用)
+- **已经能够登录系统**，可以直接配置网络、安装软件，或开始编写应用、编译固件。[按任务查找教程](#已经能够开机)
 
 ## 第一次使用
 
@@ -23,37 +20,32 @@ custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5
 
 | 步骤 | 从这里开始 | 本章完成什么 |
 | --- | --- | --- |
-| 01 | [选择系统与下载镜像](./1-QuickStart/01-Resources.md) | 核对 CM5 板型，选择桌面版或 CLI，校验下载文件 |
-| 02 | [向 eMMC 烧录系统](./1-QuickStart/02-FlashEMMC.md) | 分清镜像格式，准备驱动与配套文件，了解刷机流程 |
-| 03 | [首次启动与登录](./1-QuickStart/03-FirstBoot.md) | 设置用户，确认启动介质，联网并使用 SSH |
+| 01 | [资料下载](./1-QuickStart/Downloads.md) | 获取底板图纸、USB 驱动和烧录工具 |
+| 02 | [硬件连接](./1-QuickStart/HardwareConnections.md) | 对照 DshanPI A1 CM5 底板接线图，找到 Type-C 下载口、12V 电源口和 MASKROM 按键 |
+| 03 | [选择系统与下载镜像](./1-QuickStart/01-Resources.md) | 下载并解压 DshanPI A1 CM5 专用镜像，选择 Armbian 时核对文件名中的 `Dshanpi-a1-cm5` |
+| 04 | [向 eMMC 烧录系统](./1-QuickStart/02-FlashEMMC.md) | 进入下载模式，用 RKDevTool 写入所选系统 |
+| 05 | [首次启动与登录](./1-QuickStart/03-FirstBoot.md) | 在开发板上设置 Armbian 登录账号，并在板端终端确认从 eMMC 启动 |
 
 ## 已经能够开机
 
-| 你想做什么 | 对应教程 |
-| --- | --- |
-| 连接 Wi-Fi、安装软件、使用音频和 U 盘 | [日常使用](./2-Usage/01-DailyUse.md) |
-| 查看系统版本、了解更新与回滚 | [系统更新与恢复](./3-Maintenance/01-UpdateRecovery.md) |
-| 处理刷机、启动、网络或外设问题 | [常见问题排查](./3-Maintenance/02-Troubleshooting.md) |
-| 理解 Buildroot、内核与固件的关系 | [认识 Buildroot 与 SDK](./4-Development/01-BuildrootSDK.md) |
-| 查找硬件资料、源码和版本说明 | [资料与版本关系](./5-Reference/01-ResourcesAndVersions.md) |
+### 系统配置
 
-## 认清板型和操作位置
+- 安装软件、使用 U 盘，或查看开发板的负载与温度。[常用系统操作](./SystemConfig/09-CommonOperations.md)
+- 配置网络和远程登录、传输文件，或使用音视频和桌面应用。[系统配置与应用](/docs/DshanPi-A1_CM5/category/system-config)
 
-**A1 CM5 与原 A1 的镜像和接线图需要分别核对。** 下载文件应包含 `Dshanpi-a1-cm5`，核心板与官方底板的版本都要记录。接口用途以对应底板标注和原理图为准。
+### 应用开发
 
-教程中的操作分为三处：Windows 电脑负责下载与刷写；开发板终端负责登录、网络和日常配置；Linux 构建主机用于 SDK 编译。普通使用者无需先搭建编译环境。
+- 从 Hello World 开始，在 DshanPI A1 CM5 上用 GCC 和 Makefile 编译、运行 C 程序。[应用编程基础](/docs/DshanPi-A1_CM5/category/app-basic)
+- 按示例采集摄像头图像、运行 NPU 模型，或开发 Qt 和 ROS 2 应用。[应用开发教程](/docs/DshanPi-A1_CM5/category/app-dev)
 
-## 当前镜像与更新状态
+### 进阶系统开发
 
-本次核对的 [CM5 2026.10.10-1 镜像](https://github.com/dshanpi/ArmBianOS/releases/tag/dshanpi-a1-cm5-2026.10.10-1) 提供 CLI 和 GNOME 桌面版，仍标记为预发布。初始登录为 `root / 1234`，首次交互登录要求修改密码。
+- 查找 DshanPI A1 CM5 的硬件图纸、系统镜像及对应源码。[资料与版本关系](./5-Reference/01-ResourcesAndVersions.md)
+- 在 Linux 构建主机上选择 DshanPI A1 CM5 板级配置，编译生成可烧录的 `update.img`。[Buildroot SDK 与固件编译](./4-Development/01-BuildrootSDK.md)
 
-该版镜像与公开 APT 包集尚未完全对应，因此首次使用先完成开机与基本功能检查，系统更新另按 [更新章节](./3-Maintenance/01-UpdateRecovery.md) 核对条件。下载到镜像、刷写成功与实板功能通过，分别需要确认。
+### 更新排障
 
-## 资料入口
+- 更新 Armbian 前，先确认软件源中有与当前 DshanPI A1 CM5 镜像匹配的板级软件包。[系统更新与恢复](./3-Maintenance/01-UpdateRecovery.md)
+- 按刷机、启动、网络或外设的故障现象逐项检查，收集诊断信息。[常见问题排查](./3-Maintenance/02-Troubleshooting.md)
 
-- [资料下载](./1-QuickStart/Downloads.md)（底板图纸、开源 PCB、系统镜像与刷机工具）
-- [核心板硬件资料与讨论](https://forums.100ask.net/t/topic/10577)
-- [CM5 Armbian 系统镜像](https://github.com/dshanpi/ArmBianOS/releases#release-dshanpi-a1-cm5-2026.10.10-1)
-- [ArmBianOS 源码](https://github.com/dshanpi/ArmBianOS)
-- [Buildroot 适配文件](https://github.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK)
-- [dspi-config 板端配置工具](https://github.com/dshanpi/dspi-config)
+- 核对哪些操作已有实板验证，以及验证所用的板型和镜像。[教程验证状态](./5-Reference/02-Verification.md)

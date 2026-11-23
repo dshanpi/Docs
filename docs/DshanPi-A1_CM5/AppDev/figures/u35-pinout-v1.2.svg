@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="710" viewBox="0 0 560 710" role="img" aria-labelledby="title desc">
+<title id="title">DshanPI A1 CM5 · U35 排针（底板 V1.2）</title>
+<desc id="desc">左奇右偶，从上到下为 1 至 40 脚。实验使用 11 脚 GPIO3_A4_D 和 9 脚 GND。NC 表示 PCB 焊盘未分配网络。</desc>
+<rect width="560" height="710" fill="white"/>
+<g font-family="Arial, sans-serif" text-anchor="middle" font-weight="600">
+<rect x="8" y="8" width="190" height="27" rx="4" fill="#32383d"/><text x="103" y="27" font-size="15" fill="white">功能 / Function</text>
+<rect x="204" y="8" width="152" height="27" rx="4" fill="#32383d"/><text x="280" y="27" font-size="15" fill="white">针号 / Pin #</text>
+<rect x="362" y="8" width="190" height="27" rx="4" fill="#32383d"/><text x="457" y="27" font-size="15" fill="white">功能 / Function</text>
+<rect x="8" y="41" width="190" height="27" rx="4" fill="#b63719"/><text x="103" y="60" font-size="15" fill="white">3.3 V</text>
+<rect x="204" y="41" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="60" font-size="15" fill="white">1</text>
+<rect x="362" y="41" width="190" height="27" rx="4" fill="#b63719"/><text x="457" y="60" font-size="15" fill="white">5 V</text>
+<rect x="283" y="41" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="60" font-size="15" fill="white">2</text>
+<rect x="8" y="74" width="190" height="27" rx="4" fill="#805728"/><text x="103" y="93" font-size="15" fill="white">PWM1_CH0</text>
+<rect x="204" y="74" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="93" font-size="15" fill="white">3</text>
+<rect x="362" y="74" width="190" height="27" rx="4" fill="#b63719"/><text x="457" y="93" font-size="15" fill="white">5 V</text>
+<rect x="283" y="74" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="93" font-size="15" fill="white">4</text>
+<rect x="8" y="107" width="190" height="27" rx="4" fill="#4057a2"/><text x="103" y="126" font-size="15" fill="white">UART2_TX_M2</text>
+<rect x="204" y="107" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="126" font-size="15" fill="white">5</text>
+<rect x="362" y="107" width="190" height="27" rx="4" fill="#23282d"/><text x="457" y="126" font-size="15" fill="white">GND</text>
+<rect x="283" y="107" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="126" font-size="15" fill="white">6</text>
+<rect x="8" y="140" width="190" height="27" rx="4" fill="#4057a2"/><text x="103" y="159" font-size="15" fill="white">UART2_RX_M2</text>
+<rect x="204" y="140" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="159" font-size="15" fill="white">7</text>
+<rect x="362" y="140" width="190" height="27" rx="4" fill="#4057a2"/><text x="457" y="159" font-size="15" fill="white">UART0_TX_M0_DEBUG</text>
+<rect x="283" y="140" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="159" font-size="15" fill="white">8</text>
+<rect x="8" y="173" width="190" height="27" rx="4" fill="#23282d"/><text x="103" y="192" font-size="15" fill="white">GND</text>
+<rect x="204" y="173" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="192" font-size="15" fill="white">9</text>
+<rect x="362" y="173" width="190" height="27" rx="4" fill="#4057a2"/><text x="457" y="192" font-size="15" fill="white">UART0_RX_M0_DEBUG</text>
+<rect x="283" y="173" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="192" font-size="15" fill="white">10</text>
+<rect x="8" y="206" width="190" height="27" rx="4" fill="#277447"/><text x="103" y="225" font-size="15" fill="white">GPIO3_A4_D</text>
+<rect x="204" y="206" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="225" font-size="15" fill="white">11</text>
+<rect x="362" y="206" width="190" height="27" rx="4" fill="#57626c"/><text x="457" y="225" font-size="15" fill="white">NC</text>
+<rect x="283" y="206" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="225" font-size="15" fill="white">12</text>
+<rect x="8" y="239" width="190" height="27" rx="4" fill="#704492"/><text x="103" y="258" font-size="15" fill="white">SAI4_SCLK_M0</text>
+<rect x="204" y="239" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="258" font-size="15" fill="white">13</text>
+<rect x="362" y="239" width="190" height="27" rx="4" fill="#23282d"/><text x="457" y="258" font-size="15" fill="white">GND</text>
+<rect x="283" y="239" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="258" font-size="15" fill="white">14</text>
+<rect x="8" y="272" width="190" height="27" rx="4" fill="#704492"/><text x="103" y="291" font-size="15" fill="white">SAI4_LRCK_M0</text>
+<rect x="204" y="272" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="291" font-size="15" fill="white">15</text>
+<rect x="362" y="272" width="190" height="27" rx="4" fill="#704492"/><text x="457" y="291" font-size="15" fill="white">SAI4_SDI_M0</text>
+<rect x="283" y="272" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="291" font-size="15" fill="white">16</text>
+<rect x="8" y="305" width="190" height="27" rx="4" fill="#b63719"/><text x="103" y="324" font-size="15" fill="white">3.3 V</text>
+<rect x="204" y="305" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="324" font-size="15" fill="white">17</text>
+<rect x="362" y="305" width="190" height="27" rx="4" fill="#4057a2"/><text x="457" y="324" font-size="15" fill="white">UART5_CTS_M0</text>
+<rect x="283" y="305" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="324" font-size="15" fill="white">18</text>
+<rect x="8" y="338" width="190" height="27" rx="4" fill="#277447"/><text x="103" y="357" font-size="15" fill="white">GPIO3_C5_D</text>
+<rect x="204" y="338" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="357" font-size="15" fill="white">19</text>
+<rect x="362" y="338" width="190" height="27" rx="4" fill="#23282d"/><text x="457" y="357" font-size="15" fill="white">GND</text>
+<rect x="283" y="338" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="357" font-size="15" fill="white">20</text>
+<rect x="8" y="371" width="190" height="27" rx="4" fill="#805728"/><text x="103" y="390" font-size="15" fill="white">RK628D_PWR_EN_H</text>
+<rect x="204" y="371" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="390" font-size="15" fill="white">21</text>
+<rect x="362" y="371" width="190" height="27" rx="4" fill="#277447"/><text x="457" y="390" font-size="15" fill="white">GPIO3_C6_D</text>
+<rect x="283" y="371" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="390" font-size="15" fill="white">22</text>
+<rect x="8" y="404" width="190" height="27" rx="4" fill="#277447"/><text x="103" y="423" font-size="15" fill="white">GPIO3_C7_D</text>
+<rect x="204" y="404" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="423" font-size="15" fill="white">23</text>
+<rect x="362" y="404" width="190" height="27" rx="4" fill="#277447"/><text x="457" y="423" font-size="15" fill="white">GPIO0_D0_D</text>
+<rect x="283" y="404" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="423" font-size="15" fill="white">24</text>
+<rect x="8" y="437" width="190" height="27" rx="4" fill="#23282d"/><text x="103" y="456" font-size="15" fill="white">GND</text>
+<rect x="204" y="437" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="456" font-size="15" fill="white">25</text>
+<rect x="362" y="437" width="190" height="27" rx="4" fill="#805728"/><text x="457" y="456" font-size="15" fill="white">REF_CLK2_OUT</text>
+<rect x="283" y="437" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="456" font-size="15" fill="white">26</text>
+<rect x="8" y="470" width="190" height="27" rx="4" fill="#277447"/><text x="103" y="489" font-size="15" fill="white">GPIO0_A0_D</text>
+<rect x="204" y="470" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="489" font-size="15" fill="white">27</text>
+<rect x="362" y="470" width="190" height="27" rx="4" fill="#57626c"/><text x="457" y="489" font-size="15" fill="white">NC</text>
+<rect x="283" y="470" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="489" font-size="15" fill="white">28</text>
+<rect x="8" y="503" width="190" height="27" rx="4" fill="#277447"/><text x="103" y="522" font-size="15" fill="white">GPIO0_A5_D</text>
+<rect x="204" y="503" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="522" font-size="15" fill="white">29</text>
+<rect x="362" y="503" width="190" height="27" rx="4" fill="#23282d"/><text x="457" y="522" font-size="15" fill="white">GND</text>
+<rect x="283" y="503" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="522" font-size="15" fill="white">30</text>
+<rect x="8" y="536" width="190" height="27" rx="4" fill="#265b96"/><text x="103" y="555" font-size="15" fill="white">I2C0_SDA_M0</text>
+<rect x="204" y="536" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="555" font-size="15" fill="white">31</text>
+<rect x="362" y="536" width="190" height="27" rx="4" fill="#265b96"/><text x="457" y="555" font-size="15" fill="white">I2C0_SCL_M0</text>
+<rect x="283" y="536" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="555" font-size="15" fill="white">32</text>
+<rect x="8" y="569" width="190" height="27" rx="4" fill="#57626c"/><text x="103" y="588" font-size="15" fill="white">NC</text>
+<rect x="204" y="569" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="588" font-size="15" fill="white">33</text>
+<rect x="362" y="569" width="190" height="27" rx="4" fill="#23282d"/><text x="457" y="588" font-size="15" fill="white">GND</text>
+<rect x="283" y="569" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="588" font-size="15" fill="white">34</text>
+<rect x="8" y="602" width="190" height="27" rx="4" fill="#805728"/><text x="103" y="621" font-size="15" fill="white">ADC_1V8_VIN1</text>
+<rect x="204" y="602" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="621" font-size="15" fill="white">35</text>
+<rect x="362" y="602" width="190" height="27" rx="4" fill="#805728"/><text x="457" y="621" font-size="15" fill="white">ADC_1V8_VIN2</text>
+<rect x="283" y="602" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="621" font-size="15" fill="white">36</text>
+<rect x="8" y="635" width="190" height="27" rx="4" fill="#805728"/><text x="103" y="654" font-size="15" fill="white">SARADC_VIN4</text>
+<rect x="204" y="635" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="654" font-size="15" fill="white">37</text>
+<rect x="362" y="635" width="190" height="27" rx="4" fill="#805728"/><text x="457" y="654" font-size="15" fill="white">SARADC_VIN5</text>
+<rect x="283" y="635" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="654" font-size="15" fill="white">38</text>
+<rect x="8" y="668" width="190" height="27" rx="4" fill="#23282d"/><text x="103" y="687" font-size="15" fill="white">GND</text>
+<rect x="204" y="668" width="73" height="27" rx="4" fill="#59646d"/><text x="240.5" y="687" font-size="15" fill="white">39</text>
+<rect x="362" y="668" width="190" height="27" rx="4" fill="#57626c"/><text x="457" y="687" font-size="15" fill="white">NC</text>
+<rect x="283" y="668" width="73" height="27" rx="4" fill="#59646d"/><text x="319.5" y="687" font-size="15" fill="white">40</text>
+</g>
+</svg>

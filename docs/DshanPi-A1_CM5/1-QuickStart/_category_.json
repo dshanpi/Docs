@@ -6,7 +6,7 @@
   "link": {
     "type": "generated-index",
     "title": "快速开始",
-    "description": "从选镜像、校验文件，到 eMMC 刷机和首次登录。",
+    "description": "获取资料，连接硬件，选择并下载镜像，烧录到 eMMC 后完成首次登录。",
     "slug": "/DshanPi-A1_CM5/category/quick-start"
   }
 }

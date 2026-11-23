@@ -88,7 +88,7 @@ export default function PhotoViewer({selected, onSelect, visible, side, onSideCh
         </div>
       </div>
       {failed && <div className={styles.imageError} role="status">图片暂时无法加载，请使用下方接口索引查看说明。</div>}
-      <span className={styles.sceneCaption}>DSHANPI {boardName}<span>{view.label} · {mediaLabel}</span></span>
+      <span className={styles.sceneCaption}>{/^dshanpi\b/i.test(boardName) ? boardName : `DSHANPI ${boardName}`}<span>{view.label} · {mediaLabel}</span></span>
     </div>
     <div className={styles.viewerControls}>
       <div className={styles.cameraControls}>

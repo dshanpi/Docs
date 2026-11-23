@@ -1,0 +1,12 @@
+{
+  "label": "应用编程基础",
+  "position": 3.5,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "应用编程基础",
+    "description": "在 DshanPI A1 CM5 的 Armbian 终端编译 C 程序，练习文件操作、输入事件、网络通信、多线程和 I²C。首次使用 GCC 时，从 HelloWorld 开始。",
+    "slug": "/DshanPi-A1_CM5/category/app-basic"
+  }
+}

@@ -1,0 +1,23 @@
+.table, .table span[id] {
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+.table[data-focus="armbian-files"] tr:has(:is([id="armbian"], [id="armbian-cli"], [id="cm5-loader"])) > td,
+.table[data-focus="buildroot"] tr:has([id="buildroot"]) > td {
+  animation: signalDownload 1s ease-in-out 3;
+}
+
+@keyframes signalDownload {
+  50% { background-color: var(--ifm-color-success-contrast-background); box-shadow: inset 0 -2px var(--ifm-color-success); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table td {
+    animation: none !important;
+  }
+  .table[data-focus="armbian-files"] tr:has(:is([id="armbian"], [id="armbian-cli"], [id="cm5-loader"])) > td,
+  .table[data-focus="buildroot"] tr:has([id="buildroot"]) > td {
+    background-color: var(--ifm-color-success-contrast-background);
+    box-shadow: inset 0 -2px var(--ifm-color-success);
+  }
+}

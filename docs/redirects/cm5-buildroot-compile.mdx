@@ -1,0 +1,16 @@
+---
+title: 编译 DshanPI A1 CM5 Buildroot 固件
+slug: /DshanPi-A1_CM5/Development/BuildBuildroot
+unlisted: true
+---
+
+import {Redirect, useLocation} from '@docusaurus/router';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+export function MergedGuide() {
+  const pathname = useBaseUrl('/docs/DshanPi-A1_CM5/Development/BuildrootSDK');
+  const {search, hash} = useLocation();
+  return <Redirect to={{pathname, search, hash: hash || '#build-firmware'}} />;
+}
+
+<MergedGuide />

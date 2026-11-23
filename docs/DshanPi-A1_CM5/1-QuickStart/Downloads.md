@@ -7,6 +7,8 @@ description: 下载 DshanPI A1 CM5 核心板图纸与封装、底板图纸与 PC
 custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5/1-QuickStart/Downloads.md
 ---
 
+import CM5FirmwareLink from '@site/src/components/CM5FirmwareLink';
+
 # 资料下载
 
 :::tip 备用下载方式
@@ -36,9 +38,21 @@ custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5
 
 ## 软件资料
 
-| 资源 | 下载入口 | 用途 |
+### 系统固件 {#system-firmware}
+
+按用途下载 DshanPI A1 CM5 的系统固件。两个 Armbian 版本均基于 Ubuntu 24.04，发布版本为 `2026.10.10-1`。
+
+:::tip 固件下载提示
+系统固件文件较大。如下载较慢或中断，可前往[页末的百度网盘](#baidu-download)获取 **Armbian 桌面版、Armbian CLI 版或 Buildroot 固件**。
+:::
+
+| 系统版本 | 适用场景 | 获取链接 |
 | --- | --- | --- |
-| CM5 Armbian Ubuntu 24.04（2026.10.10-1） | [GitHub Releases · 镜像与校验文件](https://github.com/dshanpi/ArmBianOS/releases#release-dshanpi-a1-cm5-2026.10.10-1) | 在 Assets 中选择 GNOME 桌面版或 CLI 版，同时下载 `SHA256SUMS` 校验压缩包 |
+| **Armbian GNOME 桌面版** | 连接显示器、键盘和鼠标，使用图形桌面 | [下载桌面镜像（.img.xz）](https://github.com/dshanpi/ArmBianOS/releases/download/dshanpi-a1-cm5-2026.10.10-1/Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-a1-cm5_noble_vendor_6.1.115_gnome_desktop.img.xz) · <CM5FirmwareLink version="desktop" /> |
+| **Armbian CLI 命令行版** | 通过终端或 SSH 管理设备、部署服务 | [下载 CLI 镜像（.img.xz）](https://github.com/dshanpi/ArmBianOS/releases/download/dshanpi-a1-cm5-2026.10.10-1/Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-a1-cm5_noble_vendor_6.1.115.img.xz) · <CM5FirmwareLink version="cli" /> |
+| **Buildroot 系统** | 运行嵌入式应用，测试面向专用设备的固件 | <CM5FirmwareLink version="buildroot" /> |
+
+下载 Armbian 后，使用同一发布版本的 [SHA256SUMS](https://github.com/dshanpi/ArmBianOS/releases/download/dshanpi-a1-cm5-2026.10.10-1/SHA256SUMS) 校验压缩包。下载 Buildroot 时，在网盘的 `03_系统固件/02_Buildroot系统/` 目录选择 `DshanPI_A1_CM5-buildroot.zip`。
 
 ### Windows 刷机资料 {#flash-tools}
 
@@ -48,23 +62,29 @@ custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5
 | RKDevTool v3.32 | [Windows 刷机工具](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/RKDevTool_Release_v3.32.zip) | 在 Windows 上向设备写入镜像 |
 | DriverAssitant v5.1.1 | [Windows USB 驱动](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/DriverAssitant_v5.1.1.zip) | 让 Windows 识别 Rockusb 设备 |
 
-Loader 下载自百问网 A1 资源目录，已核对与 CM5 镜像资料中的同名文件一致。文件大小为 **774,649 字节**，SHA-256 为 `9aee33d44ecc4b30e76241a6aa6993e433edb42c4d92909aa55b81c21c142a9e`。在 Windows 下载目录中可运行以下命令核对文件。
+Loader 文件大小为 **774,649 字节**，SHA-256 为 `9aee33d44ecc4b30e76241a6aa6993e433edb42c4d92909aa55b81c21c142a9e`。在 Windows 下载目录中可运行以下命令核对文件。
 
 ```powershell
 Get-FileHash -Algorithm SHA256 -LiteralPath '.\rk3576_spl_loader_v1.09.107.bin'
 ```
 
-该 Loader 在 CM5 上的 eMMC 写入与启动仍待实板验证。镜像校验见 [选择系统与下载镜像](01-Resources.md)，刷写流程见 [向 eMMC 烧录系统](02-FlashEMMC.md)。
+镜像校验见 [选择系统与下载镜像](01-Resources.md)，刷写流程见 [向 eMMC 烧录系统](02-FlashEMMC.md)。
 
 ## 百度网盘备用下载 {#baidu-download}
 
-打开[百度网盘分享链接](https://pan.baidu.com/s/1Xo342SQDyKZb5xRiNAD-Dw?pwd=jevb)，按提示输入提取码 **`jevb`**。也可复制完整地址到浏览器打开：
+打开<span id="cm5-share-entry">[百度网盘分享链接](https://pan.baidu.com/s/1Xo342SQDyKZb5xRiNAD-Dw?pwd=jevb)</span>，按提示输入提取码 **`jevb`**。也可复制完整地址到浏览器打开：
 
 ```text
 https://pan.baidu.com/s/1Xo342SQDyKZb5xRiNAD-Dw?pwd=jevb
 ```
 
-网盘目录如下（2026 年 11 月 17 日核对）。
+网盘目录如下（2026 年 11 月 18 日核对）。
+
+:::tip 区分 Armbian 桌面版与 CLI 版
+目录中的【】标注了 Armbian 版本。实际下载时看文件名末尾：带 `_gnome_desktop.img.xz` 的是**桌面版**，以 `6.1.115.img.xz` 结尾的是 **CLI 命令行版**。
+:::
+
+<div id="cm5-share-directory">
 
 ```text
 115_DshanPI-A1-CM5资料/
@@ -79,7 +99,8 @@ https://pan.baidu.com/s/1Xo342SQDyKZb5xRiNAD-Dw?pwd=jevb
 │   ├── 00_loder引导文件/
 │   │   └── rk3576_spl_loader_v1.09.107.bin
 │   ├── 01_Armbian发行版系统(基于Ubuntu24.04)/
-│   │   └── Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-a1-cm5_noble_vendor_6.1.115_gnome_desktop.img.xz
+│   │   ├── 【CLI 命令行版】Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-a1-cm5_noble_vendor_6.1.115.img.xz
+│   │   └── 【GNOME 桌面版】Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-a1-cm5_noble_vendor_6.1.115_gnome_desktop.img.xz
 │   └── 02_Buildroot系统/
 │       └── DshanPI_A1_CM5-buildroot.zip
 └── 04_硬件资料/
@@ -92,3 +113,5 @@ https://pan.baidu.com/s/1Xo342SQDyKZb5xRiNAD-Dw?pwd=jevb
         ├── BitMap_DshanPI-A1-CM5-Base.pdf
         └── SCH_DshanPI-A1-CM5-Base.pdf
 ```
+
+</div>
