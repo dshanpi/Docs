@@ -1,83 +1,124 @@
 ---
-title: 认识 SDK 并编译 DshanPI A1 CM5 Buildroot 固件
+title: 编译 DshanPI A1 CM5 Buildroot 固件
 sidebar_label: Buildroot SDK 与固件编译
 sidebar_position: 1
 slug: /DshanPi-A1_CM5/Development/BuildrootSDK
 custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5/4-Development/01-BuildrootSDK.md
 ---
 
-# 认识 SDK 并编译 DshanPI A1 CM5 Buildroot 固件
+# 编译 DshanPI A1 CM5 Buildroot 固件
 
-## 认识 Buildroot 与 SDK
+本教程使用 2026-11-23 发布的源码基线。解压 SDK 后，从 GitHub 主分支 `main` 获取板级配置，再编译生成整机镜像 `update.img`。
 
-Buildroot 用于构建 DshanPI A1 CM5 的根文件系统。完整的 Rockchip SDK 还包含板级配置、U-Boot、Linux 内核和打包工具，能把 Loader、启动镜像、根文件系统等组件打包成可烧录到 eMMC 的 `update.img`。
+## 1. 准备编译环境 {#build-firmware}
 
-需要修改驱动、设备树或预装应用时，请使用已适配 DshanPI A1 CM5 的完整 SDK。公开的 [DshanPI A1 CM5 Buildroot 适配仓库](https://github.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK) 提供部分适配文件。已准备好完整 SDK，可直接[开始编译](#build-firmware)。
+在 Ubuntu 24.04 LTS x86_64 主机的终端执行以下步骤。本次验证开始时有 105 GiB 可用磁盘空间，可用 `df -h ~` 查看自己的编译分区。
+
+先安装构建工具和打包依赖。
+
+```bash
+sudo apt-get update
+sudo apt-get install --no-install-recommends \
+  build-essential git ca-certificates wget rsync file bc bison flex \
+  python3 python-is-python3 libssl-dev libelf-dev libncurses-dev libgmp-dev libmpc-dev \
+  device-tree-compiler cpio unzip xz-utils bzip2 patch perl gawk diffstat \
+  expect fakeroot lz4 zstd time locales bsdextrautils
+```
+
+生成编译工具使用的 UTF-8 区域设置。
+
+```bash
+sudo localedef -i en_US -f UTF-8 en_US.UTF-8
+```
+
+U-Boot 的构建脚本还会检查 `python2`。运行 `python2 --version`；如果系统找不到该命令，展开下方步骤安装。
 
 <details>
-<summary>查看 SDK 主要目录</summary>
+<summary>在 Ubuntu 24.04 上安装 Python 2.7.18</summary>
 
-| 目录或文件 | 作用 |
-| --- | --- |
-| `build.sh` | SDK 构建入口，实际指向 `device/rockchip/common/scripts/build.sh` |
-| `device/rockchip` | 芯片和板级配置、构建脚本、分区参数 |
-| `kernel` | 当前指向 `kernel-6.1`，包含内核与设备树 |
-| `u-boot`、`rkbin` | 启动代码和 Rockchip 引导二进制 |
-| `buildroot` | 根文件系统配置、包与构建输出 |
-| `output/.config` | 当前 SDK 选择的构建配置 |
-| `output/firmware` | 固件组件汇总，多个条目为符号链接 |
-| `rockdev` | 当前指向 `output/firmware` |
-| `output/sessions` | 构建过程日志 |
+下载 [Python 2.7.18 源码](https://www.python.org/downloads/release/python-2718/)，校验通过后再解压。
 
-这份 SDK 使用 `rk3576-100ask-dshanpi-a1-linux.dts` 作为设备树入口，其中包含 DshanPI A1 CM5 底板和三摄适配文件。
+```bash
+cd ~/Downloads
+wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
+echo 'da3080e3b488f648a3d7a4560ddee895284c3380b11d6de75edb986526b9a814  Python-2.7.18.tgz' | sha256sum -c -
+```
+
+显示 `OK` 后，使用 Ubuntu 24.04 自带的 GCC 编译。
+
+```bash
+tar -xzf Python-2.7.18.tgz
+cd Python-2.7.18
+./configure --prefix=/opt/python-2.7.18 --without-ensurepip
+make -j4
+```
+
+单独安装 `python2` 命令并检查版本。Ubuntu 的 `python3` 继续使用系统版本。
+
+```bash
+sudo make altinstall
+sudo ln -s /opt/python-2.7.18/bin/python2.7 /usr/local/bin/python2
+python2 --version
+```
+
+应显示 `Python 2.7.18`。
 
 </details>
 
-<details>
-<summary>了解 Armbian 相关仓库</summary>
+## 2. 校验并解压 SDK
 
-Armbian 使用 Debian/Ubuntu 软件包与 APT 更新应用。切换到 Buildroot 时，需使用对应的系统固件，并提前备份数据。
-
-| 资源 | 用途 |
-| --- | --- |
-| [ArmBianOS](https://github.com/dshanpi/ArmBianOS) | 提供 DshanPI A1 CM5 板级配置，构建 Armbian 桌面版和命令行版镜像 |
-| [dshanpi-build](https://github.com/dshanpi/dshanpi-build) | 固定源码版本、构建或复用 DEB 包，生成镜像和签名 APT 软件源 |
-| [dspi-config](https://github.com/dshanpi/dspi-config) | 在开发板上配置 Overlay、软件源和更新 |
-
-</details>
-
-## 编译 DshanPI A1 CM5 Buildroot 固件 {#build-firmware}
-
-在 Ubuntu 24.04 x86_64 编译主机上打开终端，依次执行以下四步。
-
-### 1. 进入 SDK 目录
+将源码包 `100ask-rk3576_SDK-cm5-baseline-20261123.tar.gz` 放入 `~/Downloads/`，再把对应的校验文件保存到同一目录。[下载 SHA-256 校验文件](https://raw.githubusercontent.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK/main/docs/baselines/100ask-rk3576_SDK-cm5-baseline-20261123.tar.gz.sha256)
 
 ```bash
-cd ~/RK3576-SDK/rk3576_linux6.1_release_v1.0.0_20240620
+cd ~/Downloads
+sha256sum -c 100ask-rk3576_SDK-cm5-baseline-20261123.tar.gz.sha256
 ```
 
-### 2. 选择板级配置
-
-这份 SDK 已适配 DshanPI A1 CM5，板级配置沿用 `dshanpi-a1` 名称。
+显示 `OK` 后，解压到主目录。首次解压时，确保目标目录 `~/100ask-rk3576_SDK` 尚不存在。
 
 ```bash
-./build.sh rockchip_rk3576_dshanpi-a1_defconfig
+tar -xzf 100ask-rk3576_SDK-cm5-baseline-20261123.tar.gz -C ~
 ```
 
-### 3. 编译固件
+## 3. 获取并应用板级差分包
 
-确认编译分区有足够的剩余空间后，运行全量编译。脚本会自动打包固件。
+首次使用时，克隆仓库即可获取默认分支 `main`。
 
 ```bash
-./build.sh
+git clone --depth 1 https://github.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK.git ~/cm5-board
 ```
 
-### 4. 获取 update.img
+已使用 `main` 的用户，后续运行 `git -C ~/cm5-board pull --ff-only` 即可获取更新。使用旧版日期分支的用户，可按仓库说明先切换到主分支。[查看切换步骤](https://github.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK#1-获取板级配置)
 
-编译成功后，在 SDK 根目录查看生成的固件及其大小。
+将板级文件应用到 SDK。本次验证的版本执行成功后显示“已应用 45 个板级文件”。
 
 ```bash
-ls -lh output/update/Image/update.img
+~/cm5-board/scripts/apply-cm5-diff.sh ~/100ask-rk3576_SDK
 ```
 
-将该 `update.img` 复制到刷机电脑，在 RKDevTool 的**升级固件**页选择它。[查看 Buildroot 烧录步骤](../1-QuickStart/02-FlashEMMC.md#flash-buildroot)
+## 4. 编译固件
+
+在 Ubuntu 24.04 终端使用普通用户进入 SDK，选择 DshanPI A1 CM5 板级配置。
+
+```bash
+cd ~/100ask-rk3576_SDK
+./build.sh defconfig:rockchip_rk3576_dshanpi-a1_cm5_defconfig
+```
+
+执行完整编译，成功后再生成整机镜像。
+
+```bash
+./build.sh && ./build.sh updateimg
+```
+
+## 5. 获取 update.img
+
+在 SDK 根目录查看镜像的实际大小。
+
+```bash
+ls -lhL output/firmware/update.img
+```
+
+生成的整机固件位于 `~/100ask-rk3576_SDK/output/firmware/update.img`。
+
+实测镜像大小为 **1,055,365,763 字节**。本次在 Ubuntu 24.04 LTS 上使用 GCC 13.3 完成全量编译，并解包核对了 U-Boot、内核、recovery、根文件系统和 userdata 分区镜像。
