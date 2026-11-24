@@ -85,15 +85,15 @@ tar -xzf 100ask-rk3576_SDK-cm5-baseline-20261123.tar.gz -C ~
 首次使用时，克隆仓库即可获取默认分支 `main`。
 
 ```bash
-git clone --depth 1 https://github.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK.git ~/cm5-board
+git clone --depth 1 https://github.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK.git ~/DshanPi-A1_CM5-BuildrootSDK
 ```
 
-已使用 `main` 的用户，后续运行 `git -C ~/cm5-board pull --ff-only` 即可获取更新。使用旧版日期分支的用户，可按仓库说明先切换到主分支。[查看切换步骤](https://github.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK#1-获取板级配置)
+已使用 `main` 的用户，后续运行 `git -C ~/DshanPi-A1_CM5-BuildrootSDK pull --ff-only` 即可获取更新。如果沿用旧目录名或日期分支，请先按仓库说明迁移。[查看迁移步骤](https://github.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK#1-获取板级配置)
 
 将板级文件应用到 SDK。本次验证的版本执行成功后显示“已应用 45 个板级文件”。
 
 ```bash
-~/cm5-board/scripts/apply-cm5-diff.sh ~/100ask-rk3576_SDK
+~/DshanPi-A1_CM5-BuildrootSDK/scripts/apply-cm5-diff.sh ~/100ask-rk3576_SDK
 ```
 
 ## 4. 编译固件
