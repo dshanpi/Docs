@@ -132,6 +132,18 @@ const config = {
             ],
           },
           {
+            type: 'dropdown',
+            label: 'RK3506系列',
+            position: 'left',
+            items: [
+              {
+                type: 'docSidebar',
+                sidebarId: 'dshanpi2aSidebar',
+                label: 'DshanPI-2A',
+              },
+            ],
+          },
+          {
             href: 'https://github.com/dshanpi/Docs',
             label: 'GitHub',
             position: 'right',

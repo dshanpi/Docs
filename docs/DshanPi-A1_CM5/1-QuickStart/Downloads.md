@@ -78,7 +78,10 @@ Get-FileHash -Algorithm SHA256 -LiteralPath '.\rk3576_spl_loader_v1.09.107.bin'
 https://pan.baidu.com/s/1Xo342SQDyKZb5xRiNAD-Dw?pwd=jevb
 ```
 
-网盘目录如下（2026 年 11 月 18 日核对）。
+编译 Buildroot 固件时，进入 `115_DshanPI-A1-CM5资料/05_SDK源码/01_Buildroot系统/`，按需选择：
+
+- **使用配好的编译环境**：打开 `搭建Ubuntu环境的VMware虚拟机(包含SDK)` 文件夹，下载含 SDK 的虚拟机。
+- **使用自己的 Ubuntu 环境**：下载源码包 `100ask-rk3576_SDK-cm5-baseline-20261123.tar.gz`（网盘显示 8.33 GB）。[查看编译指南](../4-Development/01-BuildrootSDK.md)
 
 :::tip 区分 Armbian 桌面版与 CLI 版
 目录中的【】标注了 Armbian 版本。实际下载时看文件名末尾：带 `_gnome_desktop.img.xz` 的是**桌面版**，以 `6.1.115.img.xz` 结尾的是 **CLI 命令行版**。
@@ -103,15 +106,19 @@ https://pan.baidu.com/s/1Xo342SQDyKZb5xRiNAD-Dw?pwd=jevb
 │   │   └── 【GNOME 桌面版】Armbian-unofficial_25.11.0-trunk.20261010.1_Dshanpi-a1-cm5_noble_vendor_6.1.115_gnome_desktop.img.xz
 │   └── 02_Buildroot系统/
 │       └── DshanPI_A1_CM5-buildroot.zip
-└── 04_硬件资料/
-    ├── 01_核心板硬件/
-    │   ├── DshanPI-A1(CM5)_Core_allegro.dra
-    │   ├── DshanPI-A1(CM5)_Core_dxf_V1.dxf
-    │   ├── DshanPI-A1(CM5)_Core_SCH_V1.pdf
-    │   └── DshanPI-A1_CM5_Core_BitMap_V1.1.pdf
-    └── 02_底板硬件资料/
-        ├── BitMap_DshanPI-A1-CM5-Base.pdf
-        └── SCH_DshanPI-A1-CM5-Base.pdf
+├── 04_硬件资料/
+│   ├── 01_核心板硬件/
+│   │   ├── DshanPI-A1(CM5)_Core_allegro.dra
+│   │   ├── DshanPI-A1(CM5)_Core_dxf_V1.dxf
+│   │   ├── DshanPI-A1(CM5)_Core_SCH_V1.pdf
+│   │   └── DshanPI-A1_CM5_Core_BitMap_V1.1.pdf
+│   └── 02_底板硬件资料/
+│       ├── BitMap_DshanPI-A1-CM5-Base.pdf
+│       └── SCH_DshanPI-A1-CM5-Base.pdf
+└── 05_SDK源码/
+    └── 01_Buildroot系统/
+        ├── 搭建Ubuntu环境的VMware虚拟机(包含SDK)/
+        └── 100ask-rk3576_SDK-cm5-baseline-20261123.tar.gz
 ```
 
 </div>

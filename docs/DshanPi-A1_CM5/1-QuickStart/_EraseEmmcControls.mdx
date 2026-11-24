@@ -1,0 +1,20 @@
+import screenshot from './wiring/rkdevtool-erase-emmc.png';
+
+export const controls = [
+  { x: 230, y: 72, width: 115, height: 41, badgeX: 370, badgeY: 92 },
+  { x: 669, y: 143, width: 85, height: 53, badgeX: 695, badgeY: 116 },
+  { x: 764, y: 143, width: 126, height: 53, badgeX: 838, badgeY: 116 },
+  { x: 577, y: 434, width: 165, height: 54, badgeX: 551, badgeY: 463 },
+  { x: 414, y: 511, width: 134, height: 54, badgeX: 478, badgeY: 593 },
+];
+
+<svg viewBox="0 0 1698 807" width="100%" role="img" aria-label="RKDevTool 操作顺序：① 高级功能，② Boot 行的省略号，③ 下载，④ 获取当前存储，⑤ 擦除所有。">
+  <image href={screenshot} width="1698" height="807" />
+  {controls.map(({x, y, width, height, badgeX, badgeY}, i) => (
+    <g key={i}>
+      <rect x={x} y={y} width={width} height={height} rx="5" fill="none" stroke="#bb1725" strokeWidth="5" />
+      <circle cx={badgeX} cy={badgeY} r="22" fill="#bb1725" stroke="white" strokeWidth="3" />
+      <text x={badgeX} y={badgeY} dy=".35em" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif" fontSize="32" fontWeight="bold">{i + 1}</text>
+    </g>
+  ))}
+</svg>

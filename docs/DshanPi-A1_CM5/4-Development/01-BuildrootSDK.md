@@ -8,7 +8,7 @@ custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5
 
 # 编译 DshanPI A1 CM5 Buildroot 固件
 
-本教程使用 2026-11-23 发布的源码基线。解压 SDK 后，从 GitHub 主分支 `main` 获取板级配置，再编译生成整机镜像 `update.img`。
+本教程使用 2026-11-23 发布的源码基线。先[从百度网盘下载 SDK](#download-sdk)，解压后从 GitHub 主分支 `main` 获取板级配置，再编译生成整机镜像 `update.img`。
 
 ## 1. 准备编译环境 {#build-firmware}
 
@@ -65,9 +65,11 @@ python2 --version
 
 </details>
 
-## 2. 校验并解压 SDK
+## 2. 下载、校验并解压 SDK {#download-sdk}
 
-将源码包 `100ask-rk3576_SDK-cm5-baseline-20261123.tar.gz` 放入 `~/Downloads/`，再把对应的校验文件保存到同一目录。[下载 SHA-256 校验文件](https://raw.githubusercontent.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK/main/docs/baselines/100ask-rk3576_SDK-cm5-baseline-20261123.tar.gz.sha256)
+1. 打开[百度网盘分享](https://pan.baidu.com/s/1Xo342SQDyKZb5xRiNAD-Dw?pwd=jevb)，提取码为 **`jevb`**。
+2. 进入 `115_DshanPI-A1-CM5资料/05_SDK源码/01_Buildroot系统/`，下载基线源码包 `100ask-rk3576_SDK-cm5-baseline-20261123.tar.gz`，保存到 Ubuntu 的 `~/Downloads/`。
+3. 将 [SHA-256 校验文件](https://raw.githubusercontent.com/dshanpi/DshanPi-A1_CM5-BuildrootSDK/main/docs/baselines/100ask-rk3576_SDK-cm5-baseline-20261123.tar.gz.sha256) 保存到同一目录，在终端运行以下命令。
 
 ```bash
 cd ~/Downloads

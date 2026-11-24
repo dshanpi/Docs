@@ -1,0 +1,32 @@
+---
+title: DshanPI-2A 使用指南
+sidebar_label: 使用指南
+sidebar_position: 0
+slug: /DshanPI-2A/intro
+---
+
+# DshanPI-2A 使用指南
+
+下图展示的是板上丝印为 **DShanPi-2A+** 的开发板。它采用瑞芯微 **RK3506B** 处理器和 DDR3 内存，使用树莓派 A 型板的外形布局。图中列出的板载存储选项为 eMMC 和 SPI NAND Flash。
+
+<div className="row">
+  <figure className="col col--6">
+    <img src={require('./images/board-overview.png').default} alt="开发板正面，可见 RK3506B、DDR3 和板边的彩色排针" style={{backgroundColor: 'white'}} />
+    <figcaption><strong>主板布局。</strong> 中央是 RK3506B，两个 USB-A 接口并排位于板边。</figcaption>
+  </figure>
+  <figure className="col col--6">
+    <img src={require('./images/ws73-wireless.png').default} alt="WS73 无线模组及其在板上的位置" style={{backgroundColor: 'white'}} />
+    <figcaption><strong>无线连接。</strong> 板载海思 WS73 模组集成 Wi-Fi、蓝牙和星闪。</figcaption>
+  </figure>
+</div>
+
+<div className="row">
+  <figure className="col col--6">
+    <img src={require('./images/expansion.png').default} alt="40 针扩展排针及 FlexBus、DSMC、DSI 接口说明" style={{backgroundColor: 'white'}} />
+    <figcaption><strong>外设扩展。</strong> 长边的彩色双排针为 40 针扩展接口。开发板还提供 DSI 显示接口，支持 FlexBus 和 DSMC 接口复用。</figcaption>
+  </figure>
+  <figure className="col col--6">
+    <img src={require('./images/power-and-rtc.png').default} alt="板载 DC-DC 电源、自恢复保险丝、静电防护和 RTC 备用电池说明" style={{backgroundColor: 'white'}} />
+    <figcaption><strong>供电与时钟。</strong> 板上采用 DC-DC 供电，配有自恢复保险丝和静电防护。实时时钟（RTC）支持外接备用电池。</figcaption>
+  </figure>
+</div>

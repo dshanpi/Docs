@@ -7,6 +7,7 @@ custom_edit_url: https://github.com/dshanpi/Docs/edit/master/docs/DshanPi-A1_CM5
 ---
 
 import ArmbianFlashControls from './_ArmbianFlashControls.mdx';
+import EraseEmmcControls from './_EraseEmmcControls.mdx';
 import MaskromSteps from './_MaskromSteps.mdx';
 
 # 向 eMMC 烧录系统
@@ -79,3 +80,23 @@ MASKROM 松键时机、烧录后的自动重启行为，以及下列两种写入
 ### 2.3 启动 Buildroot
 
 保持 TF 卡已取出、MASKROM 键已松开。若烧录成功后未自动启动，断开 USB 和 12V 电源，再仅接回 12V 电源。通过[调试串口](HardwareConnections.md#7-通过-40-针排针访问调试串口)查看启动日志。进入命令行后，运行 `cat /etc/os-release`，确认输出包含 `NAME=Buildroot`。
+
+## FAQ {#faq}
+
+### 烧录失败，如何擦除 eMMC 后重试？ {#erase-emmc}
+
+如果 eMMC 之前装过 Armbian 或其他 Linux 系统，旧的分区或引导数据可能影响新系统启动。遇到烧录失败或重刷后无法启动时，可以先擦除 eMMC，再重新烧录。
+
+:::warning 先备份数据
+**擦除所有**会清空 eMMC 上的系统、分区和用户文件。请先备份需要保留的数据，擦除期间保持 12 V 供电和 USB 连接。
+:::
+
+1. **进入高级功能。** 按[第 0 节](#driver-setup)让开发板进入烧录模式。确认 RKDevTool 底部显示 **发现一个 MASKROM 设备**，点击顶部的 **高级功能**。
+2. **选择 Loader。** 点击 **Boot** 行右侧的 **…**，选择 [rk3576_spl_loader_v1.09.107.bin](https://dl.100ask.net/Hardware/MPU/RK3576-DshanPi-A1/rk3576_spl_loader_v1.09.107.bin)。
+3. **下载 Loader。** 点击同一行的 **下载**，等待右侧日志提示下载成功。
+4. **确认存储。** 点击 **获取当前存储**，确认当前存储为 **EMMC** 后再继续。
+5. **擦除 eMMC。** 点击 **擦除所有**，等待右侧日志提示擦除成功。
+
+<EraseEmmcControls />
+
+擦除成功后，重新进入 MASKROM 模式，按所用镜像继续[烧录 Armbian](#flash-armbian) 或[烧录 Buildroot](#flash-buildroot)。
